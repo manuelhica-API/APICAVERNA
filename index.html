@@ -3003,7 +3003,7 @@ function bindPracticarComentario(a,rerender){
         ref_principal:it.principal.modelo,ref_secundaria:it.secundaria.modelo,conexion:it.conexion,
         principal:v("principal"),secundaria:v("secundaria"),explicacion:ex,codigo:store.get("codigo","")})});
       if(r.status===401){["principal","secundaria"].forEach(k=>document.getElementById("r-"+k).innerHTML="");box.innerHTML=codeBox();bindCode(()=>document.getElementById("cmCheck").click());return}
-      if(!r.ok) throw new Error("http "+r.status);
+      if(!r.ok) throw new Error(r.status===503?"saturada":"http "+r.status);
       const d=await r.json();
       const P=d.puntuacion_apartados||{}, F=d.feedback_por_apartado||{}, S=d.solucion_modelo_sugerida||{};
       const fmt=x=>Number(x||0).toFixed(2).replace(".",",");
@@ -3025,7 +3025,8 @@ function bindPracticarComentario(a,rerender){
       document.getElementById("cmSummary").innerHTML='<div class="cm-sum"><div><b>'+fmt(d.nota_total)+' / 2,50</b><span>Cuestión 1.ª según el baremo PAU (idea principal, secundarias y explicación)</span></div><div class="cm-sum2"><b>'+(points)+' / 2</b><span>problema y conceptos clave</span></div></div>';
     }catch(err){
       const extra=keywordIdeas();
-      box.innerHTML=resBox(null,"La corrección con IA no está disponible aquí",'<span>Funcionará cuando Caverna esté publicada en su propia web. Las ideas se han corregido por palabras clave. Compara tu explicación con las ideas del texto:</span><p class="cm-modelp"><b>Idea principal:</b> '+it.principal.modelo+'<br><b>Ideas secundarias:</b> '+it.secundaria.modelo+'</p>');
+      const sat=err&&err.message==="saturada", local=/claude|anthropic|usercontent/.test(location.hostname)||location.protocol==="file:";
+      box.innerHTML=resBox(null,sat?"La IA está saturada ahora mismo":local?"La corrección con IA no está disponible aquí":"No se ha podido conectar con la IA",'<span>'+(sat?"Hay mucha demanda en este momento. Vuelve a pulsar «Corregir» en un minuto.":local?"Funcionará cuando Caverna esté publicada en su propia web.":"Inténtalo de nuevo en un momento.")+' Mientras, las ideas se han corregido por palabras clave. Compara tu explicación con las ideas del texto:</span><p class="cm-modelp"><b>Idea principal:</b> '+it.principal.modelo+'<br><b>Ideas secundarias:</b> '+it.secundaria.modelo+'</p>');
       summary(points+extra,false);
     }
   };
