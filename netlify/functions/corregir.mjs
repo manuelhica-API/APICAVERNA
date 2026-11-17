@@ -116,24 +116,29 @@ RESPUESTAS DEL ALUMNO:
 3. Explicación (idea principal y secundarias): """${explicacion}"""`;
 
   // Modelos a probar en orden: si uno está saturado (503/429) o no existe (404), se pasa al siguiente.
-  const modelos = [...new Set([process.env.MODELO || "gemini-3.8-flash", "gemini-3.6-flash", "gemini-3.5-flash-lite"])];
+  const modelos = [...new Set([process.env.MODELO || "gemini-3.8-flash", "gemini-3.5-flash-lite"])];
   const cuerpo = JSON.stringify({
     systemInstruction: { parts: [{ text: SISTEMA }] },
     contents: [{ role: "user", parts: [{ text: prompt }] }],
-    generationConfig: { temperature: 0.15, responseMimeType: "application/json", responseSchema: ESQUEMA },
+    generationConfig: {
+      temperature: 0.15, responseMimeType: "application/json", responseSchema: ESQUEMA,
+      thinkingConfig: { thinkingLevel: "low" },
+    },
   });
   const inicio = Date.now();
   try {
     let r = null, saturado = false;
-    for (const modelo of modelos) {
-      const restante = 24000 - (Date.now() - inicio);
+    for (const [i, modelo] of modelos.entries()) {
+      const restante = 25000 - (Date.now() - inicio);
       if (restante < 4000) break;
+      // El primer modelo tiene como máximo 15 s; así siempre queda tiempo para el de respaldo.
+      const tope = i < modelos.length - 1 ? Math.min(15000, restante - 8000) : restante;
       try {
         r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${modelo}:generateContent`, {
           method: "POST",
           headers: { "Content-Type": "application/json", "x-goog-api-key": key },
           body: cuerpo,
-          signal: AbortSignal.timeout(restante),
+          signal: AbortSignal.timeout(tope),
         });
       } catch (e) {
         console.error("Gemini", modelo, "sin respuesta:", e.name);
@@ -141,6 +146,19 @@ RESPUESTAS DEL ALUMNO:
       }
       if (r.ok) break;
       const st = r.status;
+      if (st === 400) {
+        const t = await r.text();
+        console.error("Gemini", modelo, 400, t);
+        if (/thinking/i.test(t)) {
+          const sinThinking = JSON.parse(cuerpo); delete sinThinking.generationConfig.thinkingConfig;
+          r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${modelo}:generateContent`, {
+            method: "POST", headers: { "Content-Type": "application/json", "x-goog-api-key": key },
+            body: JSON.stringify(sinThinking), signal: AbortSignal.timeout(Math.max(3000, 25000 - (Date.now() - inicio))),
+          }).catch(() => null);
+          if (r && r.ok) break;
+        }
+        r = null; continue;
+      }
       console.error("Gemini", modelo, st, await r.text());
       if ([404, 429, 500, 503].includes(st)) { saturado = saturado || st !== 404; r = null; continue; }
       return json(502, { error: "La IA no ha podido corregir ahora mismo" });
