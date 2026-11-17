@@ -115,21 +115,37 @@ RESPUESTAS DEL ALUMNO:
 2. Ideas secundarias: """${secundaria || "(En blanco)"}"""
 3. Explicación (idea principal y secundarias): """${explicacion}"""`;
 
-  const modelo = process.env.MODELO || "gemini-2.5-flash";
+  // Modelos a probar en orden: si uno está saturado (503/429) o no existe (404), se pasa al siguiente.
+  const modelos = [...new Set([process.env.MODELO || "gemini-3.8-flash", "gemini-3.6-flash", "gemini-3.5-flash-lite"])];
+  const cuerpo = JSON.stringify({
+    systemInstruction: { parts: [{ text: SISTEMA }] },
+    contents: [{ role: "user", parts: [{ text: prompt }] }],
+    generationConfig: { temperature: 0.15, responseMimeType: "application/json", responseSchema: ESQUEMA },
+  });
+  const inicio = Date.now();
   try {
-    const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${modelo}:generateContent`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "x-goog-api-key": key },
-      body: JSON.stringify({
-        systemInstruction: { parts: [{ text: SISTEMA }] },
-        contents: [{ role: "user", parts: [{ text: prompt }] }],
-        generationConfig: { temperature: 0.15, responseMimeType: "application/json", responseSchema: ESQUEMA },
-      }),
-    });
-    if (!r.ok) {
-      console.error("Gemini", r.status, await r.text());
+    let r = null, saturado = false;
+    for (const modelo of modelos) {
+      const restante = 24000 - (Date.now() - inicio);
+      if (restante < 4000) break;
+      try {
+        r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${modelo}:generateContent`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "x-goog-api-key": key },
+          body: cuerpo,
+          signal: AbortSignal.timeout(restante),
+        });
+      } catch (e) {
+        console.error("Gemini", modelo, "sin respuesta:", e.name);
+        r = null; saturado = true; continue;
+      }
+      if (r.ok) break;
+      const st = r.status;
+      console.error("Gemini", modelo, st, await r.text());
+      if ([404, 429, 500, 503].includes(st)) { saturado = saturado || st !== 404; r = null; continue; }
       return json(502, { error: "La IA no ha podido corregir ahora mismo" });
     }
+    if (!r) return json(503, { error: "saturada", saturada: saturado });
     const out = await r.json();
     const txt = (out.candidates?.[0]?.content?.parts || []).map((p) => p.text || "").join("");
     const ev = JSON.parse(txt);
