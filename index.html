@@ -329,7 +329,7 @@ textarea:focus{outline:none;border-color:var(--petrol);background:var(--surface)
 .tlv-i p{font-size:14.5px}
 .infl{display:flex;flex-direction:column;gap:8px}
 .infl-i{background:var(--surface-2);border:1px solid var(--line);border-radius:14px;padding:10px 12px}
-.infl-i b{display:block;font-family:var(--font-display);color:var(--petrol)}
+.infl-i>b{display:block;font-family:var(--font-display);color:var(--petrol)}
 .infl-i span{font-size:14px}
 .vs{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:stretch}
 .vs-side{background:var(--surface-2);border:1px solid var(--line);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:6px}
@@ -522,7 +522,17 @@ textarea:focus{outline:none;border-color:var(--petrol);background:var(--surface)
 .lineblock{display:flex;flex-direction:column;gap:10px;padding:14px;border-radius:16px;background:var(--surface-2)}
 .lineblock+.lineblock{margin-top:10px}
 .lb-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:14.5px}
-.lb-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.lb-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.mini.big-ph{flex-direction:column;justify-content:center;text-align:center;gap:10px;padding:18px 12px 16px;border-radius:18px;border:1.5px solid var(--line);box-shadow:var(--shadow);transition:transform .15s,border-color .15s,box-shadow .15s}
+.mini.big-ph{border:2px solid color-mix(in srgb,var(--petrol-deep) 55%,transparent);background:linear-gradient(135deg,color-mix(in srgb,var(--petrol) 42%,var(--surface)) 0%,color-mix(in srgb,var(--petrol) 60%,var(--surface)) 100%);color:var(--petrol-deep);box-shadow:0 6px 16px rgba(74,20,48,.12)}
+.mini.big-ph .ph-av{display:grid;place-items:center;width:88px;height:92px}
+.mini.big-ph small{color:color-mix(in srgb,var(--petrol-deep) 70%,transparent)}
+:root[data-theme="dark"] .mini.big-ph,:root[data-theme="dark"] .mini.big-ph small{color:var(--ink)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .mini.big-ph,:root:not([data-theme="light"]) .mini.big-ph small{color:var(--ink)}}
+.mini.big-ph:hover{transform:translateY(-2px);border-color:var(--orange)}
+.mini.big-ph:active{transform:scale(.98)}
+.mini.big-ph span{align-items:center;font-size:17px;font-family:var(--font-display);gap:3px}
+.mini.big-ph small{font-size:12.5px;font-family:var(--font-body)}
 .mini span{display:flex;flex-direction:column;line-height:1.2}
 .mini small{font-size:11.5px;font-weight:600;color:var(--muted)}
 @media (max-width:620px){.lb-row{grid-template-columns:1fr 1fr}}
@@ -555,6 +565,126 @@ textarea:focus{outline:none;border-color:var(--petrol);background:var(--surface)
 @media (max-width:420px){.quick{grid-template-columns:repeat(2,1fr)}}
 .mobile-brand{align-items:center;gap:8px;font-family:var(--font-display);font-weight:800;font-size:18px;color:var(--petrol)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+.sec-h{font-size:18px;margin:26px 0 12px}
+.main{position:relative}
+.byline-row{max-width:980px;margin:0 auto 18px;display:flex;justify-content:flex-end}
+.byline{display:inline-flex;align-items:center;gap:11px;font-family:var(--font-display);font-weight:700;font-size:15px;color:var(--petrol-deep)}
+:root[data-theme="dark"] .byline{color:var(--ink)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .byline{color:var(--ink)}}
+.by-av{width:44px;height:44px;object-fit:cover;box-shadow:0 0 0 2px var(--orange);border-radius:50%;display:grid;place-items:center;background:var(--orange);color:#fff;font-size:11.5px;font-weight:800;letter-spacing:.03em}
+@media (max-width:860px){.topbar{align-items:flex-end}.byline-row{position:absolute;top:16px;right:16px;margin:0}.byline{font-size:14px}.by-av{width:36px;height:36px;font-size:10.5px}}
+.ds-feat{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px}
+.ds-feat>div{position:relative;background:var(--surface-2);border:1px solid var(--line);border-radius:14px;padding:12px 14px 12px 50px}
+.ds-feat>div>span{position:absolute;left:12px;top:12px;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--petrol);color:#fff;font-weight:800;font-size:13px}
+.ds-feat>div>b{display:block;font-family:var(--font-display);font-size:14.5px;margin-bottom:2px}
+.ds-feat p{font-size:14px;margin:0}
+.ds-tree{display:flex;flex-direction:column;gap:6px;max-width:460px;margin:4px auto 12px}
+.ds-tree-r{display:flex;align-items:center;gap:12px;border-radius:14px;padding:10px 14px;background:var(--petrol-soft)}
+.ds-tree-r:nth-child(2){margin:0 60px;background:color-mix(in srgb,var(--petrol) 22%,var(--surface))}
+.ds-tree-r:nth-child(3){background:var(--petrol);color:#fff}
+.ds-tree-l{font-size:11.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;opacity:.8;min-width:60px}
+.ds-tree-r b{font-family:var(--font-display)}
+.ds-rules{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ds-rules>div{border-radius:16px;padding:14px;border:1px solid var(--line);background:var(--surface-2)}
+.ds-rules .r1{background:var(--petrol-soft)}.ds-rules .r3{background:color-mix(in srgb,var(--ochre) 14%,var(--surface))}
+.ds-rules>div>b{font-family:var(--font-display);font-size:17px;margin-left:8px}
+.ds-rules p{font-size:14px;margin:8px 0 0;font-style:italic}
+.ds-rn{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:9px;background:var(--petrol);color:#fff;font-weight:800}
+.ds-doubt{display:flex;flex-direction:column;gap:10px}
+.ds-doubt>div{display:flex;gap:12px;align-items:flex-start;border-radius:16px;padding:12px 14px;border:1px solid var(--line)}
+.ds-doubt .d1{background:var(--surface-2)}
+.ds-doubt .d2{background:color-mix(in srgb,var(--petrol) 12%,var(--surface));margin-left:18px}
+.ds-doubt .d3{background:color-mix(in srgb,var(--petrol) 24%,var(--surface));margin-left:36px}
+.ds-doubt>div>div>b{font-family:var(--font-display)}
+.ds-doubt p{font-size:14px;margin:4px 0 0}
+.ds-dn{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--petrol);color:#fff;font-weight:800}
+.ds-cogito{text-align:center;border-radius:18px;padding:18px;background:linear-gradient(135deg,#6b1c44,#4a1430);color:#fff;margin:6px 0}
+.ds-cogito b{display:block;font-family:var(--font-display);font-size:26px}
+.ds-cogito span{opacity:.85}
+.ds-flow{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin:4px 0 10px}
+.ds-flow>div{text-align:center;border-radius:16px;padding:12px 18px;background:var(--surface-2);border:1px solid var(--line);min-width:120px}
+.ds-flow>div.god{background:var(--petrol);color:#fff;border-color:transparent}
+.ds-flow>div>b{display:block;font-family:var(--font-display);font-size:19px}
+.ds-flow small{opacity:.75}
+.ds-flow i{font-style:normal;font-size:22px;color:var(--petrol)}
+.ds-fl{display:block;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;opacity:.75}
+@media (max-width:620px){.ds-rules{grid-template-columns:1fr}.ds-doubt .d2,.ds-doubt .d3{margin-left:0}.ds-tree-r:nth-child(2){margin:0 24px}}
+.vplay{cursor:pointer}
+.vplay .vthumb{position:relative}
+.vplay-b{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:rgba(0,0,0,.6);color:#fff;font-size:16px;padding-left:3px}
+.vinline-embed{margin:4px 0 14px}
+.mini.big-ph{border:2px solid transparent;background:linear-gradient(135deg,#6b1c44 0%,#4a1430 100%);color:#fff;box-shadow:0 10px 24px rgba(74,20,48,.22)}
+.mini.big-ph small{color:rgba(255,255,255,.72)}
+.mini.big-ph .ph-av{width:104px;height:104px;border-radius:20px;background:rgba(255,255,255,.08)}
+.mini.big-ph:hover{border-color:#e03880}
+.tx-list{display:flex;flex-direction:column;gap:18px}
+.tx-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.tx-head b{display:block;font-family:var(--font-display);font-size:18px}
+.tx-n{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;background:var(--petrol);color:#fff;font-weight:800}
+.tx-video{margin-bottom:16px}
+.tx-v{position:relative;display:block;aspect-ratio:16/9;border-radius:16px;overflow:hidden;background:#2a1420;cursor:pointer}
+.tx-v img{width:100%;height:100%;object-fit:cover;display:block}
+.tx-v-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:linear-gradient(135deg,#6b1c44,#4a1430);color:rgba(255,255,255,.8);font-size:14px;cursor:default;aspect-ratio:auto;height:120px}
+.tx-v-empty .vplay-b{position:static;transform:none;background:rgba(255,255,255,.14)}
+.tx-video .vinline-embed{margin:0}
+.tx-v{background:linear-gradient(135deg,#6b1c44,#4a1430)}
+.tx-v-lbl{position:absolute;left:16px;bottom:14px;color:#fff;font-weight:700;font-size:14px;text-shadow:0 1px 6px rgba(0,0,0,.5)}
+.tx-body{font-family:Georgia,"Iowan Old Style","Times New Roman",serif;font-size:17px;line-height:1.95;color:var(--ink);text-align:left;hyphens:auto}
+.tx-body mark{color:inherit;border-radius:5px;padding:.08em .22em;margin:0 -.05em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.tx-body mark.hl-g{background:#cfeed3}
+.tx-body mark.hl-o{background:#ffd8bf;font-weight:600;color:#7a2e10}
+.tx-body mark.hl-b{background:#d6e2ff;color:#1f3a7a;font-weight:600}
+.tx-body u{text-decoration:underline;text-decoration-color:#c8467e;text-decoration-thickness:2px;text-underline-offset:4px}
+:root[data-theme="dark"] .tx-body mark.hl-g{background:rgba(110,190,120,.28)}
+:root[data-theme="dark"] .tx-body mark.hl-o{background:rgba(255,150,90,.28);color:#ffd2b8}
+:root[data-theme="dark"] .tx-body mark.hl-b{background:rgba(110,150,255,.28);color:#d6e2ff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tx-body mark.hl-g{background:rgba(110,190,120,.28)}:root:not([data-theme="light"]) .tx-body mark.hl-o{background:rgba(255,150,90,.28);color:#ffd2b8}:root:not([data-theme="light"]) .tx-body mark.hl-b{background:rgba(110,150,255,.28);color:#d6e2ff}}
+@media (max-width:620px){.tx-body{font-size:16px;line-height:1.85}}
+.tx-sum{display:flex;gap:24px;align-items:center;background:linear-gradient(135deg,var(--petrol-soft),var(--surface))}
+.tx-sum-t{flex:1}.tx-sum-t h3{font-family:var(--font-display);font-size:22px;margin:4px 0}
+.tx-short{position:relative;display:block;width:120px;aspect-ratio:9/16;border-radius:18px;overflow:hidden;background:linear-gradient(160deg,#6b1c44,#2a1420);cursor:pointer;flex:none}
+.tx-short img{width:100%;height:100%;object-fit:cover}
+.vembed.vert{width:240px;aspect-ratio:9/16;flex:none}
+.vembed.vert iframe{width:100%;height:100%;border:0}
+@media (max-width:620px){.tx-sum{flex-direction:column;text-align:center}.tx-short,.vembed.vert{width:min(240px,70vw)}}
+.tx-v{display:flex;align-items:center;gap:16px;aspect-ratio:auto!important;background:var(--surface-2)!important;border:1px solid var(--line);border-radius:16px;padding:10px;overflow:visible;color:inherit;text-decoration:none}
+.tx-v:hover{border-color:var(--orange)}
+.tx-v-empty{cursor:default;height:auto!important;flex-direction:row!important;justify-content:flex-start!important;opacity:.75}
+.tx-cov{position:relative;flex:none;width:168px;aspect-ratio:16/9;border-radius:11px;overflow:hidden;background:linear-gradient(135deg,#6b1c44,#4a1430)}
+.tx-cov-art{position:absolute;inset:0;display:flex;align-items:center;gap:8px;padding:0 12px;color:#fff}
+.tx-cov-art b{font-family:var(--font-display);font-size:15px;line-height:1.1}
+.tx-cov img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+.vplay-b.sm{width:30px;height:30px;font-size:12px;z-index:2;left:auto;top:auto;right:8px;bottom:8px;transform:none}
+.tx-v-txt{display:flex;flex-direction:column;gap:2px}
+.tx-v-txt b{font-family:var(--font-display);font-size:16px}
+.tx-short-art{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:#fff}
+.tx-short-art b{font-family:var(--font-display);font-size:14px}
+.tx-short img{position:absolute;inset:0;z-index:1}
+@media (max-width:620px){.tx-cov{width:128px}.tx-cov-art svg{width:34px;height:auto}.tx-cov-art b{font-size:13px}}
+.tx-group{background:var(--surface);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow)}
+.tx-gh{all:unset;box-sizing:border-box;width:100%;display:flex;align-items:center;gap:14px;padding:18px 20px;cursor:pointer}
+.tx-gh:focus-visible{outline:3px solid var(--orange);outline-offset:-3px;border-radius:22px}
+.tx-gi{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:var(--petrol);color:#fff;flex:none}
+.tx-gi svg{width:22px;height:22px}
+.tx-gt{flex:1;display:flex;flex-direction:column;gap:2px}
+.tx-gt b{font-family:var(--font-display);font-size:20px}
+.tx-chev{transition:transform .2s;color:var(--petrol)}
+.tx-group.open .tx-chev{transform:rotate(180deg)}
+.tx-gb{display:flex;flex-direction:column;gap:16px;padding:0 14px 14px}
+.tx-gb .tx-card{box-shadow:none;border:1px solid var(--line)}
+.tx-note{margin:0 6px}
+.tx-gb[hidden]{display:none}
+@media (min-width:1000px){
+ .tx-card.playing{display:grid;grid-template-columns:270px minmax(0,1fr);column-gap:26px;align-items:start}
+ .tx-card.playing .tx-head{grid-column:1/-1}
+ .tx-card.playing .tx-video{position:sticky;top:20px;margin:0}
+ .tx-card.playing .tx-body{font-size:16px;line-height:1.8}
+}
+.tx-close{margin-top:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:7px 14px;font:600 13px var(--font-body);cursor:pointer}
+.tx-close:hover{border-color:var(--orange)}
+.tx-card .vembed.vert{width:300px;max-width:100%;margin:0 auto}
+@media (max-width:999px){.tx-card .tx-video{display:flex;flex-direction:column;align-items:center}.tx-card .vembed.vert{width:min(300px,78vw)}}
+@media (min-width:1000px){.tx-card.playing .vembed.vert{width:270px;margin:0}}
 </style>
 </head>
 <body>
@@ -567,7 +697,7 @@ textarea:focus{outline:none;border-color:var(--petrol);background:var(--surface)
     <nav class="nav" id="sidenav"></nav>
     <div class="side-foot">Andalucía · curso 2025-26.<br>Los fragmentos se leen en la antología oficial.</div>
   </aside>
-  <main class="main"><div class="wrap" id="view"></div></main>
+  <main class="main"><div class="byline-row"><span class="byline"><img class="by-av" src="data:image/jpeg;base64,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" alt="" aria-hidden="true">Manuel Higueras</span></div><div class="wrap" id="view"></div></main>
 </div>
 <nav class="tabbar" id="tabbar" aria-label="Navegación"></nav>
 
@@ -596,10 +726,7 @@ const AUTHORS = [
   q1:"Localiza si el fragmento trata la reminiscencia (Fedón) o la jerarquía del conocimiento y el Bien (República). Formula el problema como pregunta: ¿cómo es posible conocer lo que no está en lo sensible? Identifica la tesis (p. ej., «el conocimiento de lo igual en sí es anterior a la percepción») y las ideas que la sostienen, siguiendo el orden del argumento.",
   q2:"Conecta el fragmento con la teoría de las Ideas, el dualismo ontológico y epistemológico, la reminiscencia y la Idea de Bien. Si el texto es de la línea, explica los cuatro segmentos; si es del Fedón, la inmortalidad del alma. Cierra con la proyección ética y política: el filósofo que conoce el Bien debe gobernar.",
   q3:[
-   ["Racionalismo (Moderna)","Descartes: la razón con ideas innatas como fuente del conocimiento verdadero; desconfianza en los sentidos, como Platón."],
-   ["Empirismo (Moderna)","Locke: no hay ideas innatas; todo conocimiento procede de la experiencia. Contraste directo con la reminiscencia."],
-   ["Vitalismo (Contemporánea)","Nietzsche: el «mundo verdadero» es una fábula; invierte el platonismo y reivindica el mundo sensible."],
-   ["Perspectivismo (Contemporánea)","Ortega: no hay una verdad única fuera de la vida; la realidad se da en perspectivas."]],
+   ["Vitalismo (Contemporánea)","Nietzsche: el «mundo verdadero» es una fábula; invierte el platonismo y reivindica el mundo sensible."]],
   tips:["No reduzcas el comentario a contar el mito de la caverna si el texto es de la línea o del Fedón.","Usa los términos griegos con su explicación, no sueltos."]},
 
  {id:"aristoteles",name:"Aristóteles",years:"384–322 a. C.",era:"Antigua",block:"b",
@@ -653,8 +780,6 @@ const AUTHORS = [
   q1:"Identifica si el texto expone el método (Discurso II) o el proceso de la duda y el cogito (Meditaciones). Formula el problema: ¿cómo alcanzar una verdad indudable? Explica la tesis y el encadenamiento: por qué dudo, hasta dónde llega la duda y qué resiste a ella.",
   q2:"Sitúa el texto en el proyecto cartesiano de reconstruir el saber: método, duda, cogito, criterio de evidencia, demostración de Dios como garantía y existencia del mundo; y el dualismo alma-cuerpo. Explica el papel de las ideas innatas.",
   q3:[
-   ["Idealismo platónico (Antigua)","Platón: la verdad está en lo inteligible y los sentidos engañan; también defiende un saber innato (reminiscencia)."],
-   ["Vitalismo (Contemporánea)","Nietzsche: crítica a la razón y a la idea de un sujeto pensante como algo evidente; el «yo» es una ficción gramatical."],
    ["Raciovitalismo (Contemporánea)","Ortega: la realidad radical no es el pensamiento sino la vida; razón vital frente a razón pura."]],
   tips:["La duda cartesiana no es escéptica: es un medio, no un fin.","No digas solo «pienso, luego existo»: explica por qué es indudable."]},
 
@@ -736,9 +861,7 @@ const AUTHORS = [
   q1:"Identifica si el texto es de La gaya ciencia (muerte de Dios, origen del conocimiento) o de Crepúsculo (crítica a la razón y a la metafísica). Problema: ¿existe un mundo verdadero tras el aparente? o ¿qué ocurre cuando muere Dios? Señala la tesis y el tono (aforístico, irónico) sin perder el argumento.",
   q2:"Relaciona con su crítica a la metafísica (platonismo), a la moral (moral de señores y esclavos) y a la religión; con el nihilismo, la transmutación de los valores, la voluntad de poder, el eterno retorno y el superhombre. Usa el perspectivismo: no hay hechos, solo interpretaciones.",
   q3:[
-   ["Idealismo platónico (Antigua)","Platón: el blanco principal de Nietzsche; dualismo de mundos y desprecio del cuerpo y los sentidos."],
-   ["Racionalismo (Moderna)","Descartes: confianza en la razón y en un sujeto sustancial; desconfianza de los sentidos."],
-   ["Ética formal (Moderna)","Kant: moral universal del deber frente a la creación de valores."]],
+   ["Idealismo platónico (Antigua)","Platón: el blanco principal de Nietzsche; dualismo de mundos y desprecio del cuerpo y los sentidos."]],
   tips:["La «muerte de Dios» no es una tesis sobre la existencia de Dios: es un acontecimiento cultural.","Evita los tópicos: superhombre no es un ser superior por raza ni fuerza."]},
 
  {id:"arendt",name:"Arendt",years:"1906–1975",era:"Contemporánea",block:"b",
@@ -792,9 +915,7 @@ const AUTHORS = [
   q1:"Identifica si el texto plantea el dilema relativismo-racionalismo, la doctrina del punto de vista o el ser como interpretación histórica. Formula el problema (¿puede la verdad ser una y a la vez vista desde la vida?), la tesis y los ejemplos.",
   q2:"Relaciona con el raciovitalismo, la vida como realidad radical, el yo y la circunstancia, la razón vital e histórica, y su superación del realismo y del idealismo. Puedes mencionar la influencia de Nietzsche y su distancia respecto a él.",
   q3:[
-   ["Idealismo platónico (Antigua)","Platón: verdad única y eterna en el mundo de las Ideas; el racionalismo que Ortega critica."],
-   ["Racionalismo (Moderna)","Descartes: razón pura y sujeto pensante como fundamento, frente a la razón vital."],
-   ["Empirismo (Moderna)","Locke: el conocimiento depende de la experiencia del sujeto, pero sin perspectivismo."]],
+   ["Racionalismo (Moderna)","Descartes: razón pura y sujeto pensante como fundamento, frente a la razón vital."]],
   tips:["Perspectivismo no es relativismo: explícalo.","Cita la frase del yo y la circunstancia completa y explícala."]}
 ];
 
@@ -961,16 +1082,151 @@ aristoteles:[
  ["Según Ética a Nicómaco I, 8, la felicidad…",["No necesita nada externo","Necesita también ciertos bienes externos, como amigos, recursos o buena fortuna","Consiste solo en bienes externos","Se alcanza tras la muerte"],1,"Es difícil actuar bien sin medios; por eso la buena fortuna también influye en la felicidad."]
 ],
 descartes:[
- ["¿Qué dice la primera regla del método (evidencia)?",["Dividir cada dificultad en partes","No admitir como verdadero nada que no se conozca con evidencia, de forma clara y distinta","Ordenar los pensamientos de lo simple a lo complejo","Hacer revisiones completas"],1,"Es la regla fundamental: evitar la precipitación y la prevención."],
- ["¿Cuáles son las cuatro reglas del método?",["Duda, cogito, Dios y mundo","Evidencia, análisis, síntesis y enumeración","Observación, hipótesis, experimento y ley","Tesis, antítesis, síntesis y conclusión"],1,"Aparecen en la segunda parte del Discurso del método."],
- ["En el Discurso II, ¿qué idea ilustra el ejemplo de las ciudades y edificios?",["Que las obras hechas por muchos son mejores","Que las obras realizadas por uno solo suelen ser más perfectas que las compuestas por muchos","Que hay que conservar las tradiciones","Que la arquitectura es una ciencia"],1,"Por eso Descartes decide reconstruir sus opiniones desde los cimientos con un único método."],
- ["¿Cuál de estos NO es un motivo de duda en la Meditación I?",["Los sentidos a veces engañan","No distinguimos con certeza la vigilia del sueño","La hipótesis del genio maligno","La autoridad de Aristóteles"],3,"Los tres motivos son los sentidos, el sueño y el genio maligno (o un Dios engañador)."],
- ["¿Qué pone en duda la hipótesis del genio maligno, a diferencia del argumento del sueño?",["Solo los colores","Incluso las verdades matemáticas","La existencia del pensamiento","Nada"],1,"Aunque soñemos, 2 + 3 = 5; pero un ser poderoso podría engañarme incluso en eso."],
- ["¿Cuál es la primera verdad que encuentra Descartes?",["Dios existe","El mundo existe","Pienso, luego existo","Los cuerpos son extensos"],2,"Aunque me engañe, para ser engañado tengo que existir mientras pienso."],
- ["Según la Meditación II, ¿qué soy?",["Un cuerpo con alma","Una cosa que piensa: que duda, entiende, afirma, niega, quiere, imagina y siente","Un haz de percepciones","Un animal racional"],1,"Descartes rechaza la definición escolástica de «animal racional» por ser oscura."],
- ["¿Qué demuestra el ejemplo del trozo de cera?",["Que los sentidos son la mejor vía de conocimiento","Que los cuerpos se conocen por el entendimiento, no por los sentidos ni la imaginación","Que la cera es una sustancia","Que el calor destruye la materia"],1,"Al acercarla al fuego cambian todas sus cualidades sensibles y, sin embargo, sigue siendo la misma cera: lo capta la mente."],
- ["¿A qué corriente pertenece Descartes?",["Empirismo","Racionalismo","Vitalismo","Escolástica"],1,"Es el iniciador del racionalismo moderno."],
- ["¿Qué ciencia toma Descartes como modelo para su método?",["La biología","Las matemáticas","La historia","La teología"],1,"Admira la certeza de la geometría y el álgebra, y quiere extenderla a todo el saber."]
+// ===== RACIONALISMO Y FILOSOFÍA MODERNA =====
+["¿Con qué obra y en qué año se suele situar el inicio de la filosofía moderna?",["Con las Meditaciones metafísicas, en 1641","Con el Discurso del método, en 1637","Con los Principios de la Filosofía, en 1644","Con las Reglas para la dirección del espíritu, en 1628"],1,"La filosofía moderna se inicia con Descartes en 1637, año de publicación del Discurso del método.","Racionalismo"],
+["¿Dónde estudió Descartes y según qué principios fue educado?",["En la Universidad de París, según el humanismo","En el colegio jesuita de La Flèche, según la Escolástica","En Holanda, según el método experimental","En Estocolmo, según la filosofía griega"],1,"Estudió de 1604 a 1612 en el colegio jesuita de La Flèche, educado según los principios de la Escolástica.","Racionalismo"],
+["¿Por qué vivió Descartes en Holanda entre 1628 y 1649?",["Porque allí estaba la corte de la reina Cristina","Porque era el país más tolerante de la época, refugio frente a la Inquisición","Porque allí estaba el colegio de La Flèche","Porque fue desterrado de Francia por hereje"],1,"Holanda era el país más tolerante de la época y servía de refugio a científicos y filósofos.","Racionalismo"],
+["¿Qué caracteriza, ante todo, a la filosofía moderna según los apuntes?",["La subordinación de la razón a la fe","La autonomía absoluta de la razón","El rechazo de la ciencia","La vuelta a la autoridad de Aristóteles"],1,"La filosofía moderna se caracteriza por la autonomía absoluta de la razón y por su conexión con la ciencia moderna.","Racionalismo"],
+["En sentido negativo, la autonomía de la razón significa que…",["La razón no puede conocer nada con certeza","Su ejercicio no está coartado por ninguna instancia exterior: tradición, autoridad o fe","La razón debe someterse a la experiencia","La razón depende de Dios para funcionar"],1,"Negativamente, nada ajeno a la razón (tradición, autoridad, fe religiosa) puede regularla.","Racionalismo"],
+["En sentido positivo, la autonomía de la razón implica que la razón es…",["Un instrumento al servicio de la teología","El tribunal supremo que juzga lo verdadero y lo justo","Una facultad inferior a los sentidos","Una herencia de la tradición"],1,"Positivamente, la razón es el tribunal supremo, tanto en lo teórico como en lo moral y lo político.","Racionalismo"],
+["¿Qué aportación hizo Descartes a las matemáticas?",["El cálculo infinitesimal","La geometría analítica","La teoría de probabilidades","Los números negativos"],1,"Descartes legó a las matemáticas la geometría analítica, además de trabajos de física y biología.","Racionalismo"],
+["La autonomía de la razón y la conexión con la ciencia moderna son rasgos…",["Exclusivos del racionalismo","De toda la filosofía moderna","Exclusivos del empirismo","De la filosofía medieval"],1,"Ambos rasgos no son exclusivos del racionalismo, sino de toda la filosofía moderna.","Racionalismo"],
+["¿Cuál de estos filósofos NO pertenece al racionalismo?",["Leibniz","Spinoza","Malebranche","Locke"],3,"Locke es empirista. Leibniz, Spinoza y Malebranche son racionalistas, como Descartes.","Racionalismo"],
+["¿En qué siglo se sitúa el racionalismo y a qué corriente se opone?",["Siglo XVII; se opone al empirismo inglés del siglo XVIII","Siglo XVIII; se opone a la Escolástica","Siglo XVI; se opone al humanismo","Siglo XIX; se opone al idealismo"],0,"El racionalismo es la corriente del siglo XVII que se opone al empirismo inglés del siglo XVIII.","Racionalismo"],
+["¿Cuál es la mejor forma de entender la oposición entre racionalismo y empirismo?",["Comparar sus teorías políticas","Comparar lo que dicen sobre el origen del conocimiento","Comparar su relación con la religión","Comparar sus éticas"],1,"La diferencia clave está en el origen del conocimiento: la razón o la experiencia sensible.","Racionalismo"],
+["Según el empirismo, nuestros conocimientos proceden…",["De ideas innatas","En último término, de los sentidos y la experiencia","De la revelación divina","De la intuición intelectual"],1,"Para el empirismo, todo conocimiento procede en último término de la experiencia sensible.","Racionalismo"],
+["Según el racionalismo, nuestros conocimientos válidos acerca de la realidad proceden…",["De los sentidos","De la razón misma","De la tradición","De la autoridad de la Iglesia"],1,"El racionalismo sostiene que el conocimiento válido procede de la razón misma.","Racionalismo"],
+["¿Qué papel da el racionalismo al conocimiento sensible?",["Es la única fuente fiable","Lo infravalora, porque los sentidos son engañosos","Lo considera la base de la deducción","Lo identifica con la intuición"],1,"Una de las características del racionalismo es la crítica del conocimiento sensible, que se considera engañoso.","Racionalismo"],
+["¿Qué son las ideas innatas para el racionalismo?",["Ideas que proceden de la experiencia externa","Verdades que se hallan potencialmente en el entendimiento","Ideas construidas por la imaginación","Opiniones heredadas de la tradición"],1,"Las ideas innatas son verdades que se hallan potencialmente en el entendimiento.","Racionalismo"],
+["¿Qué significa la «racionalidad del mundo» como rasgo del racionalismo?",["Que el mundo es una ilusión","Que todo lo que sucede tiene una justificación que la razón puede conocer","Que solo existe la razón","Que el mundo es caótico e incomprensible"],1,"Todo lo que compone la realidad tiene una justificación que la razón puede llegar a conocer: todo lo real es racional.","Racionalismo"],
+["La confianza absoluta del racionalismo en la razón supone que…",["No hay límites al conocimiento humano","Solo podemos conocer lo que vemos","La razón necesita la fe","El conocimiento es siempre probable"],0,"El racionalismo confía en la capacidad cognoscitiva de la razón: no hay límites al conocimiento humano.","Racionalismo"],
+["¿Cómo se construye el conocimiento según el racionalismo?",["Inductivamente, a partir de muchas observaciones","Deductivamente, a partir de unos primeros principios: las ideas innatas","Por acumulación de opiniones","Por revelación"],1,"El conocimiento puede construirse deductivamente a partir de primeros principios, las ideas innatas.","Racionalismo"],
+["¿Qué aspira a construir el racionalismo?",["Una ciencia universal y necesaria basada en la unidad de la razón y el método matemático","Una ciencia probable basada en la experiencia","Un saber religioso","Una colección de saberes independientes"],0,"El racionalismo aspira a una ciencia universal y necesaria, con el método matemático como modelo.","Racionalismo"],
+["Para el racionalismo, el método más adecuado del pensamiento es…",["La inducción","La deducción","La observación","La experimentación"],1,"La deducción se considera el método más adecuado del pensamiento.","Racionalismo"],
+
+// ===== EL MÉTODO =====
+["¿Qué lugar ocupa el método en la filosofía de Descartes?",["Es un asunto secundario","Es a la vez el punto de partida y la meta de su filosofía","Solo le interesa para las matemáticas","Lo toma de Aristóteles"],1,"Descartes dedicó gran parte de sus esfuerzos al método, punto de partida y meta de su filosofía.","Método"],
+["¿Qué situación provoca la búsqueda de un nuevo método en la Edad Moderna?",["El triunfo de la Escolástica","El derrumbamiento del sistema de ideas y creencias que había imperado durante siglos","La aparición del empirismo","La invención de la imprenta"],1,"La búsqueda nace del derrumbamiento de la Escolástica, aceptada durante siglos sin análisis crítico.","Método"],
+["¿Sobre qué dos autoridades principales se fundaba la Escolástica?",["Platón y Agustín de Hipona","Aristóteles y Tomás de Aquino","Copérnico y Galileo","Lutero y Erasmo"],1,"La Escolástica se fundaba en la autoridad de Aristóteles y Tomás de Aquino.","Método"],
+["¿Qué necesitaba la filosofía tras la crisis de la Escolástica?",["Descubrimientos ocasionales","Un nuevo criterio de verdad que sustituyera a la autoridad","Volver a la Biblia","Abandonar la razón"],1,"No bastaban descubrimientos ocasionales: hacía falta un nuevo criterio de verdad que sustituyera a la autoridad de la Escolástica, de Aristóteles y de la Biblia.","Método"],
+["¿Qué expresión de Kant recogen los apuntes para describir el nuevo papel de la razón?",["La revolución copernicana","La mayoría de edad de la razón","La cosa en sí","El imperativo categórico"],1,"La razón alcanza su «mayoría de edad», como dirá Kant en ¿Qué es Ilustración?","Método"],
+["¿Cuáles son los dos métodos predominantes en la filosofía moderna?",["Inductivo y dialéctico","Experimental y matemático","Escolástico y humanista","Socrático y platónico"],1,"Los métodos experimental y matemático configuran el empirismo y el racionalismo.","Método"],
+["¿Qué método elige Descartes?",["El experimental","El matemático","El dialéctico","El histórico"],1,"Descartes opta por el método matemático, inaugurando así el racionalismo.","Método"],
+["¿Qué coincidencia temática hay entre empiristas y racionalistas?",["Ninguna","Todos ponen el método en el centro de su investigación","Todos aceptan las ideas innatas","Todos rechazan la ciencia"],1,"Aunque lo entiendan de forma distinta, todos ponen el tema del método en el centro.","Método"],
+["Según Descartes, las diversas ciencias son…",["Saberes completamente independientes","Manifestaciones de una única sabiduría humana","Opiniones sin fundamento","Partes de la teología"],1,"Las ciencias no son otra cosa que la sabiduría humana, que permanece una e idéntica aunque se aplique a objetos diversos.","Método"],
+["¿Con qué imagen ilustra Descartes la unidad de la sabiduría en las Reglas?",["Con la luz del sol, que no cambia aunque ilumine objetos diversos","Con una escalera","Con una ciudad construida por un solo arquitecto","Con un río"],0,"La sabiduría no recibe de los objetos más distinción que la luz del sol de los objetos que ilumina.","Método"],
+["¿De dónde procede, en último término, la concepción unitaria del saber?",["De una concepción unitaria de la razón","De la unidad de la Iglesia","De la experiencia","De la tradición aristotélica"],0,"La sabiduría es única porque la razón es única.","Método"],
+["En el árbol de la filosofía de Descartes, las raíces son…",["La física","La metafísica","La moral","La medicina"],1,"«Toda la filosofía es como un árbol, cuyas raíces son la metafísica, el tronco es la física…»","Método"],
+["En el árbol de la filosofía, ¿qué representa el tronco?",["La metafísica","La física","La mecánica","La lógica"],1,"El tronco es la física, de la que salen las ramas de las demás ciencias.","Método"],
+["¿A qué tres ciencias principales se reducen las ramas del árbol del saber?",["Lógica, ética y política","Medicina, mecánica y moral","Astronomía, geometría y música","Física, química y biología"],1,"Las ramas se reducen a tres principales: la medicina, la mecánica y la moral.","Método"],
+["¿En qué obra aparece la imagen del árbol de la filosofía?",["Discurso del método","Principios de la Filosofía","Meditaciones metafísicas","Reglas para la dirección del espíritu"],1,"La cita del árbol procede de los Principios de la Filosofía.","Método"],
+["¿Cuáles son los dos modos de conocimiento según Descartes?",["Sensación y memoria","Intuición y deducción","Opinión y ciencia","Inducción y abstracción"],1,"Según Descartes hay dos modos de conocimiento: la intuición y la deducción.","Método"],
+["¿Cómo describe Descartes la intuición?",["Como una opinión probable","Como una especie de «luz o instinto natural»","Como una sensación corporal","Como un razonamiento largo"],1,"La intuición es una especie de luz o instinto natural de la razón.","Método"],
+["¿Cuál es el objeto de la intuición?",["Las cualidades secundarias","Las naturalezas simples","Las opiniones de la tradición","Las cosas sensibles"],1,"La intuición capta las naturalezas simples de manera inmediata y sin posibilidad de error.","Método"],
+["Según las Reglas III, la intuición es más cierta que…",["La fe","La deducción misma","Las matemáticas","Los sentidos solo a veces"],1,"Es un concepto de la mente pura y atenta que nace de la sola luz de la razón y es más cierto que la deducción misma.","Método"],
+["¿Qué es la deducción para Descartes?",["Un conocimiento de las cosas sensibles","Una sucesión de intuiciones de naturalezas simples y de sus conexiones","Una generalización a partir de casos","Una creencia sin fundamento"],1,"Por larga que sea, la deducción es en último término una sucesión de intuiciones y de sus conexiones.","Método"],
+["¿Qué dos pasos exige el dinamismo de la intuición y la deducción?",["Observación y experimentación","Análisis y síntesis","Duda y fe","Tesis y antítesis"],1,"Primero un análisis hasta las naturalezas simples; después una síntesis o reconstrucción deductiva de lo complejo.","Método"],
+["¿En qué consiste el proceso de síntesis?",["En descomponer lo complejo en partes","En reconstruir deductivamente lo complejo a partir de lo simple","En revisar que no falte nada","En dudar de todo"],1,"La síntesis es la reconstrucción deductiva de lo complejo a partir de lo simple.","Método"],
+["Según la definición de las Reglas IV, el método consiste en…",["Unas reglas ciertas y fáciles para no tomar nunca lo falso por verdadero","Una colección de experimentos","Una serie de dogmas de fe","Un conjunto de opiniones probables"],0,"Por método entiende unas reglas ciertas y fáciles con las que no se tomará nunca por verdadero lo que es falso.","Método"],
+["¿En qué obra expone Descartes las cuatro reglas del método?",["En la segunda parte del Discurso del método","En la sexta Meditación","En los Principios de la Filosofía","En las Pasiones del alma"],0,"Las reglas del método aparecen en la segunda parte del Discurso del método.","Método"],
+["¿Cuáles son las cuatro reglas del método?",["Duda, cogito, Dios y mundo","Evidencia, análisis, síntesis y comprobación","Observación, hipótesis, experimento y ley","Intuición, deducción, inducción y abstracción"],1,"Las cuatro reglas son evidencia, análisis, síntesis y comprobaciones (enumeración y revisión).","Método"],
+["¿Qué exige la regla de la evidencia?",["Dividir cada dificultad en partes","No admitir como verdadero nada que no se presente clara y distintamente","Empezar por lo más simple","Hacer revisiones generales"],1,"No admitir jamás como verdadera cosa alguna sin conocer con evidencia que lo era.","Método"],
+["¿Qué dos errores manda evitar la primera regla del método?",["La duda y la fe","La precipitación y la prevención","La deducción y la intuición","El análisis y la síntesis"],1,"La regla de la evidencia pide evitar cuidadosamente la precipitación y la prevención.","Método"],
+["«Dividir cada una de las dificultades que examinase en tantas partes como fuese posible» corresponde a la regla de…",["Evidencia","Análisis","Síntesis","Comprobación"],1,"Es la segunda regla, la del análisis.","Método"],
+["«Conducir ordenadamente mis pensamientos comenzando por los objetos más simples» corresponde a la regla de…",["Síntesis","Evidencia","Análisis","Comprobación"],0,"Es la tercera regla: ascender poco a poco de lo más simple a lo más complejo.","Método"],
+["¿Qué pide la cuarta regla del método?",["Dudar de los sentidos","Hacer enumeraciones completas y revisiones generales para no omitir nada","Aceptar solo lo evidente","Partir de lo más complejo"],1,"La regla de comprobación pide enumeraciones tan completas y revisiones tan generales que no se omita nada.","Método"],
+["¿A qué procesos se refieren la segunda y la tercera reglas del método?",["A la duda y al cogito","Al análisis y a la síntesis","A la intuición y la fe","A la evidencia y la comprobación"],1,"La segunda regla es el análisis y la tercera la síntesis.","Método"],
+["Según Descartes, ¿en qué ámbito se había usado ya la razón conforme a su método?",["En la teología","En las matemáticas","En la política","En la medicina"],1,"Hasta entonces la razón se había usado así solo en las matemáticas, con resultados admirables.","Método"],
+["¿Por qué puede aplicarse el método a todos los ámbitos del saber?",["Porque todas las ciencias son experimentales","Porque la razón es única","Porque Dios lo garantiza","Porque lo dice Aristóteles"],1,"Al ser única la razón, nada impide utilizar el mismo método en todos los ámbitos del saber.","Método"],
+["¿En qué consistía el proyecto cartesiano?",["En la unificación de la ciencia","En defender la Escolástica","En demostrar el empirismo","En reformar la Iglesia"],0,"El proyecto cartesiano consistía en la unificación de la ciencia, construida con un único método.","Método"],
+["¿Qué exige la construcción del edificio del saber?",["Un punto de partida que sea una verdad absolutamente cierta","Muchas observaciones","La aceptación de la tradición","Un acuerdo entre los sabios"],0,"Exige un punto de partida absolutamente cierto, sobre el que no sea posible dudar.","Método"],
+
+// ===== DUDA Y COGITO =====
+["¿Qué camino elige Descartes para hallar un punto de partida absolutamente cierto?",["La experiencia","La duda metódica","La revelación","La autoridad de la tradición"],1,"El camino elegido por Descartes es el de la duda metódica.","Duda y cogito"],
+["¿Es escéptica la duda cartesiana?",["Sí: Descartes duda por dudar","No: usa la duda solo para buscar la verdad","Sí: concluye que no podemos saber nada","No: porque no duda de nada"],1,"No es una actitud escéptica ni una duda gratuita: es un instrumento para buscar la verdad.","Duda y cogito"],
+["¿Por qué la duda cartesiana se llama «metódica»?",["Porque se aplica solo a las matemáticas","Porque es una exigencia del método en su momento analítico","Porque la impone la Iglesia","Porque es una duda definitiva"],1,"La duda es metódica porque es una exigencia del método en su momento analítico.","Duda y cogito"],
+["¿Cuál es la función principal de la duda metódica?",["Destruir toda posibilidad de conocimiento","Hacer una labor de desescombro en nuestro conocimiento","Demostrar la existencia del mundo","Sustituir a la razón"],1,"Su función principal es ejercer una labor de desescombro, eliminando todo aquello de que sea posible dudar.","Duda y cogito"],
+["¿Con qué regla del método se corresponde la duda metódica?",["Con la primera, la evidencia","Con la segunda, el análisis","Con la tercera, la síntesis","Con la cuarta, la comprobación"],1,"La duda permite llevar a cabo la labor de análisis (2.ª regla) hasta llegar a una verdad simple e indubitable.","Duda y cogito"],
+["¿Qué hay que eliminar según la duda metódica?",["Solo las opiniones falsas","Todo aquello de lo que sea posible dudar","Solo las creencias religiosas","Solo las verdades matemáticas"],1,"Hay que eliminar todos los conocimientos, ideas y creencias que no tengan una certeza absoluta.","Duda y cogito"],
+["¿Cómo se ordenan los tres niveles de duda?",["De mayor a menor radicalidad","De menor a mayor radicalidad","Sin un orden concreto","Según su importancia religiosa"],1,"Descartes introduce tres niveles de duda que van de menor a mayor radicalidad escéptica.","Duda y cogito"],
+["¿Cuál es el primer nivel de duda?",["El genio maligno","La falacia de los sentidos","El argumento del sueño","La duda sobre Dios"],1,"El primer nivel es la falacia de los sentidos.","Duda y cogito"],
+["¿Qué argumenta la falacia de los sentidos?",["Que los sentidos nunca engañan","Que si los sentidos nos engañan a veces, no hay garantía de que no lo hagan siempre","Que solo engaña la vista","Que los sentidos son la base del conocimiento"],1,"Si a veces nos engañan, ¿qué garantía hay de que no lo hagan siempre?","Duda y cogito"],
+["¿Por qué no basta con que sea improbable que los sentidos nos engañen siempre?",["Porque la improbabilidad no equivale a certeza","Porque los sentidos son infalibles","Porque Dios los controla","Porque lo prohíbe la tercera regla"],0,"Aunque sea improbable, la improbabilidad no equivale a la certeza que exige el método.","Duda y cogito"],
+["¿Qué permite dudar el argumento del sueño?",["Solo de las verdades matemáticas","De que existan las cosas que percibimos, e incluso de que el mundo sea real","De que yo pienso","De la existencia de Dios"],1,"Como no podemos distinguir con seguridad la vigilia del sueño, dudamos de la existencia de lo que percibimos.","Duda y cogito"],
+["¿En qué se basa el argumento del sueño?",["En que los sueños son siempre falsos","En que no hay un criterio seguro para distinguir la vigilia del sueño","En que el sueño es una enfermedad","En que soñamos con Dios"],1,"A veces los sueños son tan vivos como la vigilia y no hay criterios para distinguirlos.","Duda y cogito"],
+["¿Qué verdades resisten el argumento del sueño, pero no el del genio maligno?",["Las verdades matemáticas","Las percepciones sensibles","La existencia del mundo","La existencia de mi cuerpo"],0,"Dormidos o despiertos, los tres ángulos de un triángulo suman 180°; solo el genio maligno permite dudar de ello.","Duda y cogito"],
+["¿Cuál es el nivel más radical de la duda?",["La falacia de los sentidos","El argumento del sueño","El argumento del genio maligno","La duda sobre la tradición"],2,"El genio maligno es el tercer y más radical motivo de duda.","Duda y cogito"],
+["¿Qué supone la hipótesis del genio maligno?",["Que Dios es bueno y veraz","Que tal vez el entendimiento está hecho de tal modo que se equivoca siempre","Que los sentidos son fiables","Que el mundo existe"],1,"Supone que tal vez el entendimiento humano se equivoca siempre, incluso al pensar con verdad aparente.","Duda y cogito"],
+["¿Cómo describe Descartes al genio maligno en las Meditaciones?",["Como un ser débil e ignorante","Como un ser «extremadamente poderoso e inteligente» que emplea su industria en engañarme","Como el propio Dios","Como un sueño"],1,"Es un genio extremadamente poderoso e inteligente que pone todo su empeño en inducirme a error.","Duda y cogito"],
+["¿A qué parece abocar la duda llevada a su extremo?",["Al dogmatismo","Al escepticismo","Al empirismo","Al materialismo"],1,"Llegado a una duda universal, parece abocar irremisiblemente al escepticismo.","Duda y cogito"],
+["¿Cuál es la primera verdad que encuentra Descartes?",["Dios existe","El mundo existe","Pienso, luego existo","Los cuerpos son extensos"],2,"La existencia del propio sujeto que piensa y duda: «Cogito, ergo sum».","Duda y cogito"],
+["¿Por qué el cogito resiste a toda duda?",["Porque lo garantizan los sentidos","Porque puedo dudar de todo menos de que dudo, y para dudar tengo que existir","Porque lo enseña la Escolástica","Porque es una verdad matemática"],1,"Si pienso que el mundo existe, puedo equivocarme sobre el mundo, pero no sobre que lo pienso.","Duda y cogito"],
+["¿Qué significa «Cogito, ergo sum»?",["Dudo, luego no sé nada","Pienso, luego existo","Siento, luego existo","Creo, luego entiendo"],1,"Es la célebre frase con la que Descartes expresa la primera verdad: pienso, luego existo.","Duda y cogito"],
+["Para Descartes, «pensar» incluye…",["Solo razonar matemáticamente","Dudar, afirmar, creer, equivocarse, amar…","Solo percibir con los sentidos","Solo imaginar"],1,"Mi existencia como sujeto que piensa (duda, afirma, cree, se equivoca, ama, etc.) está exenta de toda duda.","Duda y cogito"],
+["Además de ser la primera verdad, el cogito es…",["Una hipótesis provisional","El prototipo de toda verdad y de toda certeza","Una verdad revelada","Una opinión probable"],1,"La existencia del sujeto pensante es la primera verdad y el prototipo de toda verdad.","Duda y cogito"],
+["¿Cuál es el criterio de verdad que Descartes deduce del cogito?",["La utilidad","La claridad y la distinción","La coherencia con la tradición","El acuerdo de la mayoría"],1,"Todo lo que perciba con igual claridad y distinción será verdadero.","Duda y cogito"],
+["¿Por qué es absolutamente indubitable la existencia del sujeto pensante?",["Porque la vemos con los ojos","Porque se percibe con toda claridad y distinción","Porque la demuestra Dios","Porque la acepta todo el mundo"],1,"Es indudable porque se percibe con total claridad y distinción, y de ahí sale el criterio de verdad.","Duda y cogito"],
+["«Todo lo que percibo clara y distintamente es verdadero» aparece en…",["Meditaciones, III","Discurso del método, II","Principios de la Filosofía","Reglas, IV"],0,"La regla general del criterio de verdad se formula en la Meditación III.","Duda y cogito"],
+
+// ===== IDEAS Y DIOS =====
+["Tras el cogito, ¿cuál es el gran problema que se plantea Descartes?",["Demostrar que piensa","Conseguir la certeza de que existe algo fuera de su pensamiento","Encontrar un método","Refutar a Platón"],1,"La existencia del yo no implica otra realidad: ¿cómo saber que existe algo exterior al pensamiento?","Ideas y Dios"],
+["¿Por qué Descartes tiene que deducir la realidad a partir del pensamiento?",["Porque así lo exige el ideal deductivo","Porque los sentidos son fiables","Porque así lo dice la Biblia","Porque lo prefiere por comodidad"],0,"El ideal deductivo exige extraer todos los conocimientos a partir de la primera verdad, el cogito.","Ideas y Dios"],
+["En «yo pienso que el mundo existe», ¿qué factor es dudoso?",["El yo que piensa","El mundo como realidad exterior","La idea de mundo","La idea de existencia"],1,"El yo es indudable y las ideas también; lo dudoso es la realidad exterior del mundo.","Ideas y Dios"],
+["¿Con qué dos elementos cuenta Descartes para llevar a cabo la deducción?",["Los sentidos y la memoria","El pensamiento como actividad y las ideas que pienso","Dios y el mundo","La fe y la razón"],1,"El inventario solo muestra dos elementos: el pensamiento como actividad (yo pienso) y las ideas que pienso.","Ideas y Dios"],
+["¿Qué concluye Descartes de su análisis del pensamiento?",["Que el pensamiento piensa cosas","Que el pensamiento siempre piensa ideas","Que el pensamiento es material","Que no podemos pensar"],1,"De su análisis concluye que el pensamiento siempre piensa ideas.","Ideas y Dios"],
+["Para la filosofía anterior a Descartes, ¿qué es la idea?",["Una fotografía que contemplamos","Un medio transparente, como una lente, a través del cual se ven las cosas","Una sustancia","Una sensación"],1,"Antes, el pensamiento recaía directamente sobre las cosas: la idea era como una lente transparente.","Ideas y Dios"],
+["Para Descartes, ¿qué es la idea?",["Una lente transparente","Una representación o fotografía que contemplamos","Una realidad que existe en sí misma","Un objeto material"],1,"El pensamiento no recae sobre las cosas sino sobre las ideas, que son representaciones.","Ideas y Dios"],
+["Según los apuntes, ¿qué cambia en la filosofía a partir de Descartes?",["Pasa de idealista a realista","Pasa de realista a idealista","Pasa de racionalista a empirista","No cambia nada"],1,"La filosofía es realista hasta Descartes e idealista a partir de él.","Ideas y Dios"],
+["¿En qué se diferencia la idea cartesiana de la Idea platónica?",["En nada","Para Platón las Ideas existían en y por sí; para Descartes son contenidos del pensamiento","Para Descartes las ideas son materiales","Para Platón las ideas eran sensaciones"],1,"Para Platón las Ideas existían independientemente de las cosas; en Descartes son lo que el pensamiento piensa.","Ideas y Dios"],
+["Como actos mentales o «modos del pensamiento», las ideas…",["Tienen todas la misma realidad","Tienen realidades muy distintas","No tienen realidad","Son sustancias"],0,"Como actos mentales, todas las ideas poseen la misma realidad.","Ideas y Dios"],
+["En cuanto a su contenido objetivo, ¿qué ideas tienen más realidad?",["Las que representan modos o accidentes","Las que representan sustancias","Las facticias","Todas tienen la misma"],1,"Las ideas que representan sustancias poseen más realidad objetiva que las que representan modos o accidentes.","Ideas y Dios"],
+["¿Qué son las ideas adventicias?",["Las que construye la mente","Las que parecen provenir de la experiencia externa","Las que posee el pensamiento en sí mismo","Las que vienen de Dios"],1,"Son las que parecen provenir de nuestra experiencia externa: ser humano, caballo, alas…","Ideas y Dios"],
+["¿Por qué se dice que las ideas adventicias «parecen» provenir del exterior?",["Porque aún no consta la existencia de una realidad exterior","Porque son falsas","Porque las inventa la imaginación","Porque vienen de Dios"],0,"Decimos «parecen» porque todavía no está demostrada la existencia del mundo exterior.","Ideas y Dios"],
+["¿Cuál de estas es una idea facticia?",["La idea de pensamiento","La idea de centauro","La idea de existencia","La idea de infinito"],1,"Las facticias las construye la mente a partir de otras ideas: caballo alado, centauro, ratoncito Pérez…","Ideas y Dios"],
+["¿Por qué las ideas adventicias no sirven para demostrar la existencia del mundo?",["Porque su validez depende de esa misma existencia: sería un círculo vicioso","Porque son innatas","Porque son demasiado claras","Porque las crea Dios"],0,"Su validez depende de la problemática existencia de la realidad extramental, así que sería un círculo vicioso.","Ideas y Dios"],
+["¿Qué son las ideas innatas?",["Las que el pensamiento posee en sí mismo","Las que proceden de los sentidos","Las que construye la imaginación","Las que se aprenden en la escuela"],0,"Son ideas que no son adventicias ni facticias: el pensamiento las posee en sí mismo.","Ideas y Dios"],
+["¿Cuál de estas es un ejemplo de idea innata en los apuntes?",["La idea de caballo","La idea de existencia","La idea de ratoncito Pérez","La idea de color"],1,"Las ideas de «pensamiento» y «existencia» son innatas: las encuentro en el propio «pienso, luego existo».","Ideas y Dios"],
+["¿Cuál es la afirmación fundamental del racionalismo sobre las ideas primitivas del conocimiento?",["Que proceden de la experiencia","Que son innatas","Que son facticias","Que no existen"],1,"Las ideas primitivas a partir de las cuales se construye el edificio del conocimiento son innatas.","Ideas y Dios"],
+["¿Con qué identifica Descartes la idea de infinito?",["Con el mundo","Con Dios","Con el yo","Con la extensión"],1,"Entre las ideas innatas descubre la de infinito, que identifica con la idea de Dios.","Ideas y Dios"],
+["¿Por qué la idea de Dios no es adventicia?",["Porque no tenemos experiencia directa de Dios","Porque la construye la mente","Porque es confusa","Porque procede de los sentidos"],0,"Evidentemente no es adventicia, pues no poseemos experiencia directa de Dios.","Ideas y Dios"],
+["¿Cómo argumenta Descartes que la idea de infinito no es facticia?",["Diciendo que la idea de finitud presupone la de infinitud","Diciendo que procede de la experiencia","Diciendo que la inventó la Iglesia","Diciendo que es una idea confusa"],0,"Contra la opinión tradicional, la noción de finitud presupone la de infinitud, y no al revés.","Ideas y Dios"],
+["¿Cuántos argumentos da Descartes para demostrar la existencia de Dios?",["Uno","Dos","Tres","Cinco"],2,"Dos argumentos de causalidad (aplicado a la idea de infinito y a mi propio ser) y el argumento ontológico.","Ideas y Dios"],
+["En el argumento de causalidad aplicado a la idea de infinito, la causa de una idea debe tener…",["Tanta realidad formal como realidad objetiva tenga la idea","Menos realidad que la idea","Solo realidad material","Ninguna realidad"],0,"La causa ha de tener tanta realidad formal cuanta realidad objetiva tenga su idea: la idea de infinito la causa un ser infinito.","Ideas y Dios"],
+["¿Qué afirma el argumento de causalidad aplicado a mi propio ser?",["Que soy causa de mí mismo","Que, si fuera mi propia causa, me habría hecho perfecto; por tanto me ha creado Dios","Que el mundo me ha creado","Que no existo"],1,"Soy imperfecto y tengo la idea de perfección: la causa de mi ser ha de ser Dios.","Ideas y Dios"],
+["¿De quién toma Descartes, básicamente, el argumento ontológico?",["De Tomás de Aquino","De Anselmo de Canterbury","De Platón","De Agustín de Hipona"],1,"Es básicamente el mismo argumento de Anselmo de Canterbury.","Ideas y Dios"],
+["¿Qué ejemplo usa Descartes en el argumento ontológico?",["Un trozo de cera","Un triángulo, que no puede concebirse sin tres lados","Una ciudad","Un árbol"],1,"Igual que no podemos concebir un triángulo sin tres lados, no podemos concebir un ser perfecto al que le falte la existencia.","Ideas y Dios"],
+["¿Qué sostiene el argumento ontológico?",["Que la idea de ser perfecto contiene en sí misma su existencia","Que el mundo necesita una causa","Que soy imperfecto","Que los sentidos prueban a Dios"],0,"La idea de un ser perfecto contiene en sí misma su existencia.","Ideas y Dios"],
+["¿Cómo demuestra Descartes la existencia del mundo?",["Por los sentidos","A partir de la existencia de Dios, que es bueno y veraz y no puede engañarme","Por el argumento del sueño","Por la autoridad de Aristóteles"],1,"Dios es infinitamente bueno y veraz: no puede permitir que me engañe al creer que el mundo existe.","Ideas y Dios"],
+["¿Qué papel cumple Dios respecto del mundo en la filosofía cartesiana?",["Es una hipótesis innecesaria","Es la garantía de que a mis ideas les corresponde una realidad extramental","Es el genio maligno","Es una idea facticia"],1,"Dios aparece como garantía de que a mis ideas corresponde un mundo, algo paradójico en un sistema racionalista.","Ideas y Dios"],
+["¿Garantiza Dios que a todas mis ideas les corresponda una realidad?",["Sí, a todas sin excepción","No: solo garantiza un mundo de extensión y movimiento","Sí, pero solo a las facticias","No garantiza nada"],1,"Dios no garantiza las cualidades secundarias; solo un mundo de extensión y movimiento.","Ideas y Dios"],
+["¿Cuáles son las cualidades primarias?",["Color, olor y sabor","Extensión y movimiento (forma, tamaño, movimiento)","Frío y calor","Belleza y bondad"],1,"Las cualidades primarias son la extensión y el movimiento, de las que puede deducirse la física.","Ideas y Dios"],
+["¿Qué dice Descartes de las cualidades secundarias como colores, sabores o sonidos?",["Que son lo más real del mundo","Que no existen, aunque tengamos sus ideas","Que son innatas","Que las garantiza Dios"],1,"Como Galileo y la ciencia moderna, Descartes niega que existan las cualidades secundarias.","Ideas y Dios"],
+["¿Qué puede deducirse de la extensión y el movimiento?",["La moral","La física y las leyes generales del movimiento","La existencia de Dios","Las cualidades secundarias"],1,"A partir de la extensión y el movimiento puede deducirse la física.","Ideas y Dios"],
+
+// ===== LAS TRES SUSTANCIAS =====
+["¿Cuáles son las tres sustancias de Descartes?",["Agua, aire y fuego","Sustancia infinita, sustancia pensante y sustancia extensa","Alma racional, irascible y concupiscible","Materia, forma y acto"],1,"Dios (res infinita), el yo (res cogitans) y los cuerpos (res extensa).","Sustancias"],
+["¿Qué nombre latino recibe la sustancia pensante?",["Res extensa","Res cogitans","Res infinita","Res publica"],1,"El yo o sustancia pensante es la res cogitans.","Sustancias"],
+["¿Qué nombre latino recibe la sustancia de los cuerpos?",["Res cogitans","Res infinita","Res extensa","Res materialis"],2,"Los cuerpos son sustancia extensa: res extensa.","Sustancias"],
+["¿Qué es el atributo de una sustancia?",["Una modificación pasajera","Su esencia","Su causa","Una cualidad secundaria"],1,"Cada sustancia tiene una esencia que Descartes denomina atributo.","Sustancias"],
+["¿Cuál es el atributo de la sustancia pensante?",["La extensión","El pensamiento","La infinitud","El movimiento"],1,"El atributo de la res cogitans es el pensamiento.","Sustancias"],
+["¿Cuál es el atributo de la sustancia extensa?",["El pensamiento","La infinitud","La extensión","El color"],2,"El atributo de la res extensa es la extensión.","Sustancias"],
+["¿Cuál es el atributo de Dios?",["La infinitud","La extensión","El pensamiento","El movimiento"],0,"El atributo de la sustancia infinita es la infinitud.","Sustancias"],
+["¿Qué son los modos de una sustancia?",["Su esencia","Las modificaciones que sufre la sustancia","Las pruebas de su existencia","Sus causas"],1,"Los modos son las modificaciones de la sustancia.","Sustancias"],
+["¿Cuáles son modos de la sustancia pensante?",["Profundidad, volumen y anchura","Creer, dudar, imaginar, sentir, amar, odiar","Color, olor y sabor","Infinitud y perfección"],1,"Los modos de la res cogitans son creer, dudar, imaginar, sentir, amar, odiar, etc.","Sustancias"],
+["¿Cuáles son modos de la sustancia extensa?",["Dudar y creer","Profundidad, volumen, anchura, formas y movimientos","Amar y odiar","Ninguno"],1,"Los modos de la res extensa son la profundidad, el volumen, la anchura, etc.","Sustancias"],
+["¿Por qué la sustancia infinita no tiene modos?",["Porque no existe","Porque, dada su perfección, es siempre idéntica","Porque es material","Porque es una idea facticia"],1,"Dada su perfección, la sustancia infinita no tendría modos: es siempre idéntica.","Sustancias"],
+["¿Cómo define Descartes la sustancia?",["Lo que existe en otro","Toda cosa que existe de tal modo que no necesita de ninguna otra para existir","Lo que se percibe con los sentidos","La unión de materia y forma"],1,"Sustancia es toda cosa que no necesita de ninguna otra cosa para existir.","Sustancias"],
+["Tomada al pie de la letra, ¿a qué se aplicaría la definición de sustancia?",["A los cuerpos","Solo a Dios","Solo al yo","A las ideas"],1,"En sentido absoluto, solo Dios no necesita de nada para existir.","Sustancias"],
+["¿Por qué mantiene Descartes el nombre de sustancia para el yo y los cuerpos?",["Por su independencia mutua: no necesitan la una de la otra para existir","Porque son infinitos","Porque se crean a sí mismos","Porque son idénticos"],0,"La sustancia pensante y la extensa no necesitan la una de la otra para existir.","Sustancias"],
+["¿Qué tipo de dualismo antropológico defiende Descartes?",["Uno más moderado que el de Platón","Uno más radical que el de Platón","Ninguno","Uno igual al de Aristóteles"],1,"Se deduce un dualismo antropológico mucho más radical que el del propio Platón.","Sustancias"],
+["¿Cuál es el objetivo último de separar alma y cuerpo como sustancias distintas?",["Explicar las enfermedades","Salvaguardar la autonomía del alma respecto de la materia","Demostrar el mundo","Negar la libertad"],1,"El objetivo es salvaguardar la autonomía del alma con respecto a la materia.","Sustancias"],
+["¿Qué concepción del mundo material imponía la ciencia moderna?",["Teleológica y libre","Mecanicista y determinista","Mágica","Animista"],1,"La ciencia moderna imponía una concepción mecanicista y determinista del mundo material.","Sustancias"],
+["¿Por qué el alma tiene que ser independiente del cuerpo, según Descartes?",["Para poder salvar la libertad frente al determinismo mecanicista","Para explicar la digestión","Para justificar el geocentrismo","Para negar a Dios"],0,"Si el alma fuera materia estaría sometida a las leyes mecánicas: solo separándola se salva la libertad.","Sustancias"],
+["¿En qué se justifica la autonomía del alma respecto de la materia?",["En la experiencia sensible","En la claridad y distinción con que el entendimiento percibe su independencia","En la tradición","En la autoridad de Platón"],1,"Poseo una idea clara y distinta de mí como cosa pensante e inextensa, y del cuerpo como cosa extensa que no piensa.","Sustancias"],
+["Según la Meditación VI, el yo es…",["Idéntico a su cuerpo","Distinto de su cuerpo y puede existir sin él","Una parte del cuerpo","Una cualidad secundaria"],1,"«Es evidente que yo soy distinto de mi cuerpo y que puedo existir sin él».","Sustancias"],
+["¿Por qué consigue Descartes su propósito «solo a medias»?",["Porque no encuentra ninguna verdad","Porque tiene que acudir a una garantía externa al yo: Dios","Porque renuncia al método","Porque niega el cogito"],1,"Justifica el mundo a partir del yo, pero necesita un intermediario, Dios, que lo garantice todo.","Sustancias"],
+["En el orden del descubrimiento, Dios es la segunda verdad. ¿Qué lugar ocupa en el orden ontológico?",["El último","El primero","El segundo también","Ninguno"],1,"Aunque sea la segunda verdad epistemológica, pasa a ser la primera desde el punto de vista ontológico.","Sustancias"],
+["En la reconstrucción cartesiana, el yo se conoce por intuición. ¿Cómo se conoce el mundo?",["Por intuición también","Por deducción","Por los sentidos","Por revelación"],1,"Del yo, lo más simple y conocido por intuición, se llega al mundo, lo más complejo y conocido por deducción.","Sustancias"]
 ],
 locke:[
  ["¿Cómo describe Locke el estado de naturaleza?",["Como una guerra de todos contra todos","Como un estado de perfecta libertad e igualdad regido por la ley natural","Como una sociedad organizada","Como el paraíso terrenal"],1,"La libertad no es libertinaje: la ley natural, que es la razón, obliga a todos."],
@@ -1069,57 +1325,54 @@ const ICONS = {
 /* ============ STICKMEN ============ */
 function stick(id, size){
   size = size || 64;
-  const ink = "currentColor";
-  let extra = "", hair = "", face = "";
-  const head = '<circle cx="50" cy="30" r="15" fill="var(--surface)" stroke="'+ink+'" stroke-width="4"/>';
-  let body = '<path d="M50 45v38M50 58l-18 12M50 58l18 12M50 83l-14 24M50 83l14 24" stroke="'+ink+'" stroke-width="4" stroke-linecap="round" fill="none"/>';
-  const eyes = '<circle cx="44.5" cy="29" r="1.9" fill="'+ink+'"/><circle cx="55.5" cy="29" r="1.9" fill="'+ink+'"/>';
-  switch(id){
-    case "platon":
-      // barba larga + toga + pergamino
-      hair = '<path d="M38 36c0 12 6 18 12 18s12-6 12-18c-3 4-7 5-12 5s-9-1-12-5z" fill="var(--ochre)" stroke="'+ink+'" stroke-width="3"/>';
-      body = '<path d="M50 48 34 104h32z" fill="var(--sand)" stroke="'+ink+'" stroke-width="3.5" stroke-linejoin="round"/><path d="M42 62l-14 12M58 62l14 6" stroke="'+ink+'" stroke-width="4" stroke-linecap="round"/><rect x="70" y="60" width="9" height="18" rx="3" fill="var(--surface)" stroke="'+ink+'" stroke-width="3"/><path d="M44 104l-4 10M56 104l4 10" stroke="'+ink+'" stroke-width="4" stroke-linecap="round"/>';
-      extra = '<path d="M50 20v-14" stroke="var(--orange)" stroke-width="3" stroke-linecap="round"/><circle cx="50" cy="5" r="4" fill="var(--orange)"/>';
-      break;
-    case "aristoteles":
-      hair = '<path d="M40 38c1 9 5 13 10 13s9-4 10-13c-3 2-6 3-10 3s-7-1-10-3z" fill="var(--muted)" stroke="'+ink+'" stroke-width="3"/><path d="M36 25c2-9 9-13 14-13s12 4 14 13c-5-4-9-5-14-5s-9 1-14 5z" fill="var(--muted)" stroke="'+ink+'" stroke-width="2.5"/>';
-      body = '<path d="M50 48 36 102h28z" fill="var(--petrol-soft)" stroke="'+ink+'" stroke-width="3.5" stroke-linejoin="round"/><path d="M43 62 28 70M57 62l14 14" stroke="'+ink+'" stroke-width="4" stroke-linecap="round"/><path d="M71 76v10" stroke="var(--orange)" stroke-width="3.5" stroke-linecap="round"/><path d="M45 102l-3 12M55 102l3 12" stroke="'+ink+'" stroke-width="4" stroke-linecap="round"/>';
-      break;
-    case "descartes":
-      hair = '<path d="M34 34c-2-16 6-24 16-24s18 8 16 24c0 10-2 18-5 22-1-10-2-16-2-22-4-4-14-4-18 0 0 6-1 12-2 22-3-4-5-12-5-22z" fill="#3a1e26" stroke="'+ink+'" stroke-width="2.5"/>';
-      face = '<path d="M44 37c2 2 4 2 6 0 2 2 4 2 6 0" stroke="'+ink+'" stroke-width="2.6" fill="none" stroke-linecap="round"/>';
-      extra = '<text x="70" y="22" font-family="Sora,sans-serif" font-weight="800" font-size="14" fill="var(--orange)">?</text>';
-      break;
-    case "locke":
-      hair = '<path d="M33 32c-1-14 7-22 17-22s18 8 17 22c0 12-2 20-5 24-1-12-3-18-3-24-4-3-14-3-18 0 0 6-2 12-3 24-3-4-5-12-5-24z" fill="#b88a97" stroke="'+ink+'" stroke-width="2.5"/>';
-      extra = '<rect x="68" y="70" width="16" height="12" rx="2" fill="var(--sand)" stroke="'+ink+'" stroke-width="2.5"/><path d="M71 74h10M71 78h7" stroke="'+ink+'" stroke-width="1.6"/>';
-      break;
-    case "kant":
-      hair = '<path d="M35 26c0-10 7-15 15-15s15 5 15 15c-2-2-4-3-5-3l-1 4c-3-2-6-3-9-3s-6 1-9 3l-1-4c-1 0-3 1-5 3z" fill="#efe2e4" stroke="'+ink+'" stroke-width="2.5"/><circle cx="35" cy="31" r="4" fill="#efe2e4" stroke="'+ink+'" stroke-width="2.2"/><circle cx="65" cy="31" r="4" fill="#efe2e4" stroke="'+ink+'" stroke-width="2.2"/><path d="M62 20q12 2 10 14" stroke="'+ink+'" stroke-width="2.5" fill="none"/><path d="M71 33l-3 4h6z" fill="var(--petrol)"/>';
-      extra = '<circle cx="78" cy="14" r="6" fill="none" stroke="var(--orange)" stroke-width="2.5"/><path d="M78 10v4l2 2" stroke="var(--orange)" stroke-width="2" stroke-linecap="round"/>';
-      break;
-    case "nietzsche":
-      hair = '<path d="M37 24c1-8 6-11 13-11s12 3 13 11c-4-3-8-4-13-4s-9 1-13 4z" fill="#5c3a44" stroke="'+ink+'" stroke-width="2.5"/>';
-      face = '<path d="M38 36c4-4 8-4 12-1 4-3 8-3 12 1-2 6-7 7-12 4-5 3-10 2-12-4z" fill="#5c3a44" stroke="'+ink+'" stroke-width="2.4" stroke-linejoin="round"/>';
-      extra = '<path d="M72 14l4 8 8 1-6 6 2 8-8-4-7 4 1-8-6-6 8-1z" fill="var(--orange)" opacity=".9"/>';
-      break;
-    case "arendt":
-      hair = '<path d="M34 34c-2-15 6-23 16-23s18 8 16 23c-1 4-2 7-4 9l-2-14c-4-4-7-6-10-6s-7 2-10 6l-2 14c-2-2-3-5-4-9z" fill="#2b2b33" stroke="'+ink+'" stroke-width="2.5"/>';
-      face = '<circle cx="44.5" cy="29" r="4.6" fill="none" stroke="'+ink+'" stroke-width="2"/><circle cx="55.5" cy="29" r="4.6" fill="none" stroke="'+ink+'" stroke-width="2"/><path d="M49 29h2" stroke="'+ink+'" stroke-width="2"/>';
-      body = '<path d="M50 45v14" stroke="'+ink+'" stroke-width="4" stroke-linecap="round"/><path d="M50 56 38 90h24z" fill="var(--petrol)" stroke="'+ink+'" stroke-width="3" stroke-linejoin="round"/><path d="M47 60 30 70M53 60l17 10" stroke="'+ink+'" stroke-width="4" stroke-linecap="round"/><path d="M45 90l-5 18M55 90l5 18" stroke="'+ink+'" stroke-width="4" stroke-linecap="round"/>';
-      extra = '<path d="M72 14h12v9h-6l-4 4v-4h-2z" fill="var(--orange)"/>';
-      break;
-    case "ortega":
-      hair = '<path d="M35 32c-1-4 0-7 2-9M65 32c1-4 0-7-2-9" stroke="#4a4a4a" stroke-width="4" stroke-linecap="round"/>';
-      body = body + '<path d="M44 49l6 4 6-4-6-3z M44 49v6l6-2M56 49v6l-6-2" fill="var(--orange)" stroke="'+ink+'" stroke-width="2" stroke-linejoin="round"/>';
-      extra = '<circle cx="76" cy="18" r="7" fill="none" stroke="var(--petrol)" stroke-width="2.5"/><circle cx="76" cy="18" r="2.5" fill="var(--petrol)"/><path d="M76 8v3M76 25v3M66 18h3M83 18h3" stroke="var(--petrol)" stroke-width="2" stroke-linecap="round"/>';
-      break;
-  }
-  const showEyes = (id==="arendt") ? "" : eyes;
-  const h = Math.round(size*1.2);
-  return '<svg width="'+size+'" height="'+h+'" viewBox="0 0 100 120" style="color:var(--ink)" role="img" aria-label="Muñeco de '+getA(id).name+'">'+body+head+hair+showEyes+face+extra+'</svg>';
+  const K='#4a1430',SK='#f2c9a8',CH='#f59ac0';
+  const eyesHappy='<path d="M47 49q4-4 8 0M65 49q4-4 8 0" fill="none" stroke="'+K+'" stroke-width="2.4" stroke-linecap="round"/>';
+  const eyesDot='<circle cx="51" cy="48" r="2.6" fill="'+K+'"/><circle cx="69" cy="48" r="2.6" fill="'+K+'"/><circle cx="52" cy="47" r=".9" fill="#fff"/><circle cx="70" cy="47" r=".9" fill="#fff"/>';
+  const cheeks='<circle cx="45" cy="57" r="4" fill="'+CH+'" opacity=".8"/><circle cx="75" cy="57" r="4" fill="'+CH+'" opacity=".8"/>';
+  const smile='<path d="M56 60q4 3 8 0" fill="none" stroke="'+K+'" stroke-width="2" stroke-linecap="round"/>';
+  const F={
+  platon:{bg:'#fbe0ec',body:'#fff',bodyx:'<path d="M46 84l26 34" stroke="#e03880" stroke-width="7" stroke-linecap="round"/>',
+   beard:'<path d="M36 58c2 18 12 26 24 26s22-8 24-26c-6 6-14 8-24 8s-18-2-24-8z" fill="#d6ccd1" stroke="'+K+'" stroke-width="2.5" stroke-linejoin="round"/>',
+   top:'<path d="M36 38q24-14 48 0" fill="none" stroke="#e03880" stroke-width="3.5" stroke-linecap="round"/>',
+   prop:'<rect x="76" y="90" width="16" height="11" rx="3" fill="#f6e4e9" stroke="'+K+'" stroke-width="2.2"/><path d="M78 95h12" stroke="#c8467e" stroke-width="1.6"/>'},
+  descartes:{bg:'#efe2f3',body:'#3a2a33',bodyx:'<path d="M48 82q12 8 24 0l-2 8q-10 5-20 0z" fill="#fff" stroke="'+K+'" stroke-width="2"/>',
+   back:'<path d="M30 52c-4 18 0 34 8 42h10c-6-14-6-30-4-42zM90 52c4 18 0 34-8 42H72c6-14 6-30 4-42z" fill="#3d2a24" stroke="'+K+'" stroke-width="2.5"/>',
+   hair:'<path d="M32 50c-2-20 10-30 28-30s30 10 28 30c-6-10-14-14-28-14s-22 4-28 14z" fill="#3d2a24" stroke="'+K+'" stroke-width="2.5"/>',
+   beard:'<path d="M52 61q8-4 16 0" fill="none" stroke="#3d2a24" stroke-width="2.6" stroke-linecap="round"/><path d="M58 66q2 5 4 0" fill="#3d2a24" stroke="'+K+'" stroke-width="1.6"/>',
+   prop:'<path d="M80 112l14-26" stroke="'+K+'" stroke-width="2.2" stroke-linecap="round"/><path d="M94 86c4-6 8-10 10-10-2 4-4 10-8 14z" fill="#fff" stroke="'+K+'" stroke-width="1.8"/>'},
+  nietzsche:{bg:'#e3eef5',body:'#4b4a57',bodyx:'<path d="M54 82l6 10 6-10" fill="#fff" stroke="'+K+'" stroke-width="2"/>',
+   hair:'<path d="M34 42c2-16 14-22 26-22 14 0 24 6 26 22-6-6-14-10-26-10-10 0-20 4-26 10z" fill="#5c4033" stroke="'+K+'" stroke-width="2.5"/>',
+   eyes:'<path d="M46 44l9 2M74 44l-9 2" stroke="'+K+'" stroke-width="2.6" stroke-linecap="round"/>'+eyesDot,
+   beard:'<path d="M40 60c4-6 12-8 20-4 8-4 16-2 20 4-2 6-8 8-14 6-3 2-9 2-12 0-6 2-12 0-14-6z" fill="#5c4033" stroke="'+K+'" stroke-width="2.5" stroke-linejoin="round"/>',
+   prop:'<rect x="80" y="84" width="16" height="9" rx="2" fill="#9a8f9a" stroke="'+K+'" stroke-width="2"/><path d="M88 93v18" stroke="#8a5a34" stroke-width="3.5" stroke-linecap="round"/>'},
+  ortega:{bg:'#fbe9d7',body:'#4b5363',bodyx:'<path d="M54 82l6 6 6-6" fill="#fff" stroke="'+K+'" stroke-width="2"/><path d="M60 88l-3 4 3 14 3-14z" fill="#e03880" stroke="'+K+'" stroke-width="1.6"/>',
+   hair:'<path d="M33 52c-2-8 0-14 4-18M87 52c2-8 0-14-4-18" fill="none" stroke="#6b5a52" stroke-width="5" stroke-linecap="round"/>',
+   eyes:'<circle cx="51" cy="48" r="7" fill="#fff" fill-opacity=".4" stroke="'+K+'" stroke-width="2"/><circle cx="69" cy="48" r="7" fill="#fff" fill-opacity=".4" stroke="'+K+'" stroke-width="2"/><path d="M58 48h4" stroke="'+K+'" stroke-width="2"/>'+eyesDot,
+   prop:'<rect x="78" y="88" width="15" height="20" rx="2" fill="#f6e4c8" stroke="'+K+'" stroke-width="2"/><path d="M81 94h9M81 99h7" stroke="#c8467e" stroke-width="1.4"/>'},
+  aristoteles:{bg:'#e6f1ea',body:'#fff',bodyx:'<path d="M74 84l-26 34" stroke="#8a6fc0" stroke-width="7" stroke-linecap="round"/>',
+   hair:'<path d="M34 44c0-16 12-24 26-24s26 8 26 24c-4-6-8-8-12-8l-2 4c-4-3-8-4-12-4s-8 1-12 4l-2-4c-4 0-8 2-12 8z" fill="#7a6a6e" stroke="'+K+'" stroke-width="2.5"/>',
+   beard:'<path d="M40 58c2 12 10 18 20 18s18-6 20-18c-6 4-12 6-20 6s-14-2-20-6z" fill="#7a6a6e" stroke="'+K+'" stroke-width="2.5" stroke-linejoin="round"/>',
+   prop:'<path d="M78 98l14 8" stroke="'+K+'" stroke-width="3" stroke-linecap="round"/><circle cx="94" cy="108" r="4" fill="'+SK+'" stroke="'+K+'" stroke-width="2"/><path d="M90 120h12" stroke="#5e9a7c" stroke-width="3" stroke-linecap="round"/>'},
+  locke:{bg:'#f3eedc',body:'#5b3f4a',bodyx:'<path d="M54 82h12l-2 10h-8z" fill="#fff" stroke="'+K+'" stroke-width="2"/>',
+   back:'<path d="M30 46c-6 16-2 36 6 46l10-2c-6-14-6-30-2-44zM90 46c6 16 2 36-6 46l-10-2c6-14 6-30 2-44z" fill="#c9b49a" stroke="'+K+'" stroke-width="2.5"/>',
+   hair:'<path d="M32 48c-2-20 10-28 28-28s30 8 28 28c-6-8-14-12-28-12s-22 4-28 12z" fill="#c9b49a" stroke="'+K+'" stroke-width="2.5"/><path d="M36 60q2 4 0 8M84 60q-2 4 0 8" stroke="#a8916f" stroke-width="2" fill="none"/>',
+   prop:'<rect x="78" y="88" width="18" height="22" rx="2" fill="#fff" stroke="'+K+'" stroke-width="2.2"/><text x="87" y="102" text-anchor="middle" font-size="5" font-family="Georgia,serif" fill="'+K+'">tabula</text>'},
+  kant:{bg:'#e7e6f6',body:'#3f4a6b',bodyx:'<path d="M54 82h12l-2 10h-8z" fill="#fff" stroke="'+K+'" stroke-width="2"/>',
+   hair:'<path d="M34 42c0-14 12-22 26-22s26 8 26 22c-6-6-14-8-26-8s-20 2-26 8z" fill="#f1eef2" stroke="'+K+'" stroke-width="2.5"/><circle cx="33" cy="48" r="5" fill="#f1eef2" stroke="'+K+'" stroke-width="2.2"/><circle cx="33" cy="58" r="4.5" fill="#f1eef2" stroke="'+K+'" stroke-width="2.2"/><circle cx="87" cy="48" r="5" fill="#f1eef2" stroke="'+K+'" stroke-width="2.2"/><circle cx="87" cy="58" r="4.5" fill="#f1eef2" stroke="'+K+'" stroke-width="2.2"/>',
+   prop:'<circle cx="88" cy="100" r="8" fill="#fff1b0" stroke="'+K+'" stroke-width="2.2"/><path d="M88 96v4l3 2" stroke="'+K+'" stroke-width="1.8" stroke-linecap="round"/><path d="M84 92q4-6 10-6" fill="none" stroke="#c9a23a" stroke-width="1.6"/>'},
+  arendt:{bg:'#fde4e4',body:'#5a4a6b',bodyx:'<path d="M52 82q8 8 16 0" fill="none" stroke="#fff" stroke-width="3" stroke-dasharray="1 4" stroke-linecap="round"/>',
+   hair:'<path d="M32 58c-4-24 8-38 28-38 18 0 30 12 28 32-2-8-6-14-12-16-10 2-22 0-30-6-6 6-12 14-14 28z" fill="#3d2a24" stroke="'+K+'" stroke-width="2.5"/>',
+   eyes:eyesDot,
+   prop:'<rect x="78" y="88" width="16" height="21" rx="2" fill="#f6e4e9" stroke="'+K+'" stroke-width="2"/><path d="M81 94h10M81 99h8M81 104h9" stroke="#c8467e" stroke-width="1.4"/>'}
+  };
+  const o=F[id]; const a=getA(id);
+  if(!o) return "";
+  return '<svg width="'+size+'" height="'+Math.round(size*134/120)+'" viewBox="0 0 120 134" role="img" aria-label="Dibujo de '+(a?a.name:id)+'">'+
+   '<circle cx="60" cy="64" r="56" fill="'+o.bg+'"/>'+(o.back||'')+
+   '<rect x="42" y="80" width="36" height="42" rx="14" fill="'+o.body+'" stroke="'+K+'" stroke-width="2.5"/>'+(o.bodyx||'')+
+   '<circle cx="60" cy="50" r="28" fill="'+SK+'" stroke="'+K+'" stroke-width="2.5"/>'+(o.hair||'')+(o.eyes||eyesHappy)+cheeks+(o.beard||smile)+(o.top||'')+(o.prop||'')+'</svg>';
 }
-function stickLight(id,size){ return stick(id,size).replace('style="color:var(--ink)"','style="color:#ffffff"'); }
+function stickLight(id,size){ return stick(id,size); }
 
 /* ============ ESTADO LOCAL ============ */
 const store = {
@@ -1135,7 +1388,7 @@ const VIDEOS = {
   {id:"MuwayR8x4VQ",n:4,title:"Ética y Política",sub:"Virtud, justicia y Estado ideal"}
  ]
 };
-const EMBED_VIDEOS = false; // cambiar a true cuando la web esté alojada fuera de claude.ai
+const EMBED_VIDEOS = !/claude|anthropic|usercontent/.test(location.hostname); // en la vista previa de Claude los vídeos incrustados están bloqueados
 function videoThumb(a,v){
   const tones=[["#6b1c44","#e03880"],["#4a1430","#8a4f5a"],["#7a2450","#ef6fa5"],["#5e1838","#c8467e"]];
   const [bg,ac]=tones[(v.n-1)%tones.length];
@@ -1196,7 +1449,7 @@ window.addEventListener("hashchange",route);
 function topbar(title, sub, back){
   return '<div class="topbar"><div>'+
     '<div class="mobile-brand" style="margin-bottom:6px"><svg width="26" height="26" viewBox="0 0 36 36" aria-hidden="true"><rect width="36" height="36" rx="11" fill="#e03880"/><path d="M7 28V19a11 11 0 0 1 22 0v9" fill="none" stroke="#4a1430" stroke-width="3.2" stroke-linecap="round"/><circle cx="18" cy="21" r="3.4" fill="#fff"/></svg>Caverna</div>'+
-    (sub?'<div class="hello">'+sub+'</div>':'')+'<h1>'+title+'</h1></div>'+
+    (sub?'<div class="hello">'+sub+'</div>':'')+(title?'<h1>'+title+'</h1>':'')+'</div>'+
     (back?'<a class="back" href="#'+back[0]+'">'+ICONS.back+back[1]+'</a>':'')+'</div>';
 }
 function stats(){
@@ -1210,7 +1463,13 @@ function viewInicio(){
   const s = stats();
   const avgTxt = s.avg===null? '0,0' : s.avg.toFixed(1).replace(".",",");
   const recent = s.hist.slice(-5).reverse();
-  return topbar("Tu preparación","Hola, a por la PAU")+
+  return topbar("","")+
+  '<section class="card"><div class="card-head"><h2>Ocho filósofos, dos líneas</h2><a href="#comentario">Ver todos</a></div>'+
+    '<p class="small muted" style="margin-bottom:14px">En la Parte II salen dos textos, uno de cada línea temática. Eliges uno.</p>'+
+    ["a","b"].map(b=>'<div class="lineblock"><div class="lb-head"><span class="chip '+b+'">Línea '+(b==="a"?"1":"2")+'</span><b>'+lineTitle[b]+'</b></div>'+
+      '<div class="lb-row">'+byLine(b).map(a=>'<a class="mini big-ph" href="#autor-'+a.id+'"><span class="ph-av">'+stick(a.id,80)+'</span>'+'<span>'+a.name+'<small>'+a.era+'</small></span></a>').join("")+'</div></div>').join("")+
+    '</section>'+
+  '<h2 class="sec-h">Tu preparación</h2>'+
   '<section class="balance" aria-label="Resumen de progreso">'+
     '<div class="chip-card">'+ICONS.test.replace('width="22" height="22"','width="14" height="14"')+'Test</div>'+
     '<div class="label">Nota media en test</div>'+
@@ -1224,11 +1483,6 @@ function viewInicio(){
     '<a class="qa" href="#test"><span class="ic">'+ICONS.test+'</span>Test</a>'+
     '<a class="qa" href="#examen"><span class="ic">'+ICONS.exam+'</span>El examen</a>'+
   '</div>'+
-  '<section class="card"><div class="card-head"><h2>Ocho filósofos, dos líneas</h2><a href="#comentario">Ver todos</a></div>'+
-    '<p class="small muted" style="margin-bottom:14px">En la Parte II salen dos textos, uno de cada línea temática. Eliges uno.</p>'+
-    ["a","b"].map(b=>'<div class="lineblock"><div class="lb-head"><span class="chip '+b+'">Línea '+(b==="a"?"1":"2")+'</span><b>'+lineTitle[b]+'</b></div>'+
-      '<div class="lb-row">'+byLine(b).map(a=>'<a class="mini" href="#autor-'+a.id+'">'+stick(a.id,26)+'<span>'+a.name+'<small>'+a.era+'</small></span></a>').join("")+'</div></div>').join("")+
-    '</section>'+
   '<div class="grid2">'+
    '<section class="card"><div class="card-head"><h2>Así es el examen</h2><a href="#examen">Detalles</a></div>'+
     '<div class="list">'+
@@ -1299,12 +1553,13 @@ function viewAuthor(id){
   '<section class="hero-a"><div class="av">'+stickLight(a.id,92)+'</div><div><h1>'+a.name+'</h1><div class="yrs">'+a.years+'</div>'+
    '<div class="meta"><span class="chip">'+a.era+'</span><span class="chip">'+blockName[a.block]+'</span></div></div>'+
    '<p class="problem"><b>Problema: </b>'+a.problem+'</p></section>'+
-  '<div class="seg" role="tablist"><button class="on" data-tab="teoria" role="tab">Teoría</button><button data-tab="test" role="tab">Tipo test</button><button data-tab="practicar" role="tab">Practicar</button></div>'+
+  '<div class="seg" role="tablist"><button class="on" data-tab="teoria" role="tab">Teoría</button><button data-tab="textos" role="tab">Textos</button><button data-tab="test" role="tab">Tipo test</button><button data-tab="practicar" role="tab">Practicar</button></div>'+
   '<div id="tabbody"></div>';
 }
 /* ============ TEORÍA: PLATÓN ============ */
 function vInline(a,n){
   const v=(VIDEOS[a.id]||[]).find(x=>x.n===n); if(!v) return "";
+  if(EMBED_VIDEOS) return '<div class="vinline vplay" role="button" tabindex="0" data-yt="'+v.id+'" data-title="'+(a.name+' PAU '+v.n+': '+v.title).replace(/"/g,'&quot;')+'" aria-label="Reproducir vídeo: '+v.title+'"><div class="vthumb">'+videoThumb(a,v)+'<span class="vplay-b" aria-hidden="true">▶</span></div><div><span class="tiny muted" style="font-weight:800;letter-spacing:.04em">VÍDEO · REPRODUCIR AQUÍ</span><b>'+a.name+' PAU '+v.n+': '+v.title+'</b><span class="small muted">'+v.sub+'</span></div></div>';
   return '<a class="vinline" href="https://www.youtube.com/watch?v='+v.id+'" target="_blank" rel="noopener"><div class="vthumb">'+videoThumb(a,v)+'</div><div><span class="tiny muted" style="font-weight:800;letter-spacing:.04em">VÍDEO</span><b>'+a.name+' PAU '+v.n+': '+v.title+'</b><span class="small muted">'+v.sub+'</span></div></a>';
 }
 function secHead(num,title,lead){
@@ -1639,6 +1894,240 @@ platon(a){
   <div class="works">${a.works.map(w=>'<div class="work"><span class="wi">'+ICONS.book+'</span><div><b>'+w.t+'</b><span>'+w.d+'</span></div></div>').join("")}</div>
 </section>
 <p class="tiny muted" style="text-align:right">Apuntes: José Manuel Jiménez y Manuel Higueras</p>
+`;},
+descartes(a){
+  return `
+<nav class="th-index" aria-label="Apartados de la teoría">
+  <button data-jump="ds-intro">Contexto</button>
+  <button data-jump="ds-racio">Racionalismo</button>
+  <button data-jump="ds-metodo">Método</button>
+  <button data-jump="ds-duda">Duda y cogito</button>
+  <button data-jump="ds-sust">Tres sustancias</button>
+</nav>
+
+<section class="card th" id="ds-intro">
+  ${secHead("6.1","Origen de la modernidad: Renacimiento y Revolución científica","El pensamiento moderno nace en abierto enfrentamiento con la cultura medieval. Primero lo contesta el <b>humanismo renacentista</b>; después, de forma más decisiva, la <b>ciencia moderna</b>, con una imagen heliocéntrica y mecanicista del universo.")}
+  ${vInline(a,1)}
+  <h3 class="th-h3">El Renacimiento</h3>
+  <p class="th-p">Con él se inicia la época moderna, aunque filosóficamente es un <b>periodo de transición</b> entre la filosofía medieval y la moderna. Supone la vuelta a los orígenes clásicos, iniciada en Italia y difundida por toda Europa. Suele fecharse en la <b>caída de Constantinopla (1453)</b>, que provocó la fuga de intelectuales hacia Italia.</p>
+  <div class="th-grid2">
+    <div class="th-key"><span class="th-key-l">En una sola característica</span><p>La vuelta a los grandes sistemas clásicos y una <b>progresiva laicización</b>, en busca de una nueva concepción del ser humano y de la naturaleza.</p></div>
+    <div class="th-key"><span class="th-key-l">Ruptura definitiva</span><p>Entre <b>filosofía y teología</b>: la libertad de pensamiento defiende la autonomía de la razón frente a la fe. Empieza la secularización que culminará en la Ilustración.</p></div>
+  </div>
+  <p class="th-p">El humanismo lee a los griegos, pero ya no al servicio de la fe: los platónicos renacentistas no lo son como Agustín de Hipona, ni los aristotélicos como Tomás de Aquino.</p>
+
+  <h3 class="th-h3">La Reforma protestante</h3>
+  <p class="th-p">Con <b>Lutero</b> y <b>Erasmo de Rotterdam</b>, el cristianismo occidental se fragmenta tras un largo periodo de guerras de religión que consolidan los Estados modernos.</p>
+  <div class="tlv">
+    <div class="tlv-i"><span class="tlv-y">Antes</span><p>León X inicia la <b>venta de indulgencias</b> para construir la Basílica de San Pedro, algo que Lutero considera contrario a la Biblia.</p></div>
+    <div class="tlv-i"><span class="tlv-y">1517</span><p>Lutero clava sus <b>95 tesis</b> en la puerta de la iglesia de Wittenberg: comienzo de la Reforma.</p></div>
+    <div class="tlv-i"><span class="tlv-y">1520</span><p>El Papa le exige retractarse con una bula, y Lutero la <b>quema</b> públicamente.</p></div>
+    <div class="tlv-i"><span class="tlv-y">1521</span><p>Lutero es <b>excomulgado</b> y declarado hereje.</p></div>
+  </div>
+  <div class="th-key"><span class="th-key-l">Consecuencia política</span><p>El <b>sacerdocio universal</b> niega la jerarquía eclesiástica. Ese vacío de poder lo aprovechan los príncipes: la Iglesia queda subordinada al Estado y se pasa de la dualidad medieval de poderes a un <b>monopolio del poder político</b>. Es uno de los desencadenantes del <b>absolutismo</b>.</p></div>
+
+  <h3 class="th-h3">La Revolución científica</h3>
+  <div class="vs">
+    <div class="vs-side"><span class="chip b">Antigüedad y Edad Media</span><b>Geocentrismo</b><p>Paradigma aristotélico-ptolemaico: la Tierra es el centro de un <b>cosmos finito y cerrado</b>, esférico.</p></div>
+    <div class="vs-mid">→</div>
+    <div class="vs-side"><span class="chip a">Modernidad</span><b>Heliocentrismo</b><p>Introducido por <b>Copérnico</b> en la primera mitad del s. XVI: un <b>universo infinito y abierto</b>, mecanicista.</p></div>
+  </div>
+  <div class="th-steps">
+    <div><b>Copérnico</b><span>Primero: introduce el heliocentrismo.</span></div>
+    <div><b>Galileo y Kepler</b><span>Después: consolidan la nueva ciencia.</span></div>
+    <div><b>Newton</b><span>Por último: culmina la nueva imagen del universo.</span></div>
+  </div>
+  <div class="th-key"><span class="th-key-l">Nueva metodología</span><p>Basada en las <b>matemáticas</b> y la <b>experimentación</b>, acaba relegando las ideas científicas que habían imperado durante siglos.</p></div>
+</section>
+
+<section class="card th" id="ds-racio">
+  ${secHead("6.2","El racionalismo","Descartes inaugura la <b>filosofía moderna</b>, cuya fecha de inicio se sitúa en <b>1637</b>, año del <i>Discurso del método</i>.")}
+  ${vInline(a,2)}
+  <div class="th-grid2">
+    <div>
+      <h3 class="th-h3">Vida</h3>
+      <div class="tlv">
+        <div class="tlv-i"><span class="tlv-y">1596</span><p>Nace en una familia <b>noble y acomodada</b>.</p></div>
+        <div class="tlv-i"><span class="tlv-y">1604-1612</span><p>Estudia en el colegio jesuita de <b>La Flèche</b>, donde es educado según la Escolástica.</p></div>
+        <div class="tlv-i"><span class="tlv-y">1628-1649</span><p>Vive en <b>Holanda</b>, el país más tolerante de la época, refugio frente a la Inquisición.</p></div>
+        <div class="tlv-i"><span class="tlv-y">1637</span><p>Publica el <i>Discurso del método</i>: inicio de la filosofía moderna.</p></div>
+        <div class="tlv-i"><span class="tlv-y">1649-1650</span><p>Se traslada a <b>Estocolmo</b> como profesor de la reina Cristina de Suecia, donde muere.</p></div>
+      </div>
+    </div>
+    <div class="th-stack">
+      <h3 class="th-h3">Rasgos de la filosofía moderna</h3>
+      <div class="infl">
+        <div class="infl-i"><b>Autonomía absoluta de la razón</b><span><i>Negativamente</i>: nada exterior (tradición, autoridad, fe) la coarta. <i>Positivamente</i>: la razón es el <b>tribunal supremo</b> que juzga lo verdadero y lo justo, en lo teórico, lo moral y lo político.</span></div>
+        <div class="infl-i"><b>Conexión con la ciencia moderna</b><span>El método de Descartes tiene resonancias matemáticas; él mismo aportó la <b>geometría analítica</b> y trabajos de física y biología.</span></div>
+      </div>
+      <div class="th-key"><span class="th-key-l">Ojo</span><p>Ambos rasgos son de <b>toda la filosofía moderna</b>, no exclusivos del racionalismo.</p></div>
+    </div>
+  </div>
+
+  <h3 class="th-h3">Racionalismo frente a empirismo</h3>
+  <p class="th-p">El racionalismo es la corriente del <b>siglo XVII</b> a la que pertenecen también <b>Leibniz, Spinoza y Malebranche</b>. Se opone al <b>empirismo inglés del siglo XVIII</b>. La diferencia clave está en el <b>origen del conocimiento</b>:</p>
+  <div class="vs">
+    <div class="vs-side"><span class="chip a">Racionalismo</span><b>La razón</b><p>Nuestros conocimientos válidos acerca de la realidad proceden de la <b>razón misma</b>.</p></div>
+    <div class="vs-mid">VS</div>
+    <div class="vs-side"><span class="chip b">Empirismo</span><b>La experiencia</b><p>Todos nuestros conocimientos proceden, en último término, de los <b>sentidos</b>.</p></div>
+  </div>
+
+  <h3 class="th-h3">Características del racionalismo</h3>
+  <div class="ds-feat">
+    <div><span>1</span><b>La razón, fuente de conocimiento</b><p>Es la <b>única fuente válida</b> de conocimiento.</p></div>
+    <div><span>2</span><b>Crítica del conocimiento sensible</b><p>Se infravalora: los sentidos son <b>engañosos</b>.</p></div>
+    <div><span>3</span><b>Conocimiento deductivo</b><p>Se construye deductivamente a partir de unos primeros principios: las ideas innatas.</p></div>
+    <div><span>4</span><b>Ideas innatas</b><p>Verdades que se hallan potencialmente en el entendimiento.</p></div>
+    <div><span>5</span><b>Ciencia universal y método matemático</b><p>Aspiración a una ciencia universal y necesaria basada en la unidad de la razón.</p></div>
+    <div><span>6</span><b>La deducción como método</b><p>El método más adecuado del pensamiento.</p></div>
+    <div><span>7</span><b>Racionalidad del mundo</b><p>Todo lo que sucede tiene una justificación que la razón puede conocer: <b>todo lo real es racional</b>.</p></div>
+    <div><span>8</span><b>Confianza en la razón</b><p>Confianza absoluta en su capacidad: <b>no hay límites</b> al conocimiento humano.</p></div>
+  </div>
+</section>
+
+<section class="card th" id="ds-metodo">
+  ${secHead("6.3","El método cartesiano","Toda la modernidad está casi obsesionada con el <b>método</b>. Para Descartes es a la vez el <b>punto de partida y la meta</b> de su filosofía.")}
+  ${vInline(a,3)}
+  <h3 class="th-h3">¿Por qué un nuevo método?</h3>
+  <p class="th-p">La <b>Escolástica</b>, fundada en la autoridad de Aristóteles y Tomás de Aquino y aceptada sin análisis crítico, se derrumba. Igual que antes se aceptaba en bloque, ahora se rechaza en bloque. No bastan descubrimientos ocasionales: hace falta un <b>nuevo criterio de verdad</b> que sustituya a la autoridad de la Escolástica, de Aristóteles y de la Biblia. La razón alcanza su «<b>mayoría de edad</b>», como dirá Kant en <i>¿Qué es Ilustración?</i></p>
+  <div class="duo">
+    <div class="duo-i dim"><span class="duo-t">Método experimental</span><p class="small">Configura el <b>empirismo</b>.</p></div>
+    <div class="duo-i lit"><span class="duo-t">Método matemático</span><p class="small">El que elige Descartes: inaugura el <b>racionalismo</b>.</p></div>
+  </div>
+
+  <h3 class="th-h3">La unidad del saber</h3>
+  <blockquote class="th-quote">«Todas las diversas ciencias no son otra cosa que la sabiduría humana, la cual permanece una e idéntica, aun cuando se aplique a objetos diversos, y no recibe de ellos más distinción que la que recibe la luz del sol de los diversos objetos que ilumina». <cite>Reglas para la dirección del espíritu</cite></blockquote>
+  <p class="th-p">La sabiduría es <b>única porque la razón es única</b>: la misma razón distingue lo verdadero de lo falso y ordena la conducta. Las ciencias forman una unidad orgánica:</p>
+  <div class="ds-tree" aria-label="Árbol del saber">
+    <div class="ds-tree-r"><span class="ds-tree-l">Ramas</span><b>Medicina · Mecánica · Moral</b></div>
+    <div class="ds-tree-r"><span class="ds-tree-l">Tronco</span><b>Física</b></div>
+    <div class="ds-tree-r"><span class="ds-tree-l">Raíces</span><b>Metafísica</b></div>
+  </div>
+  <blockquote class="th-quote">«Toda la filosofía es como un árbol, cuyas raíces son la metafísica, el tronco es la física, y las ramas que salen de este tronco son todas las demás ciencias, que se pueden reducir a tres principales: la medicina, la mecánica y la moral». <cite>Principios de la Filosofía</cite></blockquote>
+
+  <h3 class="th-h3">Intuición y deducción</h3>
+  <p class="th-p">Como la razón es única, hay que conocer su funcionamiento. Según Descartes, hay <b>dos modos de conocimiento</b>:</p>
+  <div class="duo">
+    <div class="duo-i lit"><span class="duo-t">Intuición</span><p class="small">Una «<b>luz o instinto natural</b>» que capta las <b>naturalezas simples</b> de forma inmediata y sin posibilidad de error.</p></div>
+    <div class="duo-i dim"><span class="duo-t">Deducción</span><p class="small">Recorre las conexiones entre naturalezas simples. Por larga que sea, es una <b>sucesión de intuiciones</b> y de sus conexiones.</p></div>
+  </div>
+  <blockquote class="th-quote">«Un concepto de la mente pura y atenta, tan fácil y distinto que no quepa duda alguna sobre lo que pensamos (…) que nace de la sola luz de la razón y es más cierto que la deducción misma». <cite>Reglas para la dirección del espíritu, III</cite></blockquote>
+  <div class="th-steps">
+    <div><b>1 · Análisis</b><span>Descomponer lo complejo hasta llegar a los elementos o naturalezas simples.</span></div>
+    <div><b>2 · Síntesis</b><span>Reconstruir deductivamente lo complejo a partir de lo simple.</span></div>
+  </div>
+
+  <h3 class="th-h3">Las cuatro reglas del método</h3>
+  <blockquote class="th-quote">«Por método entiendo lo siguiente: unas reglas ciertas y fáciles, gracias a las cuales todos los que las observen exactamente no tomarán nunca por verdadero lo que es falso, y alcanzarán (…) el conocimiento verdadero de todo aquello de que sean capaces». <cite>Reglas para la dirección del espíritu, IV</cite></blockquote>
+  <p class="th-p">Las expone en la <b>segunda parte del <i>Discurso del método</i></b>:</p>
+  <div class="ds-rules">
+    <div class="r1"><span class="ds-rn">1</span><b>Evidencia</b><p>«No admitir jamás como verdadera cosa alguna sin conocer con evidencia que lo era (…), evitar cuidadosamente la <b>precipitación y la prevención</b>, y no comprender en mis juicios más que lo que se presente a mi espíritu tan <b>clara y distintamente</b> que no tuviese motivo alguno para ponerlo en duda».</p></div>
+    <div class="r2"><span class="ds-rn">2</span><b>Análisis</b><p>«Dividir cada una de las dificultades que examinase en <b>tantas partes</b> como fuese posible y en cuantas requiriese su mejor solución».</p></div>
+    <div class="r3"><span class="ds-rn">3</span><b>Síntesis</b><p>«Conducir ordenadamente mis pensamientos comenzando por los objetos <b>más simples</b> y más fáciles de conocer, para ir ascendiendo poco a poco (…) hasta el conocimiento de los <b>más complejos</b>».</p></div>
+    <div class="r4"><span class="ds-rn">4</span><b>Comprobaciones</b><p>«Hacer en todo <b>enumeraciones</b> tan completas y <b>revisiones</b> tan generales que llegase a estar seguro de no omitir nada».</p></div>
+  </div>
+  <div class="th-key"><span class="th-key-l">Un único método para todo</span><p>Es el único que responde a la dinámica de una razón única. Hasta entonces solo se había usado en las <b>matemáticas</b>, con resultados admirables; al ser única la razón, puede aplicarse a <b>todos los ámbitos del saber</b>. El proyecto cartesiano es la <b>unificación de la ciencia</b>, y exige un punto de partida absolutamente cierto.</p></div>
+</section>
+
+<section class="card th" id="ds-duda">
+  ${secHead("Duda","La duda metódica y el cogito","Para encontrar unos cimientos firmes, Descartes elige el camino de la <b>duda metódica</b>.")}
+  ${vInline(a,4)}
+  <div class="th-grid2">
+    <div class="th-key warn"><span class="th-key-l">No es escepticismo</span><p>Descartes no duda por dudar: no es una duda gratuita, sino un instrumento para <b>buscar la verdad</b>.</p></div>
+    <div class="th-key"><span class="th-key-l">¿Por qué «metódica»?</span><p>Es una exigencia del método en su momento <b>analítico</b> (2.ª regla): una labor de <b>desescombro</b> que elimina todo lo que admita la menor duda.</p></div>
+  </div>
+  <h3 class="th-h3">Niveles de duda</h3>
+  <p class="th-p">Tres niveles, de <b>menor a mayor radicalidad</b>:</p>
+  <div class="ds-doubt">
+    <div class="d1"><span class="ds-dn">1</span><div><b>Falacia de los sentidos</b><p>Si los sentidos a veces nos engañan, ¿qué garantía hay de que no lo hagan siempre? Es improbable, pero la <b>improbabilidad no equivale a certeza</b>.</p></div></div>
+    <div class="d2"><span class="ds-dn">2</span><div><b>Argumento del sueño</b><p>A veces los sueños son tan vivos como la vigilia y no hay un criterio seguro para distinguirlos. Así dudamos de que existan las cosas que percibimos, e incluso de que el mundo sea real.</p></div></div>
+    <div class="d3"><span class="ds-dn">3</span><div><b>Argumento del genio maligno</b><p>Quizá un genio «extremadamente poderoso e inteligente» emplea su industria en engañarme. Así se duda incluso de las <b>verdades matemáticas</b>, que valen dormidos o despiertos: tal vez el entendimiento está hecho para equivocarse siempre.</p></div></div>
+  </div>
+
+  <h3 class="th-h3">La primera verdad: cogito, ergo sum</h3>
+  <p class="th-p">Llevada a este extremo, la duda es <b>universal</b> y parece abocar al escepticismo. Pero hay una verdad inmune a toda duda: la <b>existencia del propio sujeto que piensa y duda</b>. Si pienso que el mundo existe, quizá me equivoque sobre el mundo, pero no sobre que lo pienso. Puedo dudar de todo menos de que dudo.</p>
+  <div class="ds-cogito"><b>«Cogito, ergo sum»</b><span>Pienso, luego existo</span></div>
+  <p class="th-p">Mi existencia como sujeto que piensa (duda, afirma, cree, se equivoca, ama…) está exenta de todo error y de toda duda posible.</p>
+
+  <h3 class="th-h3">El criterio de verdad</h3>
+  <p class="th-p">El cogito no es solo la primera verdad: es el <b>prototipo de toda verdad</b>. Es indudable porque se percibe con <b>claridad y distinción</b>. De ahí Descartes deduce su criterio: todo lo que perciba con igual claridad y distinción será verdadero.</p>
+  <blockquote class="th-quote">«En este primer conocimiento no existe sino una percepción clara y distinta de lo que afirmo (…). Por tanto, me parece que puedo establecer como regla general que todo lo que percibo clara y distintamente es verdadero». <cite>Meditaciones, III</cite></blockquote>
+</section>
+
+<section class="card th" id="ds-sust">
+  ${secHead("6.4","La teoría de las tres sustancias","Ya tenemos una verdad cierta: el yo pensante. Pero ¿cómo saber que existe algo fuera de mi pensamiento? El ideal deductivo obliga a <b>deducir la realidad a partir del pensamiento</b>.")}
+  ${vInline(a,5)}
+  <h3 class="th-h3">El pensamiento siempre piensa ideas</h3>
+  <p class="th-p">En «yo pienso que el mundo existe» hay tres factores: el <b>yo</b> que piensa (indudable), el <b>mundo</b> exterior (dudoso) y las <b>ideas</b> de «mundo» y «existencia» (que sin duda poseo).</p>
+  <div class="vs">
+    <div class="vs-side"><span class="chip b">Hasta Descartes</span><b>Realismo</b><p>El pensamiento recae directamente sobre las <b>cosas</b>. La idea es una <b>lente transparente</b> a través de la cual se ven las cosas sin verla a ella.</p></div>
+    <div class="vs-mid">→</div>
+    <div class="vs-side"><span class="chip a">A partir de Descartes</span><b>Idealismo</b><p>El pensamiento recae sobre las <b>ideas</b>, no sobre las cosas. La idea es una <b>representación o fotografía</b> que contemplamos.</p></div>
+  </div>
+  <div class="th-key"><span class="th-key-l">Diferencia con Platón</span><p>Para Platón las Ideas existían en y por sí, con independencia de las cosas. En Descartes, las ideas son <b>contenidos del pensamiento</b>.</p></div>
+  <div class="duo">
+    <div class="duo-i dim"><span class="duo-t">Como actos mentales</span><p class="small">«Modos del pensamiento»: todas las ideas tienen <b>la misma realidad</b>.</p></div>
+    <div class="duo-i lit"><span class="duo-t">Por su contenido objetivo</span><p class="small">Su realidad es <b>diversa</b>: las que representan sustancias tienen más realidad objetiva que las que representan modos o accidentes.</p></div>
+  </div>
+
+  <h3 class="th-h3">Tres tipos de ideas</h3>
+  <div class="args">
+    <div class="arg g2"><span class="arg-t">Adventicias</span><p>Parecen provenir de la <b>experiencia externa</b> (ser humano, caballo, alas). «Parecen», porque aún no consta que exista el mundo exterior. No sirven de punto de partida: sería un <b>círculo vicioso</b>.</p></div>
+    <div class="arg g3"><span class="arg-t">Facticias</span><p>Las <b>construye la mente</b> a partir de otras ideas (caballo alado, centauro, ratoncito Pérez). Tampoco sirven: se construyen a partir de las adventicias.</p></div>
+    <div class="arg g1"><span class="arg-t">Innatas</span><p>El pensamiento las posee <b>en sí mismo</b>: pocas, pero las más importantes, como «pensamiento» y «existencia». Es la tesis fundamental del racionalismo.</p></div>
+  </div>
+  <div class="th-key"><span class="th-key-l">La idea de infinito</span><p>Entre las innatas está la idea de <b>infinito</b>, que Descartes identifica con <b>Dios</b>. No es adventicia (no tenemos experiencia de Dios) ni facticia: la noción de finitud <b>presupone</b> la de infinitud, y no al revés.</p></div>
+
+  <h3 class="th-h3">Tres argumentos de la existencia de Dios</h3>
+  <div class="args">
+    <div class="arg g1"><span class="arg-t">Causalidad: idea de infinito</span><p>Tengo la idea de un ser infinito. La causa ha de tener tanta <b>realidad formal</b> como <b>realidad objetiva</b> tenga la idea: la ha causado en mí un ser infinito, Dios.</p></div>
+    <div class="arg g2"><span class="arg-t">Causalidad: mi propio ser</span><p>No soy mi propia causa: si lo fuera, me habría hecho perfecto. Soy imperfecto y tengo la idea de perfección, así que me ha hecho un ser con esas perfecciones: Dios.</p></div>
+    <div class="arg g3"><span class="arg-t">Argumento ontológico</span><p>Es básicamente el de <b>Anselmo de Canterbury</b>: la idea de ser perfecto contiene su existencia. Igual que no hay triángulo sin tres lados, no se concibe un ser perfecto al que le falte la existencia.</p></div>
+  </div>
+
+  <h3 class="th-h3">La existencia del mundo</h3>
+  <p class="th-p">Dios es infinitamente <b>bueno y veraz</b>: no puede permitir que me engañe al creer que el mundo existe, luego el mundo existe. Dios es la <b>garantía</b> de que a mis ideas corresponde una realidad extramental, algo paradójico en un sistema racionalista.</p>
+  <div class="duo">
+    <div class="duo-i lit"><span class="duo-t">Cualidades primarias</span><p class="small"><b>Extensión y movimiento</b> (forma, tamaño, movimiento). Dios garantiza que existen, y de ellas se deducen la física y las leyes del movimiento.</p></div>
+    <div class="duo-i dim"><span class="duo-t">Cualidades secundarias</span><p class="small">Colores, olores, sabores, sonidos. Tenemos sus ideas, pero Descartes, como Galileo y la ciencia moderna, <b>niega que existan</b>.</p></div>
+  </div>
+
+  <h3 class="th-h3">Las tres sustancias</h3>
+  <div class="tblwrap"><table class="tbl">
+    <thead><tr><th>Realidad</th><th>Sustancia</th><th>Atributo</th><th>Modos</th></tr></thead>
+    <tbody>
+      <tr><td><b>Dios</b></td><td>Sustancia infinita <i>(res infinita)</i></td><td><span class="pill p1">Infinitud</span></td><td>No tiene: es perfecta y siempre idéntica</td></tr>
+      <tr><td><b>El yo</b></td><td>Sustancia pensante <i>(res cogitans)</i></td><td><span class="pill p2">Pensamiento</span></td><td>Creer, dudar, imaginar, sentir, amar, odiar…</td></tr>
+      <tr><td><b>Los cuerpos</b></td><td>Sustancia extensa <i>(res extensa)</i></td><td><span class="pill p3">Extensión</span></td><td>Profundidad, volumen, anchura, formas, movimientos…</td></tr>
+    </tbody>
+  </table></div>
+  <p class="th-p">El <b>atributo</b> es la esencia de cada sustancia; los <b>modos</b>, sus modificaciones.</p>
+  <div class="th-key"><span class="th-key-l">Concepto de sustancia</span><p>«Toda cosa que existe de tal modo que <b>no necesita de ninguna otra cosa para existir</b>». En sentido estricto solo Dios lo es; Descartes lo mantiene para las otras dos por su <b>independencia mutua</b>.</p></div>
+
+  <h3 class="th-h3">Dualismo antropológico</h3>
+  <p class="th-p">Alma y cuerpo, pensamiento y extensión, son <b>sustancias distintas</b>: un dualismo <b>más radical que el de Platón</b>. El objetivo es salvaguardar la <b>autonomía del alma</b> respecto de la materia.</p>
+  <div class="th-steps">
+    <div><b>Materia</b><span>La ciencia moderna impone un mundo <b>mecanicista y determinista</b>: el cuerpo funciona como una máquina.</span></div>
+    <div><b>Libertad</b><span>Si el alma fuera materia, estaría sometida a esas leyes. Separarla del cuerpo permite <b>defender la libertad</b>.</span></div>
+  </div>
+  <blockquote class="th-quote">«Puesto que, por una parte, poseo una idea clara y distinta de mí mismo en tanto que soy una cosa que piensa e inextensa, y, de otra parte, poseo una idea distinta del cuerpo en tanto que es solo una cosa extensa y que no piensa, es evidente que yo soy distinto de mi cuerpo y que puedo existir sin él». <cite>Meditaciones, VI</cite></blockquote>
+
+  <h3 class="th-h3">Conclusión: un éxito a medias</h3>
+  <div class="ds-flow">
+    <div><span class="ds-fl">Intuición</span><b>Yo</b><small>Lo más simple</small></div>
+    <i aria-hidden="true">→</i>
+    <div class="god"><span class="ds-fl">Garantía</span><b>Dios</b><small>Intermediario</small></div>
+    <i aria-hidden="true">→</i>
+    <div><span class="ds-fl">Deducción</span><b>Mundo</b><small>Lo más complejo</small></div>
+  </div>
+  <p class="th-p">Lo consigue en parte: a partir del yo justifica la realidad del mundo. Pero necesita una <b>garantía externa</b>, Dios. Aunque Dios sea la <b>segunda verdad en el orden del conocimiento</b>, se convierte en la <b>primera en el orden ontológico</b>: al final, todo acaba siendo gracias a Dios.</p>
+</section>
+
+<section class="card th" id="ds-pau">
+  ${secHead("PAU","Para el comentario","Fragmentos que entran y cómo enfocar cada cuestión.")}
+  <div class="works">${a.works.map(w=>'<div class="work"><span class="wi">'+ICONS.book+'</span><div><b>'+w.t+'</b><span>'+w.d+'</span></div></div>').join("")}</div>
+</section>
+<p class="tiny muted" style="text-align:right">Apuntes: José Manuel Jiménez y Manuel Higueras</p>
 `;}
 };
 
@@ -1661,7 +2150,7 @@ function tabResponder(a){
    '<div class="step"><div class="n">1</div><div><h3>Ideas principales y problema</h3><p>'+a.q1+'</p></div></div>'+
    '<div class="step"><div class="n">2</div><div><h3>Relación con la filosofía de '+a.name+'</h3><p>'+a.q2+'</p></div></div>'+
   '</div></section>'+
-  '<section class="card"><h2 style="margin-bottom:6px">Cuestión 3 · Con quién compararlo</h2><p class="small muted" style="margin-bottom:12px">Elige una corriente de otra época y un autor de esa época.</p><div class="compare">'+
+  '<section class="card"><h2 style="margin-bottom:6px">Cuestión 3 · Con quién compararlo</h2><p class="small muted" style="margin-bottom:12px">'+(a.q3.length===1?'En la PAU, '+a.name+' se compara con este autor.':'Elige una corriente de otra época y un autor de esa época.')+'</p><div class="compare">'+
    a.q3.map(c=>'<div class="cmp"><span class="chip era tag">'+c[0]+'</span><span class="small">'+c[1]+'</span></div>').join("")+'</div></section>'+
   '<section class="card"><h2 style="margin-bottom:10px">Errores frecuentes</h2><ul class="bullets">'+a.tips.map(t=>'<li>'+t+'</li>').join("")+
    '<li>Parafrasear el texto en vez de explicar y argumentar las ideas.</li></ul></section>';
@@ -3050,6 +3539,87 @@ function tabPracticar(a){
    checks.map((c,i)=>'<label class="check" for="ck-'+i+'"><input type="checkbox" id="ck-'+i+'" data-i="'+i+'" '+((d.checks||[]).includes(i)?"checked":"")+'><span>'+c+'</span></label>').join("")+
   '</div><div class="btnrow" style="margin-top:16px"><button class="btn primary" id="copyAns">Copiar respuestas</button><button class="btn ghost" id="clearAns">Borrar borrador</button><span class="saved" id="savedMsg"></span></div></section>';
 }
+const TEXTOS_RESUMEN = {platon:{grupo:"fed",yt:"rTNdgiJ_F-o",title:"Resumen final del Fedón",sub:"Lo esencial de los cuatro textos en un minuto"}};
+const TEXTOS = {
+ "platon": [
+  {
+   "id": "PLAFED01",
+   "ref": "Fedón",
+   "yt": "AqdTWXOzdic",
+   "html": "—Examina ya –dijo él– si esto es de este modo. Decimos que <mark class=\"hl-g\"><u>existe algo igual.</u></mark> No me refiero a un madero igual a otro madero ni a una piedra con otra piedra ni a ninguna cosa de esa clase, sino a <u>algo distinto, que subsiste al margen de todos esos objetos,</u> <mark class=\"hl-o\">lo igual en sí mismo.</mark> ¿Decimos que eso es algo, o nada? —Lo decimos, ¡por Zeus! –dijo Simmias–, y de manera rotunda. —¿Es que, además, sabemos lo que es? —Desde luego que sí –repuso él. <mark class=\"hl-g\"><u>—¿De dónde, entonces, hemos obtenido ese</u></mark> <mark class=\"hl-o\">conocimiento?</mark> <mark class=\"hl-g\"><u>¿No,</u></mark> por descontado, <mark class=\"hl-g\"><u>de las cosas</u></mark> que ahora mismo mencionábamos, <u>de haber visto maderos o piedras o algunos otros objetos iguales,</u> o a partir de esas cosas lo hemos intuido, siendo diferente a ellas? ¿O no te parece que es algo diferente? Examínalo con este enfoque. ¿Acaso <mark class=\"hl-g\">piedras que son iguales y leños que son los mismos no le parecen algunas veces a uno iguales, y a otro no?</mark> —En efecto, así pasa. —¿Qué? ¿Las cosas iguales en sí mismas es posible que se te muestren como desiguales, o la igualdad aparecerá como desigualdad? —Nunca jamás, Sócrates. —Por lo tanto, no es lo mismo –dijo él– esas <mark class=\"hl-o\">cosas iguales</mark> y <mark class=\"hl-o\">lo igual en sí.</mark> —De ningún modo a mí me lo parece, Sócrates."
+  },
+  {
+   "id": "PLAFED02",
+   "ref": "Fedón",
+   "yt": "9MBaRhBLurc",
+   "html": "—Con todo –dijo–, <u>¿a partir de esas cosas, las iguales,</u> que son diferentes de <mark class=\"hl-o\">lo igual en sí,</mark> <u>has</u> <mark class=\"hl-g\"><u>intuido y captado,</u></mark> <u>sin embargo, el conocimiento de eso?</u> —Acertadísimamente lo dices –dijo. —¿En consecuencia, tanto si es semejante a esas cosas como si es desemejante? —En efecto. —No hay diferencia ninguna –dijo él–. Siempre que al ver un objeto, a partir de su contemplación, intuyas otro, sea semejante o desemejante, es necesario –dijo– que eso sea un proceso de <mark class=\"hl-o\">reminiscencia.</mark> —Así es, desde luego. —¿Y qué? –dijo él–. ¿Acaso experimentamos algo parecido con respecto a los maderos y a las <mark class=\"hl-o\">cosas iguales</mark> de que hablábamos ahora? ¿Es que no parece que son iguales como lo que es igual por sí, o carecen de algo para ser de igual clase que lo igual en sí, o nada? — Carecen, y de mucho, para ello –respondió. —Por tanto, ¿reconocemos que, cuando uno al ver algo piensa: <mark class=\"hl-g\">lo que ahora yo veo pretende ser como algún otro de los objetos reales,</mark> pero carece de algo y no consigue ser tal como aquél, sino que resulta inferior, necesariamente el que piensa esto <mark class=\"hl-g\">tuvo que haber logrado ver antes aquello a lo que dice que esto se asemeja,</mark> y que le resulta inferior? —Necesariamente."
+  },
+  {
+   "id": "PLAFED03",
+   "ref": "Fedón",
+   "yt": "NUkdMiHXEL4",
+   "html": "—¿Qué, pues? ¿Hemos experimentado también nosotros algo así, o no, con respecto a <mark class=\"hl-o\">las cosas iguales</mark> y a <mark class=\"hl-o\">lo igual en sí?</mark> —Por completo. —Conque es necesario que nosotros <mark class=\"hl-g\">previamente hayamos visto lo igual</mark> antes de aquel momento en el que al ver por primera vez las cosas iguales pensamos que todas ellas tienden a ser como lo igual pero que lo son insuficientemente. —Así es. —Pero, además, reconocemos esto: que si lo hemos pensado <mark class=\"hl-g\">no es posible pensarlo, sino a partir del hecho de ver o de tocar o de alguna otra percepción de los sentidos.</mark> Lo mismo digo de todos ellos. —Porque lo mismo resulta, Sócrates, en relación con lo que quiere aclarar nuestro razonamiento. —Por lo demás, a partir de las <mark class=\"hl-o\">percepciones sensibles</mark> hay que pensar que todos los datos en <u>nuestros sentidos apuntan a lo que es lo igual, y que son inferiores a ello.</u> ¿O cómo lo decimos? —De ese modo. —Por consiguiente, <mark class=\"hl-g\"><u>antes de que empezáramos a ver, oír, y percibir todo lo demás,</u></mark> <u>era necesario que hubiéramos obtenido captándolo en algún lugar el</u> <mark class=\"hl-o\">conocimiento</mark> <u>de qué es lo igual en sí mismo,</u> si es que a este punto íbamos a referir las igualdades aprehendidas por nuestros sentidos, y que todas ellas se esfuerzan por ser tales como aquello, pero le resultan inferiores."
+  },
+  {
+   "id": "PLAFED04",
+   "ref": "Fedón",
+   "yt": "nkwZTx12zdg",
+   "html": "—Es necesario de acuerdo con lo que está dicho, Sócrates. —¿Acaso desde que nacimos veíamos, oíamos, y teníamos los demás <mark class=\"hl-o\">sentidos?</mark> —Desde luego que sí. <mark class=\"hl-g\">—¿Era preciso,</mark> entonces, decimos, <mark class=\"hl-g\">que tengamos adquirido el conocimiento de lo igual antes que éstos?</mark> —Sí. —Por lo tanto, antes de nacer, según parece, nos es necesario haberlo adquirido. —Eso parece. —Así que si, habiéndolo adquirido antes de nacer, nacimos teniéndolo, ¿sabíamos ya antes de nacer y apenas nacidos no solo lo igual, lo mayor, y lo menor, y todo lo de esa clase? Pues <mark class=\"hl-g\">el razonamiento nuestro de ahora no es en algo más sobre lo igual en sí que sobre</mark> <mark class=\"hl-o\">lo bello en sí, y lo bueno en sí, y lo justo</mark> <mark class=\"hl-g\">y lo santo,</mark> y, a lo que precisamente me refiero, sobre todo aquello que etiquetamos con <u>«eso lo que es»,</u> tanto al preguntar en nuestras preguntas como al responder en nuestras respuestas. De modo que nos es necesario haber adquirido los conocimientos de todo eso antes de nacer. —Así es. —Y si después de haberlos adquirido en cada ocasión no los olvidáramos, naceríamos siempre sabiéndolos y siempre los sabríamos a lo largo de nuestra vida. Porque el saber consiste en esto: conservar el conocimiento que se ha adquirido y no perderlo. ¿O no es eso lo que llamamos <mark class=\"hl-o\">olvido,</mark> Simmias, <u>la pérdida de un conocimiento?</u> —Totalmente de acuerdo, Sócrates –dijo. —Y si es que después de haberlos adquirido antes de nacer, pienso, <mark class=\"hl-g\">al nacer los perdimos, y luego al utilizar nuestros sentidos respecto a esas mismas cosas recuperamos los conocimientos que en un tiempo anterior ya teníamos,</mark> ¿acaso <mark class=\"hl-b\">lo que llamamos aprender no sería recuperar un conocimiento ya familiar?</mark> ¿Llamándolo <mark class=\"hl-o\">recordar</mark> lo llamaríamos correctamente? —Desde luego."
+  }
+ ]
+};
+function txCover(a,label,id){
+  return '<span class="tx-cov">'+(id?'<img src="https://i.ytimg.com/vi/'+id+'/mqdefault.jpg" alt="" loading="lazy" onerror="this.remove()">':'')+
+   '<span class="tx-cov-art" aria-hidden="true">'+stick(a.id,44)+'<b>'+label+'</b></span>'+(id?'<span class="vplay-b sm" aria-hidden="true">▶</span>':'')+'</span>';
+}
+function ytEmbed(id,title,a,label){
+  const inner=txCover(a,label,id)+'<span class="tx-v-txt"><span class="tiny" style="font-weight:800;letter-spacing:.06em;color:var(--orange)">VÍDEO</span><b>Explicación del '+label.toLowerCase()+'</b><span class="small muted">'+(EMBED_VIDEOS?'Pulsa para verlo aquí':'Se abre en YouTube')+'</span></span>';
+  if(EMBED_VIDEOS) return '<div class="vplay tx-v" role="button" tabindex="0" data-yt="'+id+'" data-vert="1" data-title="'+title.replace(/"/g,'&quot;')+'" aria-label="Reproducir vídeo: '+title+'">'+inner+'</div>';
+  return '<a class="tx-v" href="https://www.youtube.com/shorts/'+id+'" target="_blank" rel="noopener">'+inner+'</a>';
+}
+function txResumen(a){
+  const r=TEXTOS_RESUMEN[a.id]; if(!r) return '';
+  const vid=EMBED_VIDEOS
+   ? '<div class="vplay tx-short" role="button" tabindex="0" data-yt="'+r.yt+'" data-vert="1" data-title="'+r.title+'" aria-label="Reproducir: '+r.title+'"><span class="tx-short-art" aria-hidden="true">'+stick(a.id,56)+'<b>Resumen</b></span><img src="https://i.ytimg.com/vi/'+r.yt+'/hq720.jpg" alt="" loading="lazy" onerror="this.remove()"><span class="vplay-b sm" aria-hidden="true">▶</span></div>'
+   : '<a class="tx-short" href="https://www.youtube.com/shorts/'+r.yt+'" target="_blank" rel="noopener"><span class="tx-short-art" aria-hidden="true">'+stick(a.id,56)+'<b>Resumen</b></span><img src="https://i.ytimg.com/vi/'+r.yt+'/hq720.jpg" alt="" loading="lazy" onerror="this.remove()"><span class="vplay-b sm" aria-hidden="true">▶</span></a>';
+  return '<section class="card tx-sum"><div class="tx-sum-t"><span class="tiny" style="font-weight:800;letter-spacing:.06em;color:var(--orange)">RESUMEN FINAL</span><h3>'+r.title+'</h3><p class="muted small">'+r.sub+'</p></div>'+vid+'</section>';
+}
+const TEXTOS_GRUPOS = {
+  platon:[
+    {key:"fed",title:"Fedón",sub:"Teoría de la reminiscencia",prefix:"PLAFED"},
+    {key:"rep",title:"República VI",sub:"Símil de la línea y la Idea de Bien",prefix:"PLAREP"}
+  ]
+};
+function txCard(a,t,i){
+  const title=a.name+' · '+t.ref+' · Texto '+(i+1);
+  return '<section class="card tx-card" id="tx-'+t.id+'"><div class="tx-head"><span class="tx-n">'+(i+1)+'</span><div><b>'+t.ref+'</b><span class="tiny muted">'+t.id+'</span></div></div>'+
+    '<div class="tx-video">'+(t.yt?ytEmbed(t.yt,title,a,'Texto '+(i+1)):'<div class="tx-v tx-v-empty">'+txCover(a,'Texto '+(i+1),null)+'<span class="tx-v-txt"><b>Vídeo de la explicación</b><span class="small muted">Próximamente</span></span></div>')+'</div>'+
+    '<div class="tx-body">'+t.html+'</div></section>';
+}
+function tabTextos(a){
+  const L=TEXTOS[a.id]||[];
+  const G=TEXTOS_GRUPOS[a.id];
+  if(!G){
+    if(!L.length) return '<section class="card"><p class="muted">Los textos de '+a.name+' se añadirán pronto.</p></section>';
+    return '<div class="tx-list">'+L.map((t,i)=>txCard(a,t,i)).join('')+txResumen(a)+'</div>';
+  }
+  const esc=x=>String(x).replace(/&/g,"&amp;").replace(/</g,"&lt;");
+  return '<div class="tx-list">'+G.map(g=>{
+    let items=L.filter(t=>t.id.startsWith(g.prefix));
+    let plain=false;
+    if(!items.length){
+      items=(COMMENTS[a.id]||[]).filter(c=>c.id.startsWith(g.prefix)).map(c=>({id:c.id,ref:c.ref,yt:null,html:esc(c.texto)}));
+      plain=items.length>0;
+    }
+    const nv=items.filter(t=>t.yt).length;
+    const res=(TEXTOS_RESUMEN[a.id]&&TEXTOS_RESUMEN[a.id].grupo===g.key)?txResumen(a):'';
+    return '<section class="tx-group" data-g="'+g.key+'"><button class="tx-gh" aria-expanded="false"><span class="tx-gi" aria-hidden="true">'+ICONS.book+'</span><span class="tx-gt"><b>'+g.title+'</b><span class="small muted">'+g.sub+' · '+items.length+' textos'+(nv?' · '+nv+' vídeos':'')+'</span></span><svg class="tx-chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>'+
+      '<div class="tx-gb" hidden>'+(plain?'<p class="small muted tx-note">Textos sin subrayar todavía.</p>':'')+(items.length?items.map((t,i)=>txCard(a,t,i)).join(''):'<p class="muted">Próximamente.</p>')+res+'</div></section>';
+  }).join('')+'</div>';
+}
+function bindTextos(body){
+  body.querySelectorAll(".tx-gh").forEach(h=>h.onclick=()=>{const b=h.nextElementSibling;const open=b.hidden;b.hidden=!open;h.setAttribute("aria-expanded",open);h.parentElement.classList.toggle("open",open)});
+}
 function bindAuthor(id){
   const a = getA(id); if(!a) return;
   const body = document.getElementById("tabbody");
@@ -3057,6 +3627,7 @@ function bindAuthor(id){
   const show = t=>{
     tabs.forEach(b=>b.classList.toggle("on",b.dataset.tab===t));
     body._go=show;
+    if(t==="textos"){body.innerHTML=tabTextos(a);bindTextos(body);store.set("tab",t);return}
     if(t==="test"){body.innerHTML='<div id="quizhost" style="display:flex;flex-direction:column;gap:18px"></div>';const qh=document.getElementById("quizhost");qh._go=show;startQuiz(a.id,qh);store.set("tab",t);return}
     if(t==="practicar"&&COMMENTS[a.id]){body.innerHTML=tabPracticarComentario(a);bindPracticarComentario(a,()=>show("practicar"));store.set("tab",t);return}
     body.innerHTML = t==="teoria"?tabFicha(a):tabPracticar(a);
@@ -3210,6 +3781,10 @@ function startQuiz(id,host){
 }
 
 route();
+
+document.addEventListener("click",e=>{const el=e.target.closest(".vplay");if(!el)return;playInline(el)});
+document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.target.classList&&e.target.classList.contains("vplay")){e.preventDefault();playInline(e.target)}});
+function playInline(el){const id=el.dataset.yt,t=el.dataset.title;const w=document.createElement("div");w.className="vembed vinline-embed"+(el.dataset.vert?" vert":"");w.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&rel=0" title="'+t+'" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';const card=el.closest(".tx-card");el.replaceWith(w);if(card){card.classList.add("playing");const vb=card.querySelector(".tx-video");if(!vb.querySelector(".tx-close")){const c=document.createElement("button");c.className="tx-close";c.type="button";c.textContent="Cerrar vídeo";c.onclick=()=>{const tabs=document.querySelector('.seg button[data-tab="textos"]');const open=[...document.querySelectorAll(".tx-group.open")].map(g=>g.dataset.g);const id=card.id;tabs.click();open.forEach(k=>{const h=document.querySelector('.tx-group[data-g="'+k+'"] .tx-gh');if(h)h.click()});const n=document.getElementById(id);if(n)n.scrollIntoView({block:"start"})};vb.appendChild(c)}if(window.innerWidth>=1000)card.scrollIntoView({behavior:"smooth",block:"start"})}}
 </script>
 </body>
 </html>
