@@ -5233,7 +5233,7 @@ const INSIGNIAS=[
   {id:"disertador",gr:"disertacion",n:"Disertador",d:"Supera las 8 etapas del entrenador",g:G.pen,gold:true,ok:()=>DZ_STAGES.every(st=>dzDone(dzProg(),st.n))},
   {id:"pluma",gr:"disertacion",n:"Pluma propia",d:"Escribe una disertación de más de 100 palabras",g:G.doc,ok:()=>store.get("essaysWritten",[]).length>=1},
   {id:"sapere",gr:"otras",n:"Segunda opinión",d:"Corrige un comentario con la IA",g:G.spark,ok:()=>store.get("iaUsada",false)},
-  {id:"despertar",gr:"otras",n:"Despertar",d:"Instala Caverna en tu móvil",g:G.phone,ok:()=>isStandalone()}
+  {id:"despertar",gr:"otras",n:"Despertar",d:"Instala Caverna en tu móvil",g:G.phone,ok:()=>isStandalone()||store.get("appInstalada",false)}
 ];
 function medalla(b,on,size){
   const fill=on?(b.gold?"#F5A04A":"var(--petrol)"):"var(--line)",ink=on?"#fff":"var(--muted)",rib=on?(b.gold?"var(--petrol)":"#F5A04A"):"var(--line)";
@@ -5520,7 +5520,8 @@ let deferredInstall=null;
 function isStandalone(){return window.matchMedia("(display-mode: standalone)").matches||window.navigator.standalone===true}
 function isIOS(){return /iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1)}
 function installCardHTML(){
-  if(isStandalone()||store.get("installHide",false)) return "";
+  if(isStandalone()){store.set("appInstalada",true);return ""}
+  if(store.get("installHide",false)||store.get("appInstalada",false)) return "";
   return '<section class="card install-card" id="installCard">'+
     '<svg class="ic-logo" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="30" fill="#b8336a"/><path d="M26 78 V52 A24 24 0 0 1 74 52 V78" fill="none" stroke="#fbe6ef" stroke-width="9" stroke-linecap="round"/><line x1="16" y1="80" x2="84" y2="80" stroke="#fbe6ef" stroke-width="6" stroke-linecap="round"/><circle cx="50" cy="62" r="9" fill="#F5A04A"/></svg>'+
     '<div class="ic-txt"><h2>Instala Caverna en tu móvil</h2><p class="small muted">Ábrela como una app desde la pantalla de inicio, sin buscarla en el navegador.</p></div>'+
@@ -5530,7 +5531,7 @@ function installCardHTML(){
 }
 function hideInstallCard(){store.set("installHide",true);const c=document.getElementById("installCard");if(c)c.remove()}
 window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferredInstall=e});
-window.addEventListener("appinstalled",()=>{deferredInstall=null;hideInstallCard()});
+window.addEventListener("appinstalled",()=>{deferredInstall=null;store.set("appInstalada",true);hideInstallCard()});
 document.addEventListener("click",async e=>{
   const b=e.target.closest("[data-install]"); if(!b) return;
   if(b.dataset.install==="hide"){hideInstallCard();return}
