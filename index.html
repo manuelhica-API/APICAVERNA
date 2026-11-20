@@ -835,6 +835,7 @@ textarea:focus{outline:none;border-color:var(--petrol);background:var(--surface)
 .ins{display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px;padding:12px 6px;border-radius:var(--r-md);background:var(--surface-2)}
 .ins b{font-size:13.5px;line-height:1.25}.ins span{font-size:12px;color:var(--muted);line-height:1.3}
 .ins:not(.on) b{color:var(--muted)}
+.ins:not(.on) .stk{filter:grayscale(1);opacity:.5}
 .ins-toast{position:fixed;left:50%;bottom:96px;transform:translate(-50%,20px);opacity:0;z-index:100;display:flex;align-items:center;gap:12px;background:var(--petrol-deep);color:#fff;border-radius:18px;padding:10px 18px 10px 12px;box-shadow:0 10px 30px rgba(0,0,0,.25);transition:opacity .3s,transform .3s}
 .ins-toast.on{opacity:1;transform:translate(-50%,0)}
 .ins-toast div{display:flex;flex-direction:column}.ins-toast b{font-size:15px}
@@ -1718,6 +1719,7 @@ function route(){
   else if(h==="test"){v.innerHTML=viewTest()}
   else if(h==="examen"){v.innerHTML=viewExamen()}
   else if(h==="profe"){section="inicio";v.innerHTML=viewProfe()}
+  else if(h==="insignias"){section="inicio";v.innerHTML=viewInsignias()}
   else {section="inicio";v.innerHTML=viewInicio()}
   renderNav(section);
   if(h.startsWith("autor-")) bindAuthor(h.slice(6));
@@ -5195,25 +5197,43 @@ const G={
   eye:'<path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/>',
   pen:'<path d="M4 20h4L19 9l-4-4L4 16z"/><path d="m13.5 6.5 4 4"/>',
   spark:'<path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/>',
-  phone:'<rect x="7" y="3" width="10" height="18" rx="2.5"/><path d="M11 18h2"/>'
+  phone:'<rect x="7" y="3" width="10" height="18" rx="2.5"/><path d="M11 18h2"/>',
+  check:'<path d="m5 12.5 4.5 4.5L19 7.5"/>',
+  doc:'<path d="M7 3h7l4 4v14H7z"/><path d="M10 12h5M10 16h5"/>'
 };
+const FIL_INS={platon:"Amigo de las Ideas",aristoteles:"Peripatético",descartes:"Pienso, luego existo",locke:"Tabla rasa",kant:"Mayoría de edad",nietzsche:"Filosofar a martillazos",ortega:"Yo y mi circunstancia",arendt:"Pensar sin barandillas"};
+function filCompleto(id){const b=store.get("best",{});if(!(b[id]>=7))return false;const s=seenGet();
+  const vids=(VIDEOS[id]||[]).map(v=>v.id).concat((TEXTOS[id]||[]).filter(t=>t.yt).map(t=>t.yt)).filter(Boolean);return vids.every(v=>s[v])}
+const nVideos=()=>Object.keys(seenGet()).length;
+const nEtapas=()=>{const dz=dzProg();return DZ_STAGES.filter(st=>dzDone(dz,st.n)).length};
+const INS_GRUPOS=[["constancia","Constancia"],["pdia","Pregunta del día"],["filosofos","Filósofos"],["test","Test"],["videos","Vídeos"],["disertacion","Disertación"],["otras","Otras"]];
 const INSIGNIAS=[
-  {id:"primera",n:"Primera pregunta",d:"Responde tu primera pregunta del día",g:G.q,ok:()=>store.get("pdiaN",0)>=1},
-  {id:"racha3",n:"Buen comienzo",d:"3 días seguidos",num:"3",ok:x=>x.best>=3},
-  {id:"racha5",n:"Medalla de la constancia",d:"5 días seguidos",num:"5",gold:true,ok:x=>x.best>=5},
-  {id:"racha10",n:"Fuera de la caverna",d:"10 días seguidos",num:"10",ok:x=>x.best>=10},
-  {id:"racha30",n:"Rey filósofo",d:"30 días seguidos",num:"30",gold:true,ok:x=>x.best>=30},
-  {id:"mayeutica",n:"Mayéutica",d:"Acierta 10 preguntas del día",g:G.bulb,ok:()=>store.get("pdiaOk",0)>=10},
-  {id:"sobresaliente",n:"Sobresaliente",d:"Saca un 10 en un test",g:G.star,ok:()=>Object.values(store.get("best",{})).some(v=>v>=10)},
-  {id:"linea",n:"Línea completa",d:"Haz el test de los 4 filósofos de tu línea",g:G.layers,ok:()=>{const b=store.get("best",{});return ["a","b"].some(l=>LINE_ORDER[l].every(id=>b[id]!==undefined))}},
-  {id:"videos",n:"Ojos abiertos",d:"Ve 20 vídeos",g:G.eye,ok:()=>Object.keys(seenGet()).length>=20},
-  {id:"disertador",n:"Disertador",d:"Supera las 8 etapas del entrenador",g:G.pen,ok:()=>{const dz=dzProg();return DZ_STAGES.every(st=>dzDone(dz,st.n))}},
-  {id:"sapere",n:"Sapere aude",d:"Corrige un comentario con la IA",g:G.spark,ok:()=>store.get("iaUsada",false)},
-  {id:"despertar",n:"Despertar",d:"Instala Caverna en tu móvil",g:G.phone,ok:()=>isStandalone()}
+  {id:"racha3",gr:"constancia",n:"Buen comienzo",d:"3 días seguidos",num:"3",ok:x=>x.best>=3},
+  {id:"racha5",gr:"constancia",n:"Medalla de la constancia",d:"5 días seguidos",num:"5",gold:true,ok:x=>x.best>=5},
+  {id:"racha10",gr:"constancia",n:"Fuera de la caverna",d:"10 días seguidos",num:"10",ok:x=>x.best>=10},
+  {id:"racha30",gr:"constancia",n:"Rey filósofo",d:"30 días seguidos",num:"30",gold:true,ok:x=>x.best>=30},
+  {id:"primera",gr:"pdia",n:"Primera pregunta",d:"Responde tu primera pregunta del día",g:G.q,ok:()=>store.get("pdiaN",0)>=1},
+  {id:"mayeutica",gr:"pdia",n:"Mayéutica",d:"Acierta 10 preguntas del día",g:G.bulb,ok:()=>store.get("pdiaOk",0)>=10},
+  {id:"oraculo",gr:"pdia",n:"Oráculo de Delfos",d:"Acierta 50 preguntas del día",g:G.bulb,gold:true,ok:()=>store.get("pdiaOk",0)>=50},
+  ...AUTHORS.map(a=>({id:"fil-"+a.id,gr:"filosofos",n:FIL_INS[a.id]||a.name,d:"Saca 7 o más en el test de "+a.name+" y ve todos sus vídeos",fil:a.id,ok:()=>filCompleto(a.id)})),
+  {id:"primertest",gr:"test",n:"Primer test",d:"Termina tu primer test",g:G.check,ok:()=>store.get("hist",[]).length>=1},
+  {id:"sobresaliente",gr:"test",n:"Sobresaliente",d:"Saca un 10 en un test",g:G.star,ok:()=>Object.values(store.get("best",{})).some(v=>v>=10)},
+  {id:"linea",gr:"test",n:"Línea completa",d:"Haz el test de los 4 filósofos de tu línea",g:G.layers,ok:()=>{const b=store.get("best",{});return ["a","b"].some(l=>LINE_ORDER[l].every(id=>b[id]!==undefined))}},
+  {id:"ochosabios",gr:"test",n:"Los ocho sabios",d:"Aprueba el test de los 8 filósofos",g:G.layers,gold:true,ok:()=>{const b=store.get("best",{});return AUTHORS.every(a=>b[a.id]>=5)}},
+  {id:"videos25",gr:"videos",n:"Ojos abiertos",d:"Ve 25 vídeos",num:"25",ok:()=>nVideos()>=25},
+  {id:"videos50",gr:"videos",n:"Mirada al Sol",d:"Ve 50 vídeos",num:"50",ok:()=>nVideos()>=50},
+  {id:"videos100",gr:"videos",n:"Theoria",d:"Ve 100 vídeos",num:"100",gold:true,ok:()=>nVideos()>=100},
+  {id:"etapa1",gr:"disertacion",n:"Primeros elementos",d:"Supera la primera etapa del entrenador",g:G.pen,ok:()=>nEtapas()>=1},
+  {id:"etapa4",gr:"disertacion",n:"A medio camino",d:"Supera 4 etapas del entrenador",g:G.pen,ok:()=>nEtapas()>=4},
+  {id:"disertador",gr:"disertacion",n:"Disertador",d:"Supera las 8 etapas del entrenador",g:G.pen,gold:true,ok:()=>DZ_STAGES.every(st=>dzDone(dzProg(),st.n))},
+  {id:"pluma",gr:"disertacion",n:"Pluma propia",d:"Escribe una disertación de más de 100 palabras",g:G.doc,ok:()=>store.get("essaysWritten",[]).length>=1},
+  {id:"sapere",gr:"otras",n:"Segunda opinión",d:"Corrige un comentario con la IA",g:G.spark,ok:()=>store.get("iaUsada",false)},
+  {id:"despertar",gr:"otras",n:"Despertar",d:"Instala Caverna en tu móvil",g:G.phone,ok:()=>isStandalone()}
 ];
 function medalla(b,on,size){
   const fill=on?(b.gold?"#F5A04A":"var(--petrol)"):"var(--line)",ink=on?"#fff":"var(--muted)",rib=on?(b.gold?"var(--petrol)":"#F5A04A"):"var(--line)";
-  const inner=b.num?'<text x="12" y="16.3" text-anchor="middle" font-size="'+(b.num.length>1?10.5:12.5)+'" font-weight="800" font-family="Sora, sans-serif" fill="'+ink+'" stroke="none">'+b.num+'</text>':b.g;
+  const inner=b.num?'<text x="12" y="16.3" text-anchor="middle" font-size="'+(b.num.length>2?8.5:b.num.length>1?10.5:12.5)+'" font-weight="800" font-family="Sora, sans-serif" fill="'+ink+'" stroke="none">'+b.num+'</text>':b.g;
+  if(b.fil){return '<svg width="'+size+'" height="'+Math.round(size*56/48)+'" viewBox="0 0 48 56" aria-hidden="true"><path d="M13 1h9l5 16h-9z" fill="'+rib+'" opacity="'+(on?1:.6)+'"/><path d="M35 1h-9l-5 16h9z" fill="'+rib+'" opacity="'+(on?.8:.5)+'"/><circle cx="24" cy="36" r="17" fill="'+(on?'var(--petrol-soft)':'var(--line)')+'" stroke="'+fill+'" stroke-width="2.5"/><g class="stk" transform="translate(9.5 21.5)"><svg width="29" height="29" viewBox="0 0 120 120" x="0" y="0">'+stick(b.fil,120).replace(/^<svg[^>]*>/,'').replace(/<\/svg>$/,'')+'</svg></g></svg>'}
   return '<svg width="'+size+'" height="'+Math.round(size*56/48)+'" viewBox="0 0 48 56" aria-hidden="true"><path d="M13 1h9l5 16h-9z" fill="'+rib+'" opacity="'+(on?1:.6)+'"/><path d="M35 1h-9l-5 16h9z" fill="'+rib+'" opacity="'+(on?.8:.5)+'"/>'+
     '<circle cx="24" cy="36" r="17" fill="'+fill+'"/><circle cx="24" cy="36" r="13.5" fill="none" stroke="'+ink+'" stroke-opacity=".35" stroke-width="1.2"/>'+
     '<g transform="translate(12 24)" fill="none" stroke="'+ink+'" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">'+inner+'</g></svg>';
@@ -5231,12 +5251,24 @@ function toastInsignia(b){
   setTimeout(()=>{t.classList.remove("on");setTimeout(()=>t.remove(),400)},2400);
   const ins=document.getElementById("insignias");if(ins)ins.outerHTML=insigniasHTML();
 }
+function insStats(){const got=store.get("insignias",{});const rc=rachas();return {got,rc,n:INSIGNIAS.filter(b=>got[b.id]).length}}
+function insLi(b,got){const on=!!got[b.id];return '<li class="ins'+(on?' on':'')+'">'+medalla(b,on,46)+'<b>'+b.n+'</b><span>'+(on?'Conseguida':b.d)+'</span></li>'}
+function rachaRow(rc){return '<div class="racha-row"><div><b>'+rc.actual+'</b><span>días de racha</span></div><div><b>'+rc.best+'</b><span>mejor racha</span></div><div><b>'+store.get("pdiaOk",0)+'</b><span>preguntas del día acertadas</span></div></div>'}
 function insigniasHTML(){
-  const got=store.get("insignias",{});const rc=rachas();const n=INSIGNIAS.filter(b=>got[b.id]).length;
-  return '<section class="card" id="insignias"><div class="card-head"><h2>Tus insignias</h2><span class="tiny muted">'+n+' de '+INSIGNIAS.length+'</span></div>'+
-    '<div class="racha-row"><div><b>'+rc.actual+'</b><span>días de racha</span></div><div><b>'+rc.best+'</b><span>mejor racha</span></div><div><b>'+store.get("pdiaOk",0)+'</b><span>preguntas del día acertadas</span></div></div>'+
-    '<ul class="ins-grid">'+INSIGNIAS.map(b=>{const on=!!got[b.id];return '<li class="ins'+(on?' on':'')+'">'+medalla(b,on,46)+'<b>'+b.n+'</b><span>'+(on?'Conseguida':b.d)+'</span></li>'}).join("")+'</ul>'+
-    '<p class="tiny muted" style="margin-top:12px">La racha suma un día cada vez que haces algo en Caverna: la pregunta del día, un test o un vídeo.</p></section>';
+  const {got,rc,n}=insStats();
+  const ultimas=INSIGNIAS.filter(b=>got[b.id]).sort((x,y)=>got[y.id]-got[x.id]).slice(0,3);
+  const proximas=INSIGNIAS.filter(b=>!got[b.id]).slice(0,6-ultimas.length);
+  return '<section class="card" id="insignias"><div class="card-head"><h2>Tus insignias</h2><a href="#insignias">Ver las '+INSIGNIAS.length+'</a></div>'+
+    rachaRow(rc)+
+    '<p class="small muted" style="margin:-4px 0 12px">Llevas <b>'+n+' de '+INSIGNIAS.length+'</b>.'+(proximas.length?' Estas son las siguientes que puedes conseguir:':'')+'</p>'+
+    '<ul class="ins-grid">'+ultimas.concat(proximas).map(b=>insLi(b,got)).join("")+'</ul></section>';
+}
+function viewInsignias(){
+  const {got,rc,n}=insStats();
+  return topbar("Tus insignias",n+" de "+INSIGNIAS.length+" conseguidas",["inicio","Inicio"])+
+  '<section class="card">'+rachaRow(rc)+'<p class="tiny muted">La racha suma un día cada vez que haces algo en Caverna: la pregunta del día, un test o un vídeo.</p></section>'+
+  INS_GRUPOS.map(([g,t])=>{const list=INSIGNIAS.filter(b=>b.gr===g);const k=list.filter(b=>got[b.id]).length;
+    return '<section class="card"><div class="card-head"><h2>'+t+'</h2><span class="tiny muted">'+k+' de '+list.length+'</span></div><ul class="ins-grid">'+list.map(b=>insLi(b,got)).join("")+'</ul></section>'}).join("");
 }
 checkInsignias(true);
 
