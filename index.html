@@ -4,6 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Caverna</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#b8336a">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Caverna">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -814,6 +821,12 @@ textarea:focus{outline:none;border-color:var(--petrol);background:var(--surface)
 .dz-rev span{flex:1}
 
 /* Inicio: cuatro secciones */
+.install-card{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.install-card .ic-logo{flex:0 0 auto;width:52px;height:52px}
+.install-card .ic-txt{flex:1 1 220px;min-width:0}
+.install-card .ic-txt h2{margin-bottom:2px}
+.install-card .ic-act{display:flex;align-items:center;gap:14px}
+.install-card .install-help{flex-basis:100%;background:var(--surface-2);border-radius:var(--r-sm);padding:10px 14px}
 .home4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
 .h4{display:flex;flex-direction:column;gap:6px;background:var(--surface);border-radius:var(--r-lg);padding:18px 16px 16px;box-shadow:var(--shadow);text-decoration:none;color:var(--ink);border:1.5px solid transparent;transition:transform .15s ease,border-color .15s}
 .h4:hover{transform:translateY(-2px);border-color:var(--petrol)}
@@ -923,7 +936,7 @@ textarea:focus{outline:none;border-color:var(--petrol);background:var(--surface)
 <div class="app">
   <aside class="side" aria-label="Navegación principal">
     <div class="brand">
-      <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true"><rect width="36" height="36" rx="11" fill="#e03880"/><path d="M7 28V19a11 11 0 0 1 22 0v9" fill="none" stroke="#4a1430" stroke-width="3.2" stroke-linecap="round"/><circle cx="18" cy="21" r="3.4" fill="#fff"/></svg>
+      <svg width="36" height="36" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="30" fill="#b8336a"/><path d="M26 78 V52 A24 24 0 0 1 74 52 V78" fill="none" stroke="#fbe6ef" stroke-width="9" stroke-linecap="round"/><line x1="16" y1="80" x2="84" y2="80" stroke="#fbe6ef" stroke-width="6" stroke-linecap="round"/><circle cx="50" cy="62" r="9" fill="#F5A04A"/></svg>
       <div><div class="brand-name">Caverna</div><div class="brand-sub">PAU · Historia de la Filosofía</div></div>
     </div>
     <nav class="nav" id="sidenav"></nav>
@@ -1667,7 +1680,7 @@ window.addEventListener("hashchange",route);
 /* ============ VISTAS ============ */
 function topbar(title, sub, back){
   return '<div class="topbar"><div>'+
-    '<div class="mobile-brand" style="margin-bottom:6px"><svg width="26" height="26" viewBox="0 0 36 36" aria-hidden="true"><rect width="36" height="36" rx="11" fill="#e03880"/><path d="M7 28V19a11 11 0 0 1 22 0v9" fill="none" stroke="#4a1430" stroke-width="3.2" stroke-linecap="round"/><circle cx="18" cy="21" r="3.4" fill="#fff"/></svg>Caverna</div>'+
+    '<div class="mobile-brand" style="margin-bottom:6px"><svg width="26" height="26" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="30" fill="#b8336a"/><path d="M26 78 V52 A24 24 0 0 1 74 52 V78" fill="none" stroke="#fbe6ef" stroke-width="9" stroke-linecap="round"/><line x1="16" y1="80" x2="84" y2="80" stroke="#fbe6ef" stroke-width="6" stroke-linecap="round"/><circle cx="50" cy="62" r="9" fill="#F5A04A"/></svg>Caverna</div>'+
     (sub?'<div class="hello">'+sub+'</div>':'')+(title?'<h1>'+title+'</h1>':'')+'</div>'+
     (back?'<a class="back" href="#'+back[0]+'">'+ICONS.back+back[1]+'</a>':'')+'</div>';
 }
@@ -1690,6 +1703,7 @@ function viewInicio(){
     '<a class="h4" href="#test"><span class="ic">'+ICONS.test+'</span><b>Test</b><span class="d">Preguntas de repaso con explicación</span><span class="s">'+(s.avg===null?'Sin hacer':'Media: '+avgTxt+' / 10')+'</span></a>'+
     '<a class="h4" href="#examen"><span class="ic">'+ICONS.exam+'</span><b>El examen</b><span class="d">Estructura, puntuación y reparto del tiempo</span><span class="s">90 minutos</span></a>'+
   '</nav>'+
+  installCardHTML()+
   '<section class="card"><div class="card-head"><h2>Ocho filósofos, dos líneas</h2><a href="#comentario">Ver todos</a></div>'+
     '<p class="small muted" style="margin-bottom:14px">En la Parte II salen dos textos, uno de cada línea temática. Eliges uno.</p>'+
     ["a","b"].map(b=>'<div class="lineblock"><div class="lb-head"><span class="chip '+b+'">Línea '+(b==="a"?"1":"2")+'</span><b>'+lineTitle[b]+'</b></div>'+
@@ -5153,6 +5167,39 @@ function decorateSeen(){const s=seenGet();document.querySelectorAll("#view [data
 document.addEventListener("click",e=>{const v=e.target.closest("[data-yt]");if(v)markSeenId(v.dataset.yt);const a=e.target.closest("a[href*='youtube.com'],a[href*='youtu.be']");if(a)markSeenId(ytIdFromHref(a.getAttribute("href")));setTimeout(decorateSeen,60)},true);
 decorateSeen();
 (function(){const v=document.getElementById("view");if(v)new MutationObserver(()=>{clearTimeout(decorateSeen._t);decorateSeen._t=setTimeout(decorateSeen,80)}).observe(v,{childList:true,subtree:true})})();
+
+/* ============ APP INSTALABLE ============ */
+let deferredInstall=null;
+function isStandalone(){return window.matchMedia("(display-mode: standalone)").matches||window.navigator.standalone===true}
+function isIOS(){return /iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1)}
+function installCardHTML(){
+  if(isStandalone()||store.get("installHide",false)) return "";
+  return '<section class="card install-card" id="installCard">'+
+    '<svg class="ic-logo" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="30" fill="#b8336a"/><path d="M26 78 V52 A24 24 0 0 1 74 52 V78" fill="none" stroke="#fbe6ef" stroke-width="9" stroke-linecap="round"/><line x1="16" y1="80" x2="84" y2="80" stroke="#fbe6ef" stroke-width="6" stroke-linecap="round"/><circle cx="50" cy="62" r="9" fill="#F5A04A"/></svg>'+
+    '<div class="ic-txt"><h2>Instala Caverna en tu móvil</h2><p class="small muted">Ábrela como una app desde la pantalla de inicio, sin buscarla en el navegador.</p></div>'+
+    '<div class="ic-act"><button type="button" class="btn primary" data-install="go">Instalar</button><button type="button" class="link-btn" data-install="hide">Ahora no</button></div>'+
+    '<p class="small install-help" id="installHelp" hidden></p>'+
+  '</section>';
+}
+function hideInstallCard(){store.set("installHide",true);const c=document.getElementById("installCard");if(c)c.remove()}
+window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferredInstall=e});
+window.addEventListener("appinstalled",()=>{deferredInstall=null;hideInstallCard()});
+document.addEventListener("click",async e=>{
+  const b=e.target.closest("[data-install]"); if(!b) return;
+  if(b.dataset.install==="hide"){hideInstallCard();return}
+  if(deferredInstall){
+    deferredInstall.prompt();
+    const r=await deferredInstall.userChoice; deferredInstall=null;
+    if(r&&r.outcome==="accepted") hideInstallCard();
+    return;
+  }
+  const h=document.getElementById("installHelp"); if(!h) return;
+  h.innerHTML=isIOS()
+    ? 'En <b>Safari</b>, pulsa el botón <b>Compartir</b> (el cuadrado con la flecha hacia arriba) y elige <b>«Añadir a pantalla de inicio»</b>.'
+    : 'Abre el menú del navegador (<b>⋮</b>) y elige <b>«Instalar aplicación»</b> o <b>«Añadir a pantalla de inicio»</b>.';
+  h.hidden=false;
+});
+if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}))}
 </script>
 </body>
 </html>
