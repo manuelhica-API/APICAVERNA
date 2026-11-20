@@ -689,6 +689,150 @@ textarea:focus{outline:none;border-color:var(--petrol);background:var(--surface)
 @media (min-width:1000px){.tx-card.playing .vembed.vert{width:270px;margin:0}}
 .tx-body mark.hl-c{background:#e8743a;color:#fff;font-weight:700;padding:.06em .3em}
 .tx-body mark mark.hl-c{margin:0 .05em}
+/* ============ ENTRENADOR DE DISERTACIONES ============ */
+.dz-hero{position:relative;overflow:hidden;border-radius:26px;padding:24px 24px 20px;color:#fff;background:
+  radial-gradient(110% 130% at 100% 0%,rgba(224,56,128,.5) 0%,rgba(224,56,128,0) 50%),
+  linear-gradient(135deg,#6b1c44 0%,#2a0b1b 100%);box-shadow:0 14px 34px rgba(74,20,48,.28)}
+.dz-hero .label{font-size:12.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;opacity:.8}
+.dz-hero h2{font-size:26px;font-weight:800;margin:6px 0 6px}
+.dz-hero p{font-size:14.5px;opacity:.85;max-width:560px;margin:0}
+.dz-hero .row{display:flex;gap:26px;flex-wrap:wrap;margin-top:16px}
+.dz-hero .row div{display:flex;flex-direction:column}
+.dz-hero .row b{font-family:var(--font-display);font-size:22px;font-variant-numeric:tabular-nums}
+.dz-hero .row span{font-size:12.5px;opacity:.75}
+.dz-pieces{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+.dz-pieces span{font-size:11.5px;font-weight:800;padding:5px 9px;border-radius:999px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.45);border:1px dashed rgba(255,255,255,.25)}
+.dz-pieces span.on{background:#fff;color:#4a1430;border:1px solid #fff}
+
+.dz-path{position:relative;display:flex;flex-direction:column;gap:10px;padding-left:34px}
+.dz-path:before{content:"";position:absolute;left:15px;top:10px;bottom:10px;width:4px;border-radius:4px;background:linear-gradient(180deg,#2a0b1b 0%,#6b1c44 40%,#e03880 80%,#f7c948 100%)}
+.dz-phase{font-family:var(--font-display);font-weight:800;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:12px 0 2px;position:relative}
+.dz-phase:before{content:"";position:absolute;left:-26px;top:50%;width:12px;height:12px;margin-top:-6px;border-radius:50%;background:var(--bg);border:3px solid var(--muted)}
+.dz-phase:first-child{margin-top:0}
+.dz-node{display:flex;align-items:center;gap:14px;background:var(--surface);border-radius:18px;padding:14px 16px;box-shadow:var(--shadow);text-decoration:none;color:var(--ink);border:1.5px solid transparent;transition:border-color .15s,transform .15s;text-align:left;width:100%;font:inherit;cursor:pointer}
+.dz-node:hover:not(.locked):not(.soon){border-color:var(--petrol);transform:translateY(-1px)}
+.dz-node .n{width:44px;height:44px;border-radius:14px;flex:none;display:grid;place-items:center;font-family:var(--font-display);font-weight:800;font-size:18px;background:var(--petrol);color:#fff}
+.dz-node .tx{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.dz-node .tx b{font-family:var(--font-display);font-size:16px}
+.dz-node .tx span{font-size:13.5px;color:var(--muted)}
+.dz-node .st{flex:none;font-size:12.5px;font-weight:800;color:var(--muted);display:flex;align-items:center;gap:3px}
+.dz-node.done .n{background:var(--ok)}
+.dz-node.next{border-color:var(--petrol);box-shadow:0 0 0 4px var(--petrol-soft),var(--shadow)}
+.dz-node.locked,.dz-node.soon{cursor:default;opacity:.62}
+.dz-node.locked .n,.dz-node.soon .n{background:var(--surface-2);color:var(--muted);border:1.5px dashed var(--line)}
+.dz-node.final .n{background:linear-gradient(135deg,#e03880,#f7a548)}
+.dz-torch{width:16px;height:16px;display:inline-block}
+.dz-torch.off{opacity:.25;filter:grayscale(1)}
+.dz-sun{display:flex;align-items:center;gap:10px;font-weight:800;color:var(--muted);font-size:14px;position:relative}
+.dz-sun:before{content:"";position:absolute;left:-29px;top:50%;width:18px;height:18px;margin-top:-9px;border-radius:50%;background:#f7c948;box-shadow:0 0 0 5px rgba(247,201,72,.25)}
+.dz-teacher{font-size:12.5px;color:var(--muted);text-align:center}
+.dz-teacher button{background:none;border:0;color:var(--muted);text-decoration:underline;cursor:pointer;font-size:12.5px;padding:0}
+
+/* Jugador */
+.dz-play{display:flex;flex-direction:column;gap:16px;max-width:760px;width:100%;margin:0 auto}
+.dz-q{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;color:var(--muted);font-weight:700;background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.dz-q svg{flex:none;color:var(--petrol)}
+.dz-q i{font-style:normal;color:var(--ink)}
+.dz-kind{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--petrol);background:var(--petrol-soft);padding:5px 10px;border-radius:999px;align-self:flex-start}
+.dz-ask{font-family:var(--font-display);font-size:20px;font-weight:700;line-height:1.35;text-wrap:pretty}
+.dz-hintbox{display:none}
+.dz-hintbox.on{display:flex}
+.dz-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.dz-actions .grow{flex:1}
+
+/* Tocar palabras */
+.dz-tap{font-family:var(--font-display);font-size:24px;font-weight:700;line-height:1.9;text-align:center;padding:10px 4px}
+.dz-tap button{font:inherit;background:none;border:0;border-bottom:3px solid transparent;padding:0 3px;margin:0 1px;border-radius:6px;cursor:pointer;color:var(--ink)}
+.dz-tap button:hover:not([disabled]){background:var(--petrol-soft)}
+.dz-tap button.sel{background:var(--petrol);color:#fff}
+.dz-tap button.right{background:var(--ok);color:#fff}
+.dz-tap button.miss{border-bottom:3px dashed var(--ok);color:var(--ok)}
+.dz-tap button.wrong{background:var(--bad);color:#fff}
+.dz-tap button.okopt{background:var(--ok-soft);color:var(--ok)}
+.dz-tap button[disabled]{cursor:default}
+
+/* Clasificar / etiquetar */
+.dz-sort{display:flex;flex-direction:column;gap:10px}
+.dz-item{background:var(--surface-2);border:1.5px solid var(--line);border-radius:14px;padding:12px 14px;display:flex;flex-direction:column;gap:10px}
+.dz-item p{margin:0;font-size:15.5px;font-weight:600;line-height:1.45}
+.dz-item.ok{border-color:var(--ok);background:var(--ok-soft)}
+.dz-item.ko{border-color:var(--bad);background:var(--bad-soft)}
+.dz-chips{display:flex;flex-wrap:wrap;gap:6px}
+.dz-chips button{border:1.5px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px;font-size:13px;font-weight:800;cursor:pointer;color:var(--muted)}
+.dz-chips button:hover:not([disabled]){border-color:var(--petrol);color:var(--petrol)}
+.dz-chips button.sel{background:var(--petrol);border-color:var(--petrol);color:#fff}
+.dz-chips button.right{background:var(--ok);border-color:var(--ok);color:#fff}
+.dz-chips button.should{border-color:var(--ok);color:var(--ok);border-style:dashed}
+.dz-chips button.wrong{background:var(--bad);border-color:var(--bad);color:#fff}
+.dz-chips button[disabled]{cursor:default}
+.dz-item .why{font-size:13.5px;color:var(--ink);opacity:.85;margin:0}
+
+/* Ordenar */
+.dz-order{display:flex;flex-direction:column;gap:8px}
+.dz-oi{display:flex;gap:10px;align-items:center;background:var(--surface-2);border:1.5px solid var(--line);border-radius:14px;padding:10px 10px 10px 14px}
+.dz-oi .pos{width:28px;height:28px;border-radius:9px;display:grid;place-items:center;background:var(--surface);border:1px solid var(--line);font-weight:800;font-size:13px;flex:none;color:var(--muted)}
+.dz-oi p{margin:0;flex:1;font-size:15px;font-weight:600;line-height:1.45}
+.dz-oi .mv{display:flex;flex-direction:column;gap:4px;flex:none}
+.dz-oi .mv button{width:34px;height:30px;border-radius:9px;border:1.5px solid var(--line);background:var(--surface);cursor:pointer;display:grid;place-items:center;color:var(--ink)}
+.dz-oi .mv button:hover:not([disabled]){border-color:var(--petrol);color:var(--petrol)}
+.dz-oi .mv button[disabled]{opacity:.35;cursor:default}
+.dz-oi.ok{border-color:var(--ok);background:var(--ok-soft)}
+.dz-oi.ko{border-color:var(--bad);background:var(--bad-soft)}
+.dz-oi .tag{font-size:11.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:2px}
+.dz-oi.flash{animation:dzflash .35s ease}
+@keyframes dzflash{0%{transform:scale(1)}40%{transform:scale(1.015);border-color:var(--petrol)}100%{transform:scale(1)}}
+
+/* Huecos */
+.dz-gap{font-size:17px;line-height:2.1;font-weight:600;background:var(--surface-2);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.dz-gap select{font:inherit;font-size:15px;font-weight:800;border:1.5px solid var(--petrol);border-radius:10px;padding:3px 8px;background:var(--petrol-soft);color:var(--ink);max-width:100%}
+.dz-gap select.ok{border-color:var(--ok);background:var(--ok-soft)}
+.dz-gap select.ko{border-color:var(--bad);background:var(--bad-soft)}
+.dz-gap .fix{color:var(--ok);font-weight:800;font-size:14px}
+
+/* Esquema (contexto) */
+.dz-scheme{border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.dz-scheme div{display:grid;grid-template-columns:150px 1fr;border-top:1px solid var(--line);font-size:14.5px}
+.dz-scheme div:first-child{border-top:0}
+.dz-scheme b{background:var(--surface-2);padding:10px 12px;font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.03em}
+.dz-scheme span{padding:10px 12px}
+.dz-scheme .empty span{color:var(--muted);font-style:italic}
+@media (max-width:620px){.dz-scheme div{grid-template-columns:1fr}.dz-scheme b{padding-bottom:4px}}
+.dz-quote{border-left:4px solid var(--petrol);background:var(--surface-2);border-radius:0 14px 14px 0;padding:12px 16px;font-size:15px;line-height:1.55}
+.dz-quote p{margin:0 0 8px}.dz-quote p:last-child{margin:0}
+
+/* Resultado */
+.dz-result{text-align:center;display:flex;flex-direction:column;gap:12px;align-items:center}
+.dz-result .torches{display:flex;gap:10px;justify-content:center}
+.dz-result .torches svg{width:46px;height:46px}
+.dz-result .score{font-family:var(--font-display);font-size:44px;font-weight:800;line-height:1}
+.dz-result .score small{font-size:18px;color:var(--muted);font-weight:600}
+.dz-result .lit{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.dz-result .lit span{font-size:12.5px;font-weight:800;padding:5px 10px;border-radius:999px;background:var(--petrol-soft);color:var(--petrol)}
+.dz-rev{display:flex;flex-direction:column;gap:8px;width:100%;text-align:left}
+.dz-rev div{display:flex;gap:10px;align-items:center;font-size:14px;border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.dz-rev i{font-style:normal;font-weight:800;font-variant-numeric:tabular-nums;flex:none;min-width:42px;text-align:right}
+.dz-rev span{flex:1}
+
+/* Inicio: cuatro secciones */
+.home4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.h4{display:flex;flex-direction:column;gap:6px;background:var(--surface);border-radius:var(--r-lg);padding:18px 16px 16px;box-shadow:var(--shadow);text-decoration:none;color:var(--ink);border:1.5px solid transparent;transition:transform .15s ease,border-color .15s}
+.h4:hover{transform:translateY(-2px);border-color:var(--petrol)}
+.h4 .ic{width:48px;height:48px;border-radius:15px;display:grid;place-items:center;background:var(--petrol-soft);color:var(--petrol);margin-bottom:6px}
+.h4:nth-child(2) .ic{background:var(--petrol);color:#fff}
+.h4:nth-child(3) .ic{background:#fbe0ec;color:#9e2a5a}
+.h4:nth-child(4) .ic{background:var(--petrol-deep);color:#fff}
+.h4 b{font-family:var(--font-display);font-size:18px;font-weight:800}
+.h4 .d{font-size:13.5px;color:var(--muted);line-height:1.4;flex:1}
+.h4 .s{font-size:12.5px;font-weight:800;color:var(--petrol);margin-top:4px}
+:root[data-theme="dark"] .h4:nth-child(3) .ic{background:#3a1424;color:var(--ink)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .h4:nth-child(3) .ic{background:#3a1424;color:var(--ink)}}
+@media (max-width:860px){.home4{grid-template-columns:1fr 1fr;gap:10px}
+.h4{display:grid;grid-template-columns:38px 1fr;grid-template-rows:auto auto;column-gap:10px;row-gap:1px;align-items:center;padding:11px 12px;border-radius:16px}
+.h4 .ic{grid-row:1/3;width:38px;height:38px;border-radius:12px;margin:0}
+.h4 .ic svg{width:19px;height:19px}
+.h4 b{font-size:15px;line-height:1.2}
+.h4 .d{display:none}
+.h4 .s{font-size:11.5px;margin:0;line-height:1.3}}
 </style>
 </head>
 <body>
@@ -1441,6 +1585,7 @@ function route(){
   else if(h.startsWith("test-")){section="test";v.innerHTML='';startQuiz(h.slice(5))}
   else if(h==="comentario"){v.innerHTML=viewComentario()}
   else if(h==="disertacion"){v.innerHTML=viewDisertacion();bindDisertacion()}
+  else if(h.startsWith("entrena-")){section="disertacion";v.innerHTML=viewDzStage(+h.slice(8));bindDzStage(+h.slice(8))}
   else if(h==="test"){v.innerHTML=viewTest()}
   else if(h==="examen"){v.innerHTML=viewExamen()}
   else {section="inicio";v.innerHTML=viewInicio()}
@@ -1468,7 +1613,14 @@ function viewInicio(){
   const s = stats();
   const avgTxt = s.avg===null? '0,0' : s.avg.toFixed(1).replace(".",",");
   const recent = s.hist.slice(-5).reverse();
+  const dzp=dzProg(); const dzDoneN=DZ_STAGES.filter(x=>dzDone(dzp,x.n)).length;
   return topbar("","")+
+  '<nav class="home4" aria-label="Secciones">'+
+    '<a class="h4" href="#comentario"><span class="ic">'+ICONS.text+'</span><b>Comentario</b><span class="d">Textos de los 8 filósofos, teoría y práctica corregida</span><span class="s">Parte II · 7,5 pts</span></a>'+
+    '<a class="h4" href="#disertacion"><span class="ic">'+ICONS.pen+'</span><b>Disertación</b><span class="d">Entrenador paso a paso y práctica de escritura</span><span class="s">'+(dzDoneN?dzDoneN+'/'+DZ_STAGES.length+' etapas superadas':'Parte I · 2,5 pts')+'</span></a>'+
+    '<a class="h4" href="#test"><span class="ic">'+ICONS.test+'</span><b>Test</b><span class="d">Preguntas de repaso con explicación</span><span class="s">'+(s.avg===null?'Sin hacer':'Media: '+avgTxt+' / 10')+'</span></a>'+
+    '<a class="h4" href="#examen"><span class="ic">'+ICONS.exam+'</span><b>El examen</b><span class="d">Estructura, puntuación y reparto del tiempo</span><span class="s">90 minutos</span></a>'+
+  '</nav>'+
   '<section class="card"><div class="card-head"><h2>Ocho filósofos, dos líneas</h2><a href="#comentario">Ver todos</a></div>'+
     '<p class="small muted" style="margin-bottom:14px">En la Parte II salen dos textos, uno de cada línea temática. Eliges uno.</p>'+
     ["a","b"].map(b=>'<div class="lineblock"><div class="lb-head"><span class="chip '+b+'">Línea '+(b==="a"?"1":"2")+'</span><b>'+lineTitle[b]+'</b></div>'+
@@ -1482,12 +1634,6 @@ function viewInicio(){
     '<div class="tiny" style="opacity:.8">'+(s.avg===null?'Haz tu primer test para ver tu media.':'Media de tu mejor nota en cada filósofo.')+'</div>'+
     '<div class="row"><div><b>'+s.authorsDone+'/8</b><span>filósofos practicados</span></div><div><b>'+s.done+'</b><span>tests hechos</span></div><div><b>'+s.drafts+'</b><span>borradores guardados</span></div></div>'+
   '</section>'+
-  '<div class="quick">'+
-    '<a class="qa" href="#comentario"><span class="ic">'+ICONS.text+'</span>Comentario</a>'+
-    '<a class="qa" href="#disertacion"><span class="ic">'+ICONS.pen+'</span>Disertación</a>'+
-    '<a class="qa" href="#test"><span class="ic">'+ICONS.test+'</span>Test</a>'+
-    '<a class="qa" href="#examen"><span class="ic">'+ICONS.exam+'</span>El examen</a>'+
-  '</div>'+
   '<div class="grid2">'+
    '<section class="card"><div class="card-head"><h2>Así es el examen</h2><a href="#examen">Detalles</a></div>'+
     '<div class="list">'+
@@ -3681,14 +3827,32 @@ function bindPractice(a){
 }
 
 function viewDisertacion(){
-  const e = store.get("essay",{i:0,text:"",checks:[]});
-  const checks = ["Introducción: planteo la pregunta, defino los términos y anuncio mi tesis","Desarrollo: doy al menos dos argumentos con ejemplos","Uso ideas o conceptos de algún filósofo, bien explicados","Recojo una objeción y le respondo","Conclusión que responde a la pregunta","Uso conectores (en primer lugar, sin embargo, por tanto…)","No paso de 400 palabras"];
+  const tab = store.get("distab","entrenador");
   return topbar("Disertación","Parte I · 2,5 puntos")+
-  '<section class="card"><h2 style="margin-bottom:14px">Estructura en cuatro pasos</h2><div class="steps">'+
-   '<div class="step"><div class="n">1</div><div><h3>Introducción</h3><p>Plantea la pregunta, aclara sus términos, explica por qué es un problema y anuncia tu postura.</p></div></div>'+
-   '<div class="step"><div class="n">2</div><div><h3>Argumentos</h3><p>Dos o tres razones ordenadas, con ejemplos y apoyo en filósofos que conozcas.</p></div></div>'+
-   '<div class="step"><div class="n">3</div><div><h3>Objeción y respuesta</h3><p>Presenta la mejor razón en contra y muestra por qué no anula tu tesis o cómo la matiza.</p></div></div>'+
-   '<div class="step"><div class="n">4</div><div><h3>Conclusión</h3><p>Responde a la pregunta de forma clara y, si puedes, abre una reflexión final.</p></div></div>'+
+  '<div class="seg" role="tablist"><button data-dtab="entrenador" role="tab" class="'+(tab==="entrenador"?"on":"")+'">Entrenador</button><button data-dtab="escribir" role="tab" class="'+(tab==="escribir"?"on":"")+'">Escribir</button></div>'+
+  '<div id="distab" style="display:flex;flex-direction:column;gap:22px"></div>';
+}
+function bindDisertacion(){
+  const host=document.getElementById("distab");
+  const show=t=>{
+    if(timerHandle){clearInterval(timerHandle);timerHandle=null}
+    document.querySelectorAll("[data-dtab]").forEach(b=>b.classList.toggle("on",b.dataset.dtab===t));
+    store.set("distab",t);
+    if(t==="escribir"){host.innerHTML=viewEscribir();bindEscribir()}
+    else {host.innerHTML=viewDzHub();bindDzHub(()=>show("entrenador"))}
+  };
+  document.querySelectorAll("[data-dtab]").forEach(b=>b.onclick=()=>show(b.dataset.dtab));
+  show(store.get("distab","entrenador"));
+}
+const ESSAY_CHECKS = ["Introducción: defino los términos clave del título","Introducción: sitúo el problema en la actualidad","Introducción: declaro mi tesis (a favor, en contra o matización)","Introducción: anuncio la hoja de ruta","Desarrollo: dos argumentos, apoyados en autores o teorías","Desarrollo: expongo con honestidad el contraargumento más fuerte","Desarrollo: refuto el contraargumento","Conclusión: sintetizo sin aportar ideas nuevas, reafirmo la tesis y cierro","Uso conectores y fórmulas (en primer lugar, no obstante, en conclusión…)","No paso de 400 palabras"];
+function viewEscribir(){
+  const e = store.get("essay",{i:0,text:"",checks:[]});
+  const checks = ESSAY_CHECKS;
+  return '<section class="card"><h2 style="margin-bottom:14px">Estructura de la disertación</h2><div class="steps">'+
+   '<div class="step"><div class="n">0</div><div><h3>Fase previa</h3><p>Analiza el enunciado (conceptos clave y dilema), define tu tesis y esquematiza: al menos 2 argumentos, 1-2 contraargumentos y los autores o ejemplos que los respaldan.</p></div></div>'+
+   '<div class="step"><div class="n">1</div><div><h3>Introducción</h3><p>Definición de los términos, contextualización en la actualidad, tesis explícita y hoja de ruta.</p><div class="pts">≈ 100 palabras</div></div></div>'+
+   '<div class="step"><div class="n">2</div><div><h3>Desarrollo</h3><p>Argumento 1 apoyado en un autor, argumento 2 desde otro punto de vista, contraargumentación honesta y refutación.</p><div class="pts">≈ 250 palabras (150 a favor / 100 en contra y refutación)</div></div></div>'+
+   '<div class="step"><div class="n">3</div><div><h3>Conclusión</h3><p>Síntesis sin ideas nuevas, reafirmación de la tesis y cierre: una pregunta abierta, una consecuencia o una reflexión de futuro.</p><div class="pts">≈ 50 palabras</div></div></div>'+
   '</div></section>'+
   '<div class="grid2" style="align-items:start">'+
    '<section class="card"><div class="card-head"><h2>Elige una pregunta</h2><button class="link-btn" id="rnd">Al azar</button></div><div class="qbank" id="qbank">'+
@@ -3697,16 +3861,17 @@ function viewDisertacion(){
    '<div style="display:flex;flex-direction:column;gap:16px">'+
     '<div class="timer" id="timer"><span class="t" id="tt">25:00</span><button id="tstart">Empezar</button><button id="treset">Reiniciar</button></div>'+
     '<section class="card"><h2 id="eq" style="margin-bottom:10px;font-size:19px"></h2><div id="ehint" class="callout info" style="margin-bottom:14px"></div>'+
-     '<div class="field"><label for="etext">Tu disertación</label><textarea id="etext" style="min-height:300px" placeholder="Empieza planteando la pregunta…">'+esc(e.text)+'</textarea>'+
+     '<div class="field"><label for="etext">Tu disertación</label><textarea id="etext" style="min-height:300px" placeholder="Empieza definiendo los términos de la pregunta…">'+esc(e.text)+'</textarea>'+
      '<div class="counter"><span id="ew"></span><span id="esaved" class="saved"></span></div></div>'+
      '<div class="btnrow" style="margin-top:12px"><button class="btn primary" id="ecopy">Copiar texto</button><button class="btn ghost" id="eclear">Borrar</button></div></section>'+
     '<section class="card"><h2 style="margin-bottom:12px">Antes de entregar</h2><div class="checks">'+
-     checks.map((c,i)=>'<label class="check" for="ek-'+i+'"><input type="checkbox" id="ek-'+i+'" data-i="'+i+'" '+((e.checks||[]).includes(i)?"checked":"")+'><span>'+c+'</span></label>').join("")+
+     checks.map((c,i)=>'<label class="check" for="ek-'+i+'"><input type="checkbox" id="ek-'+i+'" data-i="'+i+'" '+((e.checks2||[]).includes(i)?"checked":"")+'><span>'+c+'</span></label>').join("")+
     '</div></section>'+
    '</div>'+
   '</div>';
 }
-function bindDisertacion(){
+
+function bindEscribir(){
   const e = store.get("essay",{i:0,text:"",checks:[]});
   const save=()=>{store.set("essay",e);const m=document.getElementById("esaved");m.textContent="Guardado";clearTimeout(m._t);m._t=setTimeout(()=>m.textContent="",1500)};
   const ta=document.getElementById("etext");
@@ -3721,9 +3886,9 @@ function bindDisertacion(){
   document.querySelectorAll(".qitem").forEach(b=>b.onclick=()=>{setQ(+b.dataset.i);if(window.innerWidth<861)document.getElementById("timer").scrollIntoView({behavior:"smooth",block:"start"})});
   document.getElementById("rnd").onclick=()=>{let i;do{i=Math.floor(Math.random()*ESSAYS.length)}while(i===e.i);setQ(i)};
   ta.addEventListener("input",()=>{e.text=ta.value;upd();save()});
-  document.querySelectorAll("input[data-i]").forEach(c=>c.addEventListener("change",()=>{const i=+c.dataset.i;e.checks=(e.checks||[]).filter(x=>x!==i);if(c.checked)e.checks.push(i);save()}));
+  document.querySelectorAll("input[data-i]").forEach(c=>c.addEventListener("change",()=>{const i=+c.dataset.i;e.checks2=(e.checks2||[]).filter(x=>x!==i);if(c.checked)e.checks2.push(i);save()}));
   document.getElementById("ecopy").onclick=async()=>{const m=document.getElementById("esaved");try{await navigator.clipboard.writeText(ESSAYS[e.i].q+"\n\n"+ta.value);m.textContent="Copiado"}catch(err){m.textContent="No se pudo copiar"}};
-  document.getElementById("eclear").onclick=()=>{const b=document.getElementById("eclear");if(b.dataset.confirm!=="1"){b.dataset.confirm="1";b.textContent="Pulsa otra vez para borrar";setTimeout(()=>{b.dataset.confirm="";b.textContent="Borrar"},2500);return}ta.value="";e.text="";e.checks=[];document.querySelectorAll("input[data-i]").forEach(c=>c.checked=false);upd();save();b.dataset.confirm="";b.textContent="Borrar"};
+  document.getElementById("eclear").onclick=()=>{const b=document.getElementById("eclear");if(b.dataset.confirm!=="1"){b.dataset.confirm="1";b.textContent="Pulsa otra vez para borrar";setTimeout(()=>{b.dataset.confirm="";b.textContent="Borrar"},2500);return}ta.value="";e.text="";e.checks2=[];document.querySelectorAll("input[data-i]").forEach(c=>c.checked=false);upd();save();b.dataset.confirm="";b.textContent="Borrar"};
   // temporizador
   let left=25*60,running=false;
   const tt=document.getElementById("tt"),tbox=document.getElementById("timer"),tb=document.getElementById("tstart");
@@ -3735,6 +3900,340 @@ function bindDisertacion(){
   };
   document.getElementById("treset").onclick=()=>{if(timerHandle)clearInterval(timerHandle);timerHandle=null;running=false;left=25*60;tb.textContent="Empezar";draw()};
   draw();upd();setQ(e.i||0);
+}
+
+
+/* ============ ENTRENADOR DE DISERTACIONES ============ */
+const DZ_PIECES = ["Definición","Contextualización","Tesis","Hoja de ruta","Argumento 1","Argumento 2","Contraargumentación","Refutación","Síntesis","Reafirmación","Cierre"];
+const DZ_Q = {conf:0, sent:3, feli:4}; // índices en ESSAYS
+const DZ_TPB = ["A favor","En contra","Matización fundada"];
+const DZ_ESQ = ["Argumento","Contraargumento","Autor o ejemplo","No sirve"];
+const DZ_INTRO = ["Definición","Contextualización","Tesis","Hoja de ruta"];
+const DZ_H = {
+  enunciado:"Fase previa · Analizar el enunciado: subraya los conceptos clave y detecta cuál es el dilema o paradoja implícita.",
+  tema:"El tema es la pregunta; la tesis es la respuesta. El problema se formula como un dilema, sin adelantar todavía tu postura.",
+  tesis:"Fase previa · Define tu tesis: decide tu postura respecto al tema (a favor, en contra o matización fundada).",
+  tesisbuena:"La tesis debe declarar explícitamente la postura que vas a defender y responder a la pregunta, no rodearla.",
+  esquema:"Fase previa · Esquematiza: anota al menos 2 argumentos sólidos, 1-2 contraargumentos y los autores o ejemplos reales que los respaldan.",
+  intro:"Introducción (100 palabras): Definición de los términos clave · Contextualización en la actualidad · Tesis explícita · Hoja de ruta.",
+  formulas:"Fórmulas útiles de la introducción: «Sin caer en un rechazo tajante ni en una aceptación ciega, defenderé…» · «Para fundamentar esta tesis, en primer lugar…; a continuación…; y, finalmente…»"
+};
+
+const DZ_STAGES = [
+ {n:1,phase:"Fase previa",title:"Analizar el enunciado",sub:"Conceptos clave y dilema implícito",pieces:[],ex:[
+  {type:"tap",q:"conf",ask:"Toca los conceptos clave del enunciado.",hint:DZ_H.enunciado,
+   tokens:[["¿Contribuye",.5],["el",0],["conflicto",1],["al",0],["avance",.5],["en",0],["el",0],["conocimiento",1],["y",0],["el",0],["progreso",1],["de",0],["la",0],["sociedad?",1]],
+   exp:"Los conceptos que tendrás que definir son conflicto, conocimiento, progreso y sociedad. «Contribuye» y «avance» señalan la relación que se pregunta: no es error marcarlos."},
+  {type:"choice",q:"conf",ask:"¿Cuál es el dilema implícito en esta pregunta?",hint:DZ_H.tema,opts:[
+   ["Si el choque de ideas hace avanzar el saber y la sociedad o si, por el contrario, los bloquea y destruye.",1,"Exacto: formula el problema como un dilema con dos salidas posibles. La paradoja es que algo en apariencia destructivo podría ser condición del avance."],
+   ["Qué guerras y revoluciones ha habido a lo largo de la historia.",0,"Eso es un listado de datos históricos, no un problema filosófico."],
+   ["Que el conflicto siempre es negativo para la convivencia.",0,"Eso ya es una tesis (una respuesta). En el análisis del enunciado solo se plantea la pregunta."],
+   ["Si conviene estudiar mucho para tener éxito en la vida.",0,"Se sale del tema: el enunciado habla del conflicto, no del estudio."]]},
+  {type:"tap",q:"sent",ask:"Toca los conceptos clave del enunciado.",hint:DZ_H.enunciado,
+   tokens:[["¿Son",0],["fiables",1],["los",0],["sentidos",1],["para",0],["conocer?",1]],
+   exp:"Hay que definir tres términos: sentidos, fiable (qué significa poder confiar) y conocer. Si no aclaras «fiable», no sabrás qué estás defendiendo."},
+  {type:"choice",q:"sent",ask:"¿Cuál es el dilema implícito en esta pregunta?",hint:DZ_H.tema,opts:[
+   ["Cuántos sentidos tiene el ser humano y cómo funcionan.",0,"Es una cuestión biológica, no filosófica."],
+   ["Si la experiencia sensible es una fuente segura de conocimiento o si puede engañarnos y necesitamos otra vía, como la razón.",1,"Bien: plantea las dos alternativas (confiar en los sentidos o desconfiar de ellos) sin decidir todavía."],
+   ["Que los sentidos nos engañan siempre.",0,"Eso es una tesis, y además muy radical. El dilema solo plantea la pregunta."],
+   ["Si la vista es más importante que el oído.",0,"Demasiado estrecho: la pregunta es por los sentidos en general como fuente de conocimiento."]]},
+  {type:"tap",q:"feli",ask:"Toca los conceptos clave del enunciado.",hint:DZ_H.enunciado,
+   tokens:[["¿Es",0],["la",0],["felicidad",1],["el",0],["fin",1],["de",0],["la",0],["vida humana?",1]],
+   exp:"Felicidad, fin (aquello para lo que se hace todo lo demás) y vida humana. «Fin» es la palabra trampa: aquí no significa «final», sino «finalidad»."},
+  {type:"choice",q:"feli",ask:"¿Cuál es el dilema implícito en esta pregunta?",hint:DZ_H.tema,opts:[
+   ["Qué cosas nos hacen felices en el día a día.",0,"Es una pregunta descriptiva o psicológica, no el problema filosófico del enunciado."],
+   ["Si la gente de hoy es más feliz que la de hace un siglo.",0,"Es una cuestión sociológica que se sale del tema."],
+   ["Si todo lo que hacemos se orienta en último término a ser felices o si hay algo, como el deber o la dignidad, que está por encima de la felicidad.",1,"Exacto: el dilema enfrenta la felicidad como fin último con otros posibles fines (aquí asoman Aristóteles y Kant)."],
+   ["Que la felicidad es el fin de la vida humana.",0,"Eso es repetir la pregunta en forma de afirmación: ya es una tesis."]]}
+ ]},
+ {n:2,phase:"Fase previa",title:"Define tu tesis",sub:"A favor, en contra o matización fundada",pieces:[],ex:[
+  {type:"sort",q:"conf",ask:"Clasifica cada tesis según la postura que adopta.",hint:DZ_H.tesis,buckets:DZ_TPB,items:[
+   ["El conflicto de ideas es el motor del conocimiento y del progreso social.",0],
+   ["El conflicto solo genera destrucción y división; el progreso nace de la cooperación.",1],
+   ["El conflicto hace avanzar el saber y la sociedad siempre que sea un choque de argumentos y no de violencia.",2],
+   ["El conflicto solo es fecundo cuando existen reglas comunes para resolverlo con razones.",2]],
+   exp:"La matización fundada acepta la tesis, pero bajo una condición precisa («siempre que…», «solo cuando…»). No es quedarse en medio: es poner un límite argumentado."},
+  {type:"choice",q:"conf",ask:"¿Cuál es la tesis mejor formulada?",hint:DZ_H.tesisbuena,opts:[
+   ["El conflicto es un tema muy interesante del que se ha hablado mucho.",0,"Vaga: no toma ninguna postura."],
+   ["Hay muchos conflictos en el mundo actual, como las guerras.",0,"No responde a la pregunta: describe la realidad, pero no dice si el conflicto contribuye al progreso."],
+   ["El conflicto contribuye o no contribuye al avance según el caso.",0,"Parece una matización, pero está vacía: no dice en qué casos ni por qué."],
+   ["Defenderé que el conflicto de ideas es motor del conocimiento y del progreso, siempre que se canalice mediante argumentos y no mediante la violencia.",1,"Declara explícitamente la postura (matización) y anuncia la condición que tendrás que argumentar."]]},
+  {type:"sort",q:"sent",ask:"Clasifica cada tesis según la postura que adopta.",hint:DZ_H.tesis,buckets:DZ_TPB,items:[
+   ["Los sentidos son la fuente de todo nuestro conocimiento y merecen nuestra confianza.",0],
+   ["Los sentidos nos engañan; solo la razón ofrece un conocimiento seguro.",1],
+   ["Los sentidos son un punto de partida imprescindible, pero necesitan ser corregidos por la razón.",2]],
+   exp:"La primera recuerda al empirismo de Locke; la segunda, al racionalismo de Descartes; la tercera las concilia con una condición."},
+  {type:"choice",q:"sent",ask:"¿Cuál es la tesis mejor formulada?",hint:DZ_H.tesisbuena,opts:[
+   ["Los sentidos son algo que todos tenemos y usamos cada día.",0,"Vaga: es verdad, pero no responde si son fiables."],
+   ["Defenderé que los sentidos son una fuente necesaria pero insuficiente de conocimiento: sin ellos no conocemos nada, pero sin la razón no podemos fiarnos de ellos.",1,"Postura explícita y precisa, que además deja ver los dos argumentos que vendrán."],
+   ["¿Son fiables los sentidos? Es una pregunta que muchos filósofos se han hecho.",0,"Repite la pregunta. Una tesis es una respuesta."],
+   ["Descartes fue un filósofo racionalista del siglo XVII.",0,"Es un dato sobre un autor, no una postura sobre el problema."]]},
+  {type:"sort",q:"feli",ask:"Clasifica cada tesis según la postura que adopta.",hint:DZ_H.tesis,buckets:DZ_TPB,items:[
+   ["Todo lo que hacemos lo hacemos, en última instancia, para ser felices.",0],
+   ["El fin de la vida humana no es ser feliz, sino obrar moralmente, aunque eso nos haga menos felices.",1],
+   ["La felicidad es un fin legítimo, pero no puede perseguirse a costa de la dignidad de los demás.",2]],
+   exp:"La matización acepta la felicidad como fin, pero le pone un límite moral: ahí está su fundamento."},
+  {type:"choice",q:"feli",ask:"¿Cuál es la tesis mejor formulada?",hint:DZ_H.tesisbuena,opts:[
+   ["Cada persona tiene su opinión sobre la felicidad y todas son respetables.",0,"Evita tomar postura. Una disertación exige defender una respuesta."],
+   ["Aristóteles escribió la Ética a Nicómaco.",0,"Es un dato, no una tesis."],
+   ["Sostendré que la felicidad es el fin último de la vida humana, entendida no como placer sino como pleno desarrollo de nuestras capacidades.",1,"Postura clara (a favor) y con una precisión conceptual que evita malentendidos."],
+   ["La felicidad es el fin de la vida humana porque es el fin de la vida humana.",0,"Circular: la razón repite la conclusión."]]}
+ ]},
+ {n:3,phase:"Fase previa",title:"Esquematiza tus ideas",sub:"Argumentos, contraargumentos y autores",pieces:[],ex:[
+  {type:"sort",q:"conf",ask:"Monta el esquema: coloca cada tarjeta en su casilla.",thesis:"El conflicto de ideas es motor del conocimiento y del progreso, siempre que se canalice mediante argumentos.",hint:DZ_H.esquema,buckets:DZ_ESQ,shuffle:true,items:[
+   ["El contraste de opiniones obliga a revisar nuestras creencias y a corregir errores.",0],
+   ["Una sociedad plural, donde se discute, es más libre y creativa que una donde todos piensan igual.",0],
+   ["El conflicto puede degenerar en violencia y destruir lo que se había construido.",1],
+   ["Sócrates: el diálogo que pone a prueba las opiniones acerca a la verdad.",2],
+   ["Arendt: la pluralidad de perspectivas es la condición de la política.",2],
+   ["Me encanta discutir con mis amigos.",3]],
+   exp:"Una anécdota personal no es un argumento ni un respaldo. El contraargumento es la crítica más fuerte a tu tesis: aquí, que el conflicto puede volverse violento."},
+  {type:"choice",q:"conf",ask:"Según tu ficha, ¿qué le falta a este esquema?",hint:DZ_H.esquema,
+   ctx:[["Tesis","El conflicto de ideas es motor del conocimiento si se canaliza con argumentos."],["Argumento 1","Discutir obliga a revisar nuestras creencias."],["Argumento 2","La pluralidad hace a una sociedad más libre."],["Contraargumento",""],["Autores","Sócrates, Arendt"]],
+   opts:[["Un tercer argumento.",0,"Dos argumentos sólidos son suficientes."],["Un contraargumento.",1,"La ficha exige 1-2 contraargumentos: sin ellos no habrá refutación, y la disertación quedará coja."],["Más autores.",0,"Ya hay dos autores que respaldan los argumentos."],["Nada, está completo.",0,"Falta la casilla del contraargumento."]]},
+  {type:"sort",q:"sent",ask:"Monta el esquema: coloca cada tarjeta en su casilla.",thesis:"Los sentidos son una fuente necesaria pero insuficiente de conocimiento.",hint:DZ_H.esquema,buckets:DZ_ESQ,shuffle:true,items:[
+   ["Sin experiencia no tendríamos ningún contenido sobre el que pensar.",0],
+   ["Los datos de los sentidos pueden contrastarse y corregirse con instrumentos y razonamiento.",0],
+   ["Si los sentidos a veces nos engañan, ¿cómo saber que no nos engañan siempre?",1],
+   ["Locke: la mente es como un papel en blanco que se llena con la experiencia.",2],
+   ["El palo que parece quebrado al meterlo en el agua.",2],
+   ["Tengo muy buena vista: nunca he necesitado gafas.",3]],
+   exp:"El palo quebrado es un ejemplo real que respalda la objeción. El contraargumento es la duda cartesiana: si nos engañan alguna vez, no podemos fiarnos del todo."},
+  {type:"choice",q:"sent",ask:"Según tu ficha, ¿qué le falta a este esquema?",hint:DZ_H.esquema,
+   ctx:[["Tesis","Los sentidos son necesarios pero insuficientes."],["Argumento 1","Sin experiencia no hay contenido sobre el que pensar."],["Argumento 2",""],["Contraargumento","Los sentidos a veces nos engañan."],["Autores","Locke, Descartes"]],
+   opts:[["Un segundo argumento.",1,"La ficha pide al menos 2 argumentos sólidos. Con uno solo, la tesis queda débil."],["Un segundo contraargumento.",0,"Con 1-2 basta; ya hay uno."],["Una pregunta final.",0,"El cierre con pregunta pertenece a la conclusión, no al esquema previo."],["Nada, está completo.",0,"Falta un segundo argumento."]]},
+  {type:"sort",q:"feli",ask:"Monta el esquema: coloca cada tarjeta en su casilla.",thesis:"La felicidad es el fin último de la vida humana, entendida como pleno desarrollo de nuestras capacidades.",hint:DZ_H.esquema,buckets:DZ_ESQ,shuffle:true,items:[
+   ["El dinero, la fama o la salud los buscamos como medios; la felicidad se busca por sí misma.",0],
+   ["Ser feliz consiste en realizar bien lo que nos es propio como seres humanos: pensar y convivir.",0],
+   ["Si la felicidad es lo único importante, ¿qué impide sacrificar a otros para ser feliz?",1],
+   ["Aristóteles: la eudaimonía es el bien supremo al que tienden todas las acciones.",2],
+   ["Kant: una acción tiene valor moral si se hace por deber, no por la felicidad que produce.",2],
+   ["Ayer fui al cine y fui muy feliz.",3]],
+   exp:"Kant respalda el contraargumento: también va en la casilla de autores. Un buen esquema incluye los autores de ambos lados."},
+  {type:"choice",q:"feli",ask:"Según tu ficha, ¿qué le falta a este esquema?",hint:DZ_H.esquema,
+   ctx:[["Tesis","La felicidad es el fin último de la vida humana."],["Argumento 1","Todo lo demás lo buscamos como medio."],["Argumento 2","Ser feliz es desarrollar lo propio del ser humano."],["Contraargumento","Perseguir la felicidad puede justificar dañar a otros."],["Autores o ejemplos",""]],
+   opts:[["Un tercer argumento.",0,"Dos argumentos sólidos son suficientes."],["Un contraargumento.",0,"Ya hay uno."],["Autores o ejemplos que respalden los argumentos.",1,"Sin autores la disertación pierde la vinculación con contenidos filosóficos, uno de los criterios de corrección."],["Nada, está completo.",0,"Faltan los respaldos: autores o ejemplos."]]}
+ ]},
+ {n:4,phase:"Introducción",title:"Las cuatro piezas",sub:"Definición, contextualización, tesis y hoja de ruta",pieces:[0,1,2,3],ex:[
+  {type:"sort",q:"conf",label:true,ask:"Etiqueta cada frase de esta introducción.",hint:DZ_H.intro,buckets:DZ_INTRO,items:[
+   ["Entendemos por conflicto la oposición entre ideas, intereses o grupos, y por progreso, la mejora del conocimiento y de las condiciones de vida en común.",0],
+   ["Resulta paradójico que, en una época de redes sociales en la que todo se discute, el debate parezca polarizarnos más que hacernos avanzar.",1],
+   ["Sin caer en una aceptación ciega, defenderé que el conflicto es motor del saber y de la sociedad siempre que se canalice mediante argumentos y no mediante la violencia.",2],
+   ["Para ello, en primer lugar analizaré su papel en el conocimiento; a continuación, me haré cargo de la objeción de que el conflicto destruye; y, finalmente, la refutaré.",3]],
+   exp:"Pistas para reconocerlas: «entendemos por…» define; «en una época de…» contextualiza; «defenderé que…» es la tesis; «en primer lugar…, a continuación…, finalmente…» es la hoja de ruta."},
+  {type:"order",q:"sent",ask:"Ordena las piezas de esta introducción.",hint:DZ_H.intro,items:[
+   ["Por sentidos entendemos las facultades con las que percibimos el mundo, y llamamos fiable a aquello en lo que podemos confiar sin riesgo de error.","Definición"],
+   ["Hoy, cuando una imagen puede retocarse con inteligencia artificial en segundos, preguntarse por la fiabilidad de lo que vemos es más urgente que nunca.","Contextualización"],
+   ["Defenderé una postura intermedia: los sentidos son una fuente necesaria de conocimiento, pero no suficiente sin la razón.","Tesis"],
+   ["En primer lugar mostraré por qué no podemos prescindir de la experiencia; después atenderé a la objeción de que los sentidos nos engañan; finalmente, la refutaré.","Hoja de ruta"]],
+   exp:"El orden de la ficha: primero aclaras los términos, después muestras por qué el problema importa hoy, luego dices qué defiendes y, por último, anuncias el camino."},
+  {type:"choice",q:"feli",ask:"A esta introducción le falta una pieza. ¿Cuál?",hint:DZ_H.intro,
+   quote:["La felicidad puede entenderse como placer pasajero o, en sentido filosófico, como una vida lograda en su conjunto; por «fin» entendemos aquello para lo que se hace todo lo demás.","En una sociedad que nos invita constantemente a «ser felices» a través del consumo y las redes, conviene preguntarse si ese es realmente el sentido de nuestra vida.","Para fundamentarlo, analizaré primero el argumento aristotélico; a continuación expondré la objeción kantiana; y, finalmente, responderé a ella."],
+   opts:[["Definición",0,"Está: la primera frase define felicidad y fin."],["Contextualización",0,"Está: la segunda frase sitúa el problema en la actualidad."],["Tesis",1,"Exacto. Anuncia que va a «fundamentarlo», pero nunca dice qué defiende. Sin tesis, el lector no sabe a dónde va el texto."],["Hoja de ruta",0,"Está: la última frase anuncia el recorrido."]]},
+  {type:"gap",q:"sent",ask:"Completa la fórmula para enunciar una tesis matizada.",hint:DZ_H.formulas,
+   text:"Sin caer en un rechazo tajante ni en una aceptación ciega, defenderé una postura {0}: es necesario aceptar que los sentidos nos informan del mundo, {1} su testimonio sea revisado por la razón.",
+   gaps:[["intermedia","radical","ajena al tema"],["siempre y cuando","porque nunca","a pesar de que no"]],
+   exp:"La fórmula de la matización fundada: postura intermedia + condición («siempre y cuando…»). Sin la condición no hay matización, solo indecisión."},
+  {type:"gap",q:"conf",ask:"Completa la hoja de ruta con los conectores adecuados.",hint:DZ_H.formulas,
+   text:"Para fundamentar esta tesis, {0} analizaré el papel del diálogo en el saber; {1}, me haré cargo de la principal objeción, que sostiene que el conflicto destruye; y, {2}, refutaré dicha crítica para llegar a una conclusión.",
+   gaps:[["en primer lugar","en conclusión","sin embargo"],["a continuación","por el contrario","en primer lugar"],["finalmente","no obstante","en primer lugar"]],
+   exp:"La hoja de ruta anuncia en orden los tres movimientos del desarrollo: argumento, contraargumento y refutación."},
+  {type:"gap",q:"feli",ask:"Completa la fórmula de contextualización.",hint:"Contextualización: sitúa el problema en la actualidad, con información sobre el estado o la situación actual. Fórmula: «Resulta ciertamente paradójico que, en una época caracterizada por […], nos encontremos al mismo tiempo con que […]».",
+   text:"Resulta ciertamente {0} que, en una época caracterizada por la búsqueda constante de bienestar, nos encontremos al mismo tiempo con {1}.",
+   gaps:[["paradójico","evidente","irrelevante"],["tanta gente que se siente insatisfecha","muchas tiendas abiertas","que Aristóteles era griego"]],
+   exp:"La paradoja funciona porque enfrenta dos hechos actuales que chocan entre sí: buscamos el bienestar más que nunca y, aun así, no parecemos más felices."}
+ ]},
+ {n:5,phase:"Desarrollo",title:"Argumentar",sub:"Dos argumentos apoyados en autores",pieces:[4,5],soon:true},
+ {n:6,phase:"Desarrollo",title:"Contraargumentar y refutar",sub:"La objeción más fuerte y su respuesta",pieces:[6,7],soon:true},
+ {n:7,phase:"Conclusión",title:"Cerrar",sub:"Síntesis, reafirmación y cierre",pieces:[8,9,10],soon:true},
+ {n:8,phase:"Prueba final",title:"Montaje contrarreloj",sub:"Las 11 piezas con una pregunta nueva",pieces:[],soon:true,final:true}
+];
+
+const DZ_TORCH = '<svg class="dz-torch" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 12h4l-1.2 10h-1.6z" fill="#8a4f5a"/><rect x="8.5" y="10.5" width="7" height="2.2" rx="1" fill="#4a1430"/><path d="M12 1.5c2.8 2.6 4 4.7 4 6.4A4 4 0 0 1 8 7.9c0-1 .5-2 1.3-2.8.1 1.2.8 2 1.6 2.2C10.5 5.6 11 3.6 12 1.5z" fill="#f7a548"/><path d="M12 5.5c1.3 1.3 2 2.4 2 3.2a2 2 0 0 1-4 0c0-.9.8-2 2-3.2z" fill="#f7c948"/></svg>';
+function dzTorches(k,size){let s="";for(let i=0;i<3;i++)s+=DZ_TORCH.replace('class="dz-torch"','class="dz-torch'+(i<k?'':' off')+'"'+(size?' style="width:'+size+'px;height:'+size+'px"':''));return s}
+function dzProg(){return store.get("dz",{s:{},all:false})}
+function dzStageInfo(p,n){return p.s[n]||null}
+function dzDone(p,n){const r=p.s[n];return !!(r&&r.best>=6)}
+function dzUnlocked(p,n){return n===1||p.all||dzDone(p,n-1)}
+function dzTorchCount(best){return best>=9.5?3:best>=8?2:best>=6?1:0}
+function dzLitPieces(p){const lit=new Set();DZ_STAGES.forEach(s=>{if(dzDone(p,s.n))s.pieces.forEach(i=>lit.add(i))});return lit}
+
+function viewDzHub(){
+  const p=dzProg();
+  const playable=DZ_STAGES.filter(s=>!s.soon);
+  const done=DZ_STAGES.filter(s=>dzDone(p,s.n)).length;
+  const torches=DZ_STAGES.reduce((a,s)=>a+(p.s[s.n]?dzTorchCount(p.s[s.n].best):0),0);
+  const lit=dzLitPieces(p);
+  const next=DZ_STAGES.find(s=>!s.soon&&dzUnlocked(p,s.n)&&!dzDone(p,s.n));
+  let lastPhase="";
+  let path="";
+  DZ_STAGES.forEach(s=>{
+    if(s.phase!==lastPhase){path+='<div class="dz-phase">'+s.phase+'</div>';lastPhase=s.phase}
+    const info=p.s[s.n];const isDone=dzDone(p,s.n);const un=dzUnlocked(p,s.n);
+    let cls="dz-node",st="";
+    if(s.soon){cls+=" soon";st="En construcción"}
+    else if(!un){cls+=" locked";st='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>'}
+    else if(info){st=dzTorches(dzTorchCount(info.best))}
+    else st="Empezar";
+    if(isDone)cls+=" done";
+    if(next&&next.n===s.n)cls+=" next";
+    if(s.final)cls+=" final";
+    const inner='<span class="n">'+(isDone?'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>':s.n)+'</span><span class="tx"><b>'+s.title+'</b><span>'+s.sub+'</span></span><span class="st">'+st+'</span>';
+    path+=(!s.soon&&un)?'<a class="'+cls+'" href="#entrena-'+s.n+'">'+inner+'</a>':'<div class="'+cls+'" aria-disabled="true">'+inner+'</div>';
+  });
+  path+='<div class="dz-sun">Salida al sol</div>';
+  return '<section class="dz-hero"><div class="label">Entrenador de disertaciones</div><h2>Salir de la caverna</h2>'+
+    '<p>Ocho etapas para aprender a construir una disertación pieza a pieza, con preguntas del examen. Cada etapa superada enciende una antorcha.</p>'+
+    '<div class="row"><div><b>'+done+'/'+DZ_STAGES.length+'</b><span>etapas superadas</span></div><div><b>'+torches+'</b><span>antorchas</span></div><div><b>'+lit.size+'/11</b><span>piezas dominadas</span></div></div>'+
+    '<div class="dz-pieces" aria-label="Piezas de la disertación">'+DZ_PIECES.map((x,i)=>'<span class="'+(lit.has(i)?"on":"")+'">'+x+'</span>').join("")+'</div>'+
+    (next?'<div style="margin-top:16px"><a class="btn accent" href="#entrena-'+next.n+'">'+(p.s[next.n]?'Seguir: ':'Empezar: ')+next.title+'</a></div>':'')+
+  '</section>'+
+  '<section class="card"><div class="dz-path">'+path+'</div></section>'+
+  '<p class="dz-teacher">'+(p.all?'Modo profesor activo: todas las etapas abiertas. <button id="dzAll">Desactivar</button>':'¿Eres profesor? <button id="dzAll">Abrir todas las etapas</button>')+' · <button id="dzReset">Borrar progreso</button></p>';
+}
+function bindDzHub(rerender){
+  const a=document.getElementById("dzAll");if(a)a.onclick=()=>{const p=dzProg();p.all=!p.all;store.set("dz",p);rerender()};
+  const r=document.getElementById("dzReset");if(r)r.onclick=()=>{if(r.dataset.confirm!=="1"){r.dataset.confirm="1";r.textContent="Pulsa otra vez para borrar";setTimeout(()=>{r.dataset.confirm="";r.textContent="Borrar progreso"},2500);return}const p=dzProg();store.set("dz",{s:{},all:p.all});rerender()};
+}
+
+/* ---- Tipos de ejercicio ---- */
+const DZ_KIND={tap:"Toca las palabras",choice:"Elige",sort:"Clasifica",order:"Ordena",gap:"Completa"};
+const DZ_LETTERS="ABCDEFG";
+const DZ_TYPES={
+ tap:{
+  render(ex){return '<div class="dz-tap">'+ex.tokens.map((t,i)=>'<button data-i="'+i+'" aria-pressed="false">'+esc(t[0])+'</button>').join(" ")+'</div>'},
+  init(root,ex,ready){root.querySelectorAll(".dz-tap button").forEach(b=>b.onclick=()=>{b.classList.toggle("sel");b.setAttribute("aria-pressed",b.classList.contains("sel"));ready(!!root.querySelector(".dz-tap button.sel"))})},
+  check(root,ex){
+   let req=0,hit=0,wrong=0;
+   root.querySelectorAll(".dz-tap button").forEach(b=>{const k=ex.tokens[+b.dataset.i][1];const s=b.classList.contains("sel");b.disabled=true;b.classList.remove("sel");
+    if(k===1){req++;if(s){hit++;b.classList.add("right")}else b.classList.add("miss")}
+    else if(k===.5){if(s)b.classList.add("okopt")}
+    else if(s){wrong++;b.classList.add("wrong")}});
+   return Math.max(0,(hit-wrong)/req);
+  }
+ },
+ choice:{
+  prep(ex){ex._o=shuffle(ex.opts.map((o,i)=>i))},
+  render(ex){
+   let ctx="";
+   if(ex.ctx)ctx='<div class="dz-scheme">'+ex.ctx.map(r=>'<div class="'+(r[1]?"":"empty")+'"><b>'+r[0]+'</b><span>'+(r[1]?esc(r[1]):"(vacío)")+'</span></div>').join("")+'</div>';
+   if(ex.quote)ctx='<div class="dz-quote">'+ex.quote.map(q=>'<p>'+esc(q)+'</p>').join("")+'</div>';
+   return ctx+'<div class="opts">'+ex._o.map((oi,k)=>'<button class="opt" data-o="'+oi+'"><span class="k">'+DZ_LETTERS[k]+'</span><span>'+esc(ex.opts[oi][0])+'</span></button>').join("")+'</div>';
+  },
+  init(root,ex,ready){root.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{root.querySelectorAll(".opt").forEach(x=>x.classList.remove("chosen"));b.classList.add("chosen");root.querySelectorAll(".opt").forEach(x=>{x.style.borderColor=x===b?"var(--petrol)":"";x.style.background=x===b?"var(--petrol-soft)":""});ready(true)})},
+  check(root,ex){
+   const ch=root.querySelector(".opt.chosen");const oi=+ch.dataset.o;const ok=ex.opts[oi][1]===1;
+   root.querySelectorAll(".opt").forEach(b=>{b.disabled=true;b.style.borderColor="";b.style.background="";const o=ex.opts[+b.dataset.o];if(o[1]===1)b.classList.add("right");else if(b===ch)b.classList.add("wrong")});
+   ex._why=(ok?"":"<b style=\"display:inline\">Tu respuesta: </b>"+esc(ex.opts[oi][2])+"<br>")+esc(ex.opts.find(o=>o[1]===1)[2]);
+   return ok?1:0;
+  }
+ },
+ sort:{
+  prep(ex){ex._o=ex.label?ex.items.map((x,i)=>i):shuffle(ex.items.map((x,i)=>i))},
+  render(ex){return (ex.thesis?'<div class="dz-scheme"><div><b>Tesis</b><span>'+esc(ex.thesis)+'</span></div></div>':'')+
+   '<div class="dz-sort">'+ex._o.map(ii=>'<div class="dz-item" data-i="'+ii+'"><p>'+esc(ex.items[ii][0])+'</p><div class="dz-chips">'+ex.buckets.map((b,bi)=>'<button data-b="'+bi+'">'+b+'</button>').join("")+'</div></div>').join("")+'</div>'},
+  init(root,ex,ready){root.querySelectorAll(".dz-item").forEach(it=>it.querySelectorAll("button").forEach(b=>b.onclick=()=>{it.querySelectorAll("button").forEach(x=>x.classList.remove("sel"));b.classList.add("sel");ready(root.querySelectorAll(".dz-item button.sel").length===ex.items.length)}))},
+  check(root,ex){
+   let good=0;
+   root.querySelectorAll(".dz-item").forEach(it=>{const right=ex.items[+it.dataset.i][1];const sel=it.querySelector("button.sel");const sb=+sel.dataset.b;
+    it.querySelectorAll("button").forEach(b=>{b.disabled=true;b.classList.remove("sel");const bi=+b.dataset.b;if(bi===right)b.classList.add(sb===right?"right":"should");else if(bi===sb)b.classList.add("wrong")});
+    if(sb===right){good++;it.classList.add("ok")}else it.classList.add("ko")});
+   return good/ex.items.length;
+  }
+ },
+ order:{
+  prep(ex){let o;do{o=shuffle(ex.items.map((x,i)=>i))}while(o.every((v,i)=>v===i));ex._o=o},
+  render(ex){return '<div class="dz-order"></div>'},
+  init(root,ex,ready){
+   const host=root.querySelector(".dz-order");
+   const up='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 15 6-6 6 6"/></svg>';
+   const dn='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>';
+   const draw=(flash)=>{host.innerHTML=ex._o.map((ii,k)=>'<div class="dz-oi'+(flash===ii?' flash':'')+'" data-i="'+ii+'"><span class="pos">'+(k+1)+'</span><p>'+esc(ex.items[ii][0])+'</p><span class="mv"><button data-m="-1" aria-label="Subir" '+(k===0?"disabled":"")+'>'+up+'</button><button data-m="1" aria-label="Bajar" '+(k===ex._o.length-1?"disabled":"")+'>'+dn+'</button></span></div>').join("");
+    host.querySelectorAll(".mv button").forEach(b=>b.onclick=()=>{const ii=+b.closest(".dz-oi").dataset.i;const k=ex._o.indexOf(ii);const j=k+(+b.dataset.m);[ex._o[k],ex._o[j]]=[ex._o[j],ex._o[k]];draw(ii)})};
+   draw();ready(true);
+  },
+  check(root,ex){
+   let good=0;
+   const host=root.querySelector(".dz-order");
+   host.innerHTML=ex._o.map((ii,k)=>{const ok=ii===k;if(ok)good++;return '<div class="dz-oi '+(ok?"ok":"ko")+'"><span class="pos">'+(k+1)+'</span><p><span class="tag">'+ex.items[ii][1]+(ok?'':' · va en el puesto '+(ii+1))+'</span>'+esc(ex.items[ii][0])+'</p></div>'}).join("");
+   return good/ex.items.length;
+  }
+ },
+ gap:{
+  prep(ex){ex._g=ex.gaps.map(g=>shuffle(g.map((x,i)=>i)))},
+  render(ex){return '<div class="dz-gap">'+esc(ex.text).replace(/\{(\d)\}/g,(m,d)=>{const gi=+d;return '<select data-g="'+gi+'" aria-label="Hueco '+(gi+1)+'"><option value="">…</option>'+ex._g[gi].map(oi=>'<option value="'+oi+'">'+esc(ex.gaps[gi][oi])+'</option>').join("")+'</select>'})+'</div>'},
+  init(root,ex,ready){const ss=root.querySelectorAll(".dz-gap select");ss.forEach(s=>s.onchange=()=>ready([...ss].every(x=>x.value!=="")))},
+  check(root,ex){
+   let good=0;
+   root.querySelectorAll(".dz-gap select").forEach(s=>{const ok=s.value==="0";s.disabled=true;s.classList.add(ok?"ok":"ko");if(ok)good++;else s.insertAdjacentHTML("afterend",' <span class="fix">→ '+esc(ex.gaps[+s.dataset.g][0])+'</span>')});
+   return good/ex.gaps.length;
+  }
+ }
+};
+
+/* ---- Jugador de etapa ---- */
+function viewDzStage(n){
+  const s=DZ_STAGES.find(x=>x.n===n);
+  return topbar(s?s.title:"Etapa","Entrenador · Etapa "+n+(s?" · "+s.phase:""),["disertacion","Camino"])+'<div class="dz-play" id="dzplay"></div>';
+}
+function bindDzStage(n){
+  const s=DZ_STAGES.find(x=>x.n===n);const p=dzProg();
+  const host=document.getElementById("dzplay");
+  if(!s||s.soon||!dzUnlocked(p,n)){host.innerHTML='<section class="card" style="display:flex;flex-direction:column;gap:12px;align-items:flex-start"><p style="margin:0">'+(s&&s.soon?'Esta etapa está en construcción.':'Esta etapa está cerrada: supera antes la etapa anterior.')+'</p><a class="btn primary" href="#disertacion">Volver al camino</a></section>';return}
+  const exs=s.ex.map(e=>{const c=Object.assign({},e);if(DZ_TYPES[c.type].prep)DZ_TYPES[c.type].prep(c);return c});
+  const st={i:0,scores:[]};
+  const qIcon='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/></svg>';
+  const show=()=>{
+   const ex=exs[st.i];const T=DZ_TYPES[ex.type];
+   host.innerHTML='<div class="qhead"><span>Ejercicio '+(st.i+1)+' de '+exs.length+'</span><span>'+esc(s.title)+'</span></div>'+
+    '<div class="progress"><i style="width:'+(st.i/exs.length*100)+'%"></i></div>'+
+    '<section class="card" style="display:flex;flex-direction:column;gap:14px">'+
+     '<span class="dz-kind">'+DZ_KIND[ex.type]+'</span>'+
+     (ex.type!=="tap"?'<div class="dz-q">'+qIcon+'<span>Pregunta de disertación: <i>'+esc(ESSAYS[DZ_Q[ex.q]].q)+'</i></span></div>':'')+
+     '<div class="dz-ask">'+esc(ex.ask)+'</div>'+
+     '<div id="dzbody" style="display:flex;flex-direction:column;gap:14px">'+T.render(ex)+'</div>'+
+     '<div class="callout info dz-hintbox" id="dzhint">'+ICONS.bulb+'<span>'+esc(ex.hint)+'</span></div>'+
+     '<div id="dzfb"></div>'+
+     '<div class="dz-actions"><button class="btn ghost" id="dzhintbtn">Pista</button><span class="grow"></span><button class="btn primary" id="dzcheck" disabled>Comprobar</button></div>'+
+    '</section>';
+   const body=document.getElementById("dzbody");const cb=document.getElementById("dzcheck");
+   T.init(body,ex,ok=>{cb.disabled=!ok});
+   document.getElementById("dzhintbtn").onclick=()=>document.getElementById("dzhint").classList.toggle("on");
+   cb.onclick=()=>{
+    const sc=T.check(body,ex);st.scores.push(sc);
+    const full=sc>=.999,zero=sc<=0;
+    const head=full?"¡Correcto!":zero?"No es correcto":"Casi: "+Math.round(sc*100)+"% bien";
+    const expl=ex.type==="choice"?ex._why:esc(ex.exp);
+    document.getElementById("dzfb").innerHTML='<div class="feedback '+(full?"ok":"bad")+'"><b>'+head+'</b>'+expl+'</div>';
+    document.getElementById("dzhintbtn").remove();
+    cb.textContent=st.i<exs.length-1?"Siguiente":"Ver resultado";
+    cb.onclick=()=>{st.i++;if(st.i<exs.length)show();else finish();window.scrollTo({top:0,behavior:"smooth"})};
+    cb.focus();
+   };
+  };
+  const finish=()=>{
+   const score=st.scores.reduce((a,b)=>a+b,0)/exs.length*10;
+   const pr=dzProg();const prev=pr.s[n];const wasDone=dzDone(pr,n);
+   pr.s[n]={best:Math.max(score,prev?prev.best:0),last:score,t:(prev?prev.t:0)+1};store.set("dz",pr);
+   const k=dzTorchCount(score);const passed=score>=6;
+   const nextS=DZ_STAGES.find(x=>x.n===n+1);
+   const msg=passed?(k===3?"Perfecto: has salido de esta parte de la caverna con todas las antorchas.":k===2?"Muy bien. Repite la etapa si quieres la tercera antorcha.":"Etapa superada. Puedes repetirla para mejorar."):"Necesitas al menos un 6 para superar la etapa. Revisa las pistas e inténtalo de nuevo.";
+   host.innerHTML='<div class="progress"><i style="width:100%"></i></div>'+
+    '<section class="card dz-result">'+
+     '<div class="torches">'+dzTorches(k)+'</div>'+
+     '<div class="score">'+score.toFixed(1).replace(".",",")+'<small> / 10</small></div>'+
+     '<p style="margin:0;max-width:460px">'+msg+'</p>'+
+     (passed&&!wasDone&&s.pieces.length?'<div><div class="tiny muted" style="margin-bottom:6px;font-weight:700">Piezas que acabas de encender</div><div class="lit">'+s.pieces.map(i=>'<span>'+DZ_PIECES[i]+'</span>').join("")+'</div></div>':'')+
+     '<div class="dz-rev">'+exs.map((e,i)=>{const sc=st.scores[i];return '<div><span>'+(i+1)+'. '+DZ_KIND[e.type]+' · '+esc(e.ask)+'</span><i style="color:'+(sc>=.999?"var(--ok)":sc<=0?"var(--bad)":"var(--ochre)")+'">'+Math.round(sc*100)+'%</i></div>'}).join("")+'</div>'+
+     '<div class="btnrow" style="justify-content:center">'+
+      (passed&&nextS&&!nextS.soon?'<a class="btn primary" href="#entrena-'+nextS.n+'">Siguiente etapa</a>':'')+
+      '<button class="btn '+(passed?"ghost":"primary")+'" id="dzagain">Repetir etapa</button>'+
+      '<a class="btn ghost" href="#disertacion">Volver al camino</a>'+
+     '</div>'+
+    '</section>';
+   document.getElementById("dzagain").onclick=()=>{bindDzStage(n);window.scrollTo(0,0)};
+  };
+  show();
 }
 
 function viewTest(){
