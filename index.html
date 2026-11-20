@@ -5276,7 +5276,7 @@ document.addEventListener("keydown",e=>{const r=e.target.closest&&e.target.close
 
 /* ============ ESTADÍSTICAS DE USO (anónimas, sin cookies) ============ */
 // Pega aquí la dirección de tu GoatCounter, p. ej. "https://caverna.goatcounter.com/count". Vacío = desactivado.
-const GOATCOUNTER="";
+const GOATCOUNTER="https://caverna.goatcounter.com/count";
 function stat(evento){try{if(window.goatcounter&&window.goatcounter.count)window.goatcounter.count({path:"evento/"+evento,title:evento,event:true})}catch(e){}}
 function statPage(){try{if(window.goatcounter&&window.goatcounter.count){const h=(location.hash||"#inicio").slice(1);window.goatcounter.count({path:"/"+(h.startsWith("test-")?"test/"+h.slice(5):h.startsWith("autor-")?"autor/"+h.slice(6):h)})}}catch(e){}}
 if(GOATCOUNTER&&!CLASE_DEMO){
