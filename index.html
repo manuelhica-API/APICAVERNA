@@ -1725,6 +1725,7 @@ function route(){
   if(h.startsWith("autor-")) bindAuthor(h.slice(6));
   window.scrollTo(0,0);
 }
+window.addEventListener("hashchange",()=>{pdiaRecien=false});
 window.addEventListener("hashchange",route);
 
 /* ============ VISTAS ============ */
@@ -5168,24 +5169,27 @@ function pdiaHoy(){
   return {id:pick.id,text:pick.q[0],opts:order.map(i=>pick.q[1][i]),ans:order.indexOf(pick.q[2]),exp:pick.q[3]};
 }
 const FLAME='<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2c1.2 3.4 5 5.2 5 10a5 5 0 0 1-10 0c0-2 .9-3.5 1.9-4.4.2 1.6 1.2 2.6 2.3 2.6 0-3.1-.7-5.6.8-8.2z"/></svg>';
+let pdiaRecien=false;
 function pdiaHTML(){
   const it=pdiaHoy();const r=store.get("pdia",{});const done=r.fecha===hoyStr();const rc=rachas();
+  if(done&&!pdiaRecien) return '';
   const au=getA(it.id);
   return '<section class="card pdia" id="pdia"><div class="pdia-head"><div><h2>Pregunta del día</h2><span class="tiny muted">'+(au?au.name:'')+'</span></div>'+
     '<span class="racha-chip'+(rc.actual?'':' off')+'" title="Días seguidos">'+FLAME+rc.actual+(rc.actual===1?' día':' días')+'</span></div>'+
     '<div class="question">'+it.text+'</div>'+
     '<div class="opts">'+it.opts.map((o,k)=>{let cls="";if(done){if(k===it.ans)cls="right";else if(k===r.k)cls="wrong"}
       return '<button type="button" class="opt '+cls+'" data-pdia="'+k+'" '+(done?'disabled':'')+'><span class="k">'+"ABCD"[k]+'</span><span>'+o+'</span></button>'}).join("")+'</div>'+
-    (done?'<div class="feedback '+(r.ok?'ok':'bad')+'"><b>'+(r.ok?'Correcto':'No es esa')+'</b>'+it.exp+'</div><p class="small muted">Mañana, otra pregunta. Entra cada día para mantener la racha.</p>':'')+
+    (done?'<div class="feedback '+(r.ok?'ok':'bad')+'"><b>'+(r.ok?'Correcto':'No es esa')+'</b>'+it.exp+'</div><div class="btnrow"><button type="button" class="btn primary" data-pdia-ok>Hecho</button><span class="small muted">Mañana, otra pregunta.</span></div>':'')+
   '</section>';
 }
 document.addEventListener("click",e=>{
+  if(e.target.closest("[data-pdia-ok]")){pdiaRecien=false;const c=document.getElementById("pdia");if(c)c.remove();return}
   const b=e.target.closest("[data-pdia]");if(!b||b.disabled)return;
   const it=pdiaHoy();const k=+b.dataset.pdia;const ok=k===it.ans;
   store.set("pdia",{fecha:hoyStr(),k,ok});
   store.set("pdiaN",store.get("pdiaN",0)+1);if(ok)store.set("pdiaOk",store.get("pdiaOk",0)+1);
   stat("pregunta-dia");actividad();
-  const c=document.getElementById("pdia");if(c){c.outerHTML=pdiaHTML()}
+  pdiaRecien=true;const c=document.getElementById("pdia");if(c){c.outerHTML=pdiaHTML()}
   const ins=document.getElementById("insignias");if(ins)ins.outerHTML=insigniasHTML();
 });
 
