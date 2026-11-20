@@ -23,6 +23,9 @@ function progresoLimpio(p) {
     t: num(p.t), th: num(p.th), tx: num(p.tx), te: num(p.te), ds: num(p.ds),
     via: ["a", "b", "both"].includes(p.via) ? p.via : "a",
     st: Number.isInteger(p.st) ? Math.max(0, Math.min(20, p.st)) : 0,
+    rc: Number.isInteger(p.rc) ? Math.max(0, Math.min(999, p.rc)) : 0,
+    rcm: Number.isInteger(p.rcm) ? Math.max(0, Math.min(999, p.rcm)) : 0,
+    ins: Number.isInteger(p.ins) ? Math.max(0, Math.min(50, p.ins)) : 0,
     au,
   };
 }
