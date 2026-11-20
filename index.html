@@ -5214,6 +5214,7 @@ const INSIGNIAS=[
   {id:"racha30",gr:"constancia",n:"Rey filósofo",d:"30 días seguidos",num:"30",gold:true,ok:x=>x.best>=30},
   {id:"primera",gr:"pdia",n:"Primera pregunta",d:"Responde tu primera pregunta del día",g:G.q,ok:()=>store.get("pdiaN",0)>=1},
   {id:"mayeutica",gr:"pdia",n:"Mayéutica",d:"Acierta 10 preguntas del día",g:G.bulb,ok:()=>store.get("pdiaOk",0)>=10},
+  {id:"tabano",gr:"pdia",n:"Tábano de Atenas",d:"Acierta 25 preguntas del día",g:G.bulb,ok:()=>store.get("pdiaOk",0)>=25},
   {id:"oraculo",gr:"pdia",n:"Oráculo de Delfos",d:"Acierta 50 preguntas del día",g:G.bulb,gold:true,ok:()=>store.get("pdiaOk",0)>=50},
   ...AUTHORS.map(a=>({id:"fil-"+a.id,gr:"filosofos",n:FIL_INS[a.id]||a.name,d:"Saca 7 o más en el test de "+a.name+" y ve todos sus vídeos",fil:a.id,ok:()=>filCompleto(a.id)})),
   {id:"primertest",gr:"test",n:"Primer test",d:"Termina tu primer test",g:G.check,ok:()=>store.get("hist",[]).length>=1},
