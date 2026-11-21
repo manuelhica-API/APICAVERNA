@@ -849,6 +849,23 @@ textarea:focus{outline:none;border-color:var(--petrol);background:var(--surface)
 .confeti i{position:absolute;top:-12px;width:8px;height:12px;border-radius:2px;animation:confeti linear forwards}
 @keyframes confeti{to{transform:translate(var(--x),105vh) rotate(var(--r));opacity:.9}}
 @media (prefers-reduced-motion:reduce){.celeb-card,.celeb-bg{transition:none}.celeb.on .celeb-medal{animation:none}}
+.seg-autor .t-sm{display:none}
+@media (max-width:440px){.seg-autor{gap:2px}.seg-autor button{padding-left:7px;padding-right:7px;font-size:13.5px}.seg-autor .t-lg{display:none}.seg-autor .t-sm{display:inline}}
+.dz-tap.cz-chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-start;font-family:inherit;font-size:15.5px;line-height:1.3;text-align:left;padding:2px 0}
+.cz-chips button{-webkit-tap-highlight-color:transparent;border:1.5px solid var(--line);border-radius:999px;background:var(--surface-2);padding:10px 16px;margin:0;font-weight:700}
+.cz-chips button:hover:not([disabled]){border-color:var(--petrol);background:var(--surface-2)}
+.cz-chips button.sel{background:var(--petrol);border-color:var(--petrol);color:#fff}
+.cz-chips button.right{border-color:var(--ok)}
+.cz-chips button.miss{border:1.5px dashed var(--ok);background:var(--ok-soft)}
+.cz-chips button.wrong{border-color:var(--bad)}
+.cz-chips button.okopt{border-color:var(--ok)}
+.cz-top{margin-bottom:-6px}
+.cz-frag{border:1.5px solid var(--line);border-radius:var(--r-sm);background:var(--surface-2)}
+.cz-frag summary{cursor:pointer;padding:10px 14px;font-weight:800;font-size:13.5px;color:var(--petrol)}
+.cz-ftext{padding:0 14px 12px;max-height:230px;overflow-y:auto;font-family:var(--font-serif,Georgia,serif);font-size:15px;line-height:1.55;white-space:pre-line}
+.cz-write{width:100%;box-sizing:border-box;resize:vertical;min-height:110px;font:inherit;line-height:1.5}
+.cz-timer{font-weight:800;font-variant-numeric:tabular-nums;color:var(--petrol)}.cz-timer.low{color:var(--bad)}
+.cz-tiempo{margin:0;font-weight:700;color:var(--bad)}
 .pdia{display:flex;flex-direction:column;gap:16px}
 .pdia-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
 .racha-chip{display:inline-flex;align-items:center;gap:5px;font-weight:800;font-size:14px;color:#c2410c;background:#ffedd5;border-radius:999px;padding:6px 12px;white-space:nowrap}
@@ -1863,7 +1880,7 @@ function viewAuthor(id){
   '<section class="hero-a"><div class="av">'+stickLight(a.id,92)+'</div><div><h1>'+a.name+'</h1><div class="yrs">'+a.years+'</div>'+
    '<div class="meta"><span class="chip">'+a.era+'</span><span class="chip">'+blockName[a.block]+'</span></div></div>'+
    '<p class="problem"><b>Problema: </b>'+a.problem+'</p></section>'+
-  '<div class="seg" role="tablist"><button class="on" data-tab="teoria" role="tab">Teoría</button><button data-tab="textos" role="tab">Textos</button><button data-tab="test" role="tab">Tipo test</button><button data-tab="practicar" role="tab">Practicar</button></div>'+
+  '<div class="seg seg-autor" role="tablist"><button class="on" data-tab="teoria" role="tab">Teoría</button><button data-tab="textos" role="tab">Textos</button><button data-tab="test" role="tab"><span class="t-lg">Tipo test</span><span class="t-sm">Test</span></button>'+(COMMENTS[a.id]?'<button data-tab="entrenar" role="tab">Entrenar</button>':'')+'<button data-tab="practicar" role="tab">Practicar</button></div>'+
   '<div id="tabbody"></div>';
 }
 /* ============ TEORÍA: PLATÓN ============ */
@@ -3956,6 +3973,8 @@ function bindAuthor(id){
     body._go=show;
     if(t==="textos"){body.innerHTML=tabTextos(a);bindTextos(body);store.set("tab",t);return}
     if(t==="test"){body.innerHTML='<div id="quizhost" style="display:flex;flex-direction:column;gap:18px"></div>';const qh=document.getElementById("quizhost");qh._go=show;startQuiz(a.id,qh);store.set("tab",t);return}
+    czStop();
+    if(t==="entrenar"&&COMMENTS[a.id]){body.innerHTML='<div id="czhost" style="display:flex;flex-direction:column;gap:18px;scroll-margin-top:16px"></div>';bindEntrenadorComentario(a,document.getElementById("czhost"));store.set("tab",t);return}
     if(t==="practicar"&&COMMENTS[a.id]){body.innerHTML=tabPracticarComentario(a);bindPracticarComentario(a,()=>show("practicar"));store.set("tab",t);return}
     body.innerHTML = t==="teoria"?tabFicha(a):tabPracticar(a);
     store.set("tab",t);
@@ -5176,6 +5195,206 @@ function startQuiz(id,host){
   if(!embedded)renderNav("test");
   draw();
 }
+
+/* ============ ENTRENADOR DE COMENTARIO ============ */
+const CZ_STAGES=[
+ {n:1,phase:"Leer el texto",title:"Identifica el problema",sub:"¿Qué pregunta de fondo intenta responder?"},
+ {n:2,phase:"Leer el texto",title:"Localiza los conceptos clave",sub:"Los términos que sostienen el fragmento"},
+ {n:3,phase:"Las ideas",title:"Elige la idea principal",sub:"La tesis del fragmento"},
+ {n:4,phase:"Las ideas",title:"Elige la idea secundaria",sub:"Lo que apoya o desarrolla la tesis"},
+ {n:5,phase:"Las ideas",title:"Distingue principal y secundaria",sub:"Y lo que no está en el texto"},
+ {n:6,phase:"Explicar",title:"Relaciona con su filosofía",sub:"Qué partes de su pensamiento aparecen"},
+ {n:7,phase:"Explicar",title:"Escribe la idea principal",sub:"Con tus propias palabras"},
+ {n:8,phase:"Prueba final",title:"Comentario exprés",sub:"Todo junto, en 10 minutos",final:true}
+];
+const CZ_PROBLEMAS=[
+ ["Problema del conocimiento",["conocimiento","epistemolog","gnoseolog"]],
+ ["Problema de la realidad (ontológico)",["realidad","ontolog","metafisic"]],
+ ["Problema del ser humano (antropológico)",["antropolog","ser humano"]],
+ ["Problema ético-político",["etic","politic","moral"]],
+ ["Problema de la naturaleza (cosmológico)",["cosmolog","naturaleza","universo"]],
+ ["Problema de Dios",["dios","teolog"]]
+];
+const CZ_AREAS=[["Teoría de las Ideas",["ideas"]],["Ontología",["ontolog"]],["Epistemología",["epistemolog","reminiscencia","conocimiento"]],["Antropología",["antropolog","alma"]],["Ética y Política",["etica","politica"]],["Cosmología",["cosmolog"]]];
+const CZ_GENERICAS=[
+ "El autor reflexiona sobre la filosofía y sobre la importancia de pensar por uno mismo.",
+ "El texto trata sobre el pensamiento del autor y sus ideas más importantes.",
+ "Se explica que el conocimiento es algo muy importante para el ser humano."
+];
+const CZ_KIND=Object.assign({},DZ_KIND,{write:"Escribe"});
+const CZ_TYPES=Object.assign({},DZ_TYPES,{
+ tap:Object.assign({},DZ_TYPES.tap,{render(ex){return DZ_TYPES.tap.render(ex).replace('class="dz-tap"','class="dz-tap cz-chips"')}}),
+ write:{
+  render(ex){return '<textarea class="cm-in cz-write" rows="4" placeholder="Escribe aquí la idea con tus palabras…" aria-label="Tu respuesta"></textarea><span class="tiny muted cz-count">0 palabras</span>'},
+  init(root,ex,ready){const ta=root.querySelector("textarea"),c=root.querySelector(".cz-count");ta.oninput=()=>{const n=(ta.value.trim().match(/\S+/g)||[]).length;c.textContent=n+(n===1?" palabra":" palabras");ready(n>=5)}},
+  check(root,ex){const ta=root.querySelector("textarea");ta.disabled=true;const r=checkGroups(ta.value,ex.grupos);return r.total?r.hit/r.total:0}
+ }
+});
+function czProg(){return store.get("cz",{})}
+function czAut(id){const p=czProg();return p[id]||{s:{},all:false}}
+function czSave(id,o){const p=czProg();p[id]=o;store.set("cz",p)}
+function czDone(o,n){return !!(o.s[n]&&o.s[n].best>=6)}
+function czUnlocked(o,n){return o.all||n===1||czDone(o,n-1)}
+function czPick(id,except){const L=COMMENTS[id]||[];const pool=L.filter(f=>!(except||[]).includes(f.id));return (pool.length?pool:L)[Math.floor(Math.random()*(pool.length?pool:L).length)]}
+function czJoin(f){return " "+norm(f.problema.cats.map(c=>c.join(" ")).join(" "))+" "}
+function czExProblema(f){
+  const j=czJoin(f);
+  return {type:"tap",frag:f,ask:"¿Qué problema o problemas filosóficos plantea este fragmento? Toca todos los que correspondan.",
+    hint:"Piensa en la pregunta de fondo: ¿qué podemos conocer?, ¿qué es lo real?, ¿qué es el ser humano?, ¿cómo debemos vivir juntos?",
+    tokens:shuffle(CZ_PROBLEMAS.map(p=>[p[0],p[1].some(s=>j.includes(norm(s)))?1:0])),
+    exp:"El fragmento plantea: "+f.problema.nombre+"."};
+}
+function czExConceptos(f,id){
+  const t=" "+norm(f.texto)+" ";const own=f.conceptos.map(c=>normConcept(c));
+  const L=(COMMENTS[id]||[]).filter(x=>x.id!==f.id);const otraObra=L.filter(x=>x.ref!==f.ref);
+  const others=[...new Set((otraObra.length>=3?otraObra:L).flatMap(x=>x.conceptos))].filter(c=>{const n=normConcept(c);return !own.includes(n)&&!t.includes(" "+norm(c).split(" ")[0].slice(0,5))});
+  const dis=shuffle(others).slice(0,Math.max(3,Math.min(5,8-f.conceptos.length)));
+  return {type:"tap",frag:f,ask:"Toca los conceptos clave de este fragmento.",
+    hint:"Un concepto clave es un término filosófico que el texto necesita para decir lo que dice. Busca palabras que aparezcan en el fragmento.",
+    tokens:shuffle(f.conceptos.map(c=>[c,1]).concat(dis.map(c=>[c,0]))),
+    exp:"Los conceptos clave son: "+f.conceptos.join(", ")+". Los demás no aparecen en este fragmento."};
+}
+function czExPrincipal(f,id){
+  const o=czPick(id,[f.id]);
+  return {type:"choice",frag:f,ask:"¿Cuál es la idea principal de este fragmento?",
+    hint:"La idea principal es la tesis: lo que el autor quiere demostrar o defender. Las secundarias la apoyan, la explican o la ilustran.",
+    opts:[[f.principal.modelo,1,"Esta es la tesis central del fragmento."],
+      [f.secundaria.modelo,0,"Es una idea secundaria: desarrolla o apoya la tesis, pero no es la idea principal."],
+      [o.principal.modelo,0,"Es la idea principal de otro fragmento ("+o.ref+"), no de este."],
+      [CZ_GENERICAS[Math.floor(Math.random()*CZ_GENERICAS.length)],0,"Es demasiado general: valdría para casi cualquier texto."]]};
+}
+function czExSecundaria(f,id){
+  const o=czPick(id,[f.id]);
+  return {type:"choice",frag:f,ask:"¿Cuál es la idea secundaria de este fragmento?",
+    hint:"Busca lo que sirve para apoyar la tesis: un ejemplo, una razón, una consecuencia o una aclaración.",
+    opts:[[f.secundaria.modelo,1,"Es la idea secundaria: apoya y desarrolla la tesis del fragmento."],
+      [f.principal.modelo,0,"Esa es la idea principal, la tesis, no una secundaria."],
+      [o.secundaria.modelo,0,"Es una idea secundaria de otro fragmento ("+o.ref+")."],
+      [CZ_GENERICAS[Math.floor(Math.random()*CZ_GENERICAS.length)],0,"Es demasiado general: no recoge nada concreto del texto."]]};
+}
+function czExDistingue(f,id){
+  const o=czPick(id,[f.id]);
+  return {type:"sort",frag:f,ask:"Clasifica cada afirmación según su papel en este fragmento.",
+    hint:"Primero localiza la tesis. Después, lo que la apoya. Lo que no tiene nada que ver con este texto va a la tercera opción.",
+    buckets:["Idea principal","Idea secundaria","No está en el texto"],
+    items:[[f.principal.modelo,0],[f.secundaria.modelo,1],[o.principal.modelo,2],[o.secundaria.modelo,2]],
+    exp:"La tesis es la idea principal; la secundaria la apoya. Las otras dos pertenecen a otro fragmento ("+o.ref+")."};
+}
+function czExConexion(f){
+  const c=" "+norm(f.conexion)+" ";
+  const hit=CZ_AREAS.map(a=>a[1].some(s=>c.includes(norm(s))));
+  const idx=k=>CZ_AREAS.findIndex(a=>a[0]===k);
+  const tokens=CZ_AREAS.map((a,k)=>{let v=hit[k]?1:0;if(!v&&((a[0]==="Ontología"&&hit[idx("Teoría de las Ideas")])||(a[0]==="Teoría de las Ideas"&&hit[idx("Ontología")])))v=.5;return [a[0],v]});
+  return {type:"tap",frag:f,ask:"¿Con qué partes de la filosofía del autor se relaciona este fragmento? Toca todas las que correspondan.",
+    hint:"Pregúntate qué apartados de la teoría necesitarías explicar para entender bien el texto.",
+    tokens:shuffle(tokens),exp:"Este fragmento se relaciona con: "+f.conexion.replace(/\.$/,"")+"."};
+}
+function czExEscribe(f){
+  return {type:"write",frag:f,ask:"Escribe con tus palabras la idea principal de este fragmento.",
+    hint:"Una o dos frases. No copies el texto: di qué defiende el autor y por qué.",
+    grupos:f.principal.grupos,exp:"Una buena formulación sería: «"+f.principal.modelo+"». Se comprueba que aparezcan las ideas clave, aunque uses otras palabras."};
+}
+const CZ_GEN={
+ 1:(id,f,g)=>[czExProblema(f),czExProblema(g)],
+ 2:(id,f,g)=>[czExConceptos(f,id),czExConceptos(g,id)],
+ 3:(id,f,g)=>[czExPrincipal(f,id),czExPrincipal(g,id)],
+ 4:(id,f,g)=>[czExSecundaria(f,id),czExSecundaria(g,id)],
+ 5:(id,f,g)=>[czExDistingue(f,id)],
+ 6:(id,f,g)=>[czExConexion(f),czExConexion(g)],
+ 7:(id,f,g)=>[czExEscribe(f)],
+ 8:(id,f,g)=>[czExProblema(f),czExConceptos(f,id),czExPrincipal(f,id),czExSecundaria(f,id),czExConexion(f),czExEscribe(f)]
+};
+function czHubHTML(a){
+  const o=czAut(a.id);const n=COMMENTS[a.id].length;
+  const done=CZ_STAGES.filter(s=>czDone(o,s.n)).length;
+  const torches=CZ_STAGES.reduce((t,s)=>t+(o.s[s.n]?dzTorchCount(o.s[s.n].best):0),0);
+  const next=CZ_STAGES.find(s=>czUnlocked(o,s.n)&&!czDone(o,s.n));
+  let last="",path="";
+  CZ_STAGES.forEach(s=>{
+    if(s.phase!==last){path+='<div class="dz-phase">'+s.phase+'</div>';last=s.phase}
+    const info=o.s[s.n],isDone=czDone(o,s.n),un=czUnlocked(o,s.n);
+    let cls="dz-node",st="";
+    if(!un){cls+=" locked";st='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>'}
+    else if(info)st=dzTorches(dzTorchCount(info.best));else st="Empezar";
+    if(isDone)cls+=" done";if(next&&next.n===s.n)cls+=" next";if(s.final)cls+=" final";
+    const inner='<span class="n">'+(isDone?'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>':s.n)+'</span><span class="tx"><b>'+s.title+'</b><span>'+s.sub+'</span></span><span class="st">'+st+'</span>';
+    path+=un?'<button type="button" class="'+cls+' cz-node" data-czs="'+s.n+'">'+inner+'</button>':'<div class="'+cls+'" aria-disabled="true">'+inner+'</div>';
+  });
+  path+='<div class="dz-sun">Comentario dominado</div>';
+  return '<section class="dz-hero"><div class="label">Entrenador de comentario · '+a.name+'</div><h2>Del texto a la idea</h2>'+
+    '<p>Ocho etapas cortas para aprender a comentar paso a paso. En cada etapa te toca un fragmento al azar entre los '+n+' de '+a.name+'. Cada etapa superada enciende una antorcha.</p>'+
+    '<div class="row"><div><b>'+done+'/'+CZ_STAGES.length+'</b><span>etapas superadas</span></div><div><b>'+torches+'</b><span>antorchas</span></div></div>'+
+    (next?'<div style="margin-top:16px"><button type="button" class="btn accent" data-czs="'+next.n+'">'+(o.s[next.n]?'Seguir: ':'Empezar: ')+next.title+'</button></div>':'')+
+  '</section><section class="card"><div class="dz-path">'+path+'</div></section>'+
+  '<p class="dz-teacher">'+(o.all?'Modo profesor activo: todas las etapas abiertas. <button type="button" data-czall>Desactivar</button>':'¿Eres profesor? <button type="button" data-czall>Abrir todas las etapas</button>')+' · <button type="button" data-czreset>Borrar progreso</button></p>';
+}
+function czFragHTML(f){return '<details class="cz-frag" open><summary>Fragmento · '+esc(f.ref)+'</summary><div class="cz-ftext">'+esc(f.texto)+'</div></details>'}
+let czTimer=null;
+function czStop(){if(czTimer){clearInterval(czTimer);czTimer=null}}
+function czRunStage(a,n,host,back){
+  czStop();
+  const s=CZ_STAGES.find(x=>x.n===n);const f=czPick(a.id);const g=czPick(a.id,[f.id]);
+  const exs=CZ_GEN[n](a.id,f,g).map(e=>{if(CZ_TYPES[e.type].prep)CZ_TYPES[e.type].prep(e);return e});
+  const st={i:0,scores:[]};let fin=false;let left=600;
+  const timerHTML=()=>s.final?'<span class="cz-timer'+(left<=60?' low':'')+'" id="czt">'+Math.floor(left/60)+':'+String(left%60).padStart(2,"0")+'</span>':'<span>'+esc(s.title)+'</span>';
+  if(s.final){czTimer=setInterval(()=>{left--;const t=document.getElementById("czt");if(!t||!document.body.contains(host)){czStop();return}t.textContent=Math.floor(left/60)+':'+String(left%60).padStart(2,"0");t.classList.toggle("low",left<=60);if(left<=0){czStop();while(st.scores.length<exs.length)st.scores.push(0);finish(true)}},1000)}
+  const show=()=>{
+    const ex=exs[st.i];const T=CZ_TYPES[ex.type];
+    host.innerHTML='<div class="cz-top"><button type="button" class="link-btn" data-czback>← Volver al camino</button></div>'+
+     '<div class="qhead"><span>Etapa '+n+' · Ejercicio '+(st.i+1)+' de '+exs.length+'</span>'+timerHTML()+'</div>'+
+     '<div class="progress"><i style="width:'+(st.i/exs.length*100)+'%"></i></div>'+
+     '<section class="card" style="display:flex;flex-direction:column;gap:14px">'+
+      '<span class="dz-kind">'+CZ_KIND[ex.type]+'</span>'+czFragHTML(ex.frag)+
+      '<div class="dz-ask">'+esc(ex.ask)+'</div>'+
+      '<div id="czbody" style="display:flex;flex-direction:column;gap:14px">'+T.render(ex)+'</div>'+
+      '<div class="callout info dz-hintbox" id="czhint">'+ICONS.bulb+'<span>'+esc(ex.hint)+'</span></div>'+
+      '<div id="czfb"></div>'+
+      '<div class="dz-actions"><button type="button" class="btn ghost" id="czhintbtn">Pista</button><span class="grow"></span><button type="button" class="btn primary" id="czcheck" disabled>Comprobar</button></div>'+
+     '</section>';
+    host.querySelector("[data-czback]").onclick=()=>{czStop();back()};
+    const body=document.getElementById("czbody"),cb=document.getElementById("czcheck");
+    T.init(body,ex,ok=>{cb.disabled=!ok});
+    document.getElementById("czhintbtn").onclick=()=>document.getElementById("czhint").classList.toggle("on");
+    cb.onclick=()=>{
+      const sc=T.check(body,ex);st.scores.push(sc);
+      const full=sc>=.999,zero=sc<=0;
+      const head=full?"¡Correcto!":zero?"No es correcto":"Casi: "+Math.round(sc*100)+" % bien";
+      document.getElementById("czfb").innerHTML='<div class="feedback '+(full?"ok":"bad")+'"><b>'+head+'</b>'+(ex.type==="choice"?ex._why:esc(ex.exp))+'</div>';
+      document.getElementById("czhintbtn").remove();
+      cb.textContent=st.i<exs.length-1?"Siguiente":"Ver resultado";
+      cb.onclick=()=>{st.i++;if(st.i<exs.length)show();else finish(false);host.scrollIntoView({block:"start",behavior:"smooth"})};
+      cb.focus({preventScroll:true});
+    };
+  };
+  const finish=(timeout)=>{
+    if(fin)return;fin=true;czStop();
+    const score=st.scores.reduce((x,y)=>x+y,0)/exs.length*10;
+    const o=czAut(a.id);const prev=o.s[n];o.s[n]={best:Math.max(score,prev?prev.best:0),last:score,t:(prev?prev.t:0)+1};czSave(a.id,o);
+    actividad();stat("entrenador-comentario-"+n);
+    const passed=score>=6;const nextS=CZ_STAGES.find(x=>x.n===n+1);
+    host.innerHTML='<div class="progress"><i style="width:100%"></i></div><section class="card dz-result">'+
+      (timeout?'<p class="cz-tiempo">Se acabó el tiempo. Los ejercicios sin hacer cuentan como 0.</p>':'')+
+      dzResultHead(n,score,s).replace("Repítela: te tocará otra pregunta.","Repítela: te tocará otro fragmento.").replace("con otra pregunta","con otro fragmento")+
+      '<div class="dz-rev">'+exs.map((e,i)=>{const sc=st.scores[i];return '<div><span>'+(i+1)+'. '+CZ_KIND[e.type]+' · '+esc(e.ask)+'</span><i style="color:'+(sc>=.999?"var(--ok)":sc<=0?"var(--bad)":"var(--ochre)")+'">'+Math.round(sc*100)+' %</i></div>'}).join("")+'</div>'+
+      '<div class="btnrow" style="justify-content:center">'+
+       (passed&&nextS?'<button type="button" class="btn primary" data-cznext>Siguiente etapa</button>':'')+
+       '<button type="button" class="btn '+(passed?"ghost":"primary")+'" data-czagain>Repetir con otro fragmento</button>'+
+       '<button type="button" class="btn ghost" data-czback>Volver al camino</button></div></section>';
+    host.querySelector("[data-czback]").onclick=back;
+    host.querySelector("[data-czagain]").onclick=()=>{czRunStage(a,n,host,back);host.scrollIntoView({block:"start"})};
+    const nx=host.querySelector("[data-cznext]");if(nx)nx.onclick=()=>{czRunStage(a,n+1,host,back);host.scrollIntoView({block:"start"})};
+  };
+  show();
+}
+function bindEntrenadorComentario(a,host){
+  const hub=()=>{czStop();host.innerHTML=czHubHTML(a);
+    host.querySelectorAll("[data-czs]").forEach(b=>b.onclick=()=>{czRunStage(a,+b.dataset.czs,host,hub);host.scrollIntoView({block:"start"})});
+    const al=host.querySelector("[data-czall]");if(al)al.onclick=()=>{const o=czAut(a.id);o.all=!o.all;czSave(a.id,o);hub()};
+    const r=host.querySelector("[data-czreset]");if(r)r.onclick=()=>{if(r.dataset.confirm!=="1"){r.dataset.confirm="1";r.textContent="Pulsa otra vez para borrar";setTimeout(()=>{r.dataset.confirm="";r.textContent="Borrar progreso"},2500);return}const o=czAut(a.id);czSave(a.id,{s:{},all:o.all});hub()};
+  };
+  hub();
+}
+window.addEventListener("hashchange",czStop);
 
 /* ============ PREGUNTA DEL DÍA, RACHA E INSIGNIAS ============ */
 function hoyStr(d){d=d||new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
