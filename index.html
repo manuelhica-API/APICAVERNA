@@ -5206,7 +5206,7 @@ function pdiaHTML(){
   if(done&&!pdiaRecien) return '';
   const au=getA(it.id);
   return '<section class="card pdia" id="pdia"><div class="pdia-head"><div><h2>Pregunta del día</h2><span class="tiny muted">'+(au?au.name:'')+'</span></div>'+
-    '<span class="racha-chip'+(rc.actual?'':' off')+'" title="Días seguidos">'+FLAME+rc.actual+(rc.actual===1?' día':' días')+'</span></div>'+
+    '</div>'+
     '<div class="question">'+it.text+'</div>'+
     '<div class="opts">'+it.opts.map((o,k)=>{let cls="";if(done){if(k===it.ans)cls="right";else if(k===r.k)cls="wrong"}
       return '<button type="button" class="opt '+cls+'" data-pdia="'+k+'" '+(done?'disabled':'')+'><span class="k">'+"ABCD"[k]+'</span><span>'+o+'</span></button>'}).join("")+'</div>'+
@@ -5316,15 +5316,14 @@ function insigniasHTML(){
   const ultimas=INSIGNIAS.filter(b=>got[b.id]).sort((x,y)=>got[y.id]-got[x.id]).slice(0,3);
   const proximas=INSIGNIAS.filter(b=>!got[b.id]&&!b.secret).slice(0,6-ultimas.length);
   return '<section class="card" id="insignias"><div class="card-head"><h2>Tus insignias</h2><a href="#insignias">Ver las '+INSIGNIAS.length+'</a></div>'+
-    rachaRow(rc)+
-    '<p class="small muted" style="margin:-4px 0 12px">Llevas <b>'+n+' de '+INSIGNIAS.length+'</b>.'+(proximas.length?' Estas son las siguientes que puedes conseguir:':'')+'</p>'+
+    '<p class="small muted" style="margin:0 0 12px">Llevas <b>'+n+' de '+INSIGNIAS.length+'</b>.'+(proximas.length?' Estas son las siguientes que puedes conseguir:':'')+'</p>'+
     '<ul class="ins-grid">'+ultimas.concat(proximas).map(b=>insLi(b,got)).join("")+'</ul>'+sorpresaHTML()+'</section>';
 }
 function sorpresaHTML(){return '<p class="sorpresa"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/></svg><span><b>Algunas insignias tienen sorpresa…</b> y otras son secretas: solo sabrás cuáles son cuando las consigas.</span></p>'}
 function viewInsignias(){
   const {got,rc,n}=insStats();
   return topbar("Tus insignias",n+" de "+INSIGNIAS.length+" conseguidas",["inicio","Inicio"])+
-  '<section class="card">'+rachaRow(rc)+'<p class="tiny muted">La racha suma un día cada vez que haces algo en Caverna: la pregunta del día, un test o un vídeo.</p>'+sorpresaHTML()+'</section>'+
+  '<section class="card">'+sorpresaHTML().replace('class="sorpresa"','class="sorpresa" style="margin-top:0"')+'</section>'+
   INS_GRUPOS.map(([g,t])=>{const list=INSIGNIAS.filter(b=>b.gr===g);const k=list.filter(b=>got[b.id]).length;
     return '<section class="card"><div class="card-head"><h2>'+t+'</h2><span class="tiny muted">'+k+' de '+list.length+'</span></div><ul class="ins-grid">'+list.map(b=>insLi(b,got)).join("")+'</ul></section>'}).join("");
 }
@@ -5450,12 +5449,12 @@ function viewProfe(){
   (empujon.length?'<section class="card"><div class="card-head"><h2>Necesitan un empujón</h2><span class="tiny muted">Menos del 30 % o una semana sin entrar</span></div><div class="pn-chips">'+
     empujon.map(a=>'<span class="chip pn-chip">'+escH(a.alias)+' · '+pc(a.progreso.t)+' · '+hace(a.updated)+'</span>').join("")+'</div></section>':'')+
   '<section class="card"><div class="card-head"><h2>Alumnos</h2><span class="tiny muted">Toca un alumno para ver el detalle</span></div>'+
-  (list.length?'<div class="pn-wrap"><table class="pn-table"><thead><tr>'+th("alias","Alumno")+th("t","Total")+th("th","Teoría")+th("tx","Textos")+th("te","Test")+th("ds","Disert.")+th("rc","Racha")+th("ultima","Última vez")+'</tr></thead><tbody>'+
+  (list.length?'<div class="pn-wrap"><table class="pn-table"><thead><tr>'+th("alias","Alumno")+th("t","Total")+th("th","Teoría")+th("tx","Textos")+th("te","Test")+th("ds","Disert.")+th("ultima","Última vez")+'</tr></thead><tbody>'+
    list.map(a=>{const p=a.progreso,open=panelState.abierto===a.id;
     return '<tr class="pn-row'+(open?' open':'')+'" data-palumno="'+escH(a.id)+'" tabindex="0" aria-expanded="'+open+'"><th scope="row"><b>'+escH(a.alias)+(p.pr||[]).map(id=>{const ib=INSIGNIAS.find(x=>x.id===id);return ib&&ib.premio?' <span class="pn-premio" title="'+ib.n+': '+ib.premio+'">+0,25 '+(id==="linea"?"test":id==="disertador"?"disert.":"")+'</span>':''}).join("")+'</b><span class="tiny muted">'+escH(a.grupo)+' · Línea '+(p.via==="b"?"2":p.via==="both"?"1 y 2":"1")+'</span></th>'+
-     '<td><b>'+pc(p.t)+'</b>'+bar(p.t)+'</td><td>'+pc(p.th)+'</td><td>'+pc(p.tx)+'</td><td>'+pc(p.te)+'</td><td>'+pc(p.ds)+'</td><td><span class="racha-chip sm'+(p.rc?'':' off')+'">'+FLAME+(p.rc||0)+'</span></td><td class="tiny">'+hace(a.updated)+'</td></tr>'+
-     (open?'<tr class="pn-det"><td colspan="8"><div class="pn-auth">'+Object.entries(p.au||{}).map(([id,v])=>{const au=getA(id);return '<div class="pn-a"><span class="pg-av">'+(au?stick(id,26):'')+'</span><b>'+(au?au.name:id)+'</b><span>Vídeos '+pc(v.v)+'</span><span>Test '+(v.te==null?'—':String(v.te).replace(".",",")+' / 10')+'</span></div>'}).join("")+
-      '</div><p class="tiny muted" style="margin-top:8px">Disertación: '+(p.st||0)+' de 8 etapas superadas · Mejor racha: '+(p.rcm||0)+' días · Insignias: '+(p.ins||0)+' de '+INSIGNIAS.length+'.'+(p.pr||[]).map(id=>{const ib=INSIGNIAS.find(x=>x.id===id);return ib&&ib.premio?' <b>'+ib.n+': '+ib.premio.replace(/^Te has ganado /,'+')+'.</b>':''}).join("")+'</p></td></tr>':'');
+     '<td><b>'+pc(p.t)+'</b>'+bar(p.t)+'</td><td>'+pc(p.th)+'</td><td>'+pc(p.tx)+'</td><td>'+pc(p.te)+'</td><td>'+pc(p.ds)+'</td><td class="tiny">'+hace(a.updated)+'</td></tr>'+
+     (open?'<tr class="pn-det"><td colspan="7"><div class="pn-auth">'+Object.entries(p.au||{}).map(([id,v])=>{const au=getA(id);return '<div class="pn-a"><span class="pg-av">'+(au?stick(id,26):'')+'</span><b>'+(au?au.name:id)+'</b><span>Vídeos '+pc(v.v)+'</span><span>Test '+(v.te==null?'—':String(v.te).replace(".",",")+' / 10')+'</span></div>'}).join("")+
+      '</div><p class="tiny muted" style="margin-top:8px">Disertación: '+(p.st||0)+' de 8 etapas superadas · Insignias: '+(p.ins||0)+' de '+INSIGNIAS.length+'.'+(p.pr||[]).map(id=>{const ib=INSIGNIAS.find(x=>x.id===id);return ib&&ib.premio?' <b>'+ib.n+': '+ib.premio.replace(/^Te has ganado /,'+')+'.</b>':''}).join("")+'</p></td></tr>':'');
    }).join("")+'</tbody></table></div>':'<div class="empty-state">Todavía no se ha unido nadie. Diles a tus alumnos que pulsen «Unirme a mi clase» en el Inicio.</div>')+
   '</section>'+
   '<div class="btnrow"><button type="button" class="btn ghost" data-pact="refrescar">Actualizar</button><button type="button" class="link-btn" data-pact="salir">Cerrar sesión</button></div>';
