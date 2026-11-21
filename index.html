@@ -5937,15 +5937,15 @@ function claseCardHTML(){
     '<div class="clase-txt"><b>Tu profe ve tu progreso</b><span class="small muted">Como «'+escH(c.alias)+'» · '+escH(c.grupo)+' · actualizado '+hace(c.last)+'</span></div>'+
     '<button type="button" class="link-btn" data-clase="salir">Dejar la clase</button></div></section>';
   if(store.get("claseHide",false)) return '';
+  setTimeout(claseCargarGrupos,0);
   return '<section class="card clase-card" id="claseCard"><div class="clase-row"><span class="clase-ic" aria-hidden="true">'+ICONS_CLASE+'</span>'+
-    '<div class="clase-txt"><b>¿Quieres que tu profe vea tu progreso?</b><span class="small muted">Es opcional. Solo verá tus porcentajes y el alias que elijas, nunca tus respuestas.</span></div></div>'+
-    '<div class="btnrow" id="claseBtns"><button type="button" class="btn primary" data-clase="abrir">Unirme a mi clase</button><button type="button" class="link-btn" data-clase="ocultar">Ahora no</button></div>'+
-    '<form class="clase-form" id="claseForm" hidden>'+
+    '<div class="clase-txt"><b>¿Quieres que tu profe siga tu progreso?</b><span class="small muted">Es opcional. Solo verá tus porcentajes y el alias que elijas, nunca tus respuestas.</span></div></div>'+
+    '<form class="clase-form" id="claseForm">'+
       '<div class="field"><label for="clCod">Código de clase</label><input class="cm-in" id="clCod" autocomplete="off" value="'+escH(store.get("codigo",""))+'" placeholder="El que te ha dado tu profe" required></div>'+
       '<div class="field" id="clGruBox"><label for="clGru">Grupo</label><select class="cm-in" id="clGru" required disabled><option value="">Cargando grupos…</option></select></div>'+
       '<div class="field"><label for="clAli">Alias</label><input class="cm-in" id="clAli" maxlength="24" placeholder="Tu número de lista o un apodo" required><span class="tiny muted">No pongas tu nombre completo: con que tu profe te reconozca basta.</span></div>'+
       '<p class="small clase-err" id="clErr" hidden></p>'+
-      '<div class="btnrow"><button type="submit" class="btn primary">Unirme</button><button type="button" class="link-btn" data-clase="cancelar">Cancelar</button></div>'+
+      '<div class="btnrow"><button type="submit" class="btn primary">Unirme</button><button type="button" class="link-btn" data-clase="ocultar">Ahora no</button></div>'+
     '</form></section>';
 }
 const ICONS_CLASE='<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0"/><circle cx="17" cy="9" r="2.5"/><path d="M15.5 14.2A4.5 4.5 0 0 1 21 18.5"/></svg>';
