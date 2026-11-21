@@ -5313,7 +5313,7 @@ function celebSiguiente(){
   ok.onclick=cerrar;m.querySelector(".celeb-bg").onclick=cerrar;document.addEventListener("keydown",key);
 }
 function insStats(){const got=store.get("insignias",{});const rc=rachas();return {got,rc,n:INSIGNIAS.filter(b=>got[b.id]).length}}
-function insLi(b,got){const on=!!got[b.id];if(b.secret&&!on)return '<li class="ins secreta">'+medalla({g:G.q},false,46)+'<b>Insignia secreta</b><span>Sigue explorando para descubrirla</span></li>';return '<li class="ins'+(on?' on':'')+'">'+medalla(b,on,46)+'<b>'+b.n+'</b><span>'+(on?'Conseguida':b.d)+'</span>'+(b.premio?'<span class="ins-premio">'+(on?b.premio:'Premio: 0,25 en el examen tipo test')+'</span>':'')+'</li>'}
+function insLi(b,got){const on=!!got[b.id];if(b.secret&&!on)return '<li class="ins secreta">'+medalla({g:G.q},false,46)+'<b>Insignia secreta</b><span>Sigue explorando para descubrirla</span></li>';return '<li class="ins'+(on?' on':'')+'">'+medalla(b,on,46)+'<b>'+b.n+'</b><span>'+(on?'Conseguida':b.d)+'</span>'+(b.premio&&on?'<span class="ins-premio">'+b.premio+'</span>':'')+'</li>'}
 function rachaRow(rc){return '<div class="racha-row"><div><b>'+rc.actual+'</b><span>días de racha</span></div><div><b>'+rc.best+'</b><span>mejor racha</span></div><div><b>'+store.get("pdiaOk",0)+'</b><span>preguntas del día acertadas</span></div></div>'}
 function insigniasHTML(){
   const {got,rc,n}=insStats();
