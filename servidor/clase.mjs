@@ -5,7 +5,7 @@
 //   CODIGO_CLASE  (recomendada)  el alumno debe introducirlo para unirse
 //   PROFE_CLAVE   (obligatoria)  contraseña del panel del profesor (#profe)
 //   GRUPOS        (opcional)     grupos separados por comas, p. ej. «2º A, 2º B»; el alumno los elige de una lista.
-//                                 Si no existe, se usa «2º A».
+//                                 Si no existe, se usa «2º Bach A».
 
 
 const json = (status, body) =>
@@ -39,7 +39,7 @@ export async function clase(req, env, store) {
   let b;
   try { b = await req.json(); } catch { return json(400, { error: "Petición no válida" }); }
   const codigoClase = env.CODIGO_CLASE || "";
-  const grupos = (env.GRUPOS || "2º A").split(",").map((g) => limpia(g, 12)).filter(Boolean);
+  const grupos = (env.GRUPOS || "2º Bach A").split(",").map((g) => limpia(g, 12)).filter(Boolean);
 
   if (b.action === "grupos") return json(200, { ok: true, grupos });
 

@@ -5882,9 +5882,9 @@ checkInsignias(true);
 const CLASE_DEMO=window.CAVERNA_PREVIEW===true||/claude|localhost|127\.0\.0\.1|^$/.test(location.hostname);
 const CLASE_URL="/api/clase";
 const DEMO_ALUMNOS=[
- ["Nº 3","2º A","a",.82,.9,.75,.88,.7,1],["Lupe","2º A","a",.64,.7,.55,.72,.5,2],["Nº 7","2º A","b",.41,.35,.3,.6,.4,5],
- ["Dani M.","2º A","a",.12,.1,0,.3,.1,13],["Nº 15","2º A","b",.93,1,.9,.95,.85,0],["Nº 21","2º B","b",.55,.6,.45,.62,.5,3],
- ["Sofi","2º B","a",.27,.2,.15,.45,.3,9],["Nº 2","2º B","b",.71,.75,.7,.68,.7,1],["Hugo","2º B","a",.05,0,0,.2,0,21]
+ ["Nº 3","2º Bach A","a",.82,.9,.75,.88,.7,1],["Lupe","2º Bach A","a",.64,.7,.55,.72,.5,2],["Nº 7","2º Bach A","b",.41,.35,.3,.6,.4,5],
+ ["Dani M.","2º Bach A","a",.12,.1,0,.3,.1,13],["Nº 15","2º Bach A","b",.93,1,.9,.95,.85,0],["Nº 21","2º Bach B","b",.55,.6,.45,.62,.5,3],
+ ["Sofi","2º Bach B","a",.27,.2,.15,.45,.3,9],["Nº 2","2º Bach B","b",.71,.75,.7,.68,.7,1],["Hugo","2º Bach B","a",.05,0,0,.2,0,21]
 ];
 function demoSeed(){
   const now=Date.now(),day=864e5;
@@ -5893,9 +5893,11 @@ function demoSeed(){
       au:Object.fromEntries(ids.map((id,k)=>[id,{te:Math.max(0,Math.min(10,Math.round((d[6]*10+(k-1.5)*1.6)*10)/10)),v:Math.max(0,Math.min(1,d[4]+(1.5-k)*.08))}]))}}});
 }
 function demoDB(){let db=store.get("demoClase",null);if(!db){db=demoSeed();store.set("demoClase",db)}return db}
+const GRUPOS_DEF=["2º Bach A"];
 async function claseCargarGrupos(){
   const box=document.getElementById("clGruBox");if(!box)return;
   let g=[];try{const j=await Promise.race([claseApi({action:"grupos"}),new Promise((_,no)=>setTimeout(()=>no(new Error("tiempo")),6000))]);g=j.grupos||[]}catch(e){}
+  if(!g.length)g=GRUPOS_DEF;
   if(!document.getElementById("clGruBox"))return;
   box.innerHTML=g.length
     ?'<label for="clGru">Grupo</label><select class="cm-in" id="clGru" required>'+(g.length>1?'<option value="">Elige tu grupo</option>':'')+g.map(x=>'<option>'+escH(x)+'</option>').join("")+'</select>'
@@ -5903,7 +5905,7 @@ async function claseCargarGrupos(){
 }
 async function claseApi(body){
   if(CLASE_DEMO){
-    if(body.action==="grupos")return {ok:true,grupos:["2º A"]};
+    if(body.action==="grupos")return {ok:true,grupos:GRUPOS_DEF};
     const db=demoDB();
     if(body.action==="sync"){const i=db.findIndex(x=>x.id===body.id);const rec={id:body.id,alias:body.alias,grupo:body.grupo,progreso:body.progreso,updated:Date.now()};if(i>=0)db[i]=rec;else db.push(rec);store.set("demoClase",db);return {ok:true}}
     if(body.action==="salir"){store.set("demoClase",db.filter(x=>x.id!==body.id));return {ok:true}}
@@ -5937,15 +5939,15 @@ function claseCardHTML(){
     '<div class="clase-txt"><b>Tu profe ve tu progreso</b><span class="small muted">Como «'+escH(c.alias)+'» · '+escH(c.grupo)+' · actualizado '+hace(c.last)+'</span></div>'+
     '<button type="button" class="link-btn" data-clase="salir">Dejar la clase</button></div></section>';
   if(store.get("claseHide",false)) return '';
+  setTimeout(claseCargarGrupos,0);
   return '<section class="card clase-card" id="claseCard"><div class="clase-row"><span class="clase-ic" aria-hidden="true">'+ICONS_CLASE+'</span>'+
-    '<div class="clase-txt"><b>¿Quieres que tu profe vea tu progreso?</b><span class="small muted">Es opcional. Solo verá tus porcentajes y el alias que elijas, nunca tus respuestas.</span></div></div>'+
-    '<div class="btnrow" id="claseBtns"><button type="button" class="btn primary" data-clase="abrir">Unirme a mi clase</button><button type="button" class="link-btn" data-clase="ocultar">Ahora no</button></div>'+
-    '<form class="clase-form" id="claseForm" hidden>'+
+    '<div class="clase-txt"><b>¿Quieres que tu profe siga tu progreso?</b><span class="small muted">Es opcional. Solo verá tus porcentajes y el alias que elijas, nunca tus respuestas.</span></div></div>'+
+    '<form class="clase-form" id="claseForm">'+
       '<div class="field"><label for="clCod">Código de clase</label><input class="cm-in" id="clCod" autocomplete="off" value="'+escH(store.get("codigo",""))+'" placeholder="El que te ha dado tu profe" required></div>'+
-      '<div class="field" id="clGruBox"><label for="clGru">Grupo</label><select class="cm-in" id="clGru" required disabled><option value="">Cargando grupos…</option></select></div>'+
+      '<div class="field" id="clGruBox"><label for="clGru">Grupo</label><select class="cm-in" id="clGru" required>'+GRUPOS_DEF.map(x=>'<option>'+escH(x)+'</option>').join("")+'</select></div>'+
       '<div class="field"><label for="clAli">Alias</label><input class="cm-in" id="clAli" maxlength="24" placeholder="Tu número de lista o un apodo" required><span class="tiny muted">No pongas tu nombre completo: con que tu profe te reconozca basta.</span></div>'+
       '<p class="small clase-err" id="clErr" hidden></p>'+
-      '<div class="btnrow"><button type="submit" class="btn primary">Unirme</button><button type="button" class="link-btn" data-clase="cancelar">Cancelar</button></div>'+
+      '<div class="btnrow"><button type="submit" class="btn primary">Unirme</button><button type="button" class="link-btn" data-clase="ocultar">Ahora no</button></div>'+
     '</form></section>';
 }
 const ICONS_CLASE='<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0"/><circle cx="17" cy="9" r="2.5"/><path d="M15.5 14.2A4.5 4.5 0 0 1 21 18.5"/></svg>';
