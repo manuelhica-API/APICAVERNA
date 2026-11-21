@@ -5895,7 +5895,7 @@ function demoSeed(){
 function demoDB(){let db=store.get("demoClase",null);if(!db){db=demoSeed();store.set("demoClase",db)}return db}
 async function claseCargarGrupos(){
   const box=document.getElementById("clGruBox");if(!box)return;
-  let g=[];try{const j=await claseApi({action:"grupos"});g=j.grupos||[]}catch(e){}
+  let g=[];try{const j=await Promise.race([claseApi({action:"grupos"}),new Promise((_,no)=>setTimeout(()=>no(new Error("tiempo")),6000))]);g=j.grupos||[]}catch(e){}
   if(!document.getElementById("clGruBox"))return;
   box.innerHTML=g.length
     ?'<label for="clGru">Grupo</label><select class="cm-in" id="clGru" required>'+(g.length>1?'<option value="">Elige tu grupo</option>':'')+g.map(x=>'<option>'+escH(x)+'</option>').join("")+'</select>'
