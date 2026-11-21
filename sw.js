@@ -1,7 +1,7 @@
 // Service worker de Caverna
 // Cada vez que subas cambios a la web, sube también este número (v2, v3...)
 // para que los móviles descarguen la versión nueva.
-const VERSION = 'caverna-v2';
+const VERSION = 'caverna-v3';
 
 const PRECACHE = [
   './',
