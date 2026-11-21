@@ -2,6 +2,8 @@
 // Guarda solo alias, grupo y porcentajes de progreso (nunca respuestas) en Netlify Blobs.
 //   CODIGO_CLASE  (recomendada)  el alumno debe introducirlo para unirse
 //   PROFE_CLAVE   (obligatoria)  contraseña del panel del profesor (#profe)
+//   GRUPOS        (opcional)     grupos separados por comas, p. ej. «2º A, 2º B»; el alumno los elige de una lista.
+//                                 Si no existe, se usa «2º A».
 
 import { getStore } from "@netlify/blobs";
 
@@ -37,12 +39,17 @@ export default async (req) => {
   try { b = await req.json(); } catch { return json(400, { error: "Petición no válida" }); }
   const store = getStore("clase");
   const codigoClase = process.env.CODIGO_CLASE || "";
+  const grupos = (process.env.GRUPOS || "2º A").split(",").map((g) => limpia(g, 12)).filter(Boolean);
+
+  if (b.action === "grupos") return json(200, { ok: true, grupos });
+
 
   if (b.action === "sync") {
     if (codigoClase && b.codigo !== codigoClase) return json(403, { error: "Código de clase incorrecto" });
     if (!idOk(b.id)) return json(400, { error: "Identificador no válido" });
     const alias = limpia(b.alias, 24), grupo = limpia(b.grupo, 12), progreso = progresoLimpio(b.progreso);
     if (!alias || !grupo || !progreso) return json(400, { error: "Faltan datos" });
+    if (grupos.length && !grupos.includes(grupo)) return json(400, { error: "Ese grupo no existe" });
     await store.setJSON(b.id, { id: b.id, alias, grupo, progreso, updated: Date.now() });
     return json(200, { ok: true });
   }
