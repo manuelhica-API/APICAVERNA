@@ -821,6 +821,11 @@ textarea:focus{outline:none;border-color:var(--petrol);background:var(--surface)
 .dz-rev span{flex:1}
 
 /* Inicio: cuatro secciones */
+.celeb-premio{display:flex;align-items:center;gap:12px;margin:8px 0 2px;padding:12px 16px;border-radius:var(--r-sm);background:#fff1e2;color:#7c2d12;text-align:left;font-size:15px;font-weight:700;line-height:1.35}
+.celeb-premio b{font-family:var(--font-display);font-size:24px;color:#c2410c;white-space:nowrap}
+:root[data-theme="dark"] .celeb-premio{background:#43210f;color:#fed7aa}
+.ins-premio{margin-top:4px;font-size:11.5px!important;font-weight:800;color:#c2410c!important;background:#fff1e2;border-radius:8px;padding:3px 6px}
+.pn-premio{font-size:11px;font-weight:800;color:#c2410c;background:#fff1e2;border-radius:6px;padding:1px 5px;vertical-align:1px}
 .sorpresa{display:flex;gap:10px;align-items:flex-start;margin:14px 0 0;padding:12px 14px;border-radius:var(--r-sm);background:linear-gradient(90deg,#fff1e2,var(--petrol-soft));color:var(--petrol-deep);font-size:14px;line-height:1.4}
 .sorpresa svg{flex:none;color:#c2410c;margin-top:1px}
 :root[data-theme="dark"] .sorpresa{background:var(--surface-2);color:var(--ink)}
@@ -5252,7 +5257,7 @@ const INSIGNIAS=[
   ...AUTHORS.map(a=>({id:"fil-"+a.id,gr:"filosofos",n:FIL_INS[a.id]||a.name,d:"Saca 7 o más en el test de "+a.name+" y ve todos sus vídeos",fil:a.id,frase:FIL_FRASE[a.id],ok:()=>filCompleto(a.id)})),
   {id:"primertest",gr:"test",n:"Primer test",d:"Termina tu primer test",g:G.check,ok:()=>store.get("hist",[]).length>=1},
   {id:"sobresaliente",gr:"test",n:"Sobresaliente",d:"Saca un 10 en un test",g:G.star,ok:()=>Object.values(store.get("best",{})).some(v=>v>=10)},
-  {id:"linea",gr:"test",n:"Línea completa",d:"Haz el test de los 4 filósofos de tu línea",g:G.layers,ok:()=>{const b=store.get("best",{});return ["a","b"].some(l=>LINE_ORDER[l].every(id=>b[id]!==undefined))}},
+  {id:"linea",gr:"test",n:"Línea completa",d:"Haz el test de los 4 filósofos de tu línea",premio:"Te has ganado 0,25 en el examen tipo test",gold:true,g:G.layers,ok:()=>{const b=store.get("best",{});return ["a","b"].some(l=>LINE_ORDER[l].every(id=>b[id]!==undefined))}},
   {id:"ochosabios",gr:"test",n:"Los ocho sabios",d:"Aprueba el test de los 8 filósofos",g:G.layers,gold:true,ok:()=>{const b=store.get("best",{});return AUTHORS.every(a=>b[a.id]>=5)}},
   {id:"videos25",gr:"videos",n:"Ojos abiertos",d:"Ve 25 vídeos",num:"25",ok:()=>nVideos()>=25},
   {id:"videos50",gr:"videos",n:"Mirada al Sol",d:"Ve 50 vídeos",num:"50",ok:()=>nVideos()>=50},
@@ -5293,6 +5298,7 @@ function celebSiguiente(){
     '<div class="celeb-medal">'+medalla(b,true,132)+'</div>'+
     '<span class="celeb-kicker">'+(b.secret?'¡Insignia secreta desbloqueada!':'¡Insignia conseguida!')+'</span>'+
     '<h2 id="celebT">'+b.n+'</h2><p id="celebD">'+b.d+'</p>'+
+    (b.premio?'<div class="celeb-premio"><b>+0,25</b><span>'+b.premio+'</span></div>':'')+
     (b.frase?'<blockquote class="celeb-q">«'+b.frase[0]+'»<cite>'+b.frase[1]+'</cite></blockquote>':'')+
     '<button type="button" class="btn primary celeb-ok">'+(celebCola.length?'Siguiente':'¡Genial!')+'</button></div>';
   document.body.appendChild(m);
@@ -5307,7 +5313,7 @@ function celebSiguiente(){
   ok.onclick=cerrar;m.querySelector(".celeb-bg").onclick=cerrar;document.addEventListener("keydown",key);
 }
 function insStats(){const got=store.get("insignias",{});const rc=rachas();return {got,rc,n:INSIGNIAS.filter(b=>got[b.id]).length}}
-function insLi(b,got){const on=!!got[b.id];if(b.secret&&!on)return '<li class="ins secreta">'+medalla({g:G.q},false,46)+'<b>Insignia secreta</b><span>Sigue explorando para descubrirla</span></li>';return '<li class="ins'+(on?' on':'')+'">'+medalla(b,on,46)+'<b>'+b.n+'</b><span>'+(on?'Conseguida':b.d)+'</span></li>'}
+function insLi(b,got){const on=!!got[b.id];if(b.secret&&!on)return '<li class="ins secreta">'+medalla({g:G.q},false,46)+'<b>Insignia secreta</b><span>Sigue explorando para descubrirla</span></li>';return '<li class="ins'+(on?' on':'')+'">'+medalla(b,on,46)+'<b>'+b.n+'</b><span>'+(on?'Conseguida':b.d)+'</span>'+(b.premio?'<span class="ins-premio">'+(on?b.premio:'Premio: 0,25 en el examen tipo test')+'</span>':'')+'</li>'}
 function rachaRow(rc){return '<div class="racha-row"><div><b>'+rc.actual+'</b><span>días de racha</span></div><div><b>'+rc.best+'</b><span>mejor racha</span></div><div><b>'+store.get("pdiaOk",0)+'</b><span>preguntas del día acertadas</span></div></div>'}
 function insigniasHTML(){
   const {got,rc,n}=insStats();
@@ -5340,7 +5346,7 @@ const DEMO_ALUMNOS=[
 function demoSeed(){
   const now=Date.now(),day=864e5;
   return DEMO_ALUMNOS.map((d,i)=>{const ids=LINE_ORDER[d[2]];return {id:"demo"+i,alias:d[0],grupo:d[1],updated:now-d[8]*day-i*36e5,
-    progreso:{t:d[3],th:d[4],tx:d[5],te:d[6],ds:d[7],via:d[2],st:Math.round(d[7]*8),rc:d[8]>1?0:Math.round(d[3]*9),rcm:Math.round(d[3]*14),ins:Math.round(d[3]*9),
+    progreso:{t:d[3],th:d[4],tx:d[5],te:d[6],ds:d[7],via:d[2],st:Math.round(d[7]*8),rc:d[8]>1?0:Math.round(d[3]*9),rcm:Math.round(d[3]*14),ins:Math.round(d[3]*9),pr:d[6]>=.7?["linea"]:[],
       au:Object.fromEntries(ids.map((id,k)=>[id,{te:Math.max(0,Math.min(10,Math.round((d[6]*10+(k-1.5)*1.6)*10)/10)),v:Math.max(0,Math.min(1,d[4]+(1.5-k)*.08))}]))}}});
 }
 function demoDB(){let db=store.get("demoClase",null);if(!db){db=demoSeed();store.set("demoClase",db)}return db}
@@ -5360,7 +5366,7 @@ async function claseApi(body){
 function claseSnapshot(){
   const d=progData();const r2=x=>x===null?null:Math.round(x*100)/100;
   const rc=rachas();
-  return {t:r2(d.total),th:r2(d.thp),tx:r2(d.txp),te:r2(d.testPct),ds:r2(d.ds),via:d.via,st:d.stages,rc:rc.actual,rcm:rc.best,ins:Object.keys(store.get("insignias",{})).length,
+  return {t:r2(d.total),th:r2(d.thp),tx:r2(d.txp),te:r2(d.testPct),ds:r2(d.ds),via:d.via,st:d.stages,rc:rc.actual,rcm:rc.best,ins:Object.keys(store.get("insignias",{})).length,pr:INSIGNIAS.filter(b=>b.premio&&store.get("insignias",{})[b.id]).map(b=>b.id),
     au:Object.fromEntries(d.rows.map(r=>{const tot=r.th[1]+r.tx[1];return [r.a.id,{te:r.test===undefined?null:Math.round(r.test*10)/10,v:tot?r2((r.th[0]+r.tx[0])/tot):null}]}))};
 }
 let claseLastSent=null,claseTimer=null;
@@ -5450,10 +5456,10 @@ function viewProfe(){
   '<section class="card"><div class="card-head"><h2>Alumnos</h2><span class="tiny muted">Toca un alumno para ver el detalle</span></div>'+
   (list.length?'<div class="pn-wrap"><table class="pn-table"><thead><tr>'+th("alias","Alumno")+th("t","Total")+th("th","Teoría")+th("tx","Textos")+th("te","Test")+th("ds","Disert.")+th("rc","Racha")+th("ultima","Última vez")+'</tr></thead><tbody>'+
    list.map(a=>{const p=a.progreso,open=panelState.abierto===a.id;
-    return '<tr class="pn-row'+(open?' open':'')+'" data-palumno="'+escH(a.id)+'" tabindex="0" aria-expanded="'+open+'"><th scope="row"><b>'+escH(a.alias)+'</b><span class="tiny muted">'+escH(a.grupo)+' · Línea '+(p.via==="b"?"2":p.via==="both"?"1 y 2":"1")+'</span></th>'+
+    return '<tr class="pn-row'+(open?' open':'')+'" data-palumno="'+escH(a.id)+'" tabindex="0" aria-expanded="'+open+'"><th scope="row"><b>'+escH(a.alias)+((p.pr||[]).includes("linea")?' <span class="pn-premio" title="Línea completa: +0,25 en el examen tipo test">+0,25</span>':'')+'</b><span class="tiny muted">'+escH(a.grupo)+' · Línea '+(p.via==="b"?"2":p.via==="both"?"1 y 2":"1")+'</span></th>'+
      '<td><b>'+pc(p.t)+'</b>'+bar(p.t)+'</td><td>'+pc(p.th)+'</td><td>'+pc(p.tx)+'</td><td>'+pc(p.te)+'</td><td>'+pc(p.ds)+'</td><td><span class="racha-chip sm'+(p.rc?'':' off')+'">'+FLAME+(p.rc||0)+'</span></td><td class="tiny">'+hace(a.updated)+'</td></tr>'+
      (open?'<tr class="pn-det"><td colspan="8"><div class="pn-auth">'+Object.entries(p.au||{}).map(([id,v])=>{const au=getA(id);return '<div class="pn-a"><span class="pg-av">'+(au?stick(id,26):'')+'</span><b>'+(au?au.name:id)+'</b><span>Vídeos '+pc(v.v)+'</span><span>Test '+(v.te==null?'—':String(v.te).replace(".",",")+' / 10')+'</span></div>'}).join("")+
-      '</div><p class="tiny muted" style="margin-top:8px">Disertación: '+(p.st||0)+' de 8 etapas superadas · Mejor racha: '+(p.rcm||0)+' días · Insignias: '+(p.ins||0)+' de '+INSIGNIAS.length+'.</p></td></tr>':'');
+      '</div><p class="tiny muted" style="margin-top:8px">Disertación: '+(p.st||0)+' de 8 etapas superadas · Mejor racha: '+(p.rcm||0)+' días · Insignias: '+(p.ins||0)+' de '+INSIGNIAS.length+'.'+((p.pr||[]).includes("linea")?' <b>Línea completa: +0,25 en el examen tipo test.</b>':'')+'</p></td></tr>':'');
    }).join("")+'</tbody></table></div>':'<div class="empty-state">Todavía no se ha unido nadie. Diles a tus alumnos que pulsen «Unirme a mi clase» en el Inicio.</div>')+
   '</section>'+
   '<div class="btnrow"><button type="button" class="btn ghost" data-pact="refrescar">Actualizar</button><button type="button" class="link-btn" data-pact="salir">Cerrar sesión</button></div>';

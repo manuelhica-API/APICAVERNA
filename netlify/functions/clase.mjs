@@ -26,6 +26,7 @@ function progresoLimpio(p) {
     rc: Number.isInteger(p.rc) ? Math.max(0, Math.min(999, p.rc)) : 0,
     rcm: Number.isInteger(p.rcm) ? Math.max(0, Math.min(999, p.rcm)) : 0,
     ins: Number.isInteger(p.ins) ? Math.max(0, Math.min(50, p.ins)) : 0,
+    pr: Array.isArray(p.pr) ? p.pr.filter((x) => typeof x === "string" && /^[a-z0-9-]{2,20}$/.test(x)).slice(0, 10) : [],
     au,
   };
 }
