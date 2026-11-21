@@ -1,3 +1,12 @@
 [build]
   publish = "."
   functions = "netlify/functions"
+  # La web se publica ahora en Cloudflare Pages: Netlify deja de publicar versiones nuevas
+  # (se queda la actual) y así no gasta créditos. Para volver a publicar en Netlify, borra esta línea.
+  ignore = "exit 0"
+
+# Las mismas direcciones que en Cloudflare: /api/corregir y /api/clase
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
