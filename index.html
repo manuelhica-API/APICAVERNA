@@ -821,6 +821,100 @@ textarea:focus{outline:none;border-color:var(--petrol);background:var(--surface)
 .dz-rev span{flex:1}
 
 /* Inicio: cuatro secciones */
+.celeb-premio{display:flex;align-items:center;gap:12px;margin:8px 0 2px;padding:12px 16px;border-radius:var(--r-sm);background:#fff1e2;color:#7c2d12;text-align:left;font-size:15px;font-weight:700;line-height:1.35}
+.celeb-premio b{font-family:var(--font-display);font-size:24px;color:#c2410c;white-space:nowrap}
+:root[data-theme="dark"] .celeb-premio{background:#43210f;color:#fed7aa}
+.ins-premio{margin-top:4px;font-size:11.5px!important;font-weight:800;color:#c2410c!important;background:#fff1e2;border-radius:8px;padding:3px 6px}
+.pn-premio{font-size:11px;font-weight:800;color:#c2410c;background:#fff1e2;border-radius:6px;padding:1px 5px;vertical-align:1px}
+.sorpresa{display:flex;gap:10px;align-items:flex-start;margin:14px 0 0;padding:12px 14px;border-radius:var(--r-sm);background:linear-gradient(90deg,#fff1e2,var(--petrol-soft));color:var(--petrol-deep);font-size:14px;line-height:1.4}
+.sorpresa svg{flex:none;color:#c2410c;margin-top:1px}
+:root[data-theme="dark"] .sorpresa{background:var(--surface-2);color:var(--ink)}
+.ins.secreta{border:1.5px dashed var(--line);background:transparent}
+.celeb{position:fixed;inset:0;z-index:200;display:grid;place-items:center;padding:24px;overflow:hidden}
+.celeb-bg{position:absolute;inset:0;background:rgba(40,8,22,.62);opacity:0;transition:opacity .25s}
+.celeb-card{position:relative;width:min(360px,100%);background:var(--surface);color:var(--ink);border-radius:28px;padding:28px 24px 24px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px;box-shadow:0 24px 60px rgba(0,0,0,.35);transform:scale(.7);opacity:0;transition:transform .35s cubic-bezier(.2,1.4,.4,1),opacity .2s}
+.celeb.on .celeb-bg{opacity:1}.celeb.on .celeb-card{transform:none;opacity:1}
+.celeb-medal{margin-top:-4px;filter:drop-shadow(0 8px 16px rgba(184,51,106,.35))}
+.celeb.on .celeb-medal{animation:celebPop .9s cubic-bezier(.2,1.5,.4,1) both}
+.celeb.gold .celeb-medal{filter:drop-shadow(0 0 22px rgba(245,160,74,.75))}
+.celeb-kicker{font-size:12.5px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--petrol)}
+.celeb.gold .celeb-kicker,.celeb.secret .celeb-kicker{color:#c2410c}
+.celeb-card h2{margin:0;font-family:var(--font-display);font-size:26px;line-height:1.15}
+.celeb-card p{margin:0;color:var(--muted);font-size:15px;line-height:1.4}
+.celeb-q{margin:8px 0 4px;padding:12px 14px;border-radius:var(--r-sm);background:var(--surface-2);font-size:15px;font-style:italic;line-height:1.4}
+.celeb-q cite{display:block;margin-top:6px;font-size:12.5px;font-style:normal;font-weight:700;color:var(--muted)}
+.celeb-ok{margin-top:10px;min-width:160px}
+@keyframes celebPop{0%{transform:scale(.2) rotate(-25deg)}60%{transform:scale(1.12) rotate(6deg)}100%{transform:none}}
+.confeti{position:absolute;inset:0;pointer-events:none}
+.confeti i{position:absolute;top:-12px;width:8px;height:12px;border-radius:2px;animation:confeti linear forwards}
+@keyframes confeti{to{transform:translate(var(--x),105vh) rotate(var(--r));opacity:.9}}
+@media (prefers-reduced-motion:reduce){.celeb-card,.celeb-bg{transition:none}.celeb.on .celeb-medal{animation:none}}
+.seg-autor .t-sm{display:none}
+@media (max-width:370px){.seg-autor button{padding-left:8px;padding-right:8px}}
+@media (max-width:340px){.seg-autor{gap:2px}.seg-autor button{padding-left:5px;padding-right:5px;font-size:13px}}
+.dz-tap.cz-chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-start;font-family:inherit;font-size:15.5px;line-height:1.3;text-align:left;padding:2px 0}
+.cz-chips button{-webkit-tap-highlight-color:transparent;border:1.5px solid var(--line);border-radius:999px;background:var(--surface-2);padding:10px 16px;margin:0;font-weight:700}
+@media (hover:hover){.cz-chips button:hover:not([disabled]):not(.sel){border-color:var(--petrol)}}
+.dz-tap.cz-chips button.sel,.dz-tap.cz-chips button.sel:hover{background:var(--petrol);border-color:var(--petrol);color:#fff}
+.cz-chips button.right{border-color:var(--ok)}
+.cz-chips button.miss{border:1.5px dashed var(--ok);background:var(--ok-soft)}
+.cz-chips button.wrong{border-color:var(--bad)}
+.cz-chips button.okopt{border-color:var(--ok)}
+.cz-top{margin-bottom:-6px}
+.cz-frag{border:1.5px solid var(--line);border-radius:var(--r-sm);background:var(--surface-2)}
+.cz-frag summary{cursor:pointer;padding:10px 14px;font-weight:800;font-size:13.5px;color:var(--petrol)}
+.cz-ftext{padding:0 14px 12px;max-height:230px;overflow-y:auto;font-family:var(--font-serif,Georgia,serif);font-size:15px;line-height:1.55;white-space:pre-line}
+.cz-write{width:100%;box-sizing:border-box;resize:vertical;min-height:110px;font:inherit;line-height:1.5}
+.cz-timer{font-weight:800;font-variant-numeric:tabular-nums;color:var(--petrol)}.cz-timer.low{color:var(--bad)}
+.cz-tiempo{margin:0;font-weight:700;color:var(--bad)}
+.pdia{display:flex;flex-direction:column;gap:16px}
+.pdia-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.racha-chip{display:inline-flex;align-items:center;gap:5px;font-weight:800;font-size:14px;color:#c2410c;background:#ffedd5;border-radius:999px;padding:6px 12px;white-space:nowrap}
+.racha-chip.sm{font-size:13px;padding:3px 9px}
+.racha-chip.off{color:var(--muted);background:var(--surface-2)}
+:root[data-theme="dark"] .racha-chip:not(.off){background:#43210f;color:#fdba74}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .racha-chip:not(.off){background:#43210f;color:#fdba74}}
+.racha-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:16px}
+.racha-row div{background:var(--surface-2);border-radius:var(--r-sm);padding:12px;display:flex;flex-direction:column;gap:2px}
+.racha-row b{font-family:var(--font-display);font-size:22px}.racha-row span{font-size:12.5px;color:var(--muted);line-height:1.3}
+.ins-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:12px}
+.ins{display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px;padding:12px 6px;border-radius:var(--r-md);background:var(--surface-2)}
+.ins b{font-size:13.5px;line-height:1.25}.ins span{font-size:12px;color:var(--muted);line-height:1.3}
+.ins:not(.on) b{color:var(--muted)}
+.ins:not(.on) .stk{filter:grayscale(1);opacity:.5}
+.ins-toast{position:fixed;left:50%;bottom:96px;transform:translate(-50%,20px);opacity:0;z-index:100;display:flex;align-items:center;gap:12px;background:var(--petrol-deep);color:#fff;border-radius:18px;padding:10px 18px 10px 12px;box-shadow:0 10px 30px rgba(0,0,0,.25);transition:opacity .3s,transform .3s}
+.ins-toast.on{opacity:1;transform:translate(-50%,0)}
+.ins-toast div{display:flex;flex-direction:column}.ins-toast b{font-size:15px}
+@media (min-width:861px){.ins-toast{bottom:32px}}
+@media (prefers-reduced-motion:reduce){.ins-toast{transition:none}}
+.clase-card{display:flex;flex-direction:column;gap:14px}
+.clase-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.clase-ic{flex:0 0 auto;width:44px;height:44px;border-radius:14px;background:var(--petrol-soft);color:var(--petrol);display:grid;place-items:center}
+.clase-txt{flex:1 1 220px;min-width:0;display:flex;flex-direction:column;gap:2px}
+.clase-form{display:flex;flex-direction:column;gap:14px}
+.clase-err{color:var(--bad);font-weight:700}
+.demo-note{background:var(--petrol-soft);color:var(--petrol-deep);border-radius:var(--r-sm);padding:10px 14px;font-weight:600}
+:root[data-theme="dark"] .demo-note{color:var(--ink)}
+.profe-link{text-align:center;margin:22px 0 4px}.profe-link a,.side-foot a{color:var(--muted);font-weight:700}
+.pn-grupos{margin-bottom:16px;width:max-content;max-width:100%}
+.pn-sum{margin-bottom:16px}
+.pn-chips{display:flex;flex-wrap:wrap;gap:8px}
+.pn-chip{background:var(--bad-soft);color:var(--bad);font-size:13px;padding:6px 12px}
+.pn-wrap{overflow-x:auto;margin:0 -8px}
+.pn-table{width:100%;border-collapse:collapse;font-size:14.5px;min-width:620px}
+.pn-table th,.pn-table td{padding:10px 8px;text-align:left;border-bottom:1px solid var(--line);vertical-align:middle}
+.pn-table thead th{border-bottom:1.5px solid var(--line)}
+.pn-table tbody th{font-weight:400;display:flex;flex-direction:column;gap:2px}
+.pn-sort{background:none;border:0;padding:6px 0;font-size:12.5px;font-weight:800;color:var(--muted);cursor:pointer;text-transform:uppercase;letter-spacing:.04em}
+.pn-sort.on{color:var(--petrol)}
+.pn-row{cursor:pointer}.pn-row:hover,.pn-row.open{background:var(--surface-2)}
+.pn-row:focus-visible{outline:2px solid var(--petrol);outline-offset:-2px}
+.pn-bar{height:6px;border-radius:9px;background:var(--line);margin-top:6px;width:70px;overflow:hidden}.pn-bar i{display:block;height:100%;background:var(--petrol);border-radius:9px}
+.pn-det td{background:var(--surface-2)}
+.pn-det td>*{position:sticky;left:8px;max-width:calc(100vw - 72px)}
+.pn-auth{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.pn-a{background:var(--surface);border-radius:var(--r-sm);padding:10px 12px;display:flex;flex-direction:column;gap:2px;font-size:13.5px}
+.pn-a b{font-size:14.5px}.pn-a .pg-av{margin-bottom:4px}
 .install-card{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
 .install-card .ic-logo{flex:0 0 auto;width:52px;height:52px}
 .install-card .ic-txt{flex:1 1 220px;min-width:0}
@@ -940,7 +1034,7 @@ textarea:focus{outline:none;border-color:var(--petrol);background:var(--surface)
       <div><div class="brand-name">Caverna</div><div class="brand-sub">PAU · Historia de la Filosofía</div></div>
     </div>
     <nav class="nav" id="sidenav"></nav>
-    <div class="side-foot">Andalucía · curso 2025-26.<br>Los fragmentos se leen en la antología oficial.</div>
+    <div class="side-foot">Andalucía · curso 2025-26.<br>Los fragmentos se leen en la antología oficial.<br><a href="#profe">Acceso del profesor</a></div>
   </aside>
   <main class="main"><div class="byline-row"><span class="byline"><img class="by-av" src="data:image/jpeg;base64,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" alt="" aria-hidden="true">Manuel Higueras</span></div><div class="wrap" id="view"></div></main>
 </div>
@@ -1670,11 +1764,14 @@ function route(){
   else if(h.startsWith("entrena-")){section="disertacion";v.innerHTML=viewDzStage(+h.slice(8));bindDzStage(+h.slice(8))}
   else if(h==="test"){v.innerHTML=viewTest()}
   else if(h==="examen"){v.innerHTML=viewExamen()}
+  else if(h==="profe"){section="inicio";v.innerHTML=viewProfe()}
+  else if(h==="insignias"){section="inicio";v.innerHTML=viewInsignias()}
   else {section="inicio";v.innerHTML=viewInicio()}
   renderNav(section);
   if(h.startsWith("autor-")) bindAuthor(h.slice(6));
   window.scrollTo(0,0);
 }
+window.addEventListener("hashchange",()=>{pdiaRecien=false});
 window.addEventListener("hashchange",route);
 
 /* ============ VISTAS ============ */
@@ -1703,6 +1800,7 @@ function viewInicio(){
     '<a class="h4" href="#test"><span class="ic">'+ICONS.test+'</span><b>Test</b><span class="d">Preguntas de repaso con explicación</span><span class="s">'+(s.avg===null?'Sin hacer':'Media: '+avgTxt+' / 10')+'</span></a>'+
     '<a class="h4" href="#examen"><span class="ic">'+ICONS.exam+'</span><b>El examen</b><span class="d">Estructura, puntuación y reparto del tiempo</span><span class="s">90 minutos</span></a>'+
   '</nav>'+
+  pdiaHTML()+
   installCardHTML()+
   '<section class="card"><div class="card-head"><h2>Ocho filósofos, dos líneas</h2><a href="#comentario">Ver todos</a></div>'+
     '<p class="small muted" style="margin-bottom:14px">En la Parte II salen dos textos, uno de cada línea temática. Eliges uno.</p>'+
@@ -1710,6 +1808,8 @@ function viewInicio(){
       '<div class="lb-row">'+byLine(b).map(a=>'<a class="mini big-ph" href="#autor-'+a.id+'"><span class="ph-av">'+stick(a.id,80)+'</span>'+'<span>'+a.name+'<small>'+a.era+'</small></span></a>').join("")+'</div></div>').join("")+
     '</section>'+
   progressHTML()+
+  claseCardHTML()+
+  insigniasHTML()+
   '<div class="grid2">'+
    '<section class="card"><div class="card-head"><h2>Así es el examen</h2><a href="#examen">Detalles</a></div>'+
     '<div class="list">'+
@@ -1722,7 +1822,8 @@ function viewInicio(){
     (recent.length? '<div class="list">'+recent.map(r=>{const a=r.id.startsWith("mix")?null:getA(r.id);return '<div class="li"><span class="dot">'+(a?stick(a.id,22):'∑')+'</span><div class="lt"><b>'+(a?a.name:'Test mezclado'+(r.id==="mix-a"?' · Línea 1':r.id==="mix-b"?' · Línea 2':''))+'</b><span>'+r.date+'</span></div><span class="amount '+(r.score>=5?'ok':'bad')+'">'+r.score.toFixed(1).replace(".",",")+'</span></div>'}).join("")+'</div>'
      : '<div class="empty-state">Aún no has hecho ningún test. Empieza por tu filósofo favorito.</div>')+
    '</section>'+
-  '</div>';
+  '</div>'+
+  '<p class="tiny profe-link"><a href="#profe">Acceso del profesor</a></p>';
 }
 
 function viewExamen(){
@@ -1780,7 +1881,7 @@ function viewAuthor(id){
   '<section class="hero-a"><div class="av">'+stickLight(a.id,92)+'</div><div><h1>'+a.name+'</h1><div class="yrs">'+a.years+'</div>'+
    '<div class="meta"><span class="chip">'+a.era+'</span><span class="chip">'+blockName[a.block]+'</span></div></div>'+
    '<p class="problem"><b>Problema: </b>'+a.problem+'</p></section>'+
-  '<div class="seg" role="tablist"><button class="on" data-tab="teoria" role="tab">Teoría</button><button data-tab="textos" role="tab">Textos</button><button data-tab="test" role="tab">Tipo test</button><button data-tab="practicar" role="tab">Practicar</button></div>'+
+  '<div class="seg seg-autor" role="tablist"><button class="on" data-tab="teoria" role="tab">Teoría</button><button data-tab="textos" role="tab">Textos</button>'+(COMMENTS[a.id]?'<button data-tab="entrenar" role="tab">Entrenadora</button>':'')+'<button data-tab="practicar" role="tab">Practicar</button></div>'+
   '<div id="tabbody"></div>';
 }
 /* ============ TEORÍA: PLATÓN ============ */
@@ -2360,7 +2461,7 @@ descartes(a){
 
 function tabFicha(a){
   if(THEORY[a.id]) return THEORY[a.id](a)+tabResponder(a)+
-  '<div class="btnrow"><button class="btn primary" data-go="test">'+ICONS.test+'Hacer el test</button><button class="btn ghost" data-go="practicar">'+ICONS.pen+'Practicar comentario</button></div>';
+  '<div class="btnrow"><a class="btn primary" href="#test-'+a.id+'">'+ICONS.test+'Hacer el test</a><button class="btn ghost" data-go="practicar">'+ICONS.pen+'Practicar comentario</button></div>';
   return '<div class="callout info">'+ICONS.info+'<span>Resumen provisional. Aquí irá la teoría completa de '+a.name+'.</span></div>'+
   videosSection(a)+
   '<section class="card"><h2 style="margin-bottom:12px">Fragmentos que entran</h2><div class="works">'+
@@ -2370,7 +2471,7 @@ function tabFicha(a){
   '<section class="card"><h2 style="margin-bottom:12px">Ideas clave</h2><ul class="bullets prose">'+a.ideas.map(i=>'<li>'+i+'</li>').join("")+'</ul></section>'+
   '<section class="card"><h2 style="margin-bottom:12px">Conceptos</h2><div class="concepts">'+a.concepts.map(c=>'<div class="concept"><b>'+c[0]+'</b><span>'+c[1]+'</span></div>').join("")+'</div></section>'+
   tabResponder(a)+
-  '<div class="btnrow"><button class="btn primary" data-go="test">'+ICONS.test+'Hacer el test</button><button class="btn ghost" data-go="practicar">'+ICONS.pen+'Practicar comentario</button></div>';
+  '<div class="btnrow"><a class="btn primary" href="#test-'+a.id+'">'+ICONS.test+'Hacer el test</a><button class="btn ghost" data-go="practicar">'+ICONS.pen+'Practicar comentario</button></div>';
 }
 function tabResponder(a){
   return '<section class="card"><div class="steps">'+
@@ -3714,7 +3815,7 @@ function bindPracticarComentario(a,rerender){
     ["principal","secundaria"].forEach(k=>document.getElementById("r-"+k).innerHTML=loading);
     box.innerHTML=loading; summary(points,true);
     try{
-      const r=await fetch(API_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({
+      stat("correccion-ia");store.set("iaUsada",true);const r=await fetch(API_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({
         autor:a.name,referencia:it.ref,texto:it.texto,
         ref_principal:it.principal.modelo,ref_secundaria:it.secundaria.modelo,conexion:it.conexion,
         principal:v("principal"),secundaria:v("secundaria"),explicacion:ex,codigo:store.get("codigo","")})});
@@ -3873,6 +3974,8 @@ function bindAuthor(id){
     body._go=show;
     if(t==="textos"){body.innerHTML=tabTextos(a);bindTextos(body);store.set("tab",t);return}
     if(t==="test"){body.innerHTML='<div id="quizhost" style="display:flex;flex-direction:column;gap:18px"></div>';const qh=document.getElementById("quizhost");qh._go=show;startQuiz(a.id,qh);store.set("tab",t);return}
+    czStop();
+    if(t==="entrenar"&&COMMENTS[a.id]){body.innerHTML='<div id="czhost" style="display:flex;flex-direction:column;gap:18px;scroll-margin-top:16px"></div>';bindEntrenadorComentario(a,document.getElementById("czhost"));store.set("tab",t);return}
     if(t==="practicar"&&COMMENTS[a.id]){body.innerHTML=tabPracticarComentario(a);bindPracticarComentario(a,()=>show("practicar"));store.set("tab",t);return}
     body.innerHTML = t==="teoria"?tabFicha(a):tabPracticar(a);
     store.set("tab",t);
@@ -5074,7 +5177,7 @@ function startQuiz(id,host){
   };
   const finish=()=>{
     const ok=st.answers.filter((x,k)=>x===items[k].ans).length;
-    const score=ok/items.length*10;
+    const score=ok/items.length*10;stat("test-terminado");actividad();
     const best=store.get("best",{});if(best[id]===undefined||score>best[id]){best[id]=score;store.set("best",best)}
     const hist=store.get("hist",[]);const d=new Date();hist.push({id,score,date:d.toLocaleDateString("es-ES",{day:"numeric",month:"short"})+" · "+d.toLocaleTimeString("es-ES",{hour:"2-digit",minute:"2-digit"})});store.set("hist",hist.slice(-30));
     const C=2*Math.PI*62;
@@ -5094,6 +5197,526 @@ function startQuiz(id,host){
   draw();
 }
 
+/* ============ ENTRENADOR DE COMENTARIO ============ */
+const CZ_STAGES=[
+ {n:1,phase:"Leer el texto",title:"Identifica el problema",sub:"¿Qué pregunta de fondo intenta responder?"},
+ {n:2,phase:"Leer el texto",title:"Localiza los conceptos clave",sub:"Los términos que sostienen el fragmento"},
+ {n:3,phase:"Las ideas",title:"Elige la idea principal",sub:"La tesis del fragmento"},
+ {n:4,phase:"Las ideas",title:"Elige la idea secundaria",sub:"Lo que apoya o desarrolla la tesis"},
+ {n:5,phase:"Las ideas",title:"Distingue principal y secundaria",sub:"Y lo que no está en el texto"},
+ {n:6,phase:"Explicar",title:"Relaciona con su filosofía",sub:"Qué partes de su pensamiento aparecen"},
+ {n:7,phase:"Explicar",title:"Escribe la idea principal",sub:"Con tus propias palabras"},
+ {n:8,phase:"Prueba final",title:"Comentario exprés",sub:"Todo junto, en 10 minutos",final:true}
+];
+const CZ_PROBLEMAS=[
+ ["Problema del conocimiento",["conocimiento","epistemolog","gnoseolog"]],
+ ["Problema de la realidad (ontológico)",["realidad","ontolog","metafisic"]],
+ ["Problema del ser humano (antropológico)",["antropolog","ser humano"]],
+ ["Problema ético-político",["etic","politic","moral"]],
+ ["Problema de la naturaleza (cosmológico)",["cosmolog","naturaleza","universo"]],
+ ["Problema de Dios",["dios","teolog"]]
+];
+const CZ_AREAS=[["Teoría de las Ideas",["ideas"]],["Ontología",["ontolog"]],["Epistemología",["epistemolog","reminiscencia","conocimiento"]],["Antropología",["antropolog","alma"]],["Ética y Política",["etica","politica"]],["Cosmología",["cosmolog"]]];
+const CZ_GENERICAS=[
+ "El autor reflexiona sobre la filosofía y sobre la importancia de pensar por uno mismo.",
+ "El texto trata sobre el pensamiento del autor y sus ideas más importantes.",
+ "Se explica que el conocimiento es algo muy importante para el ser humano."
+];
+const CZ_KIND=Object.assign({},DZ_KIND,{write:"Escribe"});
+const CZ_TYPES=Object.assign({},DZ_TYPES,{
+ tap:Object.assign({},DZ_TYPES.tap,{render(ex){return DZ_TYPES.tap.render(ex).replace('class="dz-tap"','class="dz-tap cz-chips"')}}),
+ write:{
+  render(ex){return '<textarea class="cm-in cz-write" rows="4" placeholder="Escribe aquí la idea con tus palabras…" aria-label="Tu respuesta"></textarea><span class="tiny muted cz-count">0 palabras</span>'},
+  init(root,ex,ready){const ta=root.querySelector("textarea"),c=root.querySelector(".cz-count");ta.oninput=()=>{const n=(ta.value.trim().match(/\S+/g)||[]).length;c.textContent=n+(n===1?" palabra":" palabras");ready(n>=5)}},
+  check(root,ex){const ta=root.querySelector("textarea");ta.disabled=true;const r=checkGroups(ta.value,ex.grupos);return r.total?r.hit/r.total:0}
+ }
+});
+function czProg(){return store.get("cz",{})}
+function czAut(id){const p=czProg();return p[id]||{s:{},all:false}}
+function czSave(id,o){const p=czProg();p[id]=o;store.set("cz",p)}
+function czDone(o,n){return !!(o.s[n]&&o.s[n].best>=6)}
+function czUnlocked(o,n){return o.all||n===1||czDone(o,n-1)}
+function czPick(id,except){const L=COMMENTS[id]||[];const pool=L.filter(f=>!(except||[]).includes(f.id));return (pool.length?pool:L)[Math.floor(Math.random()*(pool.length?pool:L).length)]}
+function czJoin(f){return " "+norm(f.problema.cats.map(c=>c.join(" ")).join(" "))+" "}
+function czExProblema(f){
+  const j=czJoin(f);
+  return {type:"tap",frag:f,ask:"¿Qué problema o problemas filosóficos plantea este fragmento? Toca todos los que correspondan.",
+    hint:"Piensa en la pregunta de fondo: ¿qué podemos conocer?, ¿qué es lo real?, ¿qué es el ser humano?, ¿cómo debemos vivir juntos?",
+    tokens:shuffle(CZ_PROBLEMAS.map(p=>[p[0],p[1].some(s=>j.includes(norm(s)))?1:0])),
+    exp:"El fragmento plantea: "+f.problema.nombre+"."};
+}
+function czExConceptos(f,id){
+  const t=" "+norm(f.texto)+" ";const own=f.conceptos.map(c=>normConcept(c));
+  const L=(COMMENTS[id]||[]).filter(x=>x.id!==f.id);const otraObra=L.filter(x=>x.ref!==f.ref);
+  const others=[...new Set((otraObra.length>=3?otraObra:L).flatMap(x=>x.conceptos))].filter(c=>{const n=normConcept(c);return !own.includes(n)&&!t.includes(" "+norm(c).split(" ")[0].slice(0,5))});
+  const dis=shuffle(others).slice(0,Math.max(3,Math.min(5,8-f.conceptos.length)));
+  return {type:"tap",frag:f,ask:"Toca los conceptos clave de este fragmento.",
+    hint:"Un concepto clave es un término filosófico que el texto necesita para decir lo que dice. Busca palabras que aparezcan en el fragmento.",
+    tokens:shuffle(f.conceptos.map(c=>[c,1]).concat(dis.map(c=>[c,0]))),
+    exp:"Los conceptos clave son: "+f.conceptos.join(", ")+". Los demás no aparecen en este fragmento."};
+}
+function czExPrincipal(f,id){
+  const o=czPick(id,[f.id]);
+  return {type:"choice",frag:f,ask:"¿Cuál es la idea principal de este fragmento?",
+    hint:"La idea principal es la tesis: lo que el autor quiere demostrar o defender. Las secundarias la apoyan, la explican o la ilustran.",
+    opts:[[f.principal.modelo,1,"Esta es la tesis central del fragmento."],
+      [f.secundaria.modelo,0,"Es una idea secundaria: desarrolla o apoya la tesis, pero no es la idea principal."],
+      [o.principal.modelo,0,"Es la idea principal de otro fragmento ("+o.ref+"), no de este."],
+      [CZ_GENERICAS[Math.floor(Math.random()*CZ_GENERICAS.length)],0,"Es demasiado general: valdría para casi cualquier texto."]]};
+}
+function czExSecundaria(f,id){
+  const o=czPick(id,[f.id]);
+  return {type:"choice",frag:f,ask:"¿Cuál es la idea secundaria de este fragmento?",
+    hint:"Busca lo que sirve para apoyar la tesis: un ejemplo, una razón, una consecuencia o una aclaración.",
+    opts:[[f.secundaria.modelo,1,"Es la idea secundaria: apoya y desarrolla la tesis del fragmento."],
+      [f.principal.modelo,0,"Esa es la idea principal, la tesis, no una secundaria."],
+      [o.secundaria.modelo,0,"Es una idea secundaria de otro fragmento ("+o.ref+")."],
+      [CZ_GENERICAS[Math.floor(Math.random()*CZ_GENERICAS.length)],0,"Es demasiado general: no recoge nada concreto del texto."]]};
+}
+function czExDistingue(f,id){
+  const o=czPick(id,[f.id]);
+  return {type:"sort",frag:f,ask:"Clasifica cada afirmación según su papel en este fragmento.",
+    hint:"Primero localiza la tesis. Después, lo que la apoya. Lo que no tiene nada que ver con este texto va a la tercera opción.",
+    buckets:["Idea principal","Idea secundaria","No está en el texto"],
+    items:[[f.principal.modelo,0],[f.secundaria.modelo,1],[o.principal.modelo,2],[o.secundaria.modelo,2]],
+    exp:"La tesis es la idea principal; la secundaria la apoya. Las otras dos pertenecen a otro fragmento ("+o.ref+")."};
+}
+function czExConexion(f){
+  const c=" "+norm(f.conexion)+" ";
+  const hit=CZ_AREAS.map(a=>a[1].some(s=>c.includes(norm(s))));
+  const idx=k=>CZ_AREAS.findIndex(a=>a[0]===k);
+  const tokens=CZ_AREAS.map((a,k)=>{let v=hit[k]?1:0;if(!v&&((a[0]==="Ontología"&&hit[idx("Teoría de las Ideas")])||(a[0]==="Teoría de las Ideas"&&hit[idx("Ontología")])))v=.5;return [a[0],v]});
+  return {type:"tap",frag:f,ask:"¿Con qué partes de la filosofía del autor se relaciona este fragmento? Toca todas las que correspondan.",
+    hint:"Pregúntate qué apartados de la teoría necesitarías explicar para entender bien el texto.",
+    tokens:shuffle(tokens),exp:"Este fragmento se relaciona con: "+f.conexion.replace(/\.$/,"")+"."};
+}
+function czExEscribe(f){
+  return {type:"write",frag:f,ask:"Escribe con tus palabras la idea principal de este fragmento.",
+    hint:"Una o dos frases. No copies el texto: di qué defiende el autor y por qué.",
+    grupos:f.principal.grupos,exp:"Una buena formulación sería: «"+f.principal.modelo+"». Se comprueba que aparezcan las ideas clave, aunque uses otras palabras."};
+}
+const CZ_GEN={
+ 1:(id,f,g)=>[czExProblema(f),czExProblema(g)],
+ 2:(id,f,g)=>[czExConceptos(f,id),czExConceptos(g,id)],
+ 3:(id,f,g)=>[czExPrincipal(f,id),czExPrincipal(g,id)],
+ 4:(id,f,g)=>[czExSecundaria(f,id),czExSecundaria(g,id)],
+ 5:(id,f,g)=>[czExDistingue(f,id)],
+ 6:(id,f,g)=>[czExConexion(f),czExConexion(g)],
+ 7:(id,f,g)=>[czExEscribe(f)],
+ 8:(id,f,g)=>[czExProblema(f),czExConceptos(f,id),czExPrincipal(f,id),czExSecundaria(f,id),czExConexion(f),czExEscribe(f)]
+};
+function czHubHTML(a){
+  const o=czAut(a.id);const n=COMMENTS[a.id].length;
+  const done=CZ_STAGES.filter(s=>czDone(o,s.n)).length;
+  const torches=CZ_STAGES.reduce((t,s)=>t+(o.s[s.n]?dzTorchCount(o.s[s.n].best):0),0);
+  const next=CZ_STAGES.find(s=>czUnlocked(o,s.n)&&!czDone(o,s.n));
+  let last="",path="";
+  CZ_STAGES.forEach(s=>{
+    if(s.phase!==last){path+='<div class="dz-phase">'+s.phase+'</div>';last=s.phase}
+    const info=o.s[s.n],isDone=czDone(o,s.n),un=czUnlocked(o,s.n);
+    let cls="dz-node",st="";
+    if(!un){cls+=" locked";st='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>'}
+    else if(info)st=dzTorches(dzTorchCount(info.best));else st="Empezar";
+    if(isDone)cls+=" done";if(next&&next.n===s.n)cls+=" next";if(s.final)cls+=" final";
+    const inner='<span class="n">'+(isDone?'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>':s.n)+'</span><span class="tx"><b>'+s.title+'</b><span>'+s.sub+'</span></span><span class="st">'+st+'</span>';
+    path+=un?'<button type="button" class="'+cls+' cz-node" data-czs="'+s.n+'">'+inner+'</button>':'<div class="'+cls+'" aria-disabled="true">'+inner+'</div>';
+  });
+  path+='<div class="dz-sun">Comentario dominado</div>';
+  return '<section class="dz-hero"><div class="label">Entrenador de comentario · '+a.name+'</div><h2>Del texto a la idea</h2>'+
+    '<p>Ocho etapas cortas para aprender a comentar paso a paso. En cada etapa te toca un fragmento al azar entre los '+n+' de '+a.name+'. Cada etapa superada enciende una antorcha.</p>'+
+    '<div class="row"><div><b>'+done+'/'+CZ_STAGES.length+'</b><span>etapas superadas</span></div><div><b>'+torches+'</b><span>antorchas</span></div></div>'+
+    (next?'<div style="margin-top:16px"><button type="button" class="btn accent" data-czs="'+next.n+'">'+(o.s[next.n]?'Seguir: ':'Empezar: ')+next.title+'</button></div>':'')+
+  '</section><section class="card"><div class="dz-path">'+path+'</div></section>'+
+  '<p class="dz-teacher">'+(o.all?'Modo profesor activo: todas las etapas abiertas. <button type="button" data-czall>Desactivar</button>':'¿Eres profesor? <button type="button" data-czall>Abrir todas las etapas</button>')+' · <button type="button" data-czreset>Borrar progreso</button></p>';
+}
+function czFragHTML(f){return '<details class="cz-frag" open><summary>Fragmento · '+esc(f.ref)+'</summary><div class="cz-ftext">'+esc(f.texto)+'</div></details>'}
+let czTimer=null;
+function czStop(){if(czTimer){clearInterval(czTimer);czTimer=null}}
+function czRunStage(a,n,host,back){
+  czStop();
+  const s=CZ_STAGES.find(x=>x.n===n);const f=czPick(a.id);const g=czPick(a.id,[f.id]);
+  const exs=CZ_GEN[n](a.id,f,g).map(e=>{if(CZ_TYPES[e.type].prep)CZ_TYPES[e.type].prep(e);return e});
+  const st={i:0,scores:[]};let fin=false;let left=600;
+  const timerHTML=()=>s.final?'<span class="cz-timer'+(left<=60?' low':'')+'" id="czt">'+Math.floor(left/60)+':'+String(left%60).padStart(2,"0")+'</span>':'<span>'+esc(s.title)+'</span>';
+  if(s.final){czTimer=setInterval(()=>{left--;const t=document.getElementById("czt");if(!t||!document.body.contains(host)){czStop();return}t.textContent=Math.floor(left/60)+':'+String(left%60).padStart(2,"0");t.classList.toggle("low",left<=60);if(left<=0){czStop();while(st.scores.length<exs.length)st.scores.push(0);finish(true)}},1000)}
+  const show=()=>{
+    const ex=exs[st.i];const T=CZ_TYPES[ex.type];
+    host.innerHTML='<div class="cz-top"><button type="button" class="link-btn" data-czback>← Volver al camino</button></div>'+
+     '<div class="qhead"><span>Etapa '+n+' · Ejercicio '+(st.i+1)+' de '+exs.length+'</span>'+timerHTML()+'</div>'+
+     '<div class="progress"><i style="width:'+(st.i/exs.length*100)+'%"></i></div>'+
+     '<section class="card" style="display:flex;flex-direction:column;gap:14px">'+
+      '<span class="dz-kind">'+CZ_KIND[ex.type]+'</span>'+czFragHTML(ex.frag)+
+      '<div class="dz-ask">'+esc(ex.ask)+'</div>'+
+      '<div id="czbody" style="display:flex;flex-direction:column;gap:14px">'+T.render(ex)+'</div>'+
+      '<div class="callout info dz-hintbox" id="czhint">'+ICONS.bulb+'<span>'+esc(ex.hint)+'</span></div>'+
+      '<div id="czfb"></div>'+
+      '<div class="dz-actions"><button type="button" class="btn ghost" id="czhintbtn">Pista</button><span class="grow"></span><button type="button" class="btn primary" id="czcheck" disabled>Comprobar</button></div>'+
+     '</section>';
+    host.querySelector("[data-czback]").onclick=()=>{czStop();back()};
+    const body=document.getElementById("czbody"),cb=document.getElementById("czcheck");
+    T.init(body,ex,ok=>{cb.disabled=!ok});
+    document.getElementById("czhintbtn").onclick=()=>document.getElementById("czhint").classList.toggle("on");
+    cb.onclick=()=>{
+      const sc=T.check(body,ex);st.scores.push(sc);
+      const full=sc>=.999,zero=sc<=0;
+      const head=full?"¡Correcto!":zero?"No es correcto":"Casi: "+Math.round(sc*100)+" % bien";
+      document.getElementById("czfb").innerHTML='<div class="feedback '+(full?"ok":"bad")+'"><b>'+head+'</b>'+(ex.type==="choice"?ex._why:esc(ex.exp))+'</div>';
+      document.getElementById("czhintbtn").remove();
+      cb.textContent=st.i<exs.length-1?"Siguiente":"Ver resultado";
+      cb.onclick=()=>{st.i++;if(st.i<exs.length)show();else finish(false);host.scrollIntoView({block:"start",behavior:"smooth"})};
+      cb.focus({preventScroll:true});
+    };
+  };
+  const finish=(timeout)=>{
+    if(fin)return;fin=true;czStop();
+    const score=st.scores.reduce((x,y)=>x+y,0)/exs.length*10;
+    const o=czAut(a.id);const prev=o.s[n];o.s[n]={best:Math.max(score,prev?prev.best:0),last:score,t:(prev?prev.t:0)+1};czSave(a.id,o);
+    actividad();stat("entrenador-comentario-"+n);
+    const passed=score>=6;const nextS=CZ_STAGES.find(x=>x.n===n+1);
+    host.innerHTML='<div class="progress"><i style="width:100%"></i></div><section class="card dz-result">'+
+      (timeout?'<p class="cz-tiempo">Se acabó el tiempo. Los ejercicios sin hacer cuentan como 0.</p>':'')+
+      dzResultHead(n,score,s).replace("Repítela: te tocará otra pregunta.","Repítela: te tocará otro fragmento.").replace("con otra pregunta","con otro fragmento")+
+      '<div class="dz-rev">'+exs.map((e,i)=>{const sc=st.scores[i];return '<div><span>'+(i+1)+'. '+CZ_KIND[e.type]+' · '+esc(e.ask)+'</span><i style="color:'+(sc>=.999?"var(--ok)":sc<=0?"var(--bad)":"var(--ochre)")+'">'+Math.round(sc*100)+' %</i></div>'}).join("")+'</div>'+
+      '<div class="btnrow" style="justify-content:center">'+
+       (passed&&nextS?'<button type="button" class="btn primary" data-cznext>Siguiente etapa</button>':'')+
+       '<button type="button" class="btn '+(passed?"ghost":"primary")+'" data-czagain>Repetir con otro fragmento</button>'+
+       '<button type="button" class="btn ghost" data-czback>Volver al camino</button></div></section>';
+    host.querySelector("[data-czback]").onclick=back;
+    host.querySelector("[data-czagain]").onclick=()=>{czRunStage(a,n,host,back);host.scrollIntoView({block:"start"})};
+    const nx=host.querySelector("[data-cznext]");if(nx)nx.onclick=()=>{czRunStage(a,n+1,host,back);host.scrollIntoView({block:"start"})};
+  };
+  show();
+}
+function bindEntrenadorComentario(a,host){
+  const hub=()=>{czStop();host.innerHTML=czHubHTML(a);
+    host.querySelectorAll("[data-czs]").forEach(b=>b.onclick=()=>{czRunStage(a,+b.dataset.czs,host,hub);host.scrollIntoView({block:"start"})});
+    const al=host.querySelector("[data-czall]");if(al)al.onclick=()=>{const o=czAut(a.id);o.all=!o.all;czSave(a.id,o);hub()};
+    const r=host.querySelector("[data-czreset]");if(r)r.onclick=()=>{if(r.dataset.confirm!=="1"){r.dataset.confirm="1";r.textContent="Pulsa otra vez para borrar";setTimeout(()=>{r.dataset.confirm="";r.textContent="Borrar progreso"},2500);return}const o=czAut(a.id);czSave(a.id,{s:{},all:o.all});hub()};
+  };
+  hub();
+}
+window.addEventListener("hashchange",czStop);
+
+/* ============ PREGUNTA DEL DÍA, RACHA E INSIGNIAS ============ */
+function hoyStr(d){d=d||new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+function diaNum(s){const p=s.split("-").map(Number);return Math.round(Date.UTC(p[0],p[1]-1,p[2])/864e5)}
+function actividad(){const d=store.get("dias",[]);const h=hoyStr();
+  if(new Date().getHours()<8)store.set("aurora",true);
+  if(!d.includes(h)){if(d.length){const last=Math.max(...d.map(diaNum));if(diaNum(h)-last>=7)store.set("retorno",true)}d.push(h);store.set("dias",d.slice(-400))}
+  checkInsignias()}
+function rachas(){
+  const set=[...new Set(store.get("dias",[]))].map(diaNum).sort((a,b)=>a-b);
+  let best=0,run=0,prev=null;
+  set.forEach(n=>{run=(prev!==null&&n===prev+1)?run+1:1;best=Math.max(best,run);prev=n});
+  const hoy=diaNum(hoyStr());
+  const actual=(prev===hoy||prev===hoy-1)?run:0;
+  return {actual,best,hoyHecho:prev===hoy};
+}
+function pdiaHoy(){
+  const all=[];AUTHORS.forEach(a=>(QUESTIONS[a.id]||[]).forEach(q=>all.push({q,id:a.id})));
+  const n=diaNum(hoyStr());const pick=all[(n*7919)%all.length];
+  let seed=n;const rnd=()=>{seed=(seed*16807)%2147483647;return seed/2147483647};
+  const order=[0,1,2,3];for(let i=3;i>0;i--){const j=Math.floor(rnd()*(i+1));[order[i],order[j]]=[order[j],order[i]]}
+  return {id:pick.id,text:pick.q[0],opts:order.map(i=>pick.q[1][i]),ans:order.indexOf(pick.q[2]),exp:pick.q[3]};
+}
+const FLAME='<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2c1.2 3.4 5 5.2 5 10a5 5 0 0 1-10 0c0-2 .9-3.5 1.9-4.4.2 1.6 1.2 2.6 2.3 2.6 0-3.1-.7-5.6.8-8.2z"/></svg>';
+let pdiaRecien=false;
+function pdiaHTML(){
+  const it=pdiaHoy();const r=store.get("pdia",{});const done=r.fecha===hoyStr();const rc=rachas();
+  if(done&&!pdiaRecien) return '';
+  const au=getA(it.id);
+  return '<section class="card pdia" id="pdia"><div class="pdia-head"><div><h2>Pregunta del día</h2><span class="tiny muted">'+(au?au.name:'')+'</span></div>'+
+    '</div>'+
+    '<div class="question">'+it.text+'</div>'+
+    '<div class="opts">'+it.opts.map((o,k)=>{let cls="";if(done){if(k===it.ans)cls="right";else if(k===r.k)cls="wrong"}
+      return '<button type="button" class="opt '+cls+'" data-pdia="'+k+'" '+(done?'disabled':'')+'><span class="k">'+"ABCD"[k]+'</span><span>'+o+'</span></button>'}).join("")+'</div>'+
+    (done?'<div class="feedback '+(r.ok?'ok':'bad')+'"><b>'+(r.ok?'Correcto':'No es esa')+'</b>'+it.exp+'</div><div class="btnrow"><button type="button" class="btn primary" data-pdia-ok>Hecho</button><span class="small muted">Mañana, otra pregunta.</span></div>':'')+
+  '</section>';
+}
+document.addEventListener("click",e=>{
+  if(e.target.closest("[data-pdia-ok]")){pdiaRecien=false;const c=document.getElementById("pdia");if(c)c.remove();return}
+  const b=e.target.closest("[data-pdia]");if(!b||b.disabled)return;
+  const it=pdiaHoy();const k=+b.dataset.pdia;const ok=k===it.ans;
+  store.set("pdia",{fecha:hoyStr(),k,ok});
+  store.set("pdiaN",store.get("pdiaN",0)+1);if(ok)store.set("pdiaOk",store.get("pdiaOk",0)+1);else store.set("pdiaMal",store.get("pdiaMal",0)+1);
+  stat("pregunta-dia");actividad();
+  pdiaRecien=true;const c=document.getElementById("pdia");if(c){c.outerHTML=pdiaHTML()}
+  const ins=document.getElementById("insignias");if(ins)ins.outerHTML=insigniasHTML();
+});
+
+const G={
+  q:'<path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1 .9-1 1.7v.6"/><circle cx="12" cy="17.2" r=".7" fill="currentColor"/>',
+  star:'<path d="m12 4 2.4 5 5.4.7-4 3.8 1 5.4L12 16.3 7.2 18.9l1-5.4-4-3.8 5.4-.7z"/>',
+  bulb:'<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/>',
+  layers:'<path d="m12 4 8 4-8 4-8-4z"/><path d="m4 12 8 4 8-4"/><path d="m4 16 8 4 8-4"/>',
+  eye:'<path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/>',
+  pen:'<path d="M4 20h4L19 9l-4-4L4 16z"/><path d="m13.5 6.5 4 4"/>',
+  spark:'<path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/>',
+  phone:'<rect x="7" y="3" width="10" height="18" rx="2.5"/><path d="M11 18h2"/>',
+  check:'<path d="m5 12.5 4.5 4.5L19 7.5"/>',
+  sun:'<circle cx="12" cy="12" r="4"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6 7 7M17 17l1.4 1.4M5.6 18.4 7 17M17 7l1.4-1.4"/>',
+  loop:'<path d="M17 3l3 3-3 3"/><path d="M4 11V9a3 3 0 0 1 3-3h13"/><path d="M7 21l-3-3 3-3"/><path d="M20 13v2a3 3 0 0 1-3 3H4"/>',
+  doc:'<path d="M7 3h7l4 4v14H7z"/><path d="M10 12h5M10 16h5"/>'
+};
+const FIL_FRASE={platon:["Lo bello es difícil.","Platón, Hipias mayor"],aristoteles:["Todos los hombres desean por naturaleza saber.","Aristóteles, Metafísica"],descartes:["Pienso, luego existo.","Descartes, Discurso del método"],locke:["El conocimiento de ningún hombre puede ir más allá de su experiencia.","Locke, Ensayo sobre el entendimiento humano"],kant:["¡Ten el valor de servirte de tu propio entendimiento!","Kant, ¿Qué es la Ilustración?"],nietzsche:["Hay que tener todavía caos dentro de sí para poder dar a luz una estrella danzarina.","Nietzsche, Así habló Zaratustra"],ortega:["Yo soy yo y mi circunstancia.","Ortega y Gasset, Meditaciones del Quijote"],arendt:["Nadie tiene derecho a obedecer.","Hannah Arendt"]};
+const FIL_INS={platon:"Amigo de las Ideas",aristoteles:"Peripatético",descartes:"Pienso, luego existo",locke:"Tabla rasa",kant:"Mayoría de edad",nietzsche:"Filosofar a martillazos",ortega:"Yo y mi circunstancia",arendt:"Pensar sin barandillas"};
+function filCompleto(id){const b=store.get("best",{});if(!(b[id]>=7))return false;const s=seenGet();
+  const vids=(VIDEOS[id]||[]).map(v=>v.id).concat((TEXTOS[id]||[]).filter(t=>t.yt).map(t=>t.yt)).filter(Boolean);return vids.every(v=>s[v])}
+const nVideos=()=>Object.keys(seenGet()).length;
+const czMax=()=>Math.max(0,...Object.values(czProg()).map(o=>CZ_STAGES.filter(st=>czDone(o,st.n)).length));
+const nEtapas=()=>{const dz=dzProg();return DZ_STAGES.filter(st=>dzDone(dz,st.n)).length};
+const INS_GRUPOS=[["pdia","Pregunta del día"],["filosofos","Filósofos"],["test","Test"],["videos","Vídeos"],["comentario","Comentario"],["disertacion","Disertación"],["otras","Otras"],["secretas","Secretas"]];
+const INSIGNIAS=[
+  {id:"primera",gr:"pdia",n:"Primera pregunta",d:"Responde tu primera pregunta del día",g:G.q,ok:()=>store.get("pdiaN",0)>=1},
+  {id:"mayeutica",gr:"pdia",n:"Mayéutica",d:"Acierta 10 preguntas del día",g:G.bulb,ok:()=>store.get("pdiaOk",0)>=10},
+  {id:"tabano",gr:"pdia",n:"Tábano de Atenas",d:"Acierta 25 preguntas del día",g:G.bulb,ok:()=>store.get("pdiaOk",0)>=25},
+  {id:"oraculo",gr:"pdia",n:"Oráculo de Delfos",d:"Acierta 50 preguntas del día",g:G.bulb,gold:true,ok:()=>store.get("pdiaOk",0)>=50},
+  ...AUTHORS.map(a=>({id:"fil-"+a.id,gr:"filosofos",n:FIL_INS[a.id]||a.name,d:"Saca 7 o más en el test de "+a.name+" y ve todos sus vídeos",fil:a.id,frase:FIL_FRASE[a.id],ok:()=>filCompleto(a.id)})),
+  {id:"primertest",gr:"test",n:"Primer test",d:"Termina tu primer test",g:G.check,ok:()=>store.get("hist",[]).length>=1},
+  {id:"sobresaliente",gr:"test",n:"Sobresaliente",d:"Saca un 10 en un test",g:G.star,ok:()=>Object.values(store.get("best",{})).some(v=>v>=10)},
+  {id:"linea",gr:"test",n:"Línea completa",d:"Haz el test de los 4 filósofos de tu línea",premio:"Te has ganado 0,25 en el examen tipo test",gold:true,g:G.layers,ok:()=>{const b=store.get("best",{});return ["a","b"].some(l=>LINE_ORDER[l].every(id=>b[id]!==undefined))}},
+  {id:"ochosabios",gr:"test",n:"Los ocho sabios",d:"Aprueba el test de los 8 filósofos",g:G.layers,gold:true,ok:()=>{const b=store.get("best",{});return AUTHORS.every(a=>b[a.id]>=5)}},
+  {id:"videos25",gr:"videos",n:"Ojos abiertos",d:"Ve 25 vídeos",num:"25",ok:()=>nVideos()>=25},
+  {id:"videos50",gr:"videos",n:"Mirada al Sol",d:"Ve 50 vídeos",num:"50",ok:()=>nVideos()>=50},
+  {id:"videos100",gr:"videos",n:"Theoria",d:"Ve 100 vídeos",num:"100",gold:true,ok:()=>nVideos()>=100},
+  {id:"cz1",gr:"comentario",n:"Primera lectura",d:"Supera la primera etapa de la entrenadora de comentario",g:G.doc,ok:()=>czMax()>=1},
+  {id:"cz4",gr:"comentario",n:"Lector atento",d:"Supera 4 etapas de la entrenadora de comentario",g:G.eye,ok:()=>czMax()>=4},
+  {id:"cz8",gr:"comentario",n:"Hermeneuta",d:"Supera las 8 etapas de la entrenadora de comentario de un autor",premio:"Te has ganado 0,25 más en el comentario de texto",g:G.star,gold:true,ok:()=>czMax()>=8},
+  {id:"etapa1",gr:"disertacion",n:"Primeros elementos",d:"Supera la primera etapa del entrenador",g:G.pen,ok:()=>nEtapas()>=1},
+  {id:"etapa4",gr:"disertacion",n:"A medio camino",d:"Supera 4 etapas del entrenador",g:G.pen,ok:()=>nEtapas()>=4},
+  {id:"disertador",gr:"disertacion",n:"Disertador",d:"Supera las 8 etapas del entrenador",premio:"Te has ganado 0,25 más en la disertación",g:G.pen,gold:true,ok:()=>DZ_STAGES.every(st=>dzDone(dzProg(),st.n))},
+  {id:"pluma",gr:"disertacion",n:"Pluma propia",d:"Escribe una disertación de más de 100 palabras",g:G.doc,ok:()=>store.get("essaysWritten",[]).length>=1},
+  {id:"sapere",gr:"otras",n:"Segunda opinión",d:"Corrige un comentario con la IA",g:G.spark,ok:()=>store.get("iaUsada",false)},
+  {id:"despertar",gr:"otras",n:"Despertar",d:"Instala Caverna en tu móvil",g:G.phone,ok:()=>isStandalone()||store.get("appInstalada",false)},
+  {id:"aurora",gr:"secretas",secret:true,n:"Aurora",d:"Has estudiado antes de las 8 de la mañana",g:G.sun,ok:()=>store.get("aurora",false),frase:["Hay tantas auroras que todavía no han brillado.","Nietzsche, Aurora"]},
+  {id:"retorno",gr:"secretas",secret:true,n:"Eterno retorno",d:"Has vuelto a Caverna después de una semana sin entrar",g:G.loop,ok:()=>store.get("retorno",false),frase:["¿Quieres esto otra vez y aún innumerables veces?","Nietzsche, La gaya ciencia"]},
+  {id:"socrates",gr:"secretas",secret:true,n:"Sé que no sé nada",d:"Has fallado 3 preguntas del día. Reconocer que no se sabe es el primer paso",g:G.q,ok:()=>store.get("pdiaMal",0)>=3,frase:["Solo sé que no sé nada.","Atribuida a Sócrates"]},
+  {id:"bien",gr:"secretas",secret:true,gold:true,n:"La Idea de Bien",d:"Has conseguido 20 insignias",g:G.sun,ok:()=>Object.keys(store.get("insignias",{})).filter(k=>k!=="bien").length>=20,frase:["En el mundo inteligible, lo último que se percibe, y con dificultad, es la Idea del Bien.","Platón, República VII"]}
+];
+function medalla(b,on,size){
+  const fill=on?(b.gold?"#F5A04A":"var(--petrol)"):"var(--line)",ink=on?"#fff":"var(--muted)",rib=on?(b.gold?"var(--petrol)":"#F5A04A"):"var(--line)";
+  const inner=b.num?'<text x="12" y="16.3" text-anchor="middle" font-size="'+(b.num.length>2?8.5:b.num.length>1?10.5:12.5)+'" font-weight="800" font-family="Sora, sans-serif" fill="'+ink+'" stroke="none">'+b.num+'</text>':b.g;
+  if(b.fil){return '<svg width="'+size+'" height="'+Math.round(size*56/48)+'" viewBox="0 0 48 56" aria-hidden="true"><path d="M13 1h9l5 16h-9z" fill="'+rib+'" opacity="'+(on?1:.6)+'"/><path d="M35 1h-9l-5 16h9z" fill="'+rib+'" opacity="'+(on?.8:.5)+'"/><circle cx="24" cy="36" r="17" fill="'+(on?'var(--petrol-soft)':'var(--line)')+'" stroke="'+fill+'" stroke-width="2.5"/><g class="stk" transform="translate(9.5 21.5)"><svg width="29" height="29" viewBox="0 0 120 120" x="0" y="0">'+stick(b.fil,120).replace(/^<svg[^>]*>/,'').replace(/<\/svg>$/,'')+'</svg></g></svg>'}
+  return '<svg width="'+size+'" height="'+Math.round(size*56/48)+'" viewBox="0 0 48 56" aria-hidden="true"><path d="M13 1h9l5 16h-9z" fill="'+rib+'" opacity="'+(on?1:.6)+'"/><path d="M35 1h-9l-5 16h9z" fill="'+rib+'" opacity="'+(on?.8:.5)+'"/>'+
+    '<circle cx="24" cy="36" r="17" fill="'+fill+'"/><circle cx="24" cy="36" r="13.5" fill="none" stroke="'+ink+'" stroke-opacity=".35" stroke-width="1.2"/>'+
+    '<g transform="translate(12 24)" fill="none" stroke="'+ink+'" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">'+inner+'</g></svg>';
+}
+function checkInsignias(silent){
+  const got=store.get("insignias",{});const rc=rachas();const nuevas=[];
+  INSIGNIAS.forEach(b=>{if(!got[b.id]){let ok=false;try{ok=b.ok(rc)}catch(e){}if(ok){got[b.id]=Date.now();nuevas.push(b)}}});
+  if(nuevas.length){store.set("insignias",got);if(!silent)nuevas.forEach(b=>celebrar(b))}
+}
+const celebCola=[];let celebAbierta=false,celebFoco=null;
+function celebrar(b){stat("insignia-"+b.id);celebCola.push(b);if(!celebAbierta)celebSiguiente()}
+function celebSiguiente(){
+  const b=celebCola.shift();
+  if(!b){celebAbierta=false;const ins=document.getElementById("insignias");if(ins)ins.outerHTML=insigniasHTML();if(celebFoco&&celebFoco.focus)celebFoco.focus({preventScroll:true});return}
+  if(!celebAbierta)celebFoco=document.activeElement;
+  celebAbierta=true;
+  const m=document.createElement("div");m.className="celeb"+(b.gold?" gold":"")+(b.secret?" secret":"");
+  m.innerHTML='<div class="celeb-bg"></div><div class="celeb-card" role="dialog" aria-modal="true" aria-labelledby="celebT" aria-describedby="celebD">'+
+    '<div class="celeb-medal">'+medalla(b,true,132)+'</div>'+
+    '<span class="celeb-kicker">'+(b.secret?'¡Insignia secreta desbloqueada!':'¡Insignia conseguida!')+'</span>'+
+    '<h2 id="celebT">'+b.n+'</h2><p id="celebD">'+b.d+'</p>'+
+    (b.premio?'<div class="celeb-premio"><b>+0,25</b><span>'+b.premio+'</span></div>':'')+
+    (b.frase?'<blockquote class="celeb-q">«'+b.frase[0]+'»<cite>'+b.frase[1]+'</cite></blockquote>':'')+
+    '<button type="button" class="btn primary celeb-ok">'+(celebCola.length?'Siguiente':'¡Genial!')+'</button></div>';
+  document.body.appendChild(m);
+  const reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if(!reduce){const cols=["#b8336a","#F5A04A","#fbe6ef","#e03880","#4a1430"];const box=document.createElement("div");box.className="confeti";box.setAttribute("aria-hidden","true");
+    for(let i=0;i<(b.gold?70:40);i++){const c=document.createElement("i");c.style.left=(Math.random()*100)+"%";c.style.background=cols[i%cols.length];c.style.animationDelay=(Math.random()*.4)+"s";c.style.animationDuration=(1.6+Math.random()*1.2)+"s";c.style.setProperty("--x",(Math.random()*160-80)+"px");c.style.setProperty("--r",(Math.random()*720-360)+"deg");box.appendChild(c)}
+    m.appendChild(box);setTimeout(()=>box.remove(),3200)}
+  requestAnimationFrame(()=>m.classList.add("on"));
+  const ok=m.querySelector(".celeb-ok");setTimeout(()=>ok.focus({preventScroll:true}),50);
+  const cerrar=()=>{document.removeEventListener("keydown",key);m.classList.remove("on");setTimeout(()=>{m.remove();celebSiguiente()},reduce?0:250)};
+  const key=e=>{if(e.key==="Escape"){e.preventDefault();cerrar()}if(e.key==="Tab"){e.preventDefault();ok.focus()}};
+  ok.onclick=cerrar;m.querySelector(".celeb-bg").onclick=cerrar;document.addEventListener("keydown",key);
+}
+function insStats(){const got=store.get("insignias",{});const rc=rachas();return {got,rc,n:INSIGNIAS.filter(b=>got[b.id]).length}}
+function insLi(b,got){const on=!!got[b.id];if(b.secret&&!on)return '<li class="ins secreta">'+medalla({g:G.q},false,46)+'<b>Insignia secreta</b><span>Sigue explorando para descubrirla</span></li>';return '<li class="ins'+(on?' on':'')+'">'+medalla(b,on,46)+'<b>'+b.n+'</b><span>'+(on?'Conseguida':b.d)+'</span>'+(b.premio&&on?'<span class="ins-premio">'+b.premio+'</span>':'')+'</li>'}
+function rachaRow(rc){return '<div class="racha-row"><div><b>'+rc.actual+'</b><span>días de racha</span></div><div><b>'+rc.best+'</b><span>mejor racha</span></div><div><b>'+store.get("pdiaOk",0)+'</b><span>preguntas del día acertadas</span></div></div>'}
+function insigniasHTML(){
+  const {got,rc,n}=insStats();
+  const ultimas=INSIGNIAS.filter(b=>got[b.id]).sort((x,y)=>got[y.id]-got[x.id]).slice(0,3);
+  const proximas=INSIGNIAS.filter(b=>!got[b.id]&&!b.secret).slice(0,6-ultimas.length);
+  return '<section class="card" id="insignias"><div class="card-head"><h2>Tus insignias</h2><a href="#insignias">Ver las '+INSIGNIAS.length+'</a></div>'+
+    '<p class="small muted" style="margin:0 0 12px">Llevas <b>'+n+' de '+INSIGNIAS.length+'</b>.'+(proximas.length?' Estas son las siguientes que puedes conseguir:':'')+'</p>'+
+    '<ul class="ins-grid">'+ultimas.concat(proximas).map(b=>insLi(b,got)).join("")+'</ul>'+sorpresaHTML()+'</section>';
+}
+function sorpresaHTML(){return '<p class="sorpresa"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/></svg><span><b>Algunas insignias tienen sorpresa…</b> y otras son secretas: solo sabrás cuáles son cuando las consigas.</span></p>'}
+function viewInsignias(){
+  const {got,rc,n}=insStats();
+  return topbar("Tus insignias",n+" de "+INSIGNIAS.length+" conseguidas",["inicio","Inicio"])+
+  '<section class="card">'+sorpresaHTML().replace('class="sorpresa"','class="sorpresa" style="margin-top:0"')+'</section>'+
+  INS_GRUPOS.map(([g,t])=>{const list=INSIGNIAS.filter(b=>b.gr===g);const k=list.filter(b=>got[b.id]).length;
+    return '<section class="card"><div class="card-head"><h2>'+t+'</h2><span class="tiny muted">'+k+' de '+list.length+'</span></div><ul class="ins-grid">'+list.map(b=>insLi(b,got)).join("")+'</ul></section>'}).join("");
+}
+checkInsignias(true);
+
+/* ============ CLASE (opcional) Y PANEL DEL PROFESOR ============ */
+// En la vista previa de Claude no hay servidor: se usa una clase de ejemplo guardada en este dispositivo.
+const CLASE_DEMO=window.CAVERNA_PREVIEW===true||/claude|localhost|127\.0\.0\.1|^$/.test(location.hostname);
+const CLASE_URL="/.netlify/functions/clase";
+const DEMO_ALUMNOS=[
+ ["Nº 3","2º A","a",.82,.9,.75,.88,.7,1],["Lupe","2º A","a",.64,.7,.55,.72,.5,2],["Nº 7","2º A","b",.41,.35,.3,.6,.4,5],
+ ["Dani M.","2º A","a",.12,.1,0,.3,.1,13],["Nº 15","2º A","b",.93,1,.9,.95,.85,0],["Nº 21","2º B","b",.55,.6,.45,.62,.5,3],
+ ["Sofi","2º B","a",.27,.2,.15,.45,.3,9],["Nº 2","2º B","b",.71,.75,.7,.68,.7,1],["Hugo","2º B","a",.05,0,0,.2,0,21]
+];
+function demoSeed(){
+  const now=Date.now(),day=864e5;
+  return DEMO_ALUMNOS.map((d,i)=>{const ids=LINE_ORDER[d[2]];return {id:"demo"+i,alias:d[0],grupo:d[1],updated:now-d[8]*day-i*36e5,
+    progreso:{t:d[3],th:d[4],tx:d[5],te:d[6],ds:d[7],via:d[2],st:Math.round(d[7]*8),rc:d[8]>1?0:Math.round(d[3]*9),rcm:Math.round(d[3]*14),ins:Math.round(d[3]*9),pr:(d[6]>=.7?["linea"]:[]).concat(d[7]>=.7?["disertador"]:[]),
+      au:Object.fromEntries(ids.map((id,k)=>[id,{te:Math.max(0,Math.min(10,Math.round((d[6]*10+(k-1.5)*1.6)*10)/10)),v:Math.max(0,Math.min(1,d[4]+(1.5-k)*.08))}]))}}});
+}
+function demoDB(){let db=store.get("demoClase",null);if(!db){db=demoSeed();store.set("demoClase",db)}return db}
+async function claseApi(body){
+  if(CLASE_DEMO){
+    const db=demoDB();
+    if(body.action==="sync"){const i=db.findIndex(x=>x.id===body.id);const rec={id:body.id,alias:body.alias,grupo:body.grupo,progreso:body.progreso,updated:Date.now()};if(i>=0)db[i]=rec;else db.push(rec);store.set("demoClase",db);return {ok:true}}
+    if(body.action==="salir"){store.set("demoClase",db.filter(x=>x.id!==body.id));return {ok:true}}
+    if(body.action==="panel"){return {ok:true,alumnos:db}}
+    return {ok:false};
+  }
+  const r=await fetch(CLASE_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});
+  let j={};try{j=await r.json()}catch(e){}
+  if(!r.ok) throw new Error(j.error||("Error "+r.status));
+  return j;
+}
+function claseSnapshot(){
+  const d=progData();const r2=x=>x===null?null:Math.round(x*100)/100;
+  const rc=rachas();
+  return {t:r2(d.total),th:r2(d.thp),tx:r2(d.txp),te:r2(d.testPct),ds:r2(d.ds),via:d.via,st:d.stages,rc:rc.actual,rcm:rc.best,ins:Object.keys(store.get("insignias",{})).length,pr:INSIGNIAS.filter(b=>b.premio&&store.get("insignias",{})[b.id]).map(b=>b.id),
+    au:Object.fromEntries(d.rows.map(r=>{const tot=r.th[1]+r.tx[1];return [r.a.id,{te:r.test===undefined?null:Math.round(r.test*10)/10,v:tot?r2((r.th[0]+r.tx[0])/tot):null}]}))};
+}
+let claseLastSent=null,claseTimer=null;
+async function claseSync(force){
+  const c=store.get("clase",null);if(!c)return;
+  const snap=claseSnapshot();const key=JSON.stringify(snap);
+  if(!force&&key===claseLastSent)return;
+  if(!force&&c.last&&Date.now()-c.last<120000){clearTimeout(claseTimer);claseTimer=setTimeout(()=>claseSync(),120000);return}
+  try{await claseApi({action:"sync",codigo:store.get("codigo",""),id:c.id,alias:c.alias,grupo:c.grupo,progreso:snap});claseLastSent=key;c.last=Date.now();store.set("clase",c)}catch(e){}
+}
+function hace(ts){if(!ts)return "nunca";const m=Math.round((Date.now()-ts)/6e4);if(m<2)return "ahora mismo";if(m<60)return "hace "+m+" min";const h=Math.round(m/60);if(h<24)return "hace "+h+" h";const d=Math.round(h/24);return d===1?"ayer":"hace "+d+" días"}
+function escH(s){return String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function claseCardHTML(){
+  const c=store.get("clase",null);
+  if(c) return '<section class="card clase-card" id="claseCard"><div class="clase-row"><span class="clase-ic" aria-hidden="true">'+ICONS_CLASE+'</span>'+
+    '<div class="clase-txt"><b>Tu profe ve tu progreso</b><span class="small muted">Como «'+escH(c.alias)+'» · '+escH(c.grupo)+' · actualizado '+hace(c.last)+'</span></div>'+
+    '<button type="button" class="link-btn" data-clase="salir">Dejar la clase</button></div></section>';
+  if(store.get("claseHide",false)) return '';
+  return '<section class="card clase-card" id="claseCard"><div class="clase-row"><span class="clase-ic" aria-hidden="true">'+ICONS_CLASE+'</span>'+
+    '<div class="clase-txt"><b>¿Quieres que tu profe vea tu progreso?</b><span class="small muted">Es opcional. Solo verá tus porcentajes y el alias que elijas, nunca tus respuestas.</span></div></div>'+
+    '<div class="btnrow" id="claseBtns"><button type="button" class="btn primary" data-clase="abrir">Unirme a mi clase</button><button type="button" class="link-btn" data-clase="ocultar">Ahora no</button></div>'+
+    '<form class="clase-form" id="claseForm" hidden>'+
+      '<div class="field"><label for="clCod">Código de clase</label><input class="cm-in" id="clCod" autocomplete="off" value="'+escH(store.get("codigo",""))+'" placeholder="El que te ha dado tu profe" required></div>'+
+      '<div class="field"><label for="clGru">Grupo</label><input class="cm-in" id="clGru" maxlength="12" placeholder="Por ejemplo, 2º A" required></div>'+
+      '<div class="field"><label for="clAli">Alias</label><input class="cm-in" id="clAli" maxlength="24" placeholder="Tu número de lista o un apodo" required><span class="tiny muted">No pongas tu nombre completo: con que tu profe te reconozca basta.</span></div>'+
+      '<p class="small clase-err" id="clErr" hidden></p>'+
+      '<div class="btnrow"><button type="submit" class="btn primary">Unirme</button><button type="button" class="link-btn" data-clase="cancelar">Cancelar</button></div>'+
+    '</form></section>';
+}
+const ICONS_CLASE='<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0"/><circle cx="17" cy="9" r="2.5"/><path d="M15.5 14.2A4.5 4.5 0 0 1 21 18.5"/></svg>';
+document.addEventListener("click",async e=>{
+  const b=e.target.closest("[data-clase]");if(!b)return;
+  const a=b.dataset.clase;
+  if(a==="abrir"){document.getElementById("claseForm").hidden=false;document.getElementById("claseBtns").hidden=true;document.getElementById(store.get("codigo","")?"clGru":"clCod").focus()}
+  if(a==="cancelar"){document.getElementById("claseForm").hidden=true;document.getElementById("claseBtns").hidden=false}
+  if(a==="ocultar"){store.set("claseHide",true);document.getElementById("claseCard").remove()}
+  if(a==="salir"){const c=store.get("clase",null);if(c){try{await claseApi({action:"salir",codigo:store.get("codigo",""),id:c.id,grupo:c.grupo})}catch(err){}}store.set("clase",null);store.set("claseHide",true);route()}
+});
+document.addEventListener("submit",async e=>{
+  if(e.target.id!=="claseForm")return;e.preventDefault();
+  const cod=document.getElementById("clCod").value.trim(),gru=document.getElementById("clGru").value.trim(),ali=document.getElementById("clAli").value.trim();
+  const err=document.getElementById("clErr");err.hidden=true;
+  if(!cod||!gru||!ali){err.textContent="Rellena los tres campos.";err.hidden=false;return}
+  const id=(crypto.randomUUID?crypto.randomUUID():String(Date.now())+Math.random().toString(36).slice(2));
+  try{
+    await claseApi({action:"sync",codigo:cod,id,alias:ali,grupo:gru,progreso:claseSnapshot()});
+    store.set("codigo",cod);store.set("clase",{id,alias:ali,grupo:gru,last:Date.now()});claseLastSent=JSON.stringify(claseSnapshot());
+    stat("clase-unirse");route();
+  }catch(x){err.textContent=/c[oó]digo/i.test(x.message)?"Ese código no es correcto. Pídeselo a tu profe.":"No se ha podido conectar. Inténtalo de nuevo en un rato.";err.hidden=false}
+});
+document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="hidden")claseSync(true)});
+
+/* ---- Panel del profesor (#profe) ---- */
+let panelState={alumnos:null,grupo:"todos",orden:"total",abierto:null,clave:""};
+function viewProfe(){
+  if(!panelState.alumnos){
+    return topbar("Panel del profesor","Solo para ti",["inicio","Inicio"])+
+    '<section class="card"><form id="profeForm" class="clase-form">'+
+      (CLASE_DEMO?'<p class="small demo-note">Vista previa: la clase es de ejemplo y vale cualquier contraseña.</p>':'')+
+      '<div class="field"><label for="pfClave">Contraseña del profesor</label><input class="cm-in" type="password" id="pfClave" autocomplete="current-password" required></div>'+
+      '<p class="small clase-err" id="pfErr" hidden></p>'+
+      '<div class="btnrow"><button type="submit" class="btn primary">Entrar</button></div></form></section>';
+  }
+  const all=panelState.alumnos;
+  const grupos=[...new Set(all.map(a=>a.grupo))].sort();
+  const list=all.filter(a=>panelState.grupo==="todos"||a.grupo===panelState.grupo);
+  const k=panelState.orden;
+  const sortV=a=>k==="alias"?a.alias.toLowerCase():k==="ultima"?-(a.updated||0):-(a.progreso[k]||0);
+  list.sort((x,y)=>{const a=sortV(x),b=sortV(y);return a<b?-1:a>b?1:0});
+  const media=list.length?list.reduce((s,a)=>s+(a.progreso.t||0),0)/list.length:0;
+  const semana=list.filter(a=>Date.now()-(a.updated||0)<7*864e5).length;
+  const empujon=list.filter(a=>(a.progreso.t||0)<.3||Date.now()-(a.updated||0)>7*864e5);
+  const pc=x=>x==null?'—':Math.round(x*100)+' %';
+  const bar=x=>'<div class="pn-bar"><i style="width:'+(x==null?0:Math.round(x*100))+'%"></i></div>';
+  const th=(key,l)=>'<th scope="col"><button type="button" class="pn-sort'+(k===key?' on':'')+'" data-psort="'+key+'">'+l+'</button></th>';
+  return topbar("Panel del profesor",(CLASE_DEMO?"Vista previa · clase de ejemplo":"Tu clase"),["inicio","Inicio"])+
+  '<div class="seg pn-grupos" role="group" aria-label="Grupo">'+['todos',...grupos].map(g=>'<button type="button" class="'+(panelState.grupo===g?'on':'')+'" data-pgrupo="'+escH(g)+'">'+(g==="todos"?"Todos":escH(g))+'</button>').join("")+'</div>'+
+  '<section class="balance pn-sum">'+
+    '<div class="row">'+
+     '<div><b>'+list.length+'</b><span>alumnos unidos</span></div>'+
+     '<div><b>'+Math.round(media*100)+' %</b><span>progreso medio</span></div>'+
+     '<div><b>'+semana+'</b><span>activos esta semana</span></div>'+
+     '<div><b>'+empujon.length+'</b><span>necesitan un empujón</span></div>'+
+    '</div></section>'+
+  (empujon.length?'<section class="card"><div class="card-head"><h2>Necesitan un empujón</h2><span class="tiny muted">Menos del 30 % o una semana sin entrar</span></div><div class="pn-chips">'+
+    empujon.map(a=>'<span class="chip pn-chip">'+escH(a.alias)+' · '+pc(a.progreso.t)+' · '+hace(a.updated)+'</span>').join("")+'</div></section>':'')+
+  '<section class="card"><div class="card-head"><h2>Alumnos</h2><span class="tiny muted">Toca un alumno para ver el detalle</span></div>'+
+  (list.length?'<div class="pn-wrap"><table class="pn-table"><thead><tr>'+th("alias","Alumno")+th("t","Total")+th("th","Teoría")+th("tx","Textos")+th("te","Test")+th("ds","Disert.")+th("ultima","Última vez")+'</tr></thead><tbody>'+
+   list.map(a=>{const p=a.progreso,open=panelState.abierto===a.id;
+    return '<tr class="pn-row'+(open?' open':'')+'" data-palumno="'+escH(a.id)+'" tabindex="0" aria-expanded="'+open+'"><th scope="row"><b>'+escH(a.alias)+(p.pr||[]).map(id=>{const ib=INSIGNIAS.find(x=>x.id===id);return ib&&ib.premio?' <span class="pn-premio" title="'+ib.n+': '+ib.premio+'">+0,25 '+(id==="linea"?"test":id==="disertador"?"disert.":id==="cz8"?"coment.":"")+'</span>':''}).join("")+'</b><span class="tiny muted">'+escH(a.grupo)+' · Línea '+(p.via==="b"?"2":p.via==="both"?"1 y 2":"1")+'</span></th>'+
+     '<td><b>'+pc(p.t)+'</b>'+bar(p.t)+'</td><td>'+pc(p.th)+'</td><td>'+pc(p.tx)+'</td><td>'+pc(p.te)+'</td><td>'+pc(p.ds)+'</td><td class="tiny">'+hace(a.updated)+'</td></tr>'+
+     (open?'<tr class="pn-det"><td colspan="7"><div class="pn-auth">'+Object.entries(p.au||{}).map(([id,v])=>{const au=getA(id);return '<div class="pn-a"><span class="pg-av">'+(au?stick(id,26):'')+'</span><b>'+(au?au.name:id)+'</b><span>Vídeos '+pc(v.v)+'</span><span>Test '+(v.te==null?'—':String(v.te).replace(".",",")+' / 10')+'</span></div>'}).join("")+
+      '</div><p class="tiny muted" style="margin-top:8px">Disertación: '+(p.st||0)+' de 8 etapas superadas · Insignias: '+(p.ins||0)+' de '+INSIGNIAS.length+'.'+(p.pr||[]).map(id=>{const ib=INSIGNIAS.find(x=>x.id===id);return ib&&ib.premio?' <b>'+ib.n+': '+ib.premio.replace(/^Te has ganado /,'+')+'.</b>':''}).join("")+'</p></td></tr>':'');
+   }).join("")+'</tbody></table></div>':'<div class="empty-state">Todavía no se ha unido nadie. Diles a tus alumnos que pulsen «Unirme a mi clase» en el Inicio.</div>')+
+  '</section>'+
+  '<div class="btnrow"><button type="button" class="btn ghost" data-pact="refrescar">Actualizar</button><button type="button" class="link-btn" data-pact="salir">Cerrar sesión</button></div>';
+}
+async function panelCargar(clave){
+  const j=await claseApi({action:"panel",clave});
+  panelState.alumnos=j.alumnos||[];panelState.clave=clave;try{sessionStorage.setItem("caverna:profe",clave)}catch(e){}
+}
+document.addEventListener("submit",async e=>{
+  if(e.target.id!=="profeForm")return;e.preventDefault();
+  const clave=document.getElementById("pfClave").value;const err=document.getElementById("pfErr");err.hidden=true;
+  try{await panelCargar(clave);route()}catch(x){err.textContent=/clave|contrase/i.test(x.message)?"Contraseña incorrecta.":"No se ha podido conectar.";err.hidden=false}
+});
+document.addEventListener("click",async e=>{
+  const g=e.target.closest("[data-pgrupo]");if(g){panelState.grupo=g.dataset.pgrupo;route();return}
+  const s=e.target.closest("[data-psort]");if(s){panelState.orden=s.dataset.psort;route();return}
+  const r=e.target.closest("[data-palumno]");if(r){panelState.abierto=panelState.abierto===r.dataset.palumno?null:r.dataset.palumno;const y=window.scrollY;route();window.scrollTo(0,y);return}
+  const p=e.target.closest("[data-pact]");if(!p)return;
+  if(p.dataset.pact==="refrescar"){try{await panelCargar(panelState.clave);route()}catch(x){}}
+  if(p.dataset.pact==="salir"){panelState.alumnos=null;try{sessionStorage.removeItem("caverna:profe")}catch(e){}route()}
+});
+document.addEventListener("keydown",e=>{const r=e.target.closest&&e.target.closest("[data-palumno]");if(r&&(e.key==="Enter"||e.key===" ")){e.preventDefault();r.click()}});
+(async()=>{let k=null;try{k=sessionStorage.getItem("caverna:profe")}catch(e){}if(k&&location.hash==="#profe"){try{await panelCargar(k);route()}catch(e){}}})();
+
+/* ============ ESTADÍSTICAS DE USO (anónimas, sin cookies) ============ */
+// Pega aquí la dirección de tu GoatCounter, p. ej. "https://caverna.goatcounter.com/count". Vacío = desactivado.
+const GOATCOUNTER="https://caverna.goatcounter.com/count";
+function stat(evento){try{if(window.goatcounter&&window.goatcounter.count)window.goatcounter.count({path:"evento/"+evento,title:evento,event:true})}catch(e){}}
+function statPage(){try{if(window.goatcounter&&window.goatcounter.count){const h=(location.hash||"#inicio").slice(1);window.goatcounter.count({path:"/"+(h.startsWith("test-")?"test/"+h.slice(5):h.startsWith("autor-")?"autor/"+h.slice(6):h)})}}catch(e){}}
+if(GOATCOUNTER&&!CLASE_DEMO){
+  window.goatcounter={no_onload:true};
+  const s=document.createElement("script");s.async=true;s.src="https://gc.zgo.at/count.js";s.dataset.goatcounter=GOATCOUNTER;s.onload=statPage;document.head.appendChild(s);
+  window.addEventListener("hashchange",statPage);
+  window.addEventListener("appinstalled",()=>stat("app-instalada"));
+}
+window.addEventListener("hashchange",()=>claseSync());
+claseSync();
+
 route();
 
 document.addEventListener("click",e=>{const el=e.target.closest(".vplay");if(!el)return;playInline(el)});
@@ -5102,7 +5725,7 @@ function playInline(el){const id=el.dataset.yt,t=el.dataset.title;const w=docume
 
 /* ============ SEGUIMIENTO ============ */
 function seenGet(){return store.get("seen",{})}
-function markSeenId(id){if(!id)return;const s=seenGet();if(!s[id]){s[id]=Date.now();store.set("seen",s)}}
+function markSeenId(id){if(!id)return;const s=seenGet();if(!s[id]){s[id]=Date.now();store.set("seen",s);actividad()}}
 function ytIdFromHref(h){const m=String(h||"").match(/(?:v=|shorts\/|youtu\.be\/|embed\/)([\w-]{6,})/);return m?m[1]:null}
 function progData(){
   const seen=seenGet();const best=store.get("best",{});
@@ -5173,7 +5796,8 @@ let deferredInstall=null;
 function isStandalone(){return window.matchMedia("(display-mode: standalone)").matches||window.navigator.standalone===true}
 function isIOS(){return /iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1)}
 function installCardHTML(){
-  if(isStandalone()||store.get("installHide",false)) return "";
+  if(isStandalone()){store.set("appInstalada",true);return ""}
+  if(store.get("installHide",false)||store.get("appInstalada",false)) return "";
   return '<section class="card install-card" id="installCard">'+
     '<svg class="ic-logo" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="30" fill="#b8336a"/><path d="M26 78 V52 A24 24 0 0 1 74 52 V78" fill="none" stroke="#fbe6ef" stroke-width="9" stroke-linecap="round"/><line x1="16" y1="80" x2="84" y2="80" stroke="#fbe6ef" stroke-width="6" stroke-linecap="round"/><circle cx="50" cy="62" r="9" fill="#F5A04A"/></svg>'+
     '<div class="ic-txt"><h2>Instala Caverna en tu móvil</h2><p class="small muted">Ábrela como una app desde la pantalla de inicio, sin buscarla en el navegador.</p></div>'+
@@ -5183,7 +5807,7 @@ function installCardHTML(){
 }
 function hideInstallCard(){store.set("installHide",true);const c=document.getElementById("installCard");if(c)c.remove()}
 window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferredInstall=e});
-window.addEventListener("appinstalled",()=>{deferredInstall=null;hideInstallCard()});
+window.addEventListener("appinstalled",()=>{deferredInstall=null;store.set("appInstalada",true);hideInstallCard()});
 document.addEventListener("click",async e=>{
   const b=e.target.closest("[data-install]"); if(!b) return;
   if(b.dataset.install==="hide"){hideInstallCard();return}
