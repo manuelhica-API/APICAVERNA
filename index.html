@@ -896,7 +896,7 @@ textarea:focus{outline:none;border-color:var(--petrol);background:var(--surface)
 select.cm-in{appearance:auto;background-color:var(--surface);color:var(--ink);font:inherit;min-height:46px}
 .demo-note{background:var(--petrol-soft);color:var(--petrol-deep);border-radius:var(--r-sm);padding:10px 14px;font-weight:600}
 :root[data-theme="dark"] .demo-note{color:var(--ink)}
-.profe-link{text-align:center;margin:22px 0 4px}.profe-link a,.side-foot a{color:var(--muted);font-weight:700}
+.profe-link{text-align:center;margin:22px 0 4px}.profe-link .link-btn{font-size:inherit;color:var(--muted);font-weight:700}.profe-link a,.side-foot a{color:var(--muted);font-weight:700}
 .pn-grupos{margin-bottom:16px;width:max-content;max-width:100%}
 .pn-sum{margin-bottom:16px}
 .pn-chips{display:flex;flex-wrap:wrap;gap:8px}
@@ -1824,7 +1824,7 @@ function viewInicio(){
      : '<div class="empty-state">Aún no has hecho ningún test. Empieza por tu filósofo favorito.</div>')+
    '</section>'+
   '</div>'+
-  '<p class="tiny profe-link"><a href="#profe">Acceso del profesor</a></p>';
+  '<p class="tiny profe-link">'+(!store.get("clase",null)&&store.get("claseHide",false)?'<button type="button" class="link-btn" data-clase="mostrar">Unirme a mi clase</button> · ':'')+'<a href="#profe">Acceso del profesor</a></p>';
 }
 
 function viewExamen(){
@@ -5638,8 +5638,9 @@ document.addEventListener("click",async e=>{
   const a=b.dataset.clase;
   if(a==="abrir"){document.getElementById("claseForm").hidden=false;document.getElementById("claseBtns").hidden=true;document.getElementById("clCod").focus();claseCargarGrupos()}
   if(a==="cancelar"){document.getElementById("claseForm").hidden=true;document.getElementById("claseBtns").hidden=false}
-  if(a==="ocultar"){store.set("claseHide",true);document.getElementById("claseCard").remove()}
-  if(a==="salir"){const c=store.get("clase",null);if(c){try{await claseApi({action:"salir",codigo:store.get("codigo",""),id:c.id,grupo:c.grupo})}catch(err){}}store.set("clase",null);store.set("claseHide",true);route()}
+  if(a==="ocultar"){store.set("claseHide",true);route()}
+  if(a==="mostrar"){store.set("claseHide",false);route();const c=document.getElementById("claseCard");if(c)c.scrollIntoView({block:"center",behavior:"smooth"})}
+  if(a==="salir"){const c=store.get("clase",null);if(c){try{await claseApi({action:"salir",codigo:store.get("codigo",""),id:c.id,grupo:c.grupo})}catch(err){}}store.set("clase",null);store.set("claseHide",false);route()}
 });
 document.addEventListener("submit",async e=>{
   if(e.target.id!=="claseForm")return;e.preventDefault();
