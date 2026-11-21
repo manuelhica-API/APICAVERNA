@@ -4015,7 +4015,7 @@ const COMMENTS = {
  }
 ]
 };
-const API_URL = "/.netlify/functions/corregir";
+const API_URL = "/api/corregir";
 
 function norm(s){
   return String(s||"").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"")
@@ -5880,7 +5880,7 @@ checkInsignias(true);
 /* ============ CLASE (opcional) Y PANEL DEL PROFESOR ============ */
 // En la vista previa de Claude no hay servidor: se usa una clase de ejemplo guardada en este dispositivo.
 const CLASE_DEMO=window.CAVERNA_PREVIEW===true||/claude|localhost|127\.0\.0\.1|^$/.test(location.hostname);
-const CLASE_URL="/.netlify/functions/clase";
+const CLASE_URL="/api/clase";
 const DEMO_ALUMNOS=[
  ["Nº 3","2º A","a",.82,.9,.75,.88,.7,1],["Lupe","2º A","a",.64,.7,.55,.72,.5,2],["Nº 7","2º A","b",.41,.35,.3,.6,.4,5],
  ["Dani M.","2º A","a",.12,.1,0,.3,.1,13],["Nº 15","2º A","b",.93,1,.9,.95,.85,0],["Nº 21","2º B","b",.55,.6,.45,.62,.5,3],
