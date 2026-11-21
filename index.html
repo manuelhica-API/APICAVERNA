@@ -2459,7 +2459,321 @@ descartes(a){
   <div class="works">${a.works.map(w=>'<div class="work"><span class="wi">'+ICONS.book+'</span><div><b>'+w.t+'</b><span>'+w.d+'</span></div></div>').join("")}</div>
 </section>
 <p class="tiny muted" style="text-align:right">Apuntes: José Manuel Jiménez y Manuel Higueras</p>
-`;}
+`;},
+nietzsche(a){
+  return `
+<nav class="th-index" aria-label="Apartados de la teoría">
+  <button data-jump="nz-intro">Introducción</button>
+  <button data-jump="nz-vida">Concepto de vida</button>
+  <button data-jump="nz-sentido">Animal de sentido</button>
+  <button data-jump="nz-critica">Crítica de la cultura</button>
+  <button data-jump="nz-nihil">Muerte de Dios</button>
+  <button data-jump="nz-super">Superhombre</button>
+</nav>
+
+<section class="card th" id="nz-intro">
+  ${secHead("8.1","Introducción","Nietzsche (1844-1900) hizo la crítica más radical de Occidente contra la <b>cultura establecida</b>: filosofía, religión, moral, ciencia… Más que irracional es <b>a-racional</b>: va contra la razón instrumental y científica que deja de lado lo vital. Es un <b>vitalista</b> genial y contradictorio.")}
+  ${vInline(a,1)}
+  <p class="th-p">Su pensamiento es sugerente, poético, rico en <b>metáforas y aforismos</b> y antisistemático. Por eso ha dado lugar a interpretaciones de todo signo: anarquismo, biologicismo, nacionalsocialismo, existencialismo…</p>
+  <div class="th-grid2">
+    <div class="th-key"><span class="th-key-l">Su época</span><p>La decadencia de una sociedad <b>cristiano-burguesa</b> de moral puritana. Su obra reacciona contra la mediocridad y el convencionalismo de la moral tradicional.</p></div>
+    <div class="th-key"><span class="th-key-l">Los movimientos revolucionarios</span><p>También los critica: siguen dentro de las formas morales judeocristianas. El sujeto del cambio sigue siendo el <b>hombre-masa</b>, no el superhombre.</p></div>
+  </div>
+  <p class="th-p">Sócrates, Platón, Kant, Hegel y el cristianismo comparten la <b>negación de la vida</b>: han construido conceptos antivitales y estáticos (las Ideas, la cosa en sí, el ser, Dios) y han reducido lo vital a falsedad, apariencia o pecado. Hay decadencia porque hay negación de la vida, y eso es el <b>nihilismo</b>.</p>
+  <div class="th-key"><span class="th-key-l">Filósofo de la sospecha</span><p>Según Paul Ricoeur, junto con <b>Freud y Marx</b>: los tres sospecharon que tras las manifestaciones culturales se esconde algo. Nietzsche se acerca a nuestra civilización <b>con el martillo</b>: nuestra historia es la historia de un error iniciado por Sócrates y Platón y perpetuado por el cristianismo.</p></div>
+
+  <h3 class="th-h3">Vida</h3>
+  <div class="tlv">
+    <div class="tlv-i"><span class="tlv-y">1844</span><p>Nace en <b>Röcken</b>, cerca de Leipzig. Su padre y sus abuelos eran pastores protestantes; él será un <b>ateo convencido</b>. Formación humanista y gran talento para el piano.</p></div>
+    <div class="tlv-i"><span class="tlv-y">1864</span><p>Estudia Teología y Filología clásica en <b>Bonn</b>, contra el deseo de su madre de que sea pastor. Lee a <b>Schopenhauer</b>.</p></div>
+    <div class="tlv-i"><span class="tlv-y">1868</span><p>Conoce a <b>Wagner</b>, al que admira por su espíritu libre. Catedrático de Filología clásica en <b>Basilea</b>.</p></div>
+    <div class="tlv-i"><span class="tlv-y">1870</span><p>Escribe <i>El nacimiento de la tragedia</i>. Se agudizan sus fuertes dolores de cabeza.</p></div>
+    <div class="tlv-i"><span class="tlv-y">1873-1876</span><p>Rompe con Wagner y se vuelve un solitario. Se jubila por enfermedad. Se enamora de <b>Lou Salomé</b>, que no acepta casarse con él.</p></div>
+    <div class="tlv-i"><span class="tlv-y">1878-1888</span><p>Desarrolla toda su obra como un <b>nómada</b>: Génova, Turín, Sicilia, Sils-María…</p></div>
+    <div class="tlv-i"><span class="tlv-y">1889-1900</span><p>Se hunde en la <b>locura</b> y queda en un estado irrecuperable hasta su muerte. Su fama empieza justo entonces.</p></div>
+  </div>
+
+  <h3 class="th-h3">Obras principales</h3>
+  <div class="infl">
+    <div class="infl-i"><b>El nacimiento de la tragedia</b><span>La cultura griega a la luz de <b>Dioniso</b> (la vida) y <b>Apolo</b> (las formas). Crítica de la filosofía socrática y platónica, a las que considera decadentes.</span></div>
+    <div class="infl-i"><b>Consideraciones intempestivas</b><span>Ataque a la cultura alemana tras 1870, crítica del método histórico y homenajes a Schopenhauer y Wagner.</span></div>
+    <div class="infl-i"><b>Humano, demasiado humano</b> (1878-1879)<span>Lo humano se explica sin supuestos metafísicos ni religiosos. Descubrir el fondo «demasiado humano» de lo ideal nos hace más libres.</span></div>
+    <div class="infl-i"><b>La gaya ciencia</b> (1882)<span>Desenmascara al santo, al artista y al sabio. Habla por primera vez del <b>eterno retorno</b> y de la <b>muerte de Dios</b>.</span></div>
+    <div class="infl-i"><b>Así habló Zaratustra</b> (1883-1885)<span>La más poética y profética: discursos simbólicos de un profeta persa que baja de la montaña. Superhombre, muerte de Dios, voluntad de poder y eterno retorno.</span></div>
+    <div class="infl-i"><b>Más allá del bien y del mal</b> (1886)<span>Critica la filosofía, la religión y la moral: filósofos con prejuicios morales, religiosos neuróticos y moralistas vengativos.</span></div>
+    <div class="infl-i"><b>La genealogía de la moral</b> (1887)<span>Crítica de los valores tradicionales de la moral occidental.</span></div>
+    <div class="infl-i"><b>El crepúsculo de los ídolos</b> (1888)<span>Crítica demoledora de la «verdad». Subtítulo: «Cómo se filosofa con el martillo».</span></div>
+    <div class="infl-i"><b>La voluntad de poder</b> (1901, póstuma)<span>El nihilismo como situación de nuestro tiempo y el proceso de autosuperación de los viejos ideales.</span></div>
+  </div>
+</section>
+
+<section class="card th" id="nz-vida">
+  ${secHead("8.2","El concepto de vida","La <b>vida</b> es el fondo originario del que surge todo lo concreto, individual y cambiante. El <b>arte</b> es el mejor órgano para interpretarla, y la <b>intuición</b> su método, porque la vida no puede captarse con conceptos.")}
+  ${vInline(a,2)}
+  <h3 class="th-h3">Lo apolíneo y lo dionisíaco</h3>
+  <p class="th-p">La <b>tragedia griega</b> supo captar esta realidad vital. Las fuerzas originarias de la cultura griega eran dos fuerzas estéticas que se combaten, pero que no pueden existir la una sin la otra:</p>
+  <div class="vs">
+    <div class="vs-side"><span class="chip a">Apolo</span><b>Orden · luz · medida</b><p>Dios de la belleza y de las artes figurativas (pintura, escultura, épica). Representa la <b>moderación, la proporción y el límite</b>.</p></div>
+    <div class="vs-mid">&amp;</div>
+    <div class="vs-side"><span class="chip b">Dioniso</span><b>Desmesura · embriaguez</b><p>Dios del vino y de las artes no figurativas (música, danza, poesía). Símbolo del <b>flujo profundo de la vida</b>, que rompe todos los límites.</p></div>
+  </div>
+  <div class="th-key warn"><span class="th-key-l">La decadencia: el socratismo</span><p>Con el <b>racionalismo socrático</b> empieza la época del hombre teórico: el predominio de la razón, incapaz de captar la vida que fluye detrás de las formas. Hay que recuperar la <b>visión trágica</b> del mundo, donde vida y muerte se entrelazan: «el camino hacia arriba y el camino hacia abajo son uno y el mismo» (Heráclito).</p></div>
+
+  <h3 class="th-h3">La voluntad de poder</h3>
+  <p class="th-p">La auténtica realidad es el <b>devenir</b>, frente a las ontologías estáticas: la realidad es cambiante, es <b>perspectiva</b>. Lo que importa no es si un juicio es verdadero o falso, sino si <b>favorece la vida</b>.</p>
+  <blockquote class="th-quote">«La verdad es aquella clase de error sin la que una determinada especie de seres vivos no podría vivir. El valor para la vida es lo que decide en última instancia».</blockquote>
+  <p class="th-p">La vida no es solo biológica ni individual: es un todo en <b>devenir y constante superación</b>. Es instinto, impulso inconsciente, fuerza creadora, alegría, riesgo, pasión y lucha.</p>
+  <div class="ds-cogito"><b>«La vida es cabalmente voluntad de poder»</b><span>Así habló Zaratustra</span></div>
+  <div class="th-key"><span class="th-key-l">Voluntad de poder</span><p>Fuerza o instinto <b>primario e inconsciente</b> que anima todo lo vivo y lo empuja a <b>crecer, renovarse y superarse</b>, creando nuevas formas de vida a partir de la destrucción de las anteriores. No es solo deseo de dominar: es la misma fuerza que anima la ciencia, el arte, el sexo o nuestras valoraciones morales.</p></div>
+  <div class="duo">
+    <div class="duo-i lit"><span class="duo-t">Voluntad de poder sana</span><p class="small">En su nivel superior es <b>creación</b> y afán de superación: el caso del <b>superhombre</b>, el hombre afirmativo que crea espontáneamente valores.</p></div>
+    <div class="duo-i dim"><span class="duo-t">Voluntad de poder enferma</span><p class="small">Aparece el hastío: se ansía la paz o la felicidad en un «más allá» inventado. Se convierte en <b>voluntad de la nada</b>. Es el <b>hombre decadente</b>: cristianos, esclavos de la moral, socialistas, anarquistas…</p></div>
+  </div>
+</section>
+
+<section class="card th" id="nz-sentido">
+  ${secHead("8.3","El ser humano como animal de sentido","La vida no tiene finalidad intrínseca: el ser humano tiene que dársela. El <b>sentido</b> es siempre una creación humana; el ser humano es un <b>artista creador de valores</b>.")}
+  ${vInline(a,3)}
+  <p class="th-p">Contra los ilustrados (el progreso), contra Marx (la historia hacia el socialismo) y contra los cristianos (la salvación), en la historia <b>no hay finalidad alguna</b>. El sufrimiento, el azar y la muerte son parte esencial de una vida que en sí carece de sentido. No hay verdades ni valores absolutos.</p>
+
+  <h3 class="th-h3">Una cultura enferma</h3>
+  <p class="th-p">Una cultura es <b>sana</b> o <b>enferma</b> según afirme o niegue la vida: Nietzsche la critica desde la óptica de la vida, no de la moral, como Rousseau. Su enfermedad es una decadencia vital, el <b>nihilismo</b>: los valores que daban sentido a la vida lo han perdido.</p>
+  <div class="th-steps">
+    <div><b>Sócrates y Platón</b><span>Inauguran la cultura que niega la vida: el «<b>optimismo teórico</b>», la fe en la razón.</span></div>
+    <div><b>Cristianismo</b><span>Su principal exponente: «<b>platonismo para el pueblo</b>». El sufrimiento es castigo de una culpa y la vida verdadera está en el «más allá».</span></div>
+    <div><b>Política y ciencia</b><span>El socialismo y el anarquismo prometen un reino de Dios en la tierra; la ciencia distingue un mundo aparente y un mundo de verdades.</span></div>
+  </div>
+  <div class="th-key"><span class="th-key-l">El ideal ascético</span><p>Inventar <b>otro mundo</b> distinto del real para negarlo y darle sentido desde fuera. Su núcleo es la <b>fe en la verdad</b>: el ser humano «prefiere querer la nada que no querer» (<i>Genealogía de la moral</i>, III).</p></div>
+
+  <h3 class="th-h3">La cultura que afirma la vida: los griegos</h3>
+  <p class="th-p">Su especificidad no era la razón, sino el <b>sentido trágico de la vida</b>: una interpretación <b>estética</b>, no moral. Los héroes trágicos (Edipo, Prometeo, Sísifo) asumen su destino cruel con entereza y orgullo, sin conciencia de pecado. «Trágico» y «dionisíaco» son equivalentes.</p>
+  <blockquote class="th-quote">«El decir sí a la vida incluso en sus problemas más extraños y duros; la voluntad de vida, regocijándose de su propia inagotabilidad (…) a eso fue a lo que yo llamé dionisíaco». <cite>Crepúsculo de los ídolos</cite></blockquote>
+  <div class="th-key"><span class="th-key-l">La inocencia de la vida</span><p>La vida es puro azar y está <b>más allá del bien y del mal</b>. El sufrimiento no es castigo, sino algo necesario para que la vida se renueve. No hay fenómenos morales, sino solo una <b>interpretación moral de los fenómenos</b>.</p></div>
+
+  <h3 class="th-h3">La relatividad del conocimiento</h3>
+  <p class="th-p">Para vivir en sociedad se fija una designación de las cosas <b>convencional</b> y obligatoria, y así surge el contraste entre verdad y mentira. Las palabras son <b>metáforas</b>; el concepto, el residuo de una metáfora que iguala casos no iguales. Luego olvidamos que los hemos creado nosotros.</p>
+  <blockquote class="th-quote">«¿Qué es entonces la verdad? Un ejército en movimiento de metáforas, metonimias y antropomorfismos (…): las verdades son ilusiones de las que se ha olvidado que lo son». <cite>Sobre verdad y mentira en sentido extramoral</cite></blockquote>
+  <div class="duo">
+    <div class="duo-i dim"><span class="duo-t">Hombre conceptual</span><p class="small">Usa la lógica y <b>no puede conocer</b> las cosas como son.</p></div>
+    <div class="duo-i lit"><span class="duo-t">Hombre intuitivo</span><p class="small">Gracias a la <b>intuición y al arte</b>, comprende la vida mejor que el científico o el filósofo.</p></div>
+  </div>
+</section>
+
+<section class="card th" id="nz-critica">
+  ${secHead("8.4","Crítica de la cultura occidental","La «<b>filosofía del martillo</b>»: golpear los conceptos y construcciones culturales para mostrar su vaciedad. Frente a los valores griegos, que expresaban la vida, Occidente solo ha dejado ideas alejadas de todo lo vital.")}
+  ${vInline(a,4)}
+  <h3 class="th-h3">8.4.1. Crítica de la filosofía</h3>
+  <p class="th-p">Empieza por <b>Sócrates</b>: la ecuación «razón = virtud = felicidad» le parece contraria a la vida, porque la felicidad es <b>instinto</b>. Sigue con <b>Platón</b>, que inaugura una interpretación moral del ser al poner el Bien como Idea suprema.</p>
+  <div class="th-key warn"><span class="th-key-l">El error de la metafísica</span><p>Despreciar el <b>devenir</b> y rechazar el mundo real para colocar en su lugar un mundo inventado, el «mundo verdadero». No hay Ideas eternas (Platón), ni sustancias segundas (Aristóteles), ni sustancias (Descartes): <b>solo existe el mundo espacio-temporal en cambio</b>, experimentable por los sentidos.</p></div>
+  <div class="vs">
+    <div class="vs-side"><span class="chip b">Hasta ahora</span><b>Lo eterno es lo real</b><p>Lo intemporal, lo eterno, Dios, era el verdadero ser; lo sensible y temporal, mera <b>apariencia</b>.</p></div>
+    <div class="vs-mid">→</div>
+    <div class="vs-side"><span class="chip a">Nietzsche</span><b>El devenir es lo real</b><p>Lo sensible, lo temporal, lo que fluye es <b>lo real</b>; lo eterno, una mera <b>invención</b> del pensamiento.</p></div>
+  </div>
+
+  <h3 class="th-h3">8.4.2. Crítica de la religión</h3>
+  <p class="th-p">Parte del <b>ateísmo</b>. La «muerte de Dios» descubre que los valores son <b>creaciones humanas</b>: Dios es una dimensión humana proyectada fuera del ser humano. El cristianismo es «el enemigo mortal del tipo superior de hombre» y la filosofía europea «lleva en sus venas sangre de teólogos».</p>
+  <div class="th-steps">
+    <div><b>Platonismo para el pueblo</b><span>Inventa y valora un trasmundo ideal y desvaloriza el mundo terreno.</span></div>
+    <div><b>Culpa y castigo</b><span>Interpreta el sufrimiento como castigo por una culpa: el pecado original.</span></div>
+    <div><b>Salvación en el más allá</b><span>La vida verdadera sería la del «más allá», fingida e inventada.</span></div>
+    <div><b>Renuncia a la vida</b><span>Los sentidos, el cuerpo y los instintos son fuente de pecado: hay que renunciar a ellos.</span></div>
+  </div>
+  <blockquote class="th-quote">«No encuentro palabras suficientemente duras para calificar este complot del cristianismo».</blockquote>
+
+  <h3 class="th-h3">8.4.3. Crítica de la moral</h3>
+  <p class="th-p">Quiere situarse «<b>más allá del bien y del mal</b>» con el <b>método genealógico</b>: rastrear el origen lingüístico de la moral entre los griegos y el giro que sufre con Sócrates y Platón, la <b>primera transvaloración</b>, fruto del resentimiento. Tras la pretendida objetividad de los valores se esconden preferencias afectivas.</p>
+  <div class="tblwrap"><table class="tbl">
+    <thead><tr><th></th><th>Moral de señores</th><th>Moral de esclavos</th></tr></thead>
+    <tbody>
+      <tr><td><b>Origen</b></td><td>Los «estados de alma elevados»: moral caballeresca</td><td>El miedo, la venganza y el <b>resentimiento</b> contra lo superior</td></tr>
+      <tr><td><b>Valores</b></td><td>Crea e implanta valores: es <b>activa y creadora</b></td><td>No crea valores: reacciona contra otros. Es <b>pasiva y reactiva</b></td></tr>
+      <tr><td><b>Ideales</b></td><td>Riesgo, aventura, pasión, orgullo</td><td>Tranquilidad, paz interior, resignación, humildad, igualdad, amor al prójimo</td></tr>
+      <tr><td><b>Felicidad</b></td><td>Actividad, creación, vitalismo</td><td>Pasividad: quietud, paz, sábado, narcosis</td></tr>
+      <tr><td><b>Raíz</b></td><td><span class="pill p2">Voluntad de poder · afirmación</span></td><td><span class="pill p3">Resentimiento · negación</span></td></tr>
+    </tbody>
+  </table></div>
+  <div class="th-key"><span class="th-key-l">La historia de Occidente</span><p>Es el <b>ascenso de los valores plebeyos</b> sobre los aristocráticos, que culmina en los movimientos de emancipación iniciados por la <b>Revolución francesa</b>.</p></div>
+</section>
+
+<section class="card th" id="nz-nihil">
+  ${secHead("8.5","La muerte de Dios y el nihilismo","Nietzsche no rechaza toda divinidad: los dioses griegos justifican la vida. Rechaza al <b>Dios cristiano</b>, que dicta desde fuera de la vida qué está permitido: no manda algo porque sea bueno, sino que es bueno porque lo manda Dios.")}
+  ${vInline(a,5)}
+  <p class="th-p">Al ser humano solo le queda obedecer; el pecado genera <b>culpa y mala conciencia</b>. Si Dios es el obstáculo a la auténtica libertad, <b>matemos a Dios</b>.</p>
+  <blockquote class="th-quote">«El mayor de los recientes acontecimientos –la muerte de Dios– o, dicho de otro modo, el hecho de que la fe en el Dios cristiano ha dejado de ser plausible, empieza ya a proyectar sus primeras sombras sobre Europa». <cite>La gaya ciencia</cite></blockquote>
+  <div class="th-key"><span class="th-key-l">¿Qué Dios muere?</span><p>El Dios <b>monoteísta</b>: «Los dioses han muerto de risa al oír decir a uno de ellos que él era el único Dios». Según Heidegger, «Dios» designa todo el <b>mundo suprasensible</b>: la metafísica entendida como platonismo llega a su fin.</p></div>
+  <p class="th-p">Para el hombre del rebaño, la muerte de Dios es la amenaza del <b>nihilismo</b> (<i>nihil</i>, nada): la pérdida de validez de los valores supremos (Dios, ser, verdad, bien) y el desprecio por la vida. Su semilla es la metafísica occidental y la moral judeocristiana.</p>
+  <div class="th-key warn"><span class="th-key-l">Nietzsche no es nihilista</span><p>Destruir es solo el <b>momento inicial</b>, necesario: para construir hay que derribar los viejos santuarios. La tarea del filósofo es determinar la <b>jerarquía de valores</b>.</p></div>
+  <div class="duo">
+    <div class="duo-i dim"><span class="duo-t">Nihilismo pasivo</span><ul class="bullets small"><li><b>Negación de la vida</b>: resentimiento, mala conciencia, ascetismo. Lema: «<b>tú debes</b>».</li><li>La <b>Ilustración</b> mata a Dios pero pone otros ídolos: la diosa razón, la igualdad, el progreso, la democracia.</li><li>Termina en el «<b>último hombre</b>»: cree que no vale la pena vivir y se refugia en narcóticos.</li></ul></div>
+    <div class="duo-i lit"><span class="duo-t">Nihilismo activo</span><ul class="bullets small"><li>Empieza con «<b>el hombre que quiere perecer</b>»: su autodestrucción está al servicio de crear nuevos valores.</li><li>Es un <b>puente hacia el superhombre</b>: toda creación exige destruir antes.</li><li>Asume que está solo y sin garantías: «si Dios ha muerto, todo está permitido».</li></ul></div>
+  </div>
+</section>
+
+<section class="card th" id="nz-super">
+  ${secHead("8.6","La transvaloración moral y el superhombre","<i>Übermensch</i> significa «<b>por encima de lo humano</b>», ultrahumano: más allá del hombre-masa moderno, en un sentido vital, no físico ni racial. «El hombre es una cuerda tendida entre el animal y el superhombre: una cuerda sobre un abismo».")}
+  ${vInline(a,6)}
+  <p class="th-p">El superhombre es el hombre del futuro, el <b>creador de nuevos valores</b>: el que dice no para empezar a decir sí. Según Savater, «no es nada más (y nada menos) que la mejor posibilidad del hombre». Es un <b>ideal</b>, una utopía: nosotros solo podemos aspirar al «hombre que quiere perecer».</p>
+
+  <h3 class="th-h3">Las dos transvaloraciones</h3>
+  <p class="th-p">La moral no tiene fundamento objetivo: la jerarquía de valores refleja el <b>dominio de unos instintos sobre otros</b>. Transvalorar es invertir ese dominio. Es, quizá, el concepto más importante de Nietzsche.</p>
+  <div class="vs">
+    <div class="vs-side"><span class="chip b">Primera transvaloración</span><b>Moral judeocristiana</b><p>Triunfan los <b>instintos débiles</b>: la moral del resentimiento. El esclavo reacciona y, con mentiras, llama «malo» al fuerte y «bueno» al débil. Es el inicio del <b>nihilismo</b>.</p></div>
+    <div class="vs-mid">→</div>
+    <div class="vs-side"><span class="chip a">Segunda transvaloración</span><b>El superhombre</b><p>Supera el nihilismo con el triunfo de nuevo de la <b>moral de señores</b>: lo que se tenía por negativo (devenir, azar, multiplicidad) pasa a ser positivo.</p></div>
+  </div>
+  <div class="th-key"><span class="th-key-l">Señor y esclavo</span><p>No son categorías sociopolíticas. <b>Esclavo</b> es aquel en quien dominan las fuerzas reactivas, el que niega la vida; <b>señor</b>, aquel en quien dominan las activas, el que la ama. El esclavo sigue siéndolo aunque alcance el poder.</p></div>
+  <p class="th-p">En el aforismo 14 de la <i>Genealogía</i>, parodiando la caverna, describe un <b>taller oscuro donde se fabrican ideales</b>: la debilidad se convierte en mérito, la impotencia en bondad, la sumisión en obediencia a Dios, el no poder vengarse en perdón… y la obra maestra, el <b>juicio final</b>.</p>
+
+  <h3 class="th-h3">Las tres metamorfosis del espíritu</h3>
+  <div class="soul">
+    <div class="soul-i s3"><span class="soul-tag">Moral de esclavos</span><b>El camello</b><span class="soul-sub">«Tú debes»</span><p>Animal de carga que obedece sin quejarse: carga con las imposiciones de la religión y la moral. Paciencia, renuncia y resignación.</p></div>
+    <div class="soul-i s2"><span class="soul-tag">Nihilismo · el hombre que quiere perecer</span><b>El león</b><span class="soul-sub">«Yo quiero»</span><p>Se rebela, derriba a su amo y dice no a los viejos valores: entierra al Dios muerto. Es necesario, pero no suficiente: destruye, pero no construye.</p></div>
+    <div class="soul-i s1"><span class="soul-tag">El superhombre</span><b>El niño</b><span class="soul-sub">Inocencia · juego · nuevo comienzo</span><p>Crea sus propios valores y juega con la vida, porque la vida es juego: más allá del bien y del mal, libre de culpa y mala conciencia.</p></div>
+  </div>
+
+  <h3 class="th-h3">El eterno retorno</h3>
+  <p class="th-p">La máxima afirmación de la vida: imaginar que nuestra existencia, con todas sus alegrías y sufrimientos, se repitiera eternamente igual, y <b>desearlo</b>. No podemos cambiar el pasado; ante eso surge el resentimiento, pero el superhombre lo incorpora y lo ama: es el <b>amor fati</b>, el amor al destino. Es el sí más radical al devenir, sin buscar compensación en un «más allá».</p>
+  <blockquote class="th-quote">«¿Qué pasaría si un demonio se deslizara un día o una noche en tu más solitaria soledad y te dijera: "Esta vida, tal como la estás viviendo y la has vivido, tendrás que vivirla una vez más e innumerables veces más"? (…) ¿O bien has vivido un momento prodigioso en el que contestarías: "¡Eres un dios y jamás he oído nada más divino!"?» <cite>La gaya ciencia, 341</cite></blockquote>
+
+  <h3 class="th-h3">Características del superhombre</h3>
+  <div class="ds-feat">
+    <div><span>1</span><b>Ansia de vivir</b><p>Afirma la vida sin renunciar al cuerpo, la salud, el placer y las pasiones.</p></div>
+    <div><span>2</span><b>Superación</b><p>Supera la moral tradicional: se sitúa <b>más allá del bien y del mal</b>.</p></div>
+    <div><span>3</span><b>Superior</b><p>Defiende la jerarquía y la diferencia frente al igualitarismo del rebaño.</p></div>
+    <div><span>4</span><b>Creador de valores</b><p>Rompe con los valores heredados y crea sus <b>propias metas</b> y sentido.</p></div>
+    <div><span>5</span><b>Fiel a la tierra</b><p>Afirma el mundo terrenal y el devenir: le preocupa el más acá, no el más allá.</p></div>
+    <div><span>6</span><b>Poderoso</b><p>Expresa la <b>voluntad de poder</b> para superarse, crear y transformar.</p></div>
+    <div><span>7</span><b>Ama el eterno retorno</b><p>Desea la repetición eterna de su vida: el <b>amor fati</b>.</p></div>
+  </div>
+</section>
+
+<section class="card th" id="nz-pau">
+  ${secHead("PAU","Para el comentario","Fragmentos que entran y cómo enfocar cada cuestión.")}
+  <div class="works">${a.works.map(w=>'<div class="work"><span class="wi">'+ICONS.book+'</span><div><b>'+w.t+'</b><span>'+w.d+'</span></div></div>').join("")}</div>
+</section>
+<p class="tiny muted" style="text-align:right">Apuntes: José Manuel Jiménez y Manuel Higueras</p>
+`;},
+ortega(a){
+  return `
+<nav class="th-index" aria-label="Apartados de la teoría">
+  <button data-jump="og-intro">Introducción</button>
+  <button data-jump="og-vital">Vitalismo</button>
+  <button data-jump="og-vida">La vida</button>
+  <button data-jump="og-razon">Raciovitalismo</button>
+</nav>
+
+<section class="card th" id="og-intro">
+  ${secHead("9.1","Introducción","La filosofía de Ortega nace del pensamiento español de fin de siglo y de la <b>crisis cultural de Occidente</b>. Su respuesta es una «<b>cultura para la vida</b>», basada en la razón vital.")}
+  ${vInline(a,1)}
+  <div class="th-grid2">
+    <div class="th-key"><span class="th-key-l">España a finales del XIX</span><p>Crisis de la conciencia española tras perder las últimas colonias en <b>1898</b> (Puerto Rico, Filipinas y Cuba). El país no consolidó la revolución burguesa ni la modernización. Ortega quiere una <b>recuperación renovadora de España</b> que la ponga a la altura de Europa.</p></div>
+    <div class="th-key"><span class="th-key-l">Contexto europeo</span><p>La crisis de Occidente se debe a la separación moderna entre <b>cultura y vida</b>, que deja la vida desorientada y la razón sin alma.</p></div>
+  </div>
+  <h3 class="th-h3">Influencias: la generación del 98</h3>
+  <p class="th-p">Maeztu, Azorín, Baroja y, sobre todo, <b>Unamuno</b>.</p>
+  <div class="vs">
+    <div class="vs-side"><span class="chip b">Unamuno</span><b>Pesimismo trágico</b><p>El sentimiento trágico de la existencia.</p></div>
+    <div class="vs-mid">VS</div>
+    <div class="vs-side"><span class="chip a">Ortega</span><b>Voluntad de aventura</b><p>El carácter <b>deportivo y festivo</b> de la existencia, como réplica al pesimismo unamuniano.</p></div>
+  </div>
+</section>
+
+<section class="card th" id="og-vital">
+  ${secHead("9.2","Ni realismo ni idealismo: vitalismo","La esencia de lo real es la <b>vida</b>, que no se comprende con categorías racionales ni se reduce a un fenómeno biológico. Por eso hay que criticar a la vez el realismo y el idealismo.")}
+  ${vInline(a,2)}
+  <div class="duo">
+    <div class="duo-i dim"><span class="duo-t">Ortega contra el realismo</span><ul class="bullets small"><li>La ciencia físico-matemática o <b>razón naturalista</b> estaba en entredicho: ante dos guerras mundiales en 31 años, no supo qué decir.</li><li>Se detiene ante la vida humana, porque el ser humano <b>no es una cosa</b>.</li><li>Solo vale cuando su objeto es una cosa, como el movimiento de los astros, no una persona.</li></ul></div>
+    <div class="duo-i dim"><span class="duo-t">Ortega contra el idealismo</span><ul class="bullets small"><li>Las «ciencias del espíritu» contraponen espíritu y naturaleza, pero tratan las realidades como si fueran <b>ideas</b>.</li><li>Cometen el mismo error: tratar las cosas como <b>identidades fijas</b>, naturalezas ya constituidas.</li><li>Descartes interpretó el sujeto como <i>res cogitans</i>: una <b>cosa</b> que piensa.</li></ul></div>
+  </div>
+  <div class="ds-cogito"><b>«El hombre no tiene naturaleza, sino que tiene historia»</b><span>Historia como sistema, VIII</span></div>
+  <p class="th-p">La vida humana no es un objeto y no posee naturaleza: hay que pensarla con <b>categorías nuevas</b>, distintas de las que explican la materia.</p>
+
+  <h3 class="th-h3">En definitiva</h3>
+  <div class="args">
+    <div class="arg g3"><span class="arg-t">Realismo</span><p>La realidad radical es <b>el mundo, el objeto</b>. Olvida al sujeto y lo considera una cosa más. Pero si yo no estoy, no hay un mundo independiente.</p></div>
+    <div class="arg g2"><span class="arg-t">Idealismo</span><p>La realidad radical es <b>el yo</b>. Ortega lo niega: el yo no es una sustancia, y pensar es solo una de las muchas cosas que hace, ni siquiera la más importante.</p></div>
+    <div class="arg g1"><span class="arg-t">Ortega</span><p>La realidad radical es <b>la vida</b>. Frente al «pienso, luego existo», «<b>vivo, luego existo</b>»: «yo soy para el mundo y el mundo es para mí».</p></div>
+  </div>
+  <div class="ds-cogito"><b>«Yo soy yo y mi circunstancia»</b><span>Meditaciones del Quijote</span></div>
+  <p class="th-p">Esta frase resume su crítica: al poner la <b>vida humana como realidad radical</b>, el realismo y el idealismo quedan superados.</p>
+</section>
+
+<section class="card th" id="og-vida">
+  ${secHead("9.3","La vida como realidad radical","La filosofía es «el conocimiento del universo o cuanto hay». La realidad indudable no es el cogito, sino <b>la vida</b>, «que incluye –además del sujeto– el mundo» (<i>¿Qué es filosofía?</i>, XI): la de cada uno en particular.")}
+  ${vInline(a,3)}
+  <p class="th-p">El pensar no es anterior a la vida: es solo un fragmento de un sujeto que, sencillamente, vive. Ortega crea un <b>nuevo concepto de realidad radical</b>, distinto del antiguo (realista) y del moderno (idealista), con dos coordenadas y siete categorías.</p>
+
+  <h3 class="th-h3">Las coordenadas de la vida</h3>
+  <div class="duo">
+    <div class="duo-i lit"><span class="duo-t">Perspectiva</span><p class="small">El ser del mundo no es alma ni materia, sino <b>perspectiva</b>: cada vida tiene un lugar y un tiempo concretos. «La perspectiva es uno de los componentes de la realidad. Lejos de ser su deformación, es su organización». La realidad solo se ve desde el punto de vista de cada cual.</p></div>
+    <div class="duo-i lit"><span class="duo-t">Circunstancia</span><p class="small">Nuestra peculiaridad dentro del mundo: una circunstancia <b>humana e histórica</b>, no biológica. Mi vida consta también del <b>yo</b>, que no es pasivo, sino que hace dentro de ella mi <b>proyecto</b>. Por eso mi vida es la realidad radical.</p></div>
+  </div>
+  <div class="th-key"><span class="th-key-l">La metáfora del teatro</span><p>La circunstancia es un <b>repertorio de posibilidades</b> que nos obliga a actuar y, a la vez, nos limita: un <b>círculo de fatalidad</b>, un cerco de imposibilidad y, al mismo tiempo, de posibilidades.</p></div>
+  <p class="th-p">La realidad radical es la vida, no el yo (idealismo) ni las cosas (realismo): en la vida radican las cosas y el yo, y consiste en la <b>relación entre ambos</b>.</p>
+
+  <h3 class="th-h3">Las categorías de la vida</h3>
+  <p class="th-p">Distintas de las que la filosofía había usado para definir el ser, desde Aristóteles hasta Kant:</p>
+  <div class="ds-feat">
+    <div><span>1</span><b>Autopresencia</b><p>La vida es siempre «<b>mi vida</b>»: algo de lo que me doy cuenta y me está presente. No le ocurre a una piedra o a un árbol.</p></div>
+    <div><span>2</span><b>Encontrarse en el mundo</b><p>El mundo no es naturaleza, sino «<b>lo vivido como tal</b>»: las cosas que nos afectan agradable o desagradablemente.</p></div>
+    <div><span>3</span><b>Estar ocupados en algo</b><p>«Yo consisto en ocuparme con lo que hay en el mundo». «<b>Vivir es convivir con una circunstancia</b>».</p></div>
+    <div><span>4</span><b>Anticipación y proyecto</b><p>«Todo hacer es ocuparme en algo para algo». La vida no está hecha: es algo <b>por hacer</b>.</p></div>
+    <div><span>5</span><b>Quehacer y libertad</b><p>No tenemos naturaleza: la vida es <b>obra de sí misma</b>. Somos forzosamente libres dentro de una fatalidad dada.</p></div>
+    <div><span>6</span><b>Circunstancia concreta</b><p>Un <b>aquí y un ahora</b>: el material de mi vida y, a la vez, una limitación. Para decidir hacen falta límites y holgura.</p></div>
+    <div><span>7</span><b>Temporeidad</b><p>Decidir lo que vamos a hacer: «la vida es <b>futurización</b>» (<i>¿Qué es filosofía?</i>, X).</p></div>
+  </div>
+  <blockquote class="th-quote">«Lo único que nos es dado y que hay cuando hay vida humana es tener que hacérsela, cada cual la suya. La vida es un gerundio y no un participio: un <i>faciendum</i> y no un <i>factum</i>. La vida es quehacer». <cite>Historia como sistema</cite></blockquote>
+  <div class="th-key"><span class="th-key-l">En síntesis</span><p>Vivir es <b>saberse viviendo</b>, ocuparse del mundo y proyectarse eligiendo entre posibilidades limitadas. La vida no es una sustancia fija, sino un <b>quehacer histórico y temporal</b>, siempre por realizar.</p></div>
+</section>
+
+<section class="card th" id="og-razon">
+  ${secHead("9.4","La epistemología orteguiana: raciovitalismo","Una nueva doctrina de la verdad. Su núcleo es el <b>perspectivismo</b>: la realidad solo puede verse desde una perspectiva, y no hay visión exterior a todo punto de vista. El tema de nuestro tiempo es convertir la <b>razón pura en razón vital</b>.")}
+  ${vInline(a,4)}
+  <div class="duo">
+    <div class="duo-i dim"><span class="duo-t">Razón pura</span><p class="small">Desde Grecia capta lo inmutable, la esencia eterna (<i>sub specie aeternitatis</i>). Culmina en la razón matemática del XVII y en Kant. Sirve para la naturaleza, pero <b>no para la vida humana</b>, cambiante y temporal.</p></div>
+    <div class="duo-i lit"><span class="duo-t">Razón vital</span><p class="small">Una razón rigurosa capaz de captar la realidad temporal de la vida. Surge porque necesitamos <b>hacernos cargo de nuestra circunstancia</b>: «vivir es no tener más remedio que razonar ante la inexorable circunstancia».</p></div>
+  </div>
+  <div class="th-key warn"><span class="th-key-l">No va contra la razón</span><p>«Mi ideología no va contra la razón, puesto que no admite otro conocimiento teórico que ella: va sólo contra el <b>racionalismo</b>», porque es racional <b>al margen de la vida</b>. La razón pura es solo una parte de la razón; tomarla por el todo es una falsedad.</p></div>
+
+  <h3 class="th-h3">Ni racionalismo ni relativismo</h3>
+  <div class="args">
+    <div class="arg g3"><span class="arg-t">Racionalismo</span><p>Conocimiento verdadero de un <b>sujeto racional universal</b> (alma platónica, cogito, razón pura kantiana), al margen de la circunstancia. <b>Para salvar la verdad, renuncia a la vida</b>.</p></div>
+    <div class="arg g1"><span class="arg-t">Raciovitalismo</span><p>Acepta que existe la verdad y que solo se conoce desde un <b>punto de vista individual</b>. Las perspectivas se complementan: la verdad integral es una <b>integración de perspectivas</b>.</p></div>
+    <div class="arg g2"><span class="arg-t">Relativismo</span><p>Todo conocimiento es de un sujeto individual e histórico, que lo deforma y hace imposible la verdad. <b>Para afirmar la vida, renuncia a la verdad</b>.</p></div>
+  </div>
+
+  <h3 class="th-h3">La razón histórica</h3>
+  <p class="th-p">El horizonte de la vida es histórico: la razón vital es <b>razón histórica</b>. Ante el naufragio de la vida, acudimos a la razón para bracear y salir adelante: a la razón pura le sucede la <b>razón dramática</b>. No hay verdad al margen de la vida y de la historia; la verdad «utópica y ucrónica» es una ilusión.</p>
+  <p class="th-p">El ser humano es <b>proyecto</b> lanzado al futuro: debe crearse a sí mismo con las posibilidades que le da su circunstancia. Esa movilidad no es irracional, sino que tiene sentido.</p>
+  <div class="th-grid2">
+    <div class="th-key"><span class="th-key-l">No es la de Hegel</span><p>No es una razón absoluta que impone a la historia un sentido previo, sino la razón concreta de cada acontecimiento: «<b>ve cómo se hace el hecho</b>». Es una razón <b>narrativa</b>.</p></div>
+    <div class="th-key"><span class="th-key-l">Amplía el horizonte</span><p>Acepta la <b>pluralidad de formas de humanidad</b> sin reducirlas a nuestro presente, y da sentido a mundos históricos que no lo tenían para nosotros.</p></div>
+  </div>
+  <blockquote class="th-quote">«Esta reflexión que nos liberta de la limitación histórica es precisamente la historia. Por esto decía que la razón, órgano de lo absoluto, sólo es completa si se integra a sí misma haciéndose, además de razón pura, clara razón histórica».</blockquote>
+
+  <h3 class="th-h3">Las generaciones</h3>
+  <p class="th-p">Cada ser humano recibe el legado de sus antepasados y lo transmite: la historia como sistema tiene su centro en el <b>concepto de generación</b>, frente a las interpretaciones individualistas (Nietzsche) o colectivistas (Marx).</p>
+  <div class="th-steps">
+    <div><b>Generación</b><span>Conjunto de seres humanos de un momento histórico que comparten una <b>sensibilidad</b>, una perspectiva. Empieza y termina con un cambio de sensibilidad y tiene una <b>misión</b>: el tema de su tiempo.</span></div>
+    <div><b>Vanguardia</b><span>Una élite que es la primera en darse cuenta de los cambios y en modificar su sensibilidad.</span></div>
+    <div><b>Masa</b><span>Puede apoyar o enfrentarse a las nuevas ideas propuestas por la minoría.</span></div>
+  </div>
+
+  <h3 class="th-h3">Ideas y creencias</h3>
+  <div class="duo">
+    <div class="duo-i dim"><span class="duo-t">Ideas</span><p class="small">Pensamientos que se nos ocurren: <b>las tenemos</b>. Cambian y son discutibles.</p></div>
+    <div class="duo-i lit"><span class="duo-t">Creencias</span><p class="small"><b>No las tenemos: las somos</b>. Están tan arraigadas que ni nos damos cuenta; operan como supuestos y son el <b>suelo que soporta una vida</b>.</p></div>
+  </div>
+  <div class="th-key"><span class="th-key-l">Clave</span><p><b>Dominamos nuestras ideas, pero somos dominados por nuestras creencias</b>. Cuando una creencia nos abandona, se abre un abismo que hay que rellenar con nuevas creencias.</p></div>
+</section>
+
+<section class="card th" id="og-pau">
+  ${secHead("PAU","Para el comentario","Fragmentos que entran y cómo enfocar cada cuestión.")}
+  <div class="works">${a.works.map(w=>'<div class="work"><span class="wi">'+ICONS.book+'</span><div><b>'+w.t+'</b><span>'+w.d+'</span></div></div>').join("")}</div>
+</section>
+<p class="tiny muted" style="text-align:right">Apuntes: José Manuel Jiménez y Manuel Higueras</p>
+`;},
 };
 
 function tabFicha(a){
