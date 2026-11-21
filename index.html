@@ -850,8 +850,8 @@ textarea:focus{outline:none;border-color:var(--petrol);background:var(--surface)
 @keyframes confeti{to{transform:translate(var(--x),105vh) rotate(var(--r));opacity:.9}}
 @media (prefers-reduced-motion:reduce){.celeb-card,.celeb-bg{transition:none}.celeb.on .celeb-medal{animation:none}}
 .seg-autor .t-sm{display:none}
-@media (max-width:440px){.seg-autor{gap:2px}.seg-autor button{padding-left:7px;padding-right:7px;font-size:13.5px}.seg-autor .t-lg{display:none}.seg-autor .t-sm{display:inline}}
-@media (max-width:370px){.seg-autor button{padding-left:5px;padding-right:5px;font-size:13px}}
+@media (max-width:370px){.seg-autor button{padding-left:8px;padding-right:8px}}
+@media (max-width:340px){.seg-autor{gap:2px}.seg-autor button{padding-left:5px;padding-right:5px;font-size:13px}}
 .dz-tap.cz-chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-start;font-family:inherit;font-size:15.5px;line-height:1.3;text-align:left;padding:2px 0}
 .cz-chips button{-webkit-tap-highlight-color:transparent;border:1.5px solid var(--line);border-radius:999px;background:var(--surface-2);padding:10px 16px;margin:0;font-weight:700}
 @media (hover:hover){.cz-chips button:hover:not([disabled]):not(.sel){border-color:var(--petrol)}}
@@ -1881,7 +1881,7 @@ function viewAuthor(id){
   '<section class="hero-a"><div class="av">'+stickLight(a.id,92)+'</div><div><h1>'+a.name+'</h1><div class="yrs">'+a.years+'</div>'+
    '<div class="meta"><span class="chip">'+a.era+'</span><span class="chip">'+blockName[a.block]+'</span></div></div>'+
    '<p class="problem"><b>Problema: </b>'+a.problem+'</p></section>'+
-  '<div class="seg seg-autor" role="tablist"><button class="on" data-tab="teoria" role="tab">Teoría</button><button data-tab="textos" role="tab">Textos</button><button data-tab="test" role="tab"><span class="t-lg">Tipo test</span><span class="t-sm">Test</span></button>'+(COMMENTS[a.id]?'<button data-tab="entrenar" role="tab">Entrenadora</button>':'')+'<button data-tab="practicar" role="tab">Practicar</button></div>'+
+  '<div class="seg seg-autor" role="tablist"><button class="on" data-tab="teoria" role="tab">Teoría</button><button data-tab="textos" role="tab">Textos</button>'+(COMMENTS[a.id]?'<button data-tab="entrenar" role="tab">Entrenadora</button>':'')+'<button data-tab="practicar" role="tab">Practicar</button></div>'+
   '<div id="tabbody"></div>';
 }
 /* ============ TEORÍA: PLATÓN ============ */
@@ -2461,7 +2461,7 @@ descartes(a){
 
 function tabFicha(a){
   if(THEORY[a.id]) return THEORY[a.id](a)+tabResponder(a)+
-  '<div class="btnrow"><button class="btn primary" data-go="test">'+ICONS.test+'Hacer el test</button><button class="btn ghost" data-go="practicar">'+ICONS.pen+'Practicar comentario</button></div>';
+  '<div class="btnrow"><a class="btn primary" href="#test-'+a.id+'">'+ICONS.test+'Hacer el test</a><button class="btn ghost" data-go="practicar">'+ICONS.pen+'Practicar comentario</button></div>';
   return '<div class="callout info">'+ICONS.info+'<span>Resumen provisional. Aquí irá la teoría completa de '+a.name+'.</span></div>'+
   videosSection(a)+
   '<section class="card"><h2 style="margin-bottom:12px">Fragmentos que entran</h2><div class="works">'+
@@ -2471,7 +2471,7 @@ function tabFicha(a){
   '<section class="card"><h2 style="margin-bottom:12px">Ideas clave</h2><ul class="bullets prose">'+a.ideas.map(i=>'<li>'+i+'</li>').join("")+'</ul></section>'+
   '<section class="card"><h2 style="margin-bottom:12px">Conceptos</h2><div class="concepts">'+a.concepts.map(c=>'<div class="concept"><b>'+c[0]+'</b><span>'+c[1]+'</span></div>').join("")+'</div></section>'+
   tabResponder(a)+
-  '<div class="btnrow"><button class="btn primary" data-go="test">'+ICONS.test+'Hacer el test</button><button class="btn ghost" data-go="practicar">'+ICONS.pen+'Practicar comentario</button></div>';
+  '<div class="btnrow"><a class="btn primary" href="#test-'+a.id+'">'+ICONS.test+'Hacer el test</a><button class="btn ghost" data-go="practicar">'+ICONS.pen+'Practicar comentario</button></div>';
 }
 function tabResponder(a){
   return '<section class="card"><div class="steps">'+
