@@ -5244,12 +5244,8 @@ function filCompleto(id){const b=store.get("best",{});if(!(b[id]>=7))return fals
   const vids=(VIDEOS[id]||[]).map(v=>v.id).concat((TEXTOS[id]||[]).filter(t=>t.yt).map(t=>t.yt)).filter(Boolean);return vids.every(v=>s[v])}
 const nVideos=()=>Object.keys(seenGet()).length;
 const nEtapas=()=>{const dz=dzProg();return DZ_STAGES.filter(st=>dzDone(dz,st.n)).length};
-const INS_GRUPOS=[["constancia","Constancia"],["pdia","Pregunta del día"],["filosofos","Filósofos"],["test","Test"],["videos","Vídeos"],["disertacion","Disertación"],["otras","Otras"],["secretas","Secretas"]];
+const INS_GRUPOS=[["pdia","Pregunta del día"],["filosofos","Filósofos"],["test","Test"],["videos","Vídeos"],["disertacion","Disertación"],["otras","Otras"],["secretas","Secretas"]];
 const INSIGNIAS=[
-  {id:"racha3",gr:"constancia",n:"Buen comienzo",d:"3 días seguidos",num:"3",ok:x=>x.best>=3},
-  {id:"racha5",gr:"constancia",n:"Medalla de la constancia",d:"5 días seguidos",num:"5",gold:true,ok:x=>x.best>=5},
-  {id:"racha10",gr:"constancia",n:"Fuera de la caverna",d:"10 días seguidos",num:"10",ok:x=>x.best>=10},
-  {id:"racha30",gr:"constancia",n:"Rey filósofo",d:"30 días seguidos",num:"30",gold:true,ok:x=>x.best>=30},
   {id:"primera",gr:"pdia",n:"Primera pregunta",d:"Responde tu primera pregunta del día",g:G.q,ok:()=>store.get("pdiaN",0)>=1},
   {id:"mayeutica",gr:"pdia",n:"Mayéutica",d:"Acierta 10 preguntas del día",g:G.bulb,ok:()=>store.get("pdiaOk",0)>=10},
   {id:"tabano",gr:"pdia",n:"Tábano de Atenas",d:"Acierta 25 preguntas del día",g:G.bulb,ok:()=>store.get("pdiaOk",0)>=25},
