@@ -1799,7 +1799,7 @@ function viewInicio(){
   const dzp=dzProg(); const dzDoneN=DZ_STAGES.filter(x=>dzDone(dzp,x.n)).length;
   return topbar("","")+
   '<nav class="home4" aria-label="Secciones">'+
-    '<a class="h4" href="#comentario"><span class="ic">'+ICONS.text+'</span><b>Comentario</b><span class="d">Textos de los 8 filósofos, teoría y práctica corregida</span><span class="s">Parte II · 7,5 pts</span></a>'+
+    '<a class="h4" href="#comentario"><span class="ic">'+ICONS.text+'</span><b>Comentario</b><span class="d">Textos de los 8 filósofos, teoría y práctica corregida</span><span class="s">Parte II · Cuestión 1</span></a>'+
     '<a class="h4" href="#disertacion"><span class="ic">'+ICONS.pen+'</span><b>Disertación</b><span class="d">Entrenador paso a paso y práctica de escritura</span><span class="s">'+(dzDoneN?dzDoneN+'/'+DZ_STAGES.length+' etapas superadas':'Parte I · 2,5 pts')+'</span></a>'+
     '<a class="h4" href="#test"><span class="ic">'+ICONS.test+'</span><b>Test</b><span class="d">Preguntas de repaso con explicación</span><span class="s">'+(s.avg===null?'Sin hacer':'Media: '+avgTxt+' / 10')+'</span></a>'+
     '<a class="h4" href="#examen"><span class="ic">'+ICONS.exam+'</span><b>El examen</b><span class="d">Estructura, puntuación y reparto del tiempo</span><span class="s">90 minutos</span></a>'+
@@ -4015,6 +4015,1208 @@ const COMMENTS = {
   ],
   "conexion": "Epistemología; Ontología"
  }
+],
+ descartes:[
+ {
+  "id": "DESDIS01",
+  "ref": "Discurso del método, parte II",
+  "texto": "Había estudiado un poco, siendo más joven, la lógica de entre las partes de la filosofía; de las matemáticas, el análisis de los geómetras y el álgebra. Tres artes o ciencias que debían contribuir en algo a mi propósito. Pero habiéndolas examinado, me percaté de que en relación con la lógica, sus silogismos y la mayor parte de sus reglas sirven más para explicar a otro cuestiones ya conocidas o, también, como sucede con el arte de Lulio, para hablar sin juicio de aquellas que se ignoran que para llegar a conocerlas. Y si bien la lógica contiene muchos preceptos verdaderos y muy adecuados, hay, sin embargo, mezclados con éstos otros muchos que o bien son perjudiciales o bien superfluos, de modo que es tan difícil separarlos como sacar una Diana o una Minerva de un bloque de mármol aún no trabajado.",
+  "problema": {
+   "nombre": "Problema del conocimiento",
+   "cats": [
+    [
+     "Problema del conocimiento",
+     "conocimiento",
+     "epistemolog",
+     "conocer",
+     "gnoseolog"
+    ]
+   ]
+  },
+  "principal": {
+   "grupos": [
+    [
+     "logica",
+     "silogism"
+    ],
+    [
+     "explic",
+     "exponer",
+     "ya conocid",
+     "ya sabid"
+    ],
+    [
+     "no sirv",
+     "no permit",
+     "no ayud",
+     "descubr",
+     "conocer",
+     "nuev",
+     "ignor"
+    ]
+   ],
+   "modelo": "Los silogismos y reglas de la lógica sirven para explicar lo ya conocido, no para descubrir verdades nuevas."
+  },
+  "secundaria": {
+   "grupos": [
+    [
+     "mezcl",
+     "separ"
+    ],
+    [
+     "superflu",
+     "perjudic",
+     "inutil",
+     "falso"
+    ]
+   ],
+   "modelo": "Junto a preceptos verdaderos, la lógica contiene otros perjudiciales o superfluos, tan difíciles de separar como esculpir una figura en un bloque de mármol."
+  },
+  "conceptos": [
+   "Reglas",
+   "Preceptos verdaderos",
+   "Silogismo",
+   "Matemáticas"
+  ],
+  "conexion": "Método; Epistemología"
+ },
+ {
+  "id": "DESDIS02",
+  "ref": "Discurso del método, parte II",
+  "texto": "Igualmente, en relación con el análisis de los antiguos o el álgebra de los modernos, además de que no se refieren sino a muy abstractas materias que parecen carecer de todo uso, el primero está tan circunscrito a la consideración de las figuras que no permite ejercer el entendimiento sin fatigar excesivamente la imaginación. La segunda está tan sometida a ciertas reglas y cifras que se ha convertido en un arte confuso y oscuro capaz de distorsionar el ingenio en vez de ser una ciencia que favorezca su desarrollo. Todo esto fue la causa por la que pensaba que era preciso indagar otro método que, asimilando las ventajas de estos tres, estuviera exento de sus defectos.",
+  "problema": {
+   "nombre": "Problema del conocimiento",
+   "cats": [
+    [
+     "Problema del conocimiento",
+     "conocimiento",
+     "epistemolog",
+     "conocer",
+     "gnoseolog"
+    ]
+   ]
+  },
+  "principal": {
+   "grupos": [
+    [
+     "metodo"
+    ],
+    [
+     "ventaja",
+     "virtud",
+     "asimil",
+     "reun"
+    ],
+    [
+     "defecto",
+     "exento",
+     "sin sus"
+    ]
+   ],
+   "modelo": "Hace falta un nuevo método que reúna las ventajas de la lógica, el análisis geométrico y el álgebra sin sus defectos."
+  },
+  "secundaria": {
+   "grupos": [
+    [
+     "analisis",
+     "geometr",
+     "antiguo"
+    ],
+    [
+     "algebra"
+    ],
+    [
+     "confus",
+     "oscur",
+     "imaginacion",
+     "figura",
+     "fatig"
+    ]
+   ],
+   "modelo": "El análisis de los antiguos depende de las figuras y fatiga la imaginación; el álgebra se ha vuelto un arte confuso y oscuro sometido a reglas y cifras."
+  },
+  "conceptos": [
+   "Método",
+   "Análisis",
+   "Álgebra",
+   "Entendimiento",
+   "Imaginación"
+  ],
+  "conexion": "Método; Epistemología"
+ },
+ {
+  "id": "DESDIS03",
+  "ref": "Discurso del método, parte II",
+  "texto": "Y como la multiplicidad de leyes frecuentemente sirve para los vicios de tal forma que un Estado está mejor regido cuando no existen más que unas pocas leyes que son minuciosamente observadas, de la misma forma, en lugar del gran número de preceptos del cual está compuesta la lógica, estimé que tendría suficiente con los cuatro siguientes con tal de que tomase la firme y constante resolución de no incumplir ni una sola vez su observancia.\n\nEl primero consistía en no admitir cosa alguna como verdadera si no se la había conocido evidentemente como tal. Es decir, con todo cuidado debía evitar la precipitación y la prevención, admitiendo exclusivamente en mis juicios aquello que se presentara tan clara y distintamente a mi espíritu que no tuviera motivo alguno para ponerlo en duda.",
+  "problema": {
+   "nombre": "Problema del conocimiento",
+   "cats": [
+    [
+     "Problema del conocimiento",
+     "conocimiento",
+     "epistemolog",
+     "conocer",
+     "gnoseolog"
+    ]
+   ]
+  },
+  "principal": {
+   "grupos": [
+    [
+     "evidenc",
+     "evident"
+    ],
+    [
+     "clar",
+     "distint"
+    ]
+   ],
+   "modelo": "Primera regla: no admitir nada como verdadero si no se conoce con evidencia, es decir, de forma clara y distinta, sin motivo alguno de duda."
+  },
+  "secundaria": {
+   "grupos": [
+    [
+     "cuatro",
+     "pocas",
+     "pocos",
+     "regla",
+     "precept",
+     "ley"
+    ],
+    [
+     "precipitacion",
+     "prevencion",
+     "prejuicio"
+    ]
+   ],
+   "modelo": "Como un Estado se rige mejor con pocas leyes bien cumplidas, bastan cuatro preceptos firmemente observados; la evidencia exige evitar la precipitación y la prevención."
+  },
+  "conceptos": [
+   "Evidencia",
+   "Claridad",
+   "Distinción",
+   "Precipitación",
+   "Prevención",
+   "Duda",
+   "Multiplicidad de leyes"
+  ],
+  "conexion": "Método; Epistemología"
+ },
+ {
+  "id": "DESDIS04",
+  "ref": "Discurso del método, parte II",
+  "texto": "El segundo exigía que dividiese cada una de las dificultades a examinar en tantas parcelas como fuera posible y necesario para resolverlas más fácilmente.\n\nEl tercero requería conducir por orden mis reflexiones comenzando por los objetos más simples y más fácilmente cognoscibles, para ascender poco a poco, gradualmente, hasta el conocimiento de los más complejos, suponiendo inclusive un orden entre aquellos que no se preceden naturalmente los unos a los otros.\n\nSegún el último de estos preceptos debería realizar recuentos tan completos y revisiones tan amplias que pudiese estar seguro de no omitir nada.",
+  "problema": {
+   "nombre": "Problema del conocimiento",
+   "cats": [
+    [
+     "Problema del conocimiento",
+     "conocimiento",
+     "epistemolog",
+     "conocer",
+     "gnoseolog"
+    ]
+   ]
+  },
+  "principal": {
+   "grupos": [
+    [
+     "divid",
+     "analisis",
+     "parte",
+     "parcela"
+    ],
+    [
+     "orden",
+     "simple",
+     "sintesis"
+    ],
+    [
+     "enumer",
+     "recuento",
+     "revision",
+     "revis"
+    ]
+   ],
+   "modelo": "Las reglas del método piden dividir cada dificultad (análisis), ordenar los pensamientos de lo simple a lo complejo (síntesis) y revisarlo todo (enumeración)."
+  },
+  "secundaria": {
+   "grupos": [
+    [
+     "gradual",
+     "poco a poco",
+     "complej",
+     "compuest",
+     "ascend"
+    ],
+    [
+     "omit",
+     "complet",
+     "nada",
+     "seguro"
+    ]
+   ],
+   "modelo": "Se asciende gradualmente desde lo más simple hasta lo más complejo, suponiendo orden incluso donde no lo hay; los recuentos y revisiones garantizan no omitir nada."
+  },
+  "conceptos": [
+   "Análisis",
+   "Síntesis",
+   "Enumeración",
+   "Dificultades",
+   "Objetos simples",
+   "Recuentos"
+  ],
+  "conexion": "Método; Epistemología"
+ },
+ {
+  "id": "DESDIS05",
+  "ref": "Discurso del método, parte II",
+  "texto": "Las largas cadenas de razones simples y fáciles, por medio de las cuales generalmente los geómetras llegan a alcanzar las demostraciones más difíciles, me habían proporcionado la ocasión de imaginar que todas las cosas que pueden ser objeto del conocimiento de los hombres se entrelazan de igual forma y que, absteniéndose de admitir como verdadera alguna que no lo sea y guardando siempre el orden necesario para deducir unas de otras, no puede haber algunas tan alejadas de nuestro conocimiento que no podamos, finalmente, conocer ni tan ocultas que no podamos llegar a descubrir. No supuso para mí una gran dificultad el decidir por cuáles era necesario iniciar el estudio: previamente sabía que debía ser por las más simples y las más fácilmente cognoscibles.",
+  "problema": {
+   "nombre": "Problema del conocimiento",
+   "cats": [
+    [
+     "Problema del conocimiento",
+     "conocimiento",
+     "epistemolog",
+     "conocer",
+     "gnoseolog"
+    ]
+   ]
+  },
+  "principal": {
+   "grupos": [
+    [
+     "cadena",
+     "encaden",
+     "entrelaz",
+     "deduc"
+    ],
+    [
+     "geometr",
+     "matemat",
+     "demostr"
+    ],
+    [
+     "todo",
+     "todas las cosas",
+     "cualquier",
+     "conoc"
+    ]
+   ],
+   "modelo": "Todo lo cognoscible se encadena como las demostraciones de los geómetras, de modo que, deduciendo con orden y sin admitir lo falso, todo puede llegar a conocerse."
+  },
+  "secundaria": {
+   "grupos": [
+    [
+     "simple",
+     "sencill",
+     "facil"
+    ],
+    [
+     "empez",
+     "inici",
+     "comenz",
+     "primero",
+     "por las"
+    ]
+   ],
+   "modelo": "El estudio debe empezar por las cosas más simples y fáciles de conocer."
+  },
+  "conceptos": [
+   "Cadenas de razones",
+   "Deducción",
+   "Demostración",
+   "Geometría",
+   "Orden"
+  ],
+  "conexion": "Método; Epistemología"
+ },
+ {
+  "id": "DESMPR01",
+  "ref": "Meditaciones metafísicas, Meditación primera",
+  "texto": "He advertido hace ya algún tiempo que, desde mi más temprana edad, había admitido como verdaderas muchas opiniones falsas, y que lo edificado después sobre cimientos tan poco sólidos tenía que ser por fuerza muy dudoso e incierto; de suerte que me era preciso emprender seriamente, una vez en la vida, la tarea de deshacerme de todas las opiniones a las que hasta entonces había dado crédito, y empezar todo de nuevo desde los fundamentos, si quería establecer algo firme y constante en las ciencias. Mas pareciéndome ardua dicha empresa, he aguardado hasta alcanzar una edad lo bastante madura como para no poder esperar que haya otra, tras ella, más apta para la ejecución de mi propósito; y por ello lo he diferido tanto, que a partir de ahora me sentiría culpable si gastase en deliberaciones el tiempo que me queda para obrar.",
+  "problema": {
+   "nombre": "Problema del conocimiento",
+   "cats": [
+    [
+     "Problema del conocimiento",
+     "conocimiento",
+     "epistemolog",
+     "conocer",
+     "gnoseolog"
+    ]
+   ]
+  },
+  "principal": {
+   "grupos": [
+    [
+     "opinion",
+     "creencia",
+     "conocimiento"
+    ],
+    [
+     "fundament",
+     "cimiento",
+     "de nuevo",
+     "desde cero",
+     "deshacer"
+    ],
+    [
+     "firme",
+     "solid",
+     "constante",
+     "cierto",
+     "ciencia"
+    ]
+   ],
+   "modelo": "Para establecer algo firme en las ciencias hay que deshacerse de todas las opiniones recibidas y empezar de nuevo desde los fundamentos."
+  },
+  "secundaria": {
+   "grupos": [
+    [
+     "falsa",
+     "falso",
+     "erro"
+    ],
+    [
+     "dudos",
+     "incierto",
+     "poco solid"
+    ]
+   ],
+   "modelo": "Desde la infancia ha admitido opiniones falsas, y todo lo construido sobre ellas es dudoso; ha esperado a la madurez para emprender la tarea."
+  },
+  "conceptos": ["Opiniones falsas", "Fundamentos", "Dudoso"],
+  "conexion": "Duda metódica; Epistemología"
+ },
+ {
+  "id": "DESMPR02",
+  "ref": "Meditaciones metafísicas, Meditación primera",
+  "texto": "Así pues, ahora que mi espíritu está libre de todo cuidado, habiéndome procurado reposo seguro en una apacible soledad, me aplicaré seriamente y con libertad a destruir en general todas mis antiguas opiniones.\n\nAhora bien, para cumplir tal designio, no me será necesario probar que son todas falsas, lo que acaso no conseguiría nunca; sino que, por cuanto la razón me persuade desde el principio para que no dé más crédito a las cosas no enteramente ciertas e indudables que a las manifiestamente falsas me bastará para rechazarlas todas con encontrar en cada una el más pequeño motivo de duda. Y para eso tampoco hará falta que examine todas y cada una en particular, pues sería un trabajo infinito; sino que, por cuanto la ruina de los cimientos lleva necesariamente consigo la de todo el edificio, me dirigiré en principio contra los fundamentos mismos en que se apoyaban todas mis opiniones antiguas.",
+  "problema": {
+   "nombre": "Problema del conocimiento",
+   "cats": [
+    [
+     "Problema del conocimiento",
+     "conocimiento",
+     "epistemolog",
+     "conocer",
+     "gnoseolog"
+    ]
+   ]
+  },
+  "principal": {
+   "grupos": [
+    [
+     "duda",
+     "dudar",
+     "dudos",
+     "motivo"
+    ],
+    [
+     "rechaz",
+     "falsa",
+     "falso",
+     "descart",
+     "no dar credito"
+    ]
+   ],
+   "modelo": "Basta encontrar el más pequeño motivo de duda en una opinión para rechazarla como si fuera falsa."
+  },
+  "secundaria": {
+   "grupos": [
+    [
+     "fundament",
+     "cimiento",
+     "principio",
+     "base"
+    ],
+    [
+     "edificio",
+     "todas",
+     "cada una",
+     "una por una",
+     "ruina"
+    ]
+   ],
+   "modelo": "No hace falta examinar cada opinión: basta atacar los fundamentos, porque su ruina arrastra todo el edificio."
+  },
+  "conceptos": [
+   "Duda",
+   "Opiniones",
+   "Fundamentos",
+   "Razón"
+  ],
+  "conexion": "Duda metódica; Método"
+ },
+ {
+  "id": "DESMPR03",
+  "ref": "Meditaciones metafísicas, Meditación primera",
+  "texto": "Todo lo que he admitido hasta el presente como más seguro y verdadero, lo he aprendido de los sentidos o por los sentidos; ahora bien, he experimentado a veces que tales sentidos me engañaban, y es prudente no fiarse nunca por entero de quienes nos han engañado una vez.\n\nPero, aun dado que los sentidos nos engañan a veces, tocante a cosas mal perceptibles o muy remotas, acaso hallemos otras muchas de las que no podamos razonablemente dudar, aunque las conozcamos por su medio; como, por ejemplo, que estoy aquí, sentado junto al fuego, con una bata puesta y este papel en mis manos, o cosas por el estilo. Y ¿cómo negar que estas manos y este cuerpo sean míos, si no es poniéndome a la altura de esos insensatos, cuyo cerebro está tan turbio y ofuscado por los negros vapores de la bilis, que aseguran constantemente ser reyes siendo muy pobres, ir vestidos de oro y púrpura estando desnudos, o que se imaginan ser cacharros o tener el cuerpo de vidrio? Mas los tales son locos, y yo no lo sería menos si me rigiera por su ejemplo.",
+  "problema": {
+   "nombre": "Problema del conocimiento",
+   "cats": [
+    [
+     "Problema del conocimiento",
+     "conocimiento",
+     "epistemolog",
+     "conocer",
+     "gnoseolog"
+    ]
+   ]
+  },
+  "principal": {
+   "grupos": [
+    [
+     "sentido"
+    ],
+    [
+     "engañ",
+     "enganan",
+     "error"
+    ]
+   ],
+   "modelo": "Todo lo tenido por más seguro procede de los sentidos, pero los sentidos a veces engañan, y no es prudente fiarse de quien nos ha engañado alguna vez."
+  },
+  "secundaria": {
+   "grupos": [
+    [
+     "cuerpo",
+     "mano",
+     "fuego",
+     "cercan",
+     "present",
+     "bata",
+     "papel"
+    ],
+    [
+     "loco",
+     "insensat",
+     "locura"
+    ]
+   ],
+   "modelo": "Parecen indudables las cosas cercanas, como estar junto al fuego o tener este cuerpo; negarlas sería ponerse a la altura de los locos."
+  },
+  "conceptos": ["Sentidos", "Engaño", "Dudar", "Locura"],
+  "conexion": "Duda metódica; Epistemología"
+ },
+ {
+  "id": "DESMPR04",
+  "ref": "Meditaciones metafísicas, Meditación primera",
+  "texto": "Con todo, debo considerar aquí que soy hombre y, por consiguiente, que tengo costumbre de dormir y de representarme en sueños las mismas cosas, y a veces cosas menos verosímiles, que esos insensatos cuando están despiertos. ¡Cuántas veces no me habrá ocurrido soñar, por la noche, que estaba aquí mismo, vestido, junto al fuego, estando en realidad desnudo y en la cama! En este momento, estoy seguro de que yo miro este papel con los ojos de la vigilia, de que esta cabeza que muevo no está soñolienta, de que alargo esta mano y la siento de propósito y con plena conciencia: lo que acaece en sueños no me resulta tan claro y distinto como todo esto. Pero, pensándolo mejor, recuerdo haber sido engañado, mientras dormía, por ilusiones semejantes. Y fijándome en este pensamiento, veo de un modo tan manifiesto que no hay indicios concluyentes ni señales que basten a distinguir con claridad el sueño de la vigilia, que acabo atónito, y mi estupor es tal que casi puede persuadirme de que estoy durmiendo.",
+  "problema": {
+   "nombre": "Problema del conocimiento",
+   "cats": [
+    [
+     "Problema del conocimiento",
+     "conocimiento",
+     "epistemolog",
+     "conocer",
+     "gnoseolog"
+    ]
+   ]
+  },
+  "principal": {
+   "grupos": [
+    [
+     "sueñ",
+     "soñ",
+     "dorm"
+    ],
+    [
+     "vigilia",
+     "despiert"
+    ],
+    [
+     "distingu",
+     "diferenci",
+     "indici",
+     "señal",
+     "criterio"
+    ]
+   ],
+   "modelo": "No hay indicios concluyentes para distinguir con claridad el sueño de la vigilia."
+  },
+  "secundaria": {
+   "grupos": [
+    [
+     "engañ",
+     "ilusion"
+    ],
+    [
+     "represent",
+     "mismas cosas",
+     "verosimil",
+     "igual"
+    ]
+   ],
+   "modelo": "En sueños nos representamos las mismas cosas que despiertos, o aún menos verosímiles, y esas ilusiones nos han engañado."
+  },
+  "conceptos": ["Distinguir sueño y vigilia", "Sueño", "Vigilia", "Ilusión", "Claro y distinto"],
+  "conexion": "Duda metódica; Epistemología"
+ },
+ {
+  "id": "DESMPR05",
+  "ref": "Meditaciones metafísicas, Meditación primera",
+  "texto": "Así, pues, supongamos ahora que estamos dormidos, y que todas estas particularidades, a saber: que abrimos los ojos, movemos la cabeza, alargamos las manos, no son sino mentirosas ilusiones; y pensemos que, acaso, ni nuestras manos ni todo nuestro cuerpo son tal y como los vemos. Con todo, hay que contestar al menos que las cosas que nos representamos en sueños son como cuadros y pinturas que deben formarse a semejanza de algo real y verdadero; de manera que por lo menos esas cosas generales —a saber: ojos, cabeza, manos, cuerpo entero— no son imaginarias, sino que en verdad existen. Pues los pintores, incluso cuando usan del mayor artificio para representar sirenas y sátiros mediante figuras caprichosas y fuera de lo común, no pueden, sin embargo, atribuirles formas y naturalezas del todo nuevas, y lo que hacen es sólo mezclar y componer partes de diversos animales; y, si llega el caso de que su imaginación sea lo bastante extravagante como para inventar algo tan nuevo que nunca haya sido visto, representándonos así su obra una cosa puramente fingida y absolutamente falsa, con todo, al menos los colores que usan deben ser verdaderos.",
+  "problema": {
+   "nombre": "Problema del conocimiento",
+   "cats": [
+    [
+     "Problema del conocimiento",
+     "conocimiento",
+     "epistemolog",
+     "conocer",
+     "gnoseolog"
+    ]
+   ]
+  },
+  "principal": {
+   "grupos": [
+    [
+     "sueñ",
+     "soñ",
+     "dorm"
+    ],
+    [
+     "real",
+     "verdader",
+     "exist"
+    ],
+    [
+     "general",
+     "semejanza",
+     "cuadro",
+     "pintur",
+     "imagen"
+    ]
+   ],
+   "modelo": "Aunque estemos soñando, las imágenes del sueño se forman a semejanza de algo real: al menos las cosas generales, como ojos, manos o cuerpo, existen."
+  },
+  "secundaria": {
+   "grupos": [
+    [
+     "pintor",
+     "pintur"
+    ],
+    [
+     "color",
+     "compon",
+     "mezcl",
+     "parte"
+    ]
+   ],
+   "modelo": "Como los pintores, que solo combinan partes de seres existentes y, aunque inventen algo nuevo, usan colores verdaderos."
+  },
+  "conceptos": ["Mentirosas ilusiones", "Sueño", "Imágenes", "Realidad"],
+  "conexion": "Duda metódica; Epistemología"
+ },
+ {
+  "id": "DESMPR06",
+  "ref": "Meditaciones metafísicas, Meditación primera",
+  "texto": "Y por igual razón, aun pudiendo ser imaginarias esas cosas generales —a saber: ojos, cabeza, manos y otras semejantes— es preciso confesar, de todos modos, que hay cosas aún más simples y universales realmente existentes, por cuya mezcla, ni más ni menos que por la de algunos colores verdaderos, se forman todas las imágenes de las cosas que residen en nuestro pensamiento, ya sean verdaderas y reales, ya fingidas y fantásticas. De ese género es la naturaleza corpórea en general, y su extensión, así como la figura de las cosas extensas, su cantidad o magnitud, su número, y también el lugar en que están, el tiempo que mide su duración y otras por el estilo.\n\nPor lo cual, acaso no sería mala conclusión si dijésemos que la física, la astronomía, la medicina y todas las demás ciencias que dependen de la consideración de cosas compuestas, son muy dudosas e inciertas; pero que la aritmética, la geometría y demás ciencias de este género, que no tratan sino de cosas muy simples y generales, sin ocuparse mucho de si tales cosas existen o no en la naturaleza, contienen algo cierto e indudable. Pues, duerma yo o esté despierto, dos más tres serán siempre cinco, y el cuadrado no tendrá más de cuatro lados; no pareciendo posible que verdades tan patentes puedan ser sospechosas de falsedad o incertidumbre alguna.",
+  "problema": {
+   "nombre": "Problema del conocimiento y Problema de la realidad (ontológico)",
+   "cats": [
+    [
+     "Problema del conocimiento",
+     "conocimiento",
+     "epistemolog",
+     "conocer",
+     "gnoseolog"
+    ],
+    [
+     "Problema de la realidad (ontológico)",
+     "realidad",
+     "ontolog",
+     "ser",
+     "metafisic"
+    ]
+   ]
+  },
+  "principal": {
+   "grupos": [
+    [
+     "simple",
+     "universal"
+    ],
+    [
+     "matemat",
+     "aritmet",
+     "geometr"
+    ],
+    [
+     "cierto",
+     "indudabl",
+     "certez",
+     "verdad"
+    ]
+   ],
+   "modelo": "Hay naturalezas más simples y universales, como la extensión, la figura o el número; las ciencias que tratan de ellas, como la aritmética y la geometría, contienen algo cierto, duerma o esté despierto."
+  },
+  "secundaria": {
+   "grupos": [
+    [
+     "fisica",
+     "astronom",
+     "medicina",
+     "compuest"
+    ],
+    [
+     "dudos",
+     "incierto"
+    ]
+   ],
+   "modelo": "Las ciencias que dependen de cosas compuestas, como la física, la astronomía o la medicina, son dudosas e inciertas."
+  },
+  "conceptos": [
+   "Naturaleza corpórea",
+   "Extensión",
+   "Figura",
+   "Aritmética",
+   "Geometría"
+  ],
+  "conexion": "Duda metódica; Epistemología; Ontología"
+ },
+ {
+  "id": "DESMPR07",
+  "ref": "Meditaciones metafísicas, Meditación primera",
+  "texto": "Y, sin embargo, hace tiempo que tengo en mi espíritu cierta opinión, según la cual hay un Dios que todo lo puede, por quien he sido creado tal como soy. Pues bien: ¿quién me asegura que el tal Dios no haya procedido de manera que no exista figura, ni magnitud, ni lugar, pero a la vez de modo que yo, no obstante, sí tenga la impresión de que todo eso existe tal y como lo veo? Y más aún: así como yo pienso, a veces, que los demás se engañan, hasta en las cosas que creen saber con más certeza, podría ocurrir que Dios haya querido que me engañe cuantas veces sumo dos más tres, o cuando enumero los lados de un cuadrado, o cuando juzgo de cosas aún más fáciles que ésas, si es que son siquiera imaginables.",
+  "problema": {
+   "nombre": "Problema del conocimiento",
+   "cats": [
+    [
+     "Problema del conocimiento",
+     "conocimiento",
+     "epistemolog",
+     "conocer",
+     "gnoseolog"
+    ]
+   ]
+  },
+  "principal": {
+   "grupos": [
+    [
+     "dios"
+    ],
+    [
+     "engañ"
+    ],
+    [
+     "matemat",
+     "dos mas tres",
+     "cuadrado",
+     "sum",
+     "facil",
+     "verdad"
+    ]
+   ],
+   "modelo": "Un Dios omnipotente podría haber hecho que me engañe incluso en las verdades más sencillas, como sumar dos más tres o contar los lados de un cuadrado."
+  },
+  "secundaria": {
+   "grupos": [
+    [
+     "exist"
+    ],
+    [
+     "figura",
+     "magnitud",
+     "lugar",
+     "exterior",
+     "mundo"
+    ]
+   ],
+   "modelo": "Ese Dios podría hacer que no exista figura, magnitud ni lugar y que, sin embargo, a mí me parezca que existen."
+  },
+  "conceptos": [
+   "Dios",
+   "Engaño",
+   "Certeza",
+   "Matemáticas"
+  ],
+  "conexion": "Duda metódica; Dios"
+ },
+ {
+  "id": "DESMPR08",
+  "ref": "Meditaciones metafísicas, Meditación primera",
+  "texto": "Así pues, supondré que hay, no un verdadero Dios —que es fuente suprema de verdad—, sino cierto genio maligno, no menos artero y engañador que poderoso, el cual ha usado de toda su industria para engañarme. Pensaré que el cielo, el aire, la tierra, los colores, las figuras, los sonidos y las demás cosas exteriores, no son sino ilusiones y ensueños, de los que él se sirve para atrapar mi credulidad. Me consideraré a mí mismo como sin manos, sin ojos, sin carne, ni sangre, sin sentido alguno, y creyendo falsamente que tengo todo eso. Permaneceré obstinadamente fijo en ese pensamiento, y, si, por dicho medio, no me es posible llegar al conocimiento de alguna verdad, al menos está en mi mano suspender el juicio. Por ello, tendré sumo cuidado en no dar crédito a ninguna falsedad, y dispondré tan bien mi espíritu contra las malas artes de ese gran engañador que, por muy poderoso y astuto que sea, nunca podrá imponer nada.",
+  "problema": {
+   "nombre": "Problema del conocimiento",
+   "cats": [
+    [
+     "Problema del conocimiento",
+     "conocimiento",
+     "epistemolog",
+     "conocer",
+     "gnoseolog"
+    ]
+   ]
+  },
+  "principal": {
+   "grupos": [
+    [
+     "genio",
+     "engañador"
+    ],
+    [
+     "ilusion",
+     "ensueñ",
+     "sueñ",
+     "falso",
+     "engañ",
+     "no exist"
+    ]
+   ],
+   "modelo": "Supone un genio maligno, poderoso y engañador, que hace que el cielo, la tierra, el cuerpo y todo lo exterior sean meras ilusiones."
+  },
+  "secundaria": {
+   "grupos": [
+    [
+     "juicio",
+     "credito",
+     "asent"
+    ],
+    [
+     "suspend",
+     "no dar",
+     "no admitir",
+     "cuidado"
+    ]
+   ],
+   "modelo": "Aunque no alcance ninguna verdad, puede suspender el juicio y no dar crédito a ninguna falsedad."
+  },
+  "conceptos": [
+   "Genio maligno",
+   "Engaño",
+   "Ilusiones",
+   "Suspensión del juicio"
+  ],
+  "conexion": "Duda metódica"
+ },
+ {
+  "id": "DESMSE01",
+  "ref": "Meditaciones metafísicas, Meditación segunda",
+  "texto": "Mi meditación de ayer ha llenado mi espíritu de tantas dudas, que ya no está en mi mano olvidarlas. Y, sin embargo, no veo en qué manera podré resolverlas; y, como si de repente hubiera caído en aguas muy profundas, tan turbado me hallo que ni puedo apoyar mis pies en el fondo ni nadar para sostenerme en la superficie. Haré un esfuerzo, pese a todo, y tomaré de nuevo la misma vía que ayer, alejándome de todo aquello en que pueda imaginar la más mínima duda, del mismo modo que si supiera que es completamente falso; y seguiré siempre por ese camino, hasta haber encontrado algo cierto, o al menos, si otra cosa no puedo, hasta saber de cierto que nada cierto hay en el mundo.\n\nArquímedes, para trasladar la tierra de lugar, sólo pedía un punto de apoyo firme e inmóvil; así yo también tendré derecho a concebir grandes esperanzas, si por ventura hallo tan sólo una cosa que sea cierta e indubitable.",
+  "problema": {
+   "nombre": "Problema del conocimiento",
+   "cats": [
+    [
+     "Problema del conocimiento",
+     "conocimiento",
+     "epistemolog",
+     "conocer",
+     "gnoseolog"
+    ]
+   ]
+  },
+  "principal": {
+   "grupos": [
+    [
+     "cierto",
+     "cierta",
+     "indubitabl",
+     "indudabl",
+     "certez"
+    ],
+    [
+     "punto",
+     "apoyo",
+     "firme",
+     "fundament",
+     "arquimedes"
+    ]
+   ],
+   "modelo": "Basta con hallar una sola cosa cierta e indubitable, como el punto de apoyo firme que pedía Arquímedes."
+  },
+  "secundaria": {
+   "grupos": [
+    [
+     "dud"
+    ],
+    [
+     "falso",
+     "rechaz",
+     "alej",
+     "camino"
+    ]
+   ],
+   "modelo": "Sumido en dudas como en aguas profundas, seguirá el mismo camino, rechazando como falso todo lo dudoso hasta encontrar algo cierto."
+  },
+  "conceptos": [
+   "Duda",
+   "Certeza",
+   "Verdad",
+   "Punto de apoyo"
+  ],
+  "conexion": "Duda metódica; Cogito"
+ },
+ {
+  "id": "DESMSE02",
+  "ref": "Meditaciones metafísicas, Meditación segunda",
+  "texto": "Así pues, supongo que todo lo que veo es falso; estoy persuadido de que nada de cuanto mi mendaz memoria me representa ha existido jamás; pienso que carezco de sentidos; creo que cuerpo, figura, extensión, movimiento, lugar, no son sino quimeras de mi espíritu. ¿Qué podré, entonces, tener por verdadero? Acaso esto solo: que nada cierto hay en el mundo.\n\nPero ¿qué sé yo si no habrá otra cosa, distinta de las que acabo de reputar inciertas, y que sea absolutamente indudable? ¿No habrá un Dios, o algún otro poder, que me ponga en el espíritu estos pensamientos? Ello no es necesario: tal vez soy capaz de producirlos por mí mismo. Y yo mismo, al menos, ¿no soy algo? Ya he negado que yo tenga sentidos ni cuerpo. Con todo, titubeo, pues ¿qué se sigue de eso? ¿Soy tan dependiente del cuerpo y de los sentidos que, sin ellos, no puedo ser?",
+  "problema": {
+   "nombre": "Problema del conocimiento y Problema antropológico",
+   "cats": [
+    [
+     "Problema del conocimiento",
+     "conocimiento",
+     "epistemolog",
+     "conocer",
+     "gnoseolog"
+    ],
+    [
+     "Problema antropológico",
+     "antropolog",
+     "ser humano",
+     "alma",
+     "hombre"
+    ]
+   ]
+  },
+  "principal": {
+   "grupos": [
+    [
+     "yo"
+    ],
+    [
+     "algo",
+     "exist",
+     "ser",
+     "depend"
+    ]
+   ],
+   "modelo": "Aunque todo sea dudoso, ¿no soy yo algo? Se pregunta si puede existir sin cuerpo ni sentidos."
+  },
+  "secundaria": {
+   "grupos": [
+    [
+     "falso",
+     "quimera",
+     "nada cierto",
+     "ilusion"
+    ],
+    [
+     "cuerpo",
+     "sentido",
+     "memoria",
+     "extension",
+     "movimiento"
+    ]
+   ],
+   "modelo": "Supone falso todo lo que ve y recuerda, y que el cuerpo, la extensión o el movimiento son quimeras; quizá nada es cierto."
+  },
+  "conceptos": [
+   "Yo",
+   "Duda",
+   "Cuerpo",
+   "Sentidos"
+  ],
+  "conexion": "Duda metódica; Cogito"
+ },
+ {
+  "id": "DESMSE03",
+  "ref": "Meditaciones metafísicas, Meditación segunda",
+  "texto": "Ya estoy persuadido de que nada hay en el mundo; ni cielo, ni tierra, ni espíritus, ni cuerpos, ¿y no estoy asimismo persuadido de que yo tampoco existo? Pues no: si yo estoy persuadido de algo, o meramente si pienso algo, es porque yo soy. Cierto que hay no sé qué engañador todopoderoso y astutísimo, que emplea toda su industria en burlarme. Pero entonces no cabe duda de que, si me engaña, es que yo soy; y, engáñeme cuanto quiera, nunca podrá hacer que yo no sea nada, mientras yo esté pensando que soy algo. De manera que, tras pensarlo bien y examinarlo todo cuidadosamente, resulta que es preciso concluir y dar como cosa cierta que esta proposición: yo soy, yo existo, es necesariamente verdadera, cuantas veces la pronuncio o la concibo en mi espíritu.",
+  "problema": {
+   "nombre": "Problema del conocimiento",
+   "cats": [
+    [
+     "Problema del conocimiento",
+     "conocimiento",
+     "epistemolog",
+     "conocer",
+     "gnoseolog"
+    ]
+   ]
+  },
+  "principal": {
+   "grupos": [
+    [
+     "yo soy",
+     "existo",
+     "exist",
+     "cogito",
+     "pienso"
+    ],
+    [
+     "verdad",
+     "cierto",
+     "indudabl",
+     "necesari"
+    ]
+   ],
+   "modelo": "La proposición «yo soy, yo existo» es necesariamente verdadera cada vez que la pienso."
+  },
+  "secundaria": {
+   "grupos": [
+    [
+     "engañ",
+     "genio"
+    ],
+    [
+     "soy",
+     "exist",
+     "pens",
+     "algo"
+    ]
+   ],
+   "modelo": "Aunque un engañador todopoderoso me engañe, si me engaña es que soy; nunca podrá hacer que no sea nada mientras pienso."
+  },
+  "conceptos": [
+   "Cogito",
+   "Existencia",
+   "Pensamiento",
+   "Engañador"
+  ],
+  "conexion": "Cogito; Epistemología"
+ },
+ {
+  "id": "DESMSE04",
+  "ref": "Meditaciones metafísicas, Meditación segunda",
+  "texto": "Ahora bien, ya sé con certeza que soy, pero aún no sé con claridad qué soy; de suerte que, en adelante, preciso del mayor cuidado para no confundir imprudentemente otra cosa conmigo, y así no enturbiar ese conocimiento, que sostengo ser más cierto y evidente que todos los que he tenido antes.\n\nPor ello, examinaré de nuevo lo que yo creía ser, antes de incidir en estos pensamientos, y quitaré de mis antiguas opiniones todo lo que puede combatirse mediante las razones que acabo de alegar, de suerte que no quede más que lo enteramente indudable. Así pues, ¿qué es lo que antes yo creía ser? Un hombre, sin duda. Pero ¿qué es un hombre? ¿Diré, acaso, que un animal racional? No, por cierto: pues habría luego que averiguar qué es animal y qué es racional, y así una única cuestión nos llevaría insensiblemente a infinidad de otras cuestiones más difíciles y embarazosas, y no quisiera malgastar en tales sutilezas el poco tiempo y ocio que me restan.\n\nEntonces, me detendré aquí a considerar más bien los pensamientos que antes nacían espontáneos en mi espíritu, inspirados por mi sola naturaleza, cuando me aplicaba a considerar mi ser. Me fijaba, primero, en que yo tenía un rostro, manos, brazos, y toda esa máquina de huesos y carne, tal y como aparece en un cadáver, a la que designaba con el nombre de cuerpo.\n\nTras eso, reparaba en que me nutría, y andaba, y sentía, y pensaba, y refería todas esas acciones al alma; pero no me paraba a pensar en qué era ese alma, o bien, si lo hacía, imaginaba que era algo extremadamente raro y sutil, como un viento, una llama o un delicado éter, difundido por mis otras partes más groseras.",
+  "problema": {
+   "nombre": "Problema del conocimiento y Problema antropológico",
+   "cats": [
+    [
+     "Problema del conocimiento",
+     "conocimiento",
+     "epistemolog",
+     "conocer",
+     "gnoseolog"
+    ],
+    [
+     "Problema antropológico",
+     "antropolog",
+     "ser humano",
+     "alma",
+     "hombre"
+    ]
+   ]
+  },
+  "principal": {
+   "grupos": [
+    [
+     "que soy",
+     "que es",
+     "naturaleza",
+     "esencia"
+    ],
+    [
+     "indudabl",
+     "cierto",
+     "examin",
+     "claridad"
+    ]
+   ],
+   "modelo": "Ya sabe que es, pero no qué es; examinará lo que creía ser para quedarse solo con lo enteramente indudable."
+  },
+  "secundaria": {
+   "grupos": [
+    [
+     "cuerpo",
+     "maquina"
+    ],
+    [
+     "alma"
+    ]
+   ],
+   "modelo": "Antes se creía un cuerpo, una máquina de huesos y carne, y un alma sutil, como un viento o una llama, a la que atribuía nutrirse, andar, sentir y pensar."
+  },
+  "conceptos": [
+   "Cuerpo",
+   "Alma",
+   "Hombre",
+   "Animal racional"
+  ],
+  "conexion": "Cogito; Antropología"
+ },
+ {
+  "id": "DESMSE05",
+  "ref": "Meditaciones metafísicas, Meditación segunda",
+  "texto": "En lo tocante al cuerpo, no dudaba en absoluto de su naturaleza, pues pensaba conocerla muy distintamente, y, de querer explicarla según las nociones que entonces tenía, la hubiera descrito así: entiendo por cuerpo todo aquello que puede estar delimitado por una figura, estar situado en un lugar y llenar un espacio, de suerte que todo otro cuerpo quede excluido; todo aquello que puede ser sentido por el tacto, la vista, el oído, el gusto o el olfato; que puede moverse de distintos modos, no por sí mismo, sino por alguna otra cosa que lo toca y cuya impresión recibe; pues no creía yo que fuera atribuible a la naturaleza corpórea la potencia de moverse, sentir y pensar: al contrario, me asombraba al ver que tales facultades se hallaban en algunos cuerpos.",
+  "problema": {
+   "nombre": "Problema de la realidad (ontológico) y Problema antropológico",
+   "cats": [
+    [
+     "Problema de la realidad (ontológico)",
+     "realidad",
+     "ontolog",
+     "ser",
+     "metafisic"
+    ],
+    [
+     "Problema antropológico",
+     "antropolog",
+     "ser humano",
+     "alma",
+     "hombre"
+    ]
+   ]
+  },
+  "principal": {
+   "grupos": [
+    [
+     "cuerpo",
+     "corpor"
+    ],
+    [
+     "figura",
+     "lugar",
+     "espacio",
+     "extens"
+    ]
+   ],
+   "modelo": "El cuerpo es todo lo que tiene figura, ocupa un lugar y llena un espacio, excluyendo a otros cuerpos."
+  },
+  "secundaria": {
+   "grupos": [
+    [
+     "sentid",
+     "tacto",
+     "vista"
+    ],
+    [
+     "mover",
+     "mueve",
+     "pensar",
+     "sentir",
+     "por si mismo"
+    ]
+   ],
+   "modelo": "El cuerpo se percibe por los sentidos y no se mueve por sí mismo; moverse, sentir y pensar no pertenecen a la naturaleza corpórea."
+  },
+  "conceptos": [
+   "Cuerpo",
+   "Extensión",
+   "Figura",
+   "Naturaleza corpórea"
+  ],
+  "conexion": "Res extensa; Ontología; Antropología"
+ },
+ {
+  "id": "DESMSE06",
+  "ref": "Meditaciones metafísicas, Meditación segunda",
+  "texto": "Pues bien, ¿qué soy yo, ahora que supongo haber alguien extremadamente poderoso y, si es lícito decirlo así, maligno y astuto, que emplea todas sus fuerzas e industria en engañarme? ¿Acaso puedo estar seguro de poseer el más mínimo de esos atributos que acabo de referir a la naturaleza corpórea? Me paro a pensar en ello con atención, paso revista una y otra vez, en mi espíritu, a esas cosas, y no hallo ninguna de la que pueda decir que está en mí. No es necesario que me entretenga en recontarlas. Pasemos, pues, a los atributos del alma, y veamos si hay alguno que esté en mí.",
+  "problema": {
+   "nombre": "Problema del conocimiento y Problema antropológico",
+   "cats": [
+    [
+     "Problema del conocimiento",
+     "conocimiento",
+     "epistemolog",
+     "conocer",
+     "gnoseolog"
+    ],
+    [
+     "Problema antropológico",
+     "antropolog",
+     "ser humano",
+     "alma",
+     "hombre"
+    ]
+   ]
+  },
+  "principal": {
+   "grupos": [
+    [
+     "cuerpo",
+     "corpor"
+    ],
+    [
+     "atribut",
+     "propiedad"
+    ],
+    [
+     "no pued",
+     "no hallo",
+     "ninguno",
+     "ningun",
+     "dud",
+     "segur"
+    ]
+   ],
+   "modelo": "Si existe un engañador poderoso, no puede estar seguro de poseer ninguno de los atributos del cuerpo."
+  },
+  "secundaria": {
+   "grupos": [
+    [
+     "alma"
+    ]
+   ],
+   "modelo": "Por eso pasa a examinar los atributos del alma para ver si alguno está en él."
+  },
+  "conceptos": [
+   "Atributos",
+   "Naturaleza corpórea",
+   "Alma",
+   "Genio maligno"
+  ],
+  "conexion": "Duda metódica; Antropología"
+ },
+ {
+  "id": "DESMSE07",
+  "ref": "Meditaciones metafísicas, Meditación segunda",
+  "texto": "Los primeros son nutrirme y andar; pero, si es cierto que no tengo cuerpo, es cierto entonces también que no puedo andar ni nutrirme. Un tercero es sentir, pero no puede uno sentir sin cuerpo, aparte de que yo he creído sentir en sueños muchas cosas y, al despertar, me he dado cuenta de que no las había sentido realmente. Un cuarto es pensar: y aquí sí hallo que el pensamiento es un atributo que me pertenece, siendo el único que no puede separarse de mí. Yo soy, yo existo; eso es cierto, pero ¿cuánto tiempo? Todo el tiempo que estoy pensando: pues quizá ocurriese que, si yo cesara de pensar, cesaría al mismo tiempo de existir.",
+  "problema": {
+   "nombre": "Problema antropológico y Problema de la realidad (ontológico)",
+   "cats": [
+    [
+     "Problema antropológico",
+     "antropolog",
+     "ser humano",
+     "alma",
+     "hombre"
+    ],
+    [
+     "Problema de la realidad (ontológico)",
+     "realidad",
+     "ontolog",
+     "ser",
+     "metafisic"
+    ]
+   ]
+  },
+  "principal": {
+   "grupos": [
+    [
+     "pensa",
+     "pensar",
+     "pienso",
+     "pensamiento"
+    ],
+    [
+     "atribut",
+     "esencia",
+     "insepar",
+     "pertenec",
+     "unico"
+    ]
+   ],
+   "modelo": "El pensamiento es el único atributo que no puede separarse de mí: es lo que me pertenece esencialmente."
+  },
+  "secundaria": {
+   "grupos": [
+    [
+     "exist"
+    ],
+    [
+     "mientras",
+     "tiempo",
+     "dej",
+     "ces"
+    ]
+   ],
+   "modelo": "Existo mientras pienso, y quizá dejaría de existir si dejara de pensar; nutrirse, andar o sentir requieren un cuerpo."
+  },
+  "conceptos": [
+   "Pensamiento",
+   "Atributo",
+   "Existencia",
+   "Alma"
+  ],
+  "conexion": "Cogito; Res cogitans; Antropología"
+ }
 ]
 };
 const API_URL = "/api/corregir";
@@ -4236,7 +5438,129 @@ const TEXTOS = {
   {"id":"PLAREP14","ref":"República, libro VI","yt":"GnVSoIDinic","html":"—Pues veamos nuevamente; será más fácil que entiendas si te digo esto antes. Creo que sabes que <u>los que se ocupan de <mark class=\"hl-c\">geometría</mark> y de cálculo suponen lo impar y lo par, las figuras y tres clases de ángulos</u> y cosas afines, según lo que investigan en cada caso. <mark class=\"hl-g\">Como si las conocieran, las adoptan como <mark class=\"hl-c\">supuestos</mark>, y de ahí en adelante no estiman que deban dar cuenta de ellas</mark> ni a sí mismos ni a otros, como si fueran evidentes a cualquiera; antes bien, <u>partiendo de ellas atraviesan el resto de modo consecuente, para concluir en aquello que proponían al examen</u>. —Sí, esto lo sé. —Sabes, por consiguiente, que <mark class=\"hl-g\">se sirven de figuras visibles y hacen discursos acerca de ellas, aunque no pensando en éstas sino en aquellas cosas a las cuales éstas se parecen</mark>, <mark class=\"hl-b\">discurriendo en vista al Cuadrado en sí y a la Diagonal en sí, y no en vista de la que dibujan</mark>, y así con lo demás. De las cosas mismas que configuran y dibujan hay <mark class=\"hl-c\">sombras</mark> e <mark class=\"hl-c\">imágenes</mark> en el agua, y <u>de estas cosas que dibujan se sirven como imágenes, buscando divisar aquellas cosas en sí que no podrían divisar de otro modo que con el <mark class=\"hl-c\">pensamiento</mark></u>. —Dices verdad."},
   {"id":"PLAREP15","ref":"República, libro VI","yt":"JIVVuC04Zwc","html":"—A esto me refería como la especie <mark class=\"hl-c\">inteligible</mark>. Pero <mark class=\"hl-g\">en esta su primera sección, el alma se ve forzada a servirse de <mark class=\"hl-c\">supuestos</mark> en su búsqueda, sin avanzar hacia un <mark class=\"hl-c\">principio</mark></mark>, por no poder remontarse más allá de los supuestos. Y <u>para eso usa como <mark class=\"hl-c\">imágenes</mark> a los objetos que abajo eran imitados</u>, y que habían sido conjeturados y estimados como claros respecto de los que eran sus imitaciones. —Comprendo que te refieres a la <mark class=\"hl-c\">geometría</mark> y a las artes afines. —Comprende entonces la otra sección de lo inteligible, cuando afirmo que <mark class=\"hl-g\">en ella la razón misma aprehende, por medio de la facultad <mark class=\"hl-c\">dialéctica</mark></mark>, y <u>hace de los supuestos no principios sino realmente supuestos, que son como peldaños y trampolines hasta el principio del todo, que es no supuesto</u>, y, tras aferrarse a él, ateniéndose a las cosas que de él dependen, desciende hasta una conclusión, <mark class=\"hl-b\">sin servirse para nada de <mark class=\"hl-c\">lo sensible</mark>, sino de Ideas, a través de Ideas y en dirección a Ideas, hasta concluir en Ideas</mark>."},
   {"id":"PLAREP16","ref":"República, libro VI","yt":"wwCNNstps-s","html":"—Comprendo, aunque no suficientemente, ya que creo que tienes en mente una tarea enorme: <u>quieres distinguir lo que de lo real e <mark class=\"hl-c\">inteligible</mark> es estudiado por la ciencia <mark class=\"hl-c\">dialéctica</mark></u>, <mark class=\"hl-g\">estableciendo que es más claro que lo estudiado por las llamadas ‘artes’</mark>, <u>para las cuales los supuestos son principios</u>. Y los que los estudian <mark class=\"hl-g\">se ven forzados a estudiarlos por medio del pensamiento discursivo, aunque no por los sentidos</mark>. Pero a raíz de <u>no hacer el examen avanzando hacia un principio sino a partir de supuestos</u>, te parece que no poseen inteligencia acerca de ellos, aunque sean inteligibles junto a un principio. Y creo que llamas ‘<mark class=\"hl-c\">pensamiento discursivo</mark>’ <u>al estado mental de los geómetras y similares</u>, pero no ‘<mark class=\"hl-c\">inteligencia</mark>’; <mark class=\"hl-g\">como si el ‘pensamiento discursivo’ fuera algo intermedio entre la <mark class=\"hl-c\">opinión</mark> y la inteligencia</mark>. —Entendiste perfectamente. Y ahora <u>aplica a las cuatro secciones estas cuatro afecciones que se generan en el alma</u>; <mark class=\"hl-g\">inteligencia, a la suprema; pensamiento discursivo, a la segunda; a la tercera asigna la <mark class=\"hl-c\">creencia</mark> y a la cuarta la <mark class=\"hl-c\">conjetura</mark></mark>; y ordénalas proporcionadamente, <mark class=\"hl-b\">considerando que cuanto más participen de la verdad tanto más participan de la claridad</mark>. —Entiendo, y estoy de acuerdo en ordenarlas como dices."}
- ]
+ ],
+ descartes:[
+ {
+  "id": "DESDIS01",
+  "ref": "Discurso del método, parte II",
+  "yt": null,
+  "html": "Había estudiado un poco, siendo más joven, la lógica de entre las partes de la filosofía; de las <mark class=\"hl-c\">matemáticas</mark>, el análisis de los geómetras y el álgebra. Tres artes o ciencias que debían contribuir en algo a mi propósito. Pero habiéndolas examinado, me percaté de que en relación con la lógica, <mark class=\"hl-g\">sus <mark class=\"hl-c\">silogismos</mark> y la mayor parte de sus <mark class=\"hl-c\">reglas</mark> sirven más para explicar a otro cuestiones ya conocidas</mark> o, también, como sucede con el arte de Lulio, para hablar sin juicio de aquellas que se ignoran que para llegar a conocerlas. Y si bien la lógica contiene muchos <mark class=\"hl-c\">preceptos verdaderos</mark> y muy adecuados, <u>hay, sin embargo, mezclados con éstos otros muchos que o bien son perjudiciales o bien superfluos</u>, de modo que <u>es tan difícil separarlos</u> como sacar una Diana o una Minerva de un bloque de mármol aún no trabajado."
+ },
+ {
+  "id": "DESDIS02",
+  "ref": "Discurso del método, parte II",
+  "yt": null,
+  "html": "Igualmente, en relación con el análisis de los antiguos o el <mark class=\"hl-c\">álgebra</mark> de los modernos, además de que no se refieren sino a muy abstractas materias que parecen carecer de todo uso, el primero está tan circunscrito a la consideración de las figuras que <mark class=\"hl-g\">no permite ejercer el <mark class=\"hl-c\">entendimiento</mark> sin fatigar excesivamente la <mark class=\"hl-c\">imaginación</mark></mark>. La segunda está tan sometida a ciertas reglas y cifras que <u>se ha convertido en un arte confuso y oscuro</u> capaz de distorsionar el ingenio en vez de ser una ciencia que favorezca su desarrollo. Todo esto fue la causa por la que pensaba que <mark class=\"hl-b\">era preciso indagar otro <mark class=\"hl-c\">método</mark> que, asimilando las ventajas de estos tres, estuviera exento de sus defectos</mark>."
+ },
+ {
+  "id": "DESDIS03",
+  "ref": "Discurso del método, parte II",
+  "yt": null,
+  "html": "Y como la <mark class=\"hl-c\">multiplicidad de leyes</mark> frecuentemente sirve para los vicios de tal forma que <u>un Estado está mejor regido cuando no existen más que unas pocas leyes</u> que son minuciosamente observadas, de la misma forma, en lugar del gran número de preceptos del cual está compuesta la lógica, <u>estimé que tendría suficiente con los cuatro siguientes</u> con tal de que tomase la firme y constante resolución de no incumplir ni una sola vez su observancia.<br><br>El primero consistía en <mark class=\"hl-b\">no admitir cosa alguna como verdadera si no se la había conocido <mark class=\"hl-c\">evidentemente</mark> como tal</mark>. Es decir, con todo cuidado debía <u>evitar la <mark class=\"hl-c\">precipitación</mark> y la <mark class=\"hl-c\">prevención</mark></u>, admitiendo exclusivamente en mis juicios <mark class=\"hl-g\">aquello que se presentara tan <mark class=\"hl-c\">clara y distintamente</mark> a mi espíritu que no tuviera motivo alguno para ponerlo en <mark class=\"hl-c\">duda</mark></mark>."
+ },
+ {
+  "id": "DESDIS04",
+  "ref": "Discurso del método, parte II",
+  "yt": null,
+  "html": "<mark class=\"hl-b\">El segundo</mark> exigía que <mark class=\"hl-g\"><mark class=\"hl-c\">dividiese</mark> cada una de las <mark class=\"hl-c\">dificultades</mark> a examinar en tantas parcelas como fuera posible</mark> y necesario para resolverlas más fácilmente.<br><br><mark class=\"hl-b\">El tercero</mark> requería <mark class=\"hl-g\">conducir por orden mis reflexiones comenzando por los <mark class=\"hl-c\">objetos más simples</mark> y más fácilmente cognoscibles</mark>, para ascender poco a poco, gradualmente, <u>hasta el conocimiento de los más complejos</u>, suponiendo inclusive un orden entre aquellos que no se preceden naturalmente los unos a los otros.<br><br>Según <mark class=\"hl-b\">el último</mark> de estos preceptos debería <mark class=\"hl-g\">realizar <mark class=\"hl-c\">recuentos</mark> tan completos y revisiones tan amplias que pudiese <mark class=\"hl-b\">estar seguro de no omitir nada</mark></mark>."
+ },
+ {
+  "id": "DESDIS05",
+  "ref": "Discurso del método, parte II",
+  "yt": null,
+  "html": "Las largas <mark class=\"hl-c\">cadenas de razones</mark> simples y fáciles, por medio de las cuales generalmente los <mark class=\"hl-c\">geómetras</mark> llegan a alcanzar las demostraciones más difíciles, me habían proporcionado la ocasión de imaginar que <mark class=\"hl-b\">todas las cosas que pueden ser objeto del conocimiento de los hombres se entrelazan de igual forma</mark> y que, <mark class=\"hl-g\">absteniéndose de admitir como verdadera alguna que no lo sea y guardando siempre el <mark class=\"hl-c\">orden</mark> necesario para <mark class=\"hl-c\">deducir</mark> unas de otras</mark>, <u>no puede haber algunas tan alejadas de nuestro conocimiento que no podamos, finalmente, conocer ni tan ocultas que no podamos llegar a descubrir</u>. No supuso para mí una gran dificultad el decidir por cuáles era necesario iniciar el estudio: previamente sabía que <u>debía ser por las más <mark class=\"hl-c\">simples</mark> y las más fácilmente cognoscibles</u>."
+ },
+ {
+  "id": "DESMPR01",
+  "ref": "Meditaciones metafísicas, Meditación primera",
+  "yt": null,
+  "html": "He advertido hace ya algún tiempo que, desde mi más temprana edad, <u>había admitido como verdaderas muchas <mark class=\"hl-c\">opiniones falsas</mark></u>, y que lo edificado después sobre cimientos tan poco sólidos tenía que ser por fuerza muy <mark class=\"hl-c\">dudoso</mark> e incierto; de suerte que me era preciso <mark class=\"hl-g\">emprender seriamente, una vez en la vida, la tarea de deshacerme de todas las opiniones a las que hasta entonces había dado crédito, y empezar todo de nuevo desde los <mark class=\"hl-c\">fundamentos</mark></mark>, <mark class=\"hl-b\">si quería establecer algo firme y constante en las ciencias</mark>. Mas pareciéndome ardua dicha empresa, he aguardado hasta alcanzar una edad lo bastante madura como para no poder esperar que haya otra, tras ella, más apta para la ejecución de mi propósito; y por ello lo he diferido tanto, que a partir de ahora me sentiría culpable si gastase en deliberaciones el tiempo que me queda para obrar."
+ },
+ {
+  "id": "DESMPR02",
+  "ref": "Meditaciones metafísicas, Meditación primera",
+  "yt": null,
+  "html": "Así pues, ahora que mi espíritu está libre de todo cuidado, habiéndome procurado reposo seguro en una apacible soledad, me aplicaré seriamente y con libertad a <mark class=\"hl-g\">destruir en general todas mis antiguas <mark class=\"hl-c\">opiniones</mark></mark>.<br><br>Ahora bien, para cumplir tal designio, no me será necesario probar que son todas falsas, lo que acaso no conseguiría nunca; sino que, por cuanto la <mark class=\"hl-c\">razón</mark> me persuade desde el principio para que no dé más crédito a las cosas no enteramente ciertas e indudables que a las manifiestamente falsas <mark class=\"hl-b\">me bastará para rechazarlas todas con encontrar en cada una el más pequeño motivo de <mark class=\"hl-c\">duda</mark></mark>. Y para eso <mark class=\"hl-g\">tampoco hará falta que examine todas y cada una en particular</mark>, pues sería un trabajo infinito; sino que, por cuanto <u>la ruina de los cimientos lleva necesariamente consigo la de todo el edificio</u>, me dirigiré en principio contra los <mark class=\"hl-c\">fundamentos</mark> mismos en que se apoyaban todas mis opiniones antiguas."
+ },
+ {
+  "id": "DESMPR03",
+  "ref": "Meditaciones metafísicas, Meditación primera",
+  "yt": null,
+  "html": "Todo lo que he admitido hasta el presente como más seguro y verdadero, lo he aprendido de los <mark class=\"hl-c\">sentidos</mark> o por los sentidos; ahora bien, <mark class=\"hl-g\">he experimentado a veces que tales sentidos me engañaban, y es prudente no fiarse nunca por entero de quienes nos han engañado una vez</mark>.<br><br>Pero, aun dado que <mark class=\"hl-g\">los sentidos nos engañan a veces</mark>, tocante a cosas mal perceptibles o muy remotas, acaso hallemos otras muchas de las que no podamos razonablemente <mark class=\"hl-c\">dudar</mark>, aunque las conozcamos por su medio; como, por ejemplo, <u>que estoy aquí, sentado junto al fuego, con una bata puesta y este papel en mis manos</u>, o cosas por el estilo. Y ¿cómo negar que estas manos y este cuerpo sean míos, si no es poniéndome a la altura de esos insensatos, cuyo cerebro está tan turbio y ofuscado por los negros vapores de la bilis, que aseguran constantemente ser reyes siendo muy pobres, ir vestidos de oro y púrpura estando desnudos, o que se imaginan ser cacharros o tener el cuerpo de vidrio? <u>Mas los tales son locos, y yo no lo sería menos si me rigiera por su ejemplo</u>."
+ },
+ {
+  "id": "DESMPR04",
+  "ref": "Meditaciones metafísicas, Meditación primera",
+  "yt": null,
+  "html": "Con todo, debo considerar aquí que soy hombre y, por consiguiente, que tengo costumbre de dormir y de <u>representarme en sueños las mismas cosas, y a veces cosas menos verosímiles</u>, que esos insensatos cuando están despiertos. ¡Cuántas veces no me habrá ocurrido soñar, por la noche, que estaba aquí mismo, vestido, junto al fuego, estando en realidad desnudo y en la cama! En este momento, estoy seguro de que yo miro este papel con los ojos de la <mark class=\"hl-c\">vigilia</mark>, de que esta cabeza que muevo no está soñolienta, de que alargo esta mano y la siento de propósito y con plena conciencia: lo que acaece en sueños no me resulta tan <mark class=\"hl-c\">claro y distinto</mark> como todo esto. Pero, pensándolo mejor, <mark class=\"hl-g\">recuerdo haber sido engañado, mientras dormía, por <mark class=\"hl-c\">ilusiones</mark> semejantes</mark>. Y fijándome en este pensamiento, veo de un modo tan manifiesto que <mark class=\"hl-b\">no hay indicios concluyentes ni señales que basten a <mark class=\"hl-c\">distinguir con claridad el sueño de la vigilia</mark></mark>, que acabo atónito, y mi estupor es tal que casi puede persuadirme de que estoy durmiendo."
+ },
+ {
+  "id": "DESMPR05",
+  "ref": "Meditaciones metafísicas, Meditación primera",
+  "yt": null,
+  "html": "Así, pues, supongamos ahora que estamos dormidos, y que todas estas particularidades, a saber: que abrimos los ojos, movemos la cabeza, alargamos las manos, no son sino <mark class=\"hl-c\">mentirosas ilusiones</mark>; y pensemos que, acaso, ni nuestras manos ni todo nuestro cuerpo son tal y como los vemos. Con todo, hay que contestar al menos que <mark class=\"hl-g\">las cosas que nos representamos en sueños son como cuadros y pinturas que deben formarse a semejanza de algo real y verdadero</mark>; de manera que por lo menos <mark class=\"hl-b\">esas cosas generales —a saber: ojos, cabeza, manos, cuerpo entero— no son imaginarias, sino que en verdad existen</mark>. Pues los pintores, incluso cuando usan del mayor artificio para representar sirenas y sátiros mediante figuras caprichosas y fuera de lo común, no pueden, sin embargo, atribuirles formas y naturalezas del todo nuevas, y <u>lo que hacen es sólo mezclar y componer partes de diversos animales</u>; y, si llega el caso de que su imaginación sea lo bastante extravagante como para inventar algo tan nuevo que nunca haya sido visto, representándonos así su obra una cosa puramente fingida y absolutamente falsa, con todo, <u>al menos los colores que usan deben ser verdaderos</u>."
+ },
+ {
+  "id": "DESMPR06",
+  "ref": "Meditaciones metafísicas, Meditación primera",
+  "yt": null,
+  "html": "Y por igual razón, aun pudiendo ser imaginarias esas cosas generales —a saber: ojos, cabeza, manos y otras semejantes— es preciso confesar, de todos modos, que <mark class=\"hl-g\">hay cosas aún más simples y universales realmente existentes</mark>, por cuya mezcla, ni más ni menos que por la de algunos colores verdaderos, se forman todas las imágenes de las cosas que residen en nuestro pensamiento, ya sean verdaderas y reales, ya fingidas y fantásticas. De ese género es la <mark class=\"hl-c\">naturaleza corpórea</mark> en general, y su <mark class=\"hl-c\">extensión</mark>, así como la figura de las cosas extensas, su cantidad o magnitud, su número, y también el lugar en que están, el tiempo que mide su duración y otras por el estilo.<br><br>Por lo cual, acaso no sería mala conclusión si dijésemos que <u>la física, la astronomía, la medicina y todas las demás ciencias que dependen de la consideración de cosas compuestas, son muy dudosas e inciertas</u>; pero que <mark class=\"hl-b\">la <mark class=\"hl-c\">aritmética</mark>, la <mark class=\"hl-c\">geometría</mark> y demás ciencias de este género, que no tratan sino de cosas muy simples y generales</mark>, sin ocuparse mucho de si tales cosas existen o no en la naturaleza, <mark class=\"hl-g\">contienen algo cierto e indudable</mark>. Pues, <u>duerma yo o esté despierto, dos más tres serán siempre cinco</u>, y el cuadrado no tendrá más de cuatro lados; no pareciendo posible que verdades tan patentes puedan ser sospechosas de falsedad o incertidumbre alguna."
+ },
+ {
+  "id": "DESMPR07",
+  "ref": "Meditaciones metafísicas, Meditación primera",
+  "yt": null,
+  "html": "Y, sin embargo, hace tiempo que tengo en mi espíritu cierta opinión, según la cual <mark class=\"hl-b\">hay un <mark class=\"hl-c\">Dios</mark> que todo lo puede</mark>, por quien he sido creado tal como soy. Pues bien: ¿quién me asegura que el tal Dios no haya procedido de manera que <u>no exista figura, ni magnitud, ni lugar, pero a la vez de modo que yo, no obstante, sí tenga la impresión de que todo eso existe</u> tal y como lo veo? Y más aún: así como yo pienso, a veces, que los demás se engañan, hasta en las cosas que creen saber con más certeza, <mark class=\"hl-g\">podría ocurrir que Dios haya querido que me engañe cuantas veces sumo dos más tres, o cuando enumero los lados de un cuadrado</mark>, o cuando juzgo de cosas aún más fáciles que ésas, si es que son siquiera imaginables."
+ },
+ {
+  "id": "DESMPR08",
+  "ref": "Meditaciones metafísicas, Meditación primera",
+  "yt": null,
+  "html": "Así pues, supondré que hay, no un verdadero Dios —que es fuente suprema de verdad—, sino <mark class=\"hl-b\">cierto <mark class=\"hl-c\">genio maligno</mark>, no menos artero y engañador que poderoso, el cual ha usado de toda su industria para engañarme</mark>. Pensaré que <mark class=\"hl-g\">el cielo, el aire, la tierra, los colores, las figuras, los sonidos y las demás cosas exteriores, no son sino <mark class=\"hl-c\">ilusiones</mark> y ensueños</mark>, de los que él se sirve para atrapar mi credulidad. Me consideraré a mí mismo como sin manos, sin ojos, sin carne, ni sangre, sin sentido alguno, y creyendo falsamente que tengo todo eso. Permaneceré obstinadamente fijo en ese pensamiento, y, si, por dicho medio, no me es posible llegar al conocimiento de alguna verdad, <u>al menos está en mi mano suspender el <mark class=\"hl-c\">juicio</mark></u>. Por ello, <u>tendré sumo cuidado en no dar crédito a ninguna falsedad</u>, y dispondré tan bien mi espíritu contra las malas artes de ese gran engañador que, por muy poderoso y astuto que sea, nunca podrá imponer nada."
+ },
+ {
+  "id": "DESMSE01",
+  "ref": "Meditaciones metafísicas, Meditación segunda",
+  "yt": null,
+  "html": "Mi meditación de ayer ha llenado mi espíritu de tantas dudas, que ya no está en mi mano olvidarlas. Y, sin embargo, no veo en qué manera podré resolverlas; y, como si de repente hubiera caído en aguas muy profundas, tan turbado me hallo que ni puedo apoyar mis pies en el fondo ni nadar para sostenerme en la superficie. Haré un esfuerzo, pese a todo, y tomaré de nuevo la misma vía que ayer, <u>alejándome de todo aquello en que pueda imaginar la más mínima <mark class=\"hl-c\">duda</mark>, del mismo modo que si supiera que es completamente falso</u>; y <mark class=\"hl-g\">seguiré siempre por ese camino, hasta haber encontrado algo cierto, o al menos, si otra cosa no puedo, hasta saber de cierto que nada cierto hay en el mundo</mark>.<br><br>Arquímedes, para trasladar la tierra de lugar, <u>sólo pedía un <mark class=\"hl-c\">punto de apoyo</mark> firme e inmóvil</u>; así yo también tendré derecho a concebir grandes esperanzas, <mark class=\"hl-b\">si por ventura hallo tan sólo una cosa que sea cierta e <mark class=\"hl-c\">indubitable</mark></mark>."
+ },
+ {
+  "id": "DESMSE02",
+  "ref": "Meditaciones metafísicas, Meditación segunda",
+  "yt": null,
+  "html": "Así pues, <u>supongo que todo lo que veo es falso</u>; estoy persuadido de que nada de cuanto mi mendaz memoria me representa ha existido jamás; pienso que carezco de <mark class=\"hl-c\">sentidos</mark>; <u>creo que <mark class=\"hl-c\">cuerpo</mark>, figura, extensión, movimiento, lugar, no son sino <mark class=\"hl-c\">quimeras</mark> de mi espíritu</u>. ¿Qué podré, entonces, tener por verdadero? Acaso esto solo: que nada cierto hay en el mundo.<br><br>Pero ¿qué sé yo si no habrá otra cosa, distinta de las que acabo de reputar inciertas, y que sea absolutamente indudable? ¿No habrá un Dios, o algún otro poder, que me ponga en el espíritu estos pensamientos? Ello no es necesario: tal vez soy capaz de producirlos por mí mismo. <mark class=\"hl-g\">Y yo mismo, al menos, ¿no soy algo?</mark> Ya he negado que yo tenga sentidos ni cuerpo. Con todo, titubeo, pues ¿qué se sigue de eso? <mark class=\"hl-b\">¿Soy tan dependiente del cuerpo y de los sentidos que, sin ellos, no puedo ser?</mark>"
+ },
+ {
+  "id": "DESMSE03",
+  "ref": "Meditaciones metafísicas, Meditación segunda",
+  "yt": null,
+  "html": "Ya estoy persuadido de que nada hay en el mundo; ni cielo, ni tierra, ni espíritus, ni cuerpos, ¿y no estoy asimismo persuadido de que yo tampoco existo? Pues no: <mark class=\"hl-g\">si yo estoy persuadido de algo, o meramente si <mark class=\"hl-c\">pienso</mark> algo, es porque yo soy</mark>. Cierto que hay no sé qué <mark class=\"hl-c\">engañador todopoderoso</mark> y astutísimo, que emplea toda su industria en burlarme. Pero entonces no cabe duda de que, <u>si me engaña, es que yo soy; y, engáñeme cuanto quiera, nunca podrá hacer que yo no sea nada, mientras yo esté pensando que soy algo</u>. De manera que, tras pensarlo bien y examinarlo todo cuidadosamente, resulta que es preciso concluir y dar como cosa cierta que esta proposición: <mark class=\"hl-b\">yo soy, yo existo, es necesariamente verdadera, cuantas veces la pronuncio o la concibo en mi espíritu</mark>."
+ },
+ {
+  "id": "DESMSE04",
+  "ref": "Meditaciones metafísicas, Meditación segunda",
+  "yt": null,
+  "html": "Ahora bien, <mark class=\"hl-g\">ya sé con <mark class=\"hl-c\">certeza</mark> que soy, pero aún no sé con claridad qué soy</mark>; de suerte que, en adelante, preciso del mayor cuidado para no confundir imprudentemente otra cosa conmigo, y así no enturbiar ese conocimiento, que sostengo ser más cierto y evidente que todos los que he tenido antes.<br><br>Por ello, examinaré de nuevo lo que yo creía ser, antes de incidir en estos pensamientos, y <u>quitaré de mis antiguas opiniones todo lo que puede combatirse mediante las razones que acabo de alegar, de suerte que no quede más que lo enteramente indudable</u>. Así pues, ¿qué es lo que antes yo creía ser? Un hombre, sin duda. Pero ¿qué es un hombre? ¿Diré, acaso, que un <mark class=\"hl-c\">animal racional</mark>? No, por cierto: pues habría luego que averiguar qué es animal y qué es racional, y así una única cuestión nos llevaría insensiblemente a infinidad de otras cuestiones más difíciles y embarazosas, y no quisiera malgastar en tales sutilezas el poco tiempo y ocio que me restan.<br><br>Entonces, me detendré aquí a considerar más bien los pensamientos que antes nacían espontáneos en mi espíritu, inspirados por mi sola naturaleza, cuando me aplicaba a considerar mi ser. Me fijaba, primero, en que yo tenía un rostro, manos, brazos, y <u>toda esa máquina de huesos y carne, tal y como aparece en un cadáver, a la que designaba con el nombre de <mark class=\"hl-c\">cuerpo</mark></u>.<br><br>Tras eso, reparaba en que me nutría, y andaba, y sentía, y pensaba, y <u>refería todas esas acciones al <mark class=\"hl-c\">alma</mark></u>; pero no me paraba a pensar en qué era ese alma, o bien, si lo hacía, imaginaba que era algo extremadamente raro y sutil, como un viento, una llama o un delicado éter, difundido por mis otras partes más groseras."
+ },
+ {
+  "id": "DESMSE05",
+  "ref": "Meditaciones metafísicas, Meditación segunda",
+  "yt": null,
+  "html": "En lo tocante al cuerpo, no dudaba en absoluto de su naturaleza, pues pensaba conocerla muy distintamente, y, de querer explicarla según las nociones que entonces tenía, la hubiera descrito así: <mark class=\"hl-b\">entiendo por cuerpo todo aquello que puede estar delimitado por una <mark class=\"hl-c\">figura</mark>, estar situado en un <mark class=\"hl-c\">lugar</mark> y llenar un <mark class=\"hl-c\">espacio</mark>, de suerte que todo otro cuerpo quede excluido</mark>; <u>todo aquello que puede ser sentido por el tacto, la vista, el oído, el gusto o el olfato</u>; que puede moverse de distintos modos, no por sí mismo, sino por alguna otra cosa que lo toca y cuya impresión recibe; pues <u>no creía yo que fuera atribuible a la <mark class=\"hl-c\">naturaleza corpórea</mark> la potencia de moverse, sentir y pensar</u>: al contrario, me asombraba al ver que tales facultades se hallaban en algunos cuerpos."
+ },
+ {
+  "id": "DESMSE06",
+  "ref": "Meditaciones metafísicas, Meditación segunda",
+  "yt": null,
+  "html": "Pues bien, ¿qué soy yo, ahora que supongo haber <u>alguien extremadamente poderoso y, si es lícito decirlo así, maligno y astuto, que emplea todas sus fuerzas e industria en engañarme</u>? ¿Acaso puedo estar seguro de poseer el más mínimo de esos <mark class=\"hl-c\">atributos</mark> que acabo de referir a la <mark class=\"hl-c\">naturaleza corpórea</mark>? Me paro a pensar en ello con atención, paso revista una y otra vez, en mi espíritu, a esas cosas, y <mark class=\"hl-g\">no hallo ninguna de la que pueda decir que está en mí</mark>. No es necesario que me entretenga en recontarlas. <u>Pasemos, pues, a los atributos del <mark class=\"hl-c\">alma</mark></u>, y veamos si hay alguno que esté en mí."
+ },
+ {
+  "id": "DESMSE07",
+  "ref": "Meditaciones metafísicas, Meditación segunda",
+  "yt": null,
+  "html": "Los primeros son nutrirme y andar; pero, si es cierto que no tengo <mark class=\"hl-c\">cuerpo</mark>, es cierto entonces también que no puedo andar ni nutrirme. Un tercero es sentir, pero <u>no puede uno sentir sin cuerpo</u>, aparte de que yo he creído sentir en sueños muchas cosas y, al despertar, me he dado cuenta de que no las había sentido realmente. Un cuarto es pensar: y aquí sí hallo que <mark class=\"hl-b\">el <mark class=\"hl-c\">pensamiento</mark> es un <mark class=\"hl-c\">atributo</mark> que me pertenece, siendo el único que no puede separarse de mí</mark>. <mark class=\"hl-g\">Yo soy, yo existo; eso es cierto</mark>, pero ¿cuánto tiempo? Todo el tiempo que estoy pensando: pues quizá ocurriese que, <u>si yo cesara de pensar, cesaría al mismo tiempo de existir</u>."
+ }
+]
 };
 function txCover(a,label,id){
   return '<span class="tx-cov">'+(id?'<img src="https://i.ytimg.com/vi/'+id+'/mqdefault.jpg" alt="" loading="lazy" onerror="this.remove()">':'')+
@@ -4258,6 +5582,11 @@ const TEXTOS_GRUPOS = {
   platon:[
     {key:"fed",title:"Fedón",sub:"Teoría de la reminiscencia",prefix:"PLAFED"},
     {key:"rep",title:"República VI",sub:"Símil de la línea y la Idea de Bien",prefix:"PLAREP"}
+  ],
+  descartes:[
+    {key:"dis",title:"Discurso del método",sub:"Parte II · Las reglas del método",prefix:"DESDIS"},
+    {key:"mpr",title:"Meditación primera",sub:"De las cosas que pueden ponerse en duda",prefix:"DESMPR"},
+    {key:"mse",title:"Meditación segunda",sub:"La naturaleza del espíritu humano",prefix:"DESMSE"}
   ]
 };
 function txCard(a,t,i){
