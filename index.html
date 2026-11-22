@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Caverna</title>
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#b8336a">
@@ -548,8 +548,8 @@ textarea:focus{outline:none;border-color:var(--petrol);background:var(--surface)
 @media (max-width:860px){
   .app{grid-template-columns:1fr}
   .side{display:none}
-  .main{padding:16px 16px 96px}
-  .tabbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--surface);border-top:1px solid var(--line);padding:8px 6px calc(8px + env(safe-area-inset-bottom));justify-content:space-around;box-shadow:0 -6px 20px rgba(74,20,48,.08)}
+  .main{padding:16px max(16px, env(safe-area-inset-right)) calc(104px + env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left))}
+  .tabbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--surface);border-top:1px solid var(--line);padding:8px max(6px, env(safe-area-inset-right)) max(14px, calc(8px + env(safe-area-inset-bottom))) max(6px, env(safe-area-inset-left));justify-content:space-around;box-shadow:0 -6px 20px rgba(74,20,48,.08)}
   .tabbar a{display:flex;flex-direction:column;align-items:center;gap:3px;text-decoration:none;color:var(--muted);font-size:11.5px;font-weight:700;padding:4px 8px;border-radius:10px;min-width:64px}
   .tabbar a.on{color:var(--petrol)}
   .tabbar a.on svg{color:var(--orange)}
