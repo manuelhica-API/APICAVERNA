@@ -59,6 +59,16 @@ function json(obj, status = 200) {
   });
 }
 
+// Comparación de la contraseña sin revelar en cuánto se diferencia.
+function claveCorrecta(recibida, esperada) {
+  if (recibida.length !== esperada.length) return false;
+  let diferencia = 0;
+  for (let i = 0; i < esperada.length; i++) {
+    diferencia |= recibida.charCodeAt(i) ^ esperada.charCodeAt(i);
+  }
+  return diferencia === 0;
+}
+
 function extraerJson(texto) {
   const ini = texto.indexOf("{");
   const fin = texto.lastIndexOf("}");
@@ -76,6 +86,12 @@ export async function corregirDisertacion(request, env) {
     datos = await request.json();
   } catch {
     return json({ error: "JSON no válido" }, 400);
+  }
+
+  const esperada = env.CLAVE_CORRECCION;
+  if (!esperada) return json({ error: "Falta configurar CLAVE_CORRECCION" }, 500);
+  if (!claveCorrecta(String(datos.clave || ""), esperada)) {
+    return json({ error: "Contraseña incorrecta" }, 401);
   }
 
   const pregunta = String(datos.pregunta || "").trim();
