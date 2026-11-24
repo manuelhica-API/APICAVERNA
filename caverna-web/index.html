@@ -5756,10 +5756,14 @@ function bindDisertacion(){
   show(store.get("distab","como"));
 }
 const ESSAY_CHECKS = ["Introducción: defino los términos clave del título","Introducción: sitúo el problema en la actualidad","Introducción: declaro mi tesis (a favor, en contra o matización)","Introducción: anuncio la hoja de ruta","Desarrollo: dos argumentos, apoyados en autores o teorías","Desarrollo: expongo con honestidad el contraargumento más fuerte","Desarrollo: refuto el contraargumento","Conclusión: sintetizo sin aportar ideas nuevas, reafirmo la tesis y cierro","Uso conectores y fórmulas (en primer lugar, no obstante, en conclusión…)","Tengo entre 350 y 400 palabras"];
+const PARTES_ESCRIBIR=[{k:"introduccion",t:"Introducción",o:100,h:"Define los términos, sitúa el problema, plantea tu tesis y anuncia el guion."},{k:"argumentacion",t:"Argumentación",o:150,h:"Argumentos a favor de tu tesis, apoyados en un autor o teoría."},{k:"contraargumentacion",t:"Contraargumentación y refutación",o:100,h:"La objeción más fuerte, expuesta con honestidad, y por qué es insuficiente."},{k:"conclusion",t:"Conclusión",o:50,h:"Síntesis, reafirmación de la tesis y cierre."}];
+const DIS_CORREGIR_URL="/api/corregir-disertacion";
+function escribirPartesDe(e){e.partes=e.partes||{};return e.partes}
 function viewEscribir(){
-  const e = store.get("essay",{i:0,text:"",checks:[]});
+  const e = store.get("essay",{i:0,partes:{},checks2:[]});
+  const p = escribirPartesDe(e);
   const checks = ESSAY_CHECKS;
-  return '<div class="callout info">'+ICONS.bulb+'<span>Introducción (≈100 palabras) · Desarrollo (≈250) · Conclusión (≈50). ¿Dudas con algún elemento? <button class="link-btn" data-dgo="como">Repasa cómo se hace</button></span></div>'+
+  return '<div class="callout info">'+ICONS.bulb+'<span>Introducción (≈100 palabras) · Argumentación (≈150) · Contraargumentación y refutación (≈100) · Conclusión (≈50). ¿Dudas con algún elemento? <button class="link-btn" data-dgo="como">Repasa cómo se hace</button></span></div>'+
   '<div class="grid2" style="align-items:start">'+
    '<section class="card"><div class="card-head"><h2>Elige una pregunta</h2><button class="link-btn" id="rnd">Al azar</button></div><div class="qbank" id="qbank">'+
     ESSAYS.map((x,i)=>'<button class="qitem '+(i===e.i?"on":"")+'" data-i="'+i+'"><span class="num">'+(i+1)+'</span><span>'+x.q+(x.tag?' <span class="chip era" style="margin-left:4px">'+x.tag+'</span>':'')+'</span></button>').join("")+
@@ -5767,9 +5771,11 @@ function viewEscribir(){
    '<div style="display:flex;flex-direction:column;gap:16px">'+
     '<div class="timer" id="timer"><span class="t" id="tt">25:00</span><button id="tstart">Empezar</button><button id="treset">Reiniciar</button></div>'+
     '<section class="card"><h2 id="eq" style="margin-bottom:10px;font-size:19px"></h2><div id="ehint" class="callout info" style="margin-bottom:14px"></div>'+
-     '<div class="field"><label for="etext">Tu disertación</label><textarea id="etext" style="min-height:300px" placeholder="Empieza definiendo los términos de la pregunta…">'+esc(e.text)+'</textarea>'+
-     '<div class="counter"><span id="ew"></span><span id="esaved" class="saved"></span></div></div>'+
-     '<div class="btnrow" style="margin-top:12px"><button class="btn primary" id="ecopy">Copiar texto</button><button class="btn ghost" id="eclear">Borrar</button></div></section>'+
+     PARTES_ESCRIBIR.map(x=>'<div class="field"><label for="ep-'+x.k+'">'+x.t+' <span class="tiny muted">(≈'+x.o+' palabras)</span></label><textarea id="ep-'+x.k+'" rows="6" placeholder="'+x.h+'">'+esc(p[x.k]||"")+'</textarea><div class="counter"><span id="ec-'+x.k+'"></span></div></div>').join("")+
+     '<div class="counter"><span id="ew"></span><span id="esaved" class="saved"></span></div>'+
+     '<div class="btnrow" style="margin-top:12px"><button class="btn primary" id="ecorr">Corregir</button><button class="btn ghost" id="ecopy">Copiar texto</button><button class="btn ghost" id="eclear">Borrar</button></div>'+
+     '<div class="card" id="eres" hidden style="margin-top:14px"></div>'+
+    '</section>'+
     '<section class="card"><h2 style="margin-bottom:12px">Antes de entregar</h2><div class="checks">'+
      checks.map((c,i)=>'<label class="check" for="ek-'+i+'"><input type="checkbox" id="ek-'+i+'" data-i="'+i+'" '+((e.checks2||[]).includes(i)?"checked":"")+'><span>'+c+'</span></label>').join("")+
     '</div></section>'+
@@ -5777,11 +5783,28 @@ function viewEscribir(){
   '</div>';
 }
 
+function pintarCorreccionEscribir(d){
+  const NIVEL={conseguido:"Conseguido",parcial:"Parcial",no_conseguido:"No conseguido"};
+  const partes=Object.values(d.partes||{}).map(x=>'<li>'+esc(x.etiqueta)+': '+x.palabras+' de '+x.objetivo+' palabras</li>').join("");
+  const cats=(d.categorias||[]).map(c=>'<div style="margin-top:12px"><b>'+esc(c.nombre)+'</b> <span class="chip">'+esc(NIVEL[c.nivel]||c.nivel||"")+'</span><p class="small" style="margin:6px 0 0">'+esc(c.comentario||"")+'</p></div>').join("");
+  const lista=a=>a&&a.length?'<ul class="small">'+a.map(x=>'<li>'+esc(x)+'</li>').join("")+'</ul>':'';
+  return '<h2 style="margin-bottom:8px;font-size:19px">Corrección</h2>'+
+   '<p>'+esc(d.valoracion_global||"")+'</p>'+
+   '<ul class="small">'+partes+'</ul>'+cats+
+   '<h3 style="font-size:16px;margin:16px 0 4px">Puntos fuertes</h3>'+lista(d.puntos_fuertes)+
+   '<h3 style="font-size:16px;margin:16px 0 4px">Mejoras prioritarias</h3>'+lista(d.mejoras_prioritarias);
+}
+
 function bindEscribir(){
-  const e = store.get("essay",{i:0,text:"",checks:[]});
+  const e = store.get("essay",{i:0,partes:{},checks2:[]});
+  const p = escribirPartesDe(e);
   const save=()=>{store.set("essay",e);const m=document.getElementById("esaved");m.textContent="Guardado";clearTimeout(m._t);m._t=setTimeout(()=>m.textContent="",1500)};
-  const ta=document.getElementById("etext");
-  const upd=()=>{const n=words(ta.value);document.getElementById("ew").innerHTML='<span class="'+(n>400?"over":n>=350?"wc-ok":"")+'">'+n+' / 400 palabras</span>'+(n===0?'':n<350?'<span class="wc-low"> · te faltan '+(350-n)+' para llegar a 350</span>':n<=400?'<span class="wc-ok"> · extensión ideal</span>':'<span class="over"> · te pasas en '+(n-400)+'</span>')};
+  const totalPalabras=()=>PARTES_ESCRIBIR.reduce((s,x)=>s+words(p[x.k]||""),0);
+  const upd=()=>{
+    PARTES_ESCRIBIR.forEach(x=>{const n=words(p[x.k]||""),el=document.getElementById("ec-"+x.k);if(el)el.innerHTML=n+' / '+x.o+' palabras'+(n>x.o*1.5?' <span class="over">· te pasas</span>':'')});
+    const n=totalPalabras();
+    document.getElementById("ew").innerHTML='<span class="'+(n>400?"over":n>=350?"wc-ok":"")+'">'+n+' / 400 palabras en total</span>'+(n===0?'':n<350?'<span class="wc-low"> · te faltan '+(350-n)+' para llegar a 350</span>':n<=400?'<span class="wc-ok"> · extensión ideal</span>':'<span class="over"> · te pasas en '+(n-400)+'</span>');
+  };
   const setQ=i=>{
     e.i=i;const x=ESSAYS[i];
     document.getElementById("eq").textContent=x.q;
@@ -5790,13 +5813,35 @@ function bindEscribir(){
     store.set("essay",e);
   };
   document.querySelectorAll(".qitem").forEach(b=>b.onclick=()=>{setQ(+b.dataset.i);if(window.innerWidth<861)document.getElementById("timer").scrollIntoView({behavior:"smooth",block:"start"})});
-  document.getElementById("rnd").onclick=()=>{let i;do{i=Math.floor(Math.random()*ESSAYS.length)}while(i===e.i);setQ(i)};
-  ta.addEventListener("input",()=>{e.text=ta.value;upd();save();if(words(ta.value)>=100){const w=store.get("essaysWritten",[]);const q=ESSAYS[e.i].q;if(!w.includes(q)){w.push(q);store.set("essaysWritten",w)}}});
+  document.getElementById("rnd").onclick=()=>{let i;do{i=Math.floor(Math.random()*ESSAYS.length)}while(i===e.i&&ESSAYS.length>1);setQ(i)};
+  PARTES_ESCRIBIR.forEach(x=>{
+    const ta=document.getElementById("ep-"+x.k);
+    ta.addEventListener("input",()=>{
+      p[x.k]=ta.value;upd();save();
+      if(totalPalabras()>=100){const w=store.get("essaysWritten",[]);const q=ESSAYS[e.i].q;if(!w.includes(q)){w.push(q);store.set("essaysWritten",w)}}
+    });
+  });
   document.querySelectorAll("input[data-i]").forEach(c=>c.addEventListener("change",()=>{const i=+c.dataset.i;e.checks2=(e.checks2||[]).filter(x=>x!==i);if(c.checked)e.checks2.push(i);save()}));
-  document.getElementById("ecopy").onclick=async()=>{const m=document.getElementById("esaved");try{await navigator.clipboard.writeText(ESSAYS[e.i].q+"\n\n"+ta.value);m.textContent="Copiado"}catch(err){m.textContent="No se pudo copiar"}};
-  document.getElementById("eclear").onclick=()=>{const b=document.getElementById("eclear");if(b.dataset.confirm!=="1"){b.dataset.confirm="1";b.textContent="Pulsa otra vez para borrar";setTimeout(()=>{b.dataset.confirm="";b.textContent="Borrar"},2500);return}ta.value="";e.text="";e.checks2=[];document.querySelectorAll("input[data-i]").forEach(c=>c.checked=false);upd();save();b.dataset.confirm="";b.textContent="Borrar"};
+  document.getElementById("ecorr").onclick=async()=>{
+    const box=document.getElementById("eres"),btn=document.getElementById("ecorr");
+    if(!PARTES_ESCRIBIR.some(x=>(p[x.k]||"").trim())){box.hidden=false;box.innerHTML='<p class="small">Escribe al menos una parte antes de corregir.</p>';return}
+    const datos={pregunta:ESSAYS[e.i].q};PARTES_ESCRIBIR.forEach(x=>datos[x.k]=p[x.k]||"");
+    btn.disabled=true;btn.textContent="Corrigiendo…";box.hidden=false;
+    box.innerHTML='<p class="small muted">Corrigiendo con los criterios de la PAU. Tarda unos segundos…</p>';
+    try{
+      const r=await fetch(DIS_CORREGIR_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(datos)});
+      const j=await r.json().catch(()=>({}));
+      if(!r.ok) throw new Error(j.error||("Error "+r.status));
+      stat("correccion-disertacion");
+      box.innerHTML=pintarCorreccionEscribir(j);
+    }catch(err){
+      box.innerHTML='<p class="small">'+esc(err.message||"No se ha podido corregir. Inténtalo de nuevo.")+'</p>';
+    }finally{btn.disabled=false;btn.textContent="Corregir"}
+  };
+  document.getElementById("ecopy").onclick=async()=>{const m=document.getElementById("esaved");const txt=ESSAYS[e.i].q+"\n\n"+PARTES_ESCRIBIR.map(x=>x.t+"\n"+(p[x.k]||"")).join("\n\n");try{await navigator.clipboard.writeText(txt);m.textContent="Copiado"}catch(err){m.textContent="No se pudo copiar"}};
+  document.getElementById("eclear").onclick=()=>{const b=document.getElementById("eclear");if(b.dataset.confirm!=="1"){b.dataset.confirm="1";b.textContent="Pulsa otra vez para borrar";setTimeout(()=>{b.dataset.confirm="";b.textContent="Borrar"},2500);return}PARTES_ESCRIBIR.forEach(x=>{p[x.k]="";document.getElementById("ep-"+x.k).value=""});e.checks2=[];document.querySelectorAll("input[data-i]").forEach(c=>c.checked=false);document.getElementById("eres").hidden=true;upd();save();b.dataset.confirm="";b.textContent="Borrar"};
   // temporizador
-  let left=25*60,running=false;
+  let left=25*60,running=false,timerHandle=null;
   const tt=document.getElementById("tt"),tbox=document.getElementById("timer"),tb=document.getElementById("tstart");
   const draw=()=>{const m=Math.floor(left/60),s=left%60;tt.textContent=String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");tbox.classList.toggle("warn",left<=300)};
   tb.onclick=()=>{
