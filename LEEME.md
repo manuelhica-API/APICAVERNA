@@ -48,3 +48,4 @@ Cuando cambie la web, sube el nuevo `index.html` a GitHub (Add file → Upload f
 - Las respuestas del alumno tienen un límite de longitud para contener el coste.
 - El baremo de corrección (2,5 puntos: 0,75 idea principal, 0,25 secundarias y 1,5 explicación) está en `netlify/functions/corregir.mjs`, en el bloque `SISTEMA`. Puedes retocarlo ahí.
 - Pide a los alumnos que no escriban datos personales en las respuestas.
+ 
