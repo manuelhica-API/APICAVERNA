@@ -5750,12 +5750,15 @@ function bindEscribir(){
   document.getElementById("ecorr").onclick=async()=>{
     const box=document.getElementById("eres"),btn=document.getElementById("ecorr");
     if(!PARTES_ESCRIBIR.some(x=>(p[x.k]||"").trim())){box.hidden=false;box.innerHTML='<p class="small">Escribe al menos una parte antes de corregir.</p>';return}
-    const datos={pregunta:ESSAYS[e.i].q};PARTES_ESCRIBIR.forEach(x=>datos[x.k]=p[x.k]||"");
+    let clave=sessionStorage.getItem("caverna:clave-correccion")||"";
+    if(!clave){clave=prompt("Escribe la contraseña para corregir (te la da tu profesor):")||"";if(!clave)return;sessionStorage.setItem("caverna:clave-correccion",clave)}
+    const datos={pregunta:ESSAYS[e.i].q,clave};PARTES_ESCRIBIR.forEach(x=>datos[x.k]=p[x.k]||"");
     btn.disabled=true;btn.textContent="Corrigiendo…";box.hidden=false;
     box.innerHTML='<p class="small muted">Corrigiendo con los criterios de la PAU. Tarda unos segundos…</p>';
     try{
       const r=await fetch(DIS_CORREGIR_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(datos)});
       const j=await r.json().catch(()=>({}));
+      if(r.status===401)sessionStorage.removeItem("caverna:clave-correccion");
       if(!r.ok) throw new Error(j.error||("Error "+r.status));
       stat("correccion-disertacion");
       box.innerHTML=pintarCorreccionEscribir(j);
