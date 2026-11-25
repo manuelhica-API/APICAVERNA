@@ -130,7 +130,7 @@ ${bloques}
 
   const cuerpoPeticion = JSON.stringify({
     model: MODELO,
-    max_tokens: 1500,
+    max_tokens: 3000,
     system: SYSTEM_PROMPT,
     messages: [{ role: "user", content: mensajeUsuario }],
   });
@@ -173,7 +173,7 @@ ${bloques}
   try {
     evaluacion = extraerJson(texto);
   } catch {
-    console.log("corregir-disertacion: respuesta no interpretable", texto.slice(0, 300));
+    console.log("corregir-disertacion: respuesta no interpretable", cuerpo.stop_reason, texto.slice(0, 300), texto.slice(-200));
     return json({ error: "No se pudo interpretar la corrección. Inténtalo de nuevo." }, 500);
   }
 
