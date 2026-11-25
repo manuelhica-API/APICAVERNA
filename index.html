@@ -1902,7 +1902,19 @@ const SEC_CHECK = {
   "pl-antro":{author:"platon",n:1,tag:"Antropología"},
   "pl-onto":{author:"platon",n:2,tag:"Ontología"},
   "pl-episte":{author:"platon",n:3,tag:"Epistemología"},
-  "pl-etica":{author:"platon",n:4,tag:"Ética y política"}
+  "pl-etica":{author:"platon",n:4,tag:"Ética y política"},
+  "ds-racio":{author:"descartes",n:2,tag:"Racionalismo"},
+  "ds-metodo":{author:"descartes",n:3,tag:"Método"},
+  "ds-duda":{author:"descartes",n:4,tag:"Duda y cogito"},
+  "ds-sust":{author:"descartes",n:5,tag:["Sustancias","Ideas y Dios"]},
+  "nz-vida":{author:"nietzsche",n:2,tag:"Concepto de vida"},
+  "nz-sentido":{author:"nietzsche",n:3,tag:"Animal de sentido"},
+  "nz-critica":{author:"nietzsche",n:4,tag:"Crítica de la cultura"},
+  "nz-nihil":{author:"nietzsche",n:5,tag:"Muerte de Dios"},
+  "nz-super":{author:"nietzsche",n:6,tag:"Superhombre"},
+  "og-vital":{author:"ortega",n:2,tag:"Vitalismo"},
+  "og-vida":{author:"ortega",n:3,tag:"La vida"},
+  "og-razon":{author:"ortega",n:4,tag:"Raciovitalismo"}
 };
 function paintSecCheck(box,secId){
   const S=SEC_CHECK[secId];
@@ -1910,8 +1922,9 @@ function paintSecCheck(box,secId){
   const videoOk=!!(v&&seenGet()[v.id]);
   const best=store.get("secTest",{})[secId];
   const testOk=(best||0)>7;
+  const hayPreguntas=(QUESTIONS[S.author]||[]).filter(q=>[].concat(S.tag).includes(q[4])).length>=10;
   if(!(videoOk&&testOk)){
-    box.innerHTML='<div class="seccheck-pend"><p class="small"><b>Para marcar este apartado hacen falta las dos cosas:</b></p><ul class="seccheck-list small"><li>'+(videoOk?'✔':'<span style="color:#9a9a9a;font-weight:800">✕</span>')+' Ver el vídeo del apartado</li><li>'+(testOk?'✔':'<span style="color:#9a9a9a;font-weight:800">✕</span>')+' Sacar más de 7 en el test de 10 preguntas'+(best!==undefined?' (tu mejor nota: '+best.toFixed(1).replace(".",",")+')':'')+'</li></ul>'+(testOk?'':'<div class="btnrow"><button class="btn primary" id="sectest-'+secId+'">'+(best!==undefined?'Repetir el test de 10 preguntas':'Hacer el test de 10 preguntas')+'</button></div>')+'</div>';
+    box.innerHTML='<div class="seccheck-pend"><p class="small"><b>Para marcar este apartado hacen falta las dos cosas:</b></p><ul class="seccheck-list small"><li>'+(videoOk?'✔':'<span style="color:#9a9a9a;font-weight:800">✕</span>')+' Ver el vídeo del apartado</li><li>'+(testOk?'✔':'<span style="color:#9a9a9a;font-weight:800">✕</span>')+' Sacar más de 7 en el test de 10 preguntas'+(best!==undefined?' (tu mejor nota: '+best.toFixed(1).replace(".",",")+')':'')+'</li></ul>'+(testOk?'':hayPreguntas?'<div class="btnrow"><button class="btn primary" id="sectest-'+secId+'">'+(best!==undefined?'Repetir el test de 10 preguntas':'Hacer el test de 10 preguntas')+'</button></div>':'<p class="small muted">Todavía no hay 10 preguntas de test para este apartado.</p>')+'</div>';
     const b=box.querySelector("#sectest-"+secId);
     if(b) b.onclick=()=>startQuiz("sec:"+secId);
     return;
@@ -2598,7 +2611,7 @@ nietzsche(a){
 <section class="card th" id="nz-critica">
   ${secHead("8.4","Crítica de la cultura occidental","La «<b>filosofía del martillo</b>»: golpear los conceptos y construcciones culturales para mostrar su vaciedad. Frente a los valores griegos, que expresaban la vida, Occidente solo ha dejado ideas alejadas de todo lo vital.")}
   ${vInline(a,4)}
-  <h3 class="th-h3">8.4.1. Crítica de la filosofía</h3>
+  <h3 class="th-h3">Crítica de la filosofía</h3>
   <p class="th-p">Empieza por <b>Sócrates</b>: la ecuación «razón = virtud = felicidad» le parece contraria a la vida, porque la felicidad es <b>instinto</b>. Sigue con <b>Platón</b>, que inaugura una interpretación moral del ser al poner el Bien como Idea suprema.</p>
   <div class="th-key warn"><span class="th-key-l">El error de la metafísica</span><p>Despreciar el <b>devenir</b> y rechazar el mundo real para colocar en su lugar un mundo inventado, el «mundo verdadero». No hay Ideas eternas (Platón), ni sustancias segundas (Aristóteles), ni sustancias (Descartes): <b>solo existe el mundo espacio-temporal en cambio</b>, experimentable por los sentidos.</p></div>
   <div class="vs">
@@ -2607,7 +2620,7 @@ nietzsche(a){
     <div class="vs-side"><span class="chip a">Nietzsche</span><b>El devenir es lo real</b><p>Lo sensible, lo temporal, lo que fluye es <b>lo real</b>; lo eterno, una mera <b>invención</b> del pensamiento.</p></div>
   </div>
 
-  <h3 class="th-h3">8.4.2. Crítica de la religión</h3>
+  <h3 class="th-h3">Crítica de la religión</h3>
   <p class="th-p">Parte del <b>ateísmo</b>. La «muerte de Dios» descubre que los valores son <b>creaciones humanas</b>: Dios es una dimensión humana proyectada fuera del ser humano. El cristianismo es «el enemigo mortal del tipo superior de hombre» y la filosofía europea «lleva en sus venas sangre de teólogos».</p>
   <div class="th-steps">
     <div><b>Platonismo para el pueblo</b><span>Inventa y valora un trasmundo ideal y desvaloriza el mundo terreno.</span></div>
@@ -2617,7 +2630,7 @@ nietzsche(a){
   </div>
   <blockquote class="th-quote">«No encuentro palabras suficientemente duras para calificar este complot del cristianismo».</blockquote>
 
-  <h3 class="th-h3">8.4.3. Crítica de la moral</h3>
+  <h3 class="th-h3">Crítica de la moral</h3>
   <p class="th-p">Quiere situarse «<b>más allá del bien y del mal</b>» con el <b>método genealógico</b>: rastrear el origen lingüístico de la moral entre los griegos y el giro que sufre con Sócrates y Platón, la <b>primera transvaloración</b>, fruto del resentimiento. Tras la pretendida objetividad de los valores se esconden preferencias afectivas.</p>
   <div class="tblwrap"><table class="tbl">
     <thead><tr><th></th><th>Moral de señores</th><th>Moral de esclavos</th></tr></thead>
@@ -5938,7 +5951,7 @@ function viewEscribir(){
     '<section class="card"><h2 id="eq" style="margin-bottom:10px;font-size:19px"></h2><div id="ehint" class="callout info" style="margin-bottom:14px"></div>'+
      PARTES_ESCRIBIR.map(x=>'<div class="field"><label for="ep-'+x.k+'">'+x.t+' <span class="tiny muted">(≈'+x.o+' palabras)</span></label><textarea id="ep-'+x.k+'" rows="6" placeholder="'+x.h+'">'+esc(p[x.k]||"")+'</textarea><div class="counter"><span id="ec-'+x.k+'"></span></div></div>').join("")+
      '<div class="counter"><span id="ew"></span><span id="esaved" class="saved"></span></div>'+
-     '<div class="btnrow" style="margin-top:12px"><button class="btn primary" id="ecopy">Copiar texto</button><button class="btn ghost" id="eclear">Borrar</button></div>'+
+     '<div class="btnrow" style="margin-top:12px"><button class="btn primary" id="ecorr">Corregir</button><button class="btn primary" id="ecopy">Copiar texto</button><button class="btn ghost" id="eclear">Borrar</button></div><div class="card" id="eres" hidden style="margin-top:14px"></div>'+
      ''+
     '</section>'+
     '<section class="card"><h2 style="margin-bottom:12px">Antes de entregar</h2><div class="checks">'+
@@ -5946,6 +5959,19 @@ function viewEscribir(){
     '</div></section>'+
    '</div>'+
   '</div>';
+}
+
+const DIS_CORREGIR_URL="/api/corregir-disertacion";
+function pintarCorreccionEscribir(d){
+  const NIVEL={conseguido:"Conseguido",parcial:"Parcial",no_conseguido:"No conseguido"};
+  const partes=Object.values(d.partes||{}).map(x=>'<li>'+esc(x.etiqueta)+': '+x.palabras+' de '+x.objetivo+' palabras</li>').join("");
+  const cats=(d.categorias||[]).map(c=>'<div style="margin-top:12px"><b>'+esc(c.nombre)+'</b> <span class="chip">'+esc(NIVEL[c.nivel]||c.nivel||"")+'</span><p class="small" style="margin:6px 0 0">'+esc(c.comentario||"")+'</p></div>').join("");
+  const lista=a=>a&&a.length?'<ul class="small">'+a.map(x=>'<li>'+esc(x)+'</li>').join("")+'</ul>':'';
+  return '<h2 style="margin-bottom:8px;font-size:19px">Corrección</h2>'+
+   '<p>'+esc(d.valoracion_global||"")+'</p>'+
+   '<ul class="small">'+partes+'</ul>'+cats+
+   '<h3 style="font-size:16px;margin:16px 0 4px">Puntos fuertes</h3>'+lista(d.puntos_fuertes)+
+   '<h3 style="font-size:16px;margin:16px 0 4px">Mejoras prioritarias</h3>'+lista(d.mejoras_prioritarias);
 }
 
 function bindEscribir(){
@@ -5975,6 +6001,25 @@ function bindEscribir(){
     });
   });
   document.querySelectorAll("input[data-i]").forEach(c=>c.addEventListener("change",()=>{const i=+c.dataset.i;e.checks2=(e.checks2||[]).filter(x=>x!==i);if(c.checked)e.checks2.push(i);save()}));
+  document.getElementById("ecorr").onclick=async()=>{
+    const box=document.getElementById("eres"),btn=document.getElementById("ecorr");
+    if(!PARTES_ESCRIBIR.some(x=>(p[x.k]||"").trim())){box.hidden=false;box.innerHTML='<p class="small">Escribe al menos una parte antes de corregir.</p>';return}
+    let clave=sessionStorage.getItem("caverna:clave-correccion")||"";
+    if(!clave){clave=prompt("Escribe la contraseña para corregir (te la da tu profesor):")||"";if(!clave)return;sessionStorage.setItem("caverna:clave-correccion",clave)}
+    const datos={pregunta:ESSAYS[e.i].q,clave};PARTES_ESCRIBIR.forEach(x=>datos[x.k]=p[x.k]||"");
+    btn.disabled=true;btn.textContent="Corrigiendo…";box.hidden=false;
+    box.innerHTML='<p class="small muted">Corrigiendo con los criterios de la PAU. Tarda unos segundos…</p>';
+    try{
+      const r=await fetch(DIS_CORREGIR_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(datos)});
+      const j=await r.json().catch(()=>({}));
+      if(r.status===401)sessionStorage.removeItem("caverna:clave-correccion");
+      if(!r.ok) throw new Error(j.error||("Error "+r.status));
+      stat("correccion-disertacion");
+      box.innerHTML=pintarCorreccionEscribir(j);
+    }catch(err){
+      box.innerHTML='<p class="small">'+esc(err.message||"No se ha podido corregir. Inténtalo de nuevo.")+'</p>';
+    }finally{btn.disabled=false;btn.textContent="Corregir"}
+  };
   document.getElementById("ecopy").onclick=async()=>{const m=document.getElementById("esaved");const txt=ESSAYS[e.i].q+"\n\n"+PARTES_ESCRIBIR.map(x=>x.t+"\n"+(p[x.k]||"")).join("\n\n");try{await navigator.clipboard.writeText(txt);m.textContent="Copiado"}catch(err){m.textContent="No se pudo copiar"}};
   document.getElementById("eclear").onclick=()=>{const b=document.getElementById("eclear");if(b.dataset.confirm!=="1"){b.dataset.confirm="1";b.textContent="Pulsa otra vez para borrar";setTimeout(()=>{b.dataset.confirm="";b.textContent="Borrar"},2500);return}PARTES_ESCRIBIR.forEach(x=>{p[x.k]="";document.getElementById("ep-"+x.k).value=""});e.checks2=[];document.querySelectorAll("input[data-i]").forEach(c=>c.checked=false);upd();save();b.dataset.confirm="";b.textContent="Borrar"};
   // temporizador
@@ -7065,12 +7110,12 @@ function startQuiz(id,host){
   if(isMix){const line=id.slice(4);const list=shuffle((line==="a"||line==="b")?byLine(line):AUTHORS);
     const per=list.map((a,k)=>Math.floor(10/list.length)+(k<10%list.length?1:0));
     pool=shuffle(list.flatMap((a,k)=>shuffle(QUESTIONS[a.id].map(q=>({q,id:a.id}))).slice(0,per[k])))}
-  else if(secKey){const S=SEC_CHECK[secKey];pool=shuffle(QUESTIONS[S.author].filter(q=>q[4]===S.tag).map(q=>({q,id:S.author}))).slice(0,10)}
+  else if(secKey){const S=SEC_CHECK[secKey];pool=shuffle(QUESTIONS[S.author].filter(q=>[].concat(S.tag).includes(q[4])).map(q=>({q,id:S.author}))).slice(0,10)}
   else {if(!QUESTIONS[id]){location.hash="#test";return}pool=shuffle(QUESTIONS[id].map(q=>({q,id}))).slice(0,10)}
   // barajar opciones
   const items = pool.map(({q,id})=>{const order=shuffle([0,1,2,3]);return {id,text:q[0],opts:order.map(i=>q[1][i]),ans:order.indexOf(q[2]),exp:q[3],tema:q[4]||""}});
   const st={i:0,answers:[]};
-  const title = isMix?"Test mezclado · "+(id==="mix-a"?"Línea 1":id==="mix-b"?"Línea 2":"Todos"):secKey?"Test · "+getA(aid).name+" · "+SEC_CHECK[secKey].tag:"Test · "+getA(aid).name;
+  const title = isMix?"Test mezclado · "+(id==="mix-a"?"Línea 1":id==="mix-b"?"Línea 2":"Todos"):secKey?"Test · "+getA(aid).name+" · "+[].concat(SEC_CHECK[secKey].tag).join(" / "):"Test · "+getA(aid).name;
   const v=host||document.getElementById("view");
   const top=(sub,back)=>embedded?'':topbar(title,sub,back);
   const toTop=()=>{if(embedded)v.scrollIntoView({block:"start"});else window.scrollTo(0,0)};
