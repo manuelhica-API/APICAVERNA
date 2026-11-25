@@ -5682,7 +5682,6 @@ function bindDisertacion(){
 }
 const ESSAY_CHECKS = ["Introducción: defino los términos clave del título","Introducción: sitúo el problema en la actualidad","Introducción: declaro mi tesis (a favor, en contra o matización)","Introducción: anuncio la hoja de ruta","Desarrollo: dos argumentos, apoyados en autores o teorías","Desarrollo: expongo con honestidad el contraargumento más fuerte","Desarrollo: refuto el contraargumento","Conclusión: sintetizo sin aportar ideas nuevas, reafirmo la tesis y cierro","Uso conectores y fórmulas (en primer lugar, no obstante, en conclusión…)","Tengo entre 350 y 400 palabras"];
 const PARTES_ESCRIBIR=[{k:"introduccion",t:"Introducción",o:100,h:"Define los términos, sitúa el problema, plantea tu tesis y anuncia el guion."},{k:"argumentacion",t:"Argumentación",o:150,h:"Argumentos a favor de tu tesis, apoyados en un autor o teoría."},{k:"contraargumentacion",t:"Contraargumentación y refutación",o:100,h:"La objeción más fuerte, expuesta con honestidad, y por qué es insuficiente."},{k:"conclusion",t:"Conclusión",o:50,h:"Síntesis, reafirmación de la tesis y cierre."}];
-const DIS_CORREGIR_URL="/api/corregir-disertacion";
 function escribirPartesDe(e){e.partes=e.partes||{};return e.partes}
 function viewEscribir(){
   const e = store.get("essay",{i:0,partes:{},checks2:[]});
@@ -5698,26 +5697,14 @@ function viewEscribir(){
     '<section class="card"><h2 id="eq" style="margin-bottom:10px;font-size:19px"></h2><div id="ehint" class="callout info" style="margin-bottom:14px"></div>'+
      PARTES_ESCRIBIR.map(x=>'<div class="field"><label for="ep-'+x.k+'">'+x.t+' <span class="tiny muted">(≈'+x.o+' palabras)</span></label><textarea id="ep-'+x.k+'" rows="6" placeholder="'+x.h+'">'+esc(p[x.k]||"")+'</textarea><div class="counter"><span id="ec-'+x.k+'"></span></div></div>').join("")+
      '<div class="counter"><span id="ew"></span><span id="esaved" class="saved"></span></div>'+
-     '<div class="btnrow" style="margin-top:12px"><button class="btn primary" id="ecorr">Corregir</button><button class="btn ghost" id="ecopy">Copiar texto</button><button class="btn ghost" id="eclear">Borrar</button></div>'+
-     '<div class="card" id="eres" hidden style="margin-top:14px"></div>'+
+     '<div class="btnrow" style="margin-top:12px"><button class="btn primary" id="ecopy">Copiar texto</button><button class="btn ghost" id="eclear">Borrar</button></div>'+
+     ''+
     '</section>'+
     '<section class="card"><h2 style="margin-bottom:12px">Antes de entregar</h2><div class="checks">'+
      checks.map((c,i)=>'<label class="check" for="ek-'+i+'"><input type="checkbox" id="ek-'+i+'" data-i="'+i+'" '+((e.checks2||[]).includes(i)?"checked":"")+'><span>'+c+'</span></label>').join("")+
     '</div></section>'+
    '</div>'+
   '</div>';
-}
-
-function pintarCorreccionEscribir(d){
-  const NIVEL={conseguido:"Conseguido",parcial:"Parcial",no_conseguido:"No conseguido"};
-  const partes=Object.values(d.partes||{}).map(x=>'<li>'+esc(x.etiqueta)+': '+x.palabras+' de '+x.objetivo+' palabras</li>').join("");
-  const cats=(d.categorias||[]).map(c=>'<div style="margin-top:12px"><b>'+esc(c.nombre)+'</b> <span class="chip">'+esc(NIVEL[c.nivel]||c.nivel||"")+'</span><p class="small" style="margin:6px 0 0">'+esc(c.comentario||"")+'</p></div>').join("");
-  const lista=a=>a&&a.length?'<ul class="small">'+a.map(x=>'<li>'+esc(x)+'</li>').join("")+'</ul>':'';
-  return '<h2 style="margin-bottom:8px;font-size:19px">Corrección</h2>'+
-   '<p>'+esc(d.valoracion_global||"")+'</p>'+
-   '<ul class="small">'+partes+'</ul>'+cats+
-   '<h3 style="font-size:16px;margin:16px 0 4px">Puntos fuertes</h3>'+lista(d.puntos_fuertes)+
-   '<h3 style="font-size:16px;margin:16px 0 4px">Mejoras prioritarias</h3>'+lista(d.mejoras_prioritarias);
 }
 
 function bindEscribir(){
@@ -5747,27 +5734,8 @@ function bindEscribir(){
     });
   });
   document.querySelectorAll("input[data-i]").forEach(c=>c.addEventListener("change",()=>{const i=+c.dataset.i;e.checks2=(e.checks2||[]).filter(x=>x!==i);if(c.checked)e.checks2.push(i);save()}));
-  document.getElementById("ecorr").onclick=async()=>{
-    const box=document.getElementById("eres"),btn=document.getElementById("ecorr");
-    if(!PARTES_ESCRIBIR.some(x=>(p[x.k]||"").trim())){box.hidden=false;box.innerHTML='<p class="small">Escribe al menos una parte antes de corregir.</p>';return}
-    let clave=sessionStorage.getItem("caverna:clave-correccion")||"";
-    if(!clave){clave=prompt("Escribe la contraseña para corregir (te la da tu profesor):")||"";if(!clave)return;sessionStorage.setItem("caverna:clave-correccion",clave)}
-    const datos={pregunta:ESSAYS[e.i].q,clave};PARTES_ESCRIBIR.forEach(x=>datos[x.k]=p[x.k]||"");
-    btn.disabled=true;btn.textContent="Corrigiendo…";box.hidden=false;
-    box.innerHTML='<p class="small muted">Corrigiendo con los criterios de la PAU. Tarda unos segundos…</p>';
-    try{
-      const r=await fetch(DIS_CORREGIR_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(datos)});
-      const j=await r.json().catch(()=>({}));
-      if(r.status===401)sessionStorage.removeItem("caverna:clave-correccion");
-      if(!r.ok) throw new Error(j.error||("Error "+r.status));
-      stat("correccion-disertacion");
-      box.innerHTML=pintarCorreccionEscribir(j);
-    }catch(err){
-      box.innerHTML='<p class="small">'+esc(err.message||"No se ha podido corregir. Inténtalo de nuevo.")+'</p>';
-    }finally{btn.disabled=false;btn.textContent="Corregir"}
-  };
   document.getElementById("ecopy").onclick=async()=>{const m=document.getElementById("esaved");const txt=ESSAYS[e.i].q+"\n\n"+PARTES_ESCRIBIR.map(x=>x.t+"\n"+(p[x.k]||"")).join("\n\n");try{await navigator.clipboard.writeText(txt);m.textContent="Copiado"}catch(err){m.textContent="No se pudo copiar"}};
-  document.getElementById("eclear").onclick=()=>{const b=document.getElementById("eclear");if(b.dataset.confirm!=="1"){b.dataset.confirm="1";b.textContent="Pulsa otra vez para borrar";setTimeout(()=>{b.dataset.confirm="";b.textContent="Borrar"},2500);return}PARTES_ESCRIBIR.forEach(x=>{p[x.k]="";document.getElementById("ep-"+x.k).value=""});e.checks2=[];document.querySelectorAll("input[data-i]").forEach(c=>c.checked=false);document.getElementById("eres").hidden=true;upd();save();b.dataset.confirm="";b.textContent="Borrar"};
+  document.getElementById("eclear").onclick=()=>{const b=document.getElementById("eclear");if(b.dataset.confirm!=="1"){b.dataset.confirm="1";b.textContent="Pulsa otra vez para borrar";setTimeout(()=>{b.dataset.confirm="";b.textContent="Borrar"},2500);return}PARTES_ESCRIBIR.forEach(x=>{p[x.k]="";document.getElementById("ep-"+x.k).value=""});e.checks2=[];document.querySelectorAll("input[data-i]").forEach(c=>c.checked=false);upd();save();b.dataset.confirm="";b.textContent="Borrar"};
   // temporizador
   let left=25*60,running=false,timerHandle=null;
   const tt=document.getElementById("tt"),tbox=document.getElementById("timer"),tb=document.getElementById("tstart");
