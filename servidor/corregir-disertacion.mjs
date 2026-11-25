@@ -2,7 +2,7 @@
 // Clave: env.ANTHROPIC_API_KEY (secreto en Cloudflare Pages → Variables y secretos).
 // Llamado desde functions/api/corregir-disertacion.js
 
-const MODELO = "claude-sonnet-5-5";
+const MODELO = "claude-haiku-5-5";
 
 const LIMITES = {
   introduccion: { etiqueta: "Introducción", objetivo: 100 },
@@ -128,22 +128,40 @@ Extensión total: ${total} palabras (máximo orientativo de la PAU: 400).
 ${bloques}
 </disertacion>`;
 
-  const r = await fetch("https://api.anthropic.com/v1/messages", {
-    method: "POST",
-    headers: {
-      "x-api-key": env.ANTHROPIC_API_KEY,
-      "anthropic-version": "2023-06-01",
-      "content-type": "application/json",
-    },
-    body: JSON.stringify({
-      model: MODELO,
-      max_tokens: 1500,
-      system: SYSTEM_PROMPT,
-      messages: [{ role: "user", content: mensajeUsuario }],
-    }),
+  const cuerpoPeticion = JSON.stringify({
+    model: MODELO,
+    max_tokens: 1500,
+    system: SYSTEM_PROMPT,
+    messages: [{ role: "user", content: mensajeUsuario }],
   });
 
-  if (!r.ok) return json({ error: "La API de Claude no ha respondido. Inténtalo de nuevo." }, 502);
+  // Reintenta solo los errores temporales (límite de peticiones o modelo saturado).
+  let r;
+  for (let intento = 1; intento <= 3; intento++) {
+    r = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: {
+        "x-api-key": env.ANTHROPIC_API_KEY,
+        "anthropic-version": "2023-06-01",
+        "content-type": "application/json",
+      },
+      body: cuerpoPeticion,
+    });
+    if (r.status !== 429 && r.status !== 529) break;
+    if (intento < 3) await new Promise((res) => setTimeout(res, 2000 * intento));
+  }
+
+  if (!r.ok) {
+    let detalle = "";
+    try {
+      const error = await r.json();
+      detalle = error?.error?.message || error?.error?.type || "";
+    } catch {}
+    return json(
+      { error: `La API de Claude respondió con error ${r.status}${detalle ? ": " + detalle : ""}` },
+      502
+    );
+  }
 
   const cuerpo = await r.json();
   const texto = (cuerpo.content || []).filter((b) => b.type === "text").map((b) => b.text).join("");
