@@ -1897,13 +1897,47 @@ function vInline(a,n){
 function secHead(num,title,lead){
   return '<button class="th-head" aria-expanded="false"><h2>'+title+'</h2><span class="th-tog"><span class="th-tog-t">Ver teoría</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></button>'+(lead?'<p class="th-lead">'+lead+'</p>':'');
 }
+/* Check de completado por apartado: vídeo visto + test de 10 preguntas del apartado */
+const SEC_CHECK = {
+  "pl-antro":{author:"platon",n:1,tag:"Antropología"},
+  "pl-onto":{author:"platon",n:2,tag:"Ontología"},
+  "pl-episte":{author:"platon",n:3,tag:"Epistemología"},
+  "pl-etica":{author:"platon",n:4,tag:"Ética y política"}
+};
+function paintSecCheck(box,secId){
+  const S=SEC_CHECK[secId];
+  const v=(VIDEOS[S.author]||[]).find(x=>x.n===S.n);
+  const videoOk=!!(v&&seenGet()[v.id]);
+  const best=store.get("secTest",{})[secId];
+  const testOk=(best||0)>7;
+  if(!(videoOk&&testOk)){
+    box.innerHTML='<div class="seccheck-pend"><p class="small"><b>Para marcar este apartado hacen falta las dos cosas:</b></p><ul class="seccheck-list small"><li>'+(videoOk?'✔':'<span style="color:#9a9a9a;font-weight:800">✕</span>')+' Ver el vídeo del apartado</li><li>'+(testOk?'✔':'<span style="color:#9a9a9a;font-weight:800">✕</span>')+' Sacar más de 7 en el test de 10 preguntas'+(best!==undefined?' (tu mejor nota: '+best.toFixed(1).replace(".",",")+')':'')+'</li></ul>'+(testOk?'':'<div class="btnrow"><button class="btn primary" id="sectest-'+secId+'">'+(best!==undefined?'Repetir el test de 10 preguntas':'Hacer el test de 10 preguntas')+'</button></div>')+'</div>';
+    const b=box.querySelector("#sectest-"+secId);
+    if(b) b.onclick=()=>startQuiz("sec:"+secId);
+    return;
+  }
+  const done=!!store.get("secDone",{})[secId];
+  box.innerHTML='<label class="check"><input type="checkbox" '+(done?"checked":"")+'><span>Apartado completado</span></label>';
+  box.querySelector("input").onchange=e=>{const d=store.get("secDone",{});d[secId]=e.target.checked;store.set("secDone",d)};
+}
+function refreshSecChecks(){
+  document.querySelectorAll("section.th.open").forEach(s=>{if(s._paintCheck)s._paintCheck()});
+}
+window.addEventListener("focus",refreshSecChecks);
+document.addEventListener("visibilitychange",()=>{if(!document.hidden)refreshSecChecks()});
+document.addEventListener("click",()=>setTimeout(refreshSecChecks,400));
 function makeCollapsible(root){
   root.querySelectorAll("section.th").forEach(sec=>{
     const head=sec.querySelector(".th-head"); if(!head) return;
     const bodyEl=document.createElement("div"); bodyEl.className="th-body"; bodyEl.hidden=true;
     [...sec.children].forEach(ch=>{ if(ch!==head && !ch.classList.contains("vinline")) bodyEl.appendChild(ch); });
     sec.appendChild(bodyEl);
-    const set=open=>{bodyEl.hidden=!open;head.setAttribute("aria-expanded",open);sec.classList.toggle("open",open);head.querySelector(".th-tog-t").textContent=open?"Ocultar":"Ver teoría"};
+    if(SEC_CHECK[sec.id]){
+      const box=document.createElement("div"); box.className="seccheck"; box.style.marginTop="18px";
+      bodyEl.appendChild(box);
+      sec._paintCheck=()=>paintSecCheck(box,sec.id);
+    }
+    const set=open=>{bodyEl.hidden=!open;head.setAttribute("aria-expanded",open);sec.classList.toggle("open",open);head.querySelector(".th-tog-t").textContent=open?"Ocultar":"Ver teoría";if(open&&sec._paintCheck)sec._paintCheck()};
     head.onclick=()=>set(bodyEl.hidden);
     sec._open=()=>set(true);
   });
@@ -2882,16 +2916,23 @@ const COMMENTS = {
   "ref": "Fedón",
   "texto": "—Con todo –dijo–, ¿a partir de esas cosas, las iguales, que son diferentes de lo igual en sí, has intuido y captado, sin embargo, el conocimiento de eso? —Acertadísimamente lo dices –dijo. —¿En consecuencia, tanto si es semejante a esas cosas como si es desemejante? —En efecto. —No hay diferencia ninguna –dijo él–. Siempre que al ver un objeto, a partir de su contemplación, intuyas otro, sea semejante o desemejante, es necesario –dijo– que eso sea un proceso de reminiscencia. —Así es, desde luego. —¿Y qué? –dijo él–. ¿Acaso experimentamos algo parecido con respecto a los maderos y a las cosas iguales de que hablábamos ahora? ¿Es que no parece que son iguales como lo que es igual por sí, o carecen de algo para ser de igual clase que lo igual en sí, o nada? —Carecen, y de mucho, para ello –respondió. —Por tanto, ¿reconocemos que, cuando uno al ver algo piensa: lo que ahora yo veo pretende ser como algún otro de los objetos reales, pero carece de algo y no consigue ser tal como aquél, sino que resulta inferior, necesariamente el que piensa esto tuvo que haber logrado ver antes aquello a lo que dice que esto se asemeja, y que le resulta inferior? —Necesariamente.",
   "problema": {
-   "nombre": "Problema del conocimiento",
-   "cats": [
-    [
-     "Problema del conocimiento",
-     "conocimiento",
-     "epistemolog",
-     "conocer",
-     "gnoseolog"
-    ]
-   ]
+     "nombre": "Problema del conocimiento y Problema de la realidad (ontológico)",
+     "cats": [
+        [
+           "Problema del conocimiento",
+           "conocimiento",
+           "epistemolog",
+           "conocer",
+           "gnoseolog"
+        ],
+        [
+           "Problema de la realidad (ontológico)",
+           "realidad",
+           "ontolog",
+           "ser",
+           "metafisic"
+        ]
+     ]
   },
   "principal": {
    "grupos": [
@@ -3001,23 +3042,30 @@ const COMMENTS = {
   "ref": "Fedón",
   "texto": "—Es necesario de acuerdo con lo que está dicho, Sócrates. —¿Acaso desde que nacimos veíamos, oíamos, y teníamos los demás sentidos? —Desde luego que sí. —¿Era preciso, entonces, decimos, que tengamos adquirido el conocimiento de lo igual antes que éstos? —Sí. —Por lo tanto, antes de nacer, según parece, nos es necesario haberlo adquirido. —Eso parece. —Así que si, habiéndolo adquirido antes de nacer, nacimos teniéndolo, ¿sabíamos ya antes de nacer y apenas nacidos no solo lo igual, lo mayor, y lo menor, y todo lo de esa clase? Pues el razonamiento nuestro de ahora no es en algo más sobre lo igual en sí que sobre lo bello en sí, y lo bueno en sí, y lo justo y lo santo, y, a lo que precisamente me refiero, sobre todo aquello que etiquetamos con «eso lo que es», tanto al preguntar en nuestras preguntas como al responder en nuestras respuestas. De modo que nos es necesario haber adquirido los conocimientos de todo eso antes de nacer. —Así es. —Y si después de haberlos adquirido en cada ocasión no los olvidáramos, naceríamos siempre sabiéndolos y siempre los sabríamos a lo largo de nuestra vida. Porque el saber consiste en esto: conservar el conocimiento que se ha adquirido y no perderlo. ¿O no es eso lo que llamamos olvido, Simmias, la pérdida de un conocimiento? —Totalmente de acuerdo, Sócrates –dijo. —Y si es que después de haberlos adquirido antes de nacer, pienso, al nacer los perdimos, y luego al utilizar nuestros sentidos respecto a esas mismas cosas recuperamos los conocimientos que en un tiempo anterior ya teníamos, ¿acaso lo que llamamos aprender no sería recuperar un conocimiento ya familiar? ¿Llamándolo recordar lo llamaríamos correctamente? —Desde luego.",
   "problema": {
-   "nombre": "Antropología y Problema del conocimiento",
-   "cats": [
-    [
-     "Problema del conocimiento",
-     "conocimiento",
-     "epistemolog",
-     "conocer",
-     "gnoseolog"
-    ],
-    [
-     "Problema antropológico",
-     "antropolog",
-     "ser humano",
-     "alma",
-     "hombre"
-    ]
-   ]
+     "nombre": "Problema del conocimiento, Problema de la realidad (ontológico) y Problema antropológico",
+     "cats": [
+        [
+           "Problema del conocimiento",
+           "conocimiento",
+           "epistemolog",
+           "conocer",
+           "gnoseolog"
+        ],
+        [
+           "Problema de la realidad (ontológico)",
+           "realidad",
+           "ontolog",
+           "ser",
+           "metafisic"
+        ],
+        [
+           "Problema antropológico",
+           "antropolog",
+           "ser humano",
+           "alma",
+           "hombre"
+        ]
+     ]
   },
   "principal": {
    "grupos": [
@@ -3069,23 +3117,30 @@ const COMMENTS = {
   "ref": "República, libro VI",
   "texto": "—Pero ¿acaso —preguntó Adimanto— no son la justicia y lo demás que hemos descrito lo supremo, sino que hay algo todavía mayor? —Mayor, ciertamente —respondí—. Y de esas cosas mismas no debemos contemplar, como hasta ahora, un bosquejo, sino no pararnos hasta tener un cuadro acabado. ¿No sería ridículo acaso que pusiésemos todos nuestros esfuerzos en otras cosas de escaso valor, de modo de alcanzar en ellas la mayor precisión y pureza posibles, y que no consideráramos dignas de la máxima precisión justamente a las cosas supremas? —Efectivamente; pero en cuanto a lo que llamas ‘el estudio supremo’ y en cuanto a lo que trata, ¿te parece que podemos dejar pasar sin preguntarte qué es?",
   "problema": {
-   "nombre": "Problema ético-político y Problema del conocimiento",
-   "cats": [
-    [
-     "Problema del conocimiento",
-     "conocimiento",
-     "epistemolog",
-     "conocer",
-     "gnoseolog"
-    ],
-    [
-     "Problema ético-político",
-     "etic",
-     "moral",
-     "politic",
-     "estado"
-    ]
-   ]
+     "nombre": "Problema del conocimiento, Problema ético-político y Problema de la realidad (ontológico)",
+     "cats": [
+        [
+           "Problema del conocimiento",
+           "conocimiento",
+           "epistemolog",
+           "conocer",
+           "gnoseolog"
+        ],
+        [
+           "Problema ético-político",
+           "etic",
+           "moral",
+           "politic",
+           "estado"
+        ],
+        [
+           "Problema de la realidad (ontológico)",
+           "realidad",
+           "ontolog",
+           "ser",
+           "metafisic"
+        ]
+     ]
   },
   "principal": {
    "grupos": [
@@ -3191,21 +3246,30 @@ const COMMENTS = {
   "ref": "República, libro VI",
   "texto": "—Claro, sobre todo si nos reprochan que no conocemos el bien y hablan como si a su vez lo supiesen; pues dicen que es la inteligencia del bien, como si comprendiéramos qué quieren decir cuando pronuncian la palabra ‘bien’. —Es muy verdad. —¿Y los que definen el bien como el placer? ¿Acaso incurren menos en error que los otros? ¿No se ven forzados a reconocer que hay placeres malos? —Es forzoso. —Pero en ese caso, pienso, les sucede que deben reconocer que las mismas cosas son buenas y malas. ¿No es así? —Sí. —También es manifiesto que hay muchas y grandes disputas en torno a esto. —Sin duda. —Ahora bien, es patente que, respecto de las cosas justas y bellas, muchos se atienen a las apariencias y, aunque no sean justas ni bellas, actúan y las adquieren como si lo fueran; respecto de las cosas buenas, en cambio, nadie se conforma con poseer apariencias, sino que buscan cosas reales y rechazan las que sólo parecen buenas. —Así es.",
   "problema": {
-   "nombre": "Problema del conocimiento y ética",
-   "cats": [
-    [
-     "Problema del conocimiento",
-     "conocimiento",
-     "epistemolog",
-     "conocer",
-     "gnoseolog"
-    ],
-    [
-     "Problema ético",
-     "etic",
-     "moral"
-    ]
-   ]
+     "nombre": "Problema del conocimiento, Problema de la realidad (ontológico) y Problema ético-político",
+     "cats": [
+        [
+           "Problema del conocimiento",
+           "conocimiento",
+           "epistemolog",
+           "conocer",
+           "gnoseolog"
+        ],
+        [
+           "Problema de la realidad (ontológico)",
+           "realidad",
+           "ontolog",
+           "ser",
+           "metafisic"
+        ],
+        [
+           "Problema ético-político",
+           "etic",
+           "moral",
+           "politic",
+           "estado"
+        ]
+     ]
   },
   "principal": {
    "grupos": [
@@ -3247,21 +3311,30 @@ const COMMENTS = {
   "ref": "República, libro VI",
   "texto": "—Veamos. Lo que toda alma persigue y por lo cual hace todo, adivinando que existe, pero sumida en dificultades frente a eso y sin poder captar suficientemente qué es, ni recurrir a una sólida creencia como sucede respecto de otras cosas, que es lo que hace perder lo que puede haber en ellas de ventajoso; algo de esta índole y magnitud, ¿diremos que debe permanecer en tinieblas para aquellos que son los mejores en el Estado y con los cuales hemos de llevar a cabo nuestros intentos? —Ni en lo más mínimo. —Pienso, en todo caso, que, si se desconoce en qué sentido las cosas justas y bellas del Estado son buenas, no sirve de mucho tener un guardián que ignore esto en ellas; y presiento que nadie conocerá adecuadamente las cosas justas y bellas antes de conocer en qué sentido son buenas. —Presientes bien. —Pues entonces nuestro Estado estará perfectamente organizado, si el guardián que lo vigila es alguien que posee el conocimiento de estas cosas. —Forzosamente. Pero tú, Sócrates, ¿qué dices que es el bien? ¿Ciencia, placer o alguna otra cosa? —¡Hombre! Ya veo bien claro que no te contentarás con lo que opinen otros acerca de eso.",
   "problema": {
-   "nombre": "Problema del conocimiento y Política",
-   "cats": [
-    [
-     "Problema del conocimiento",
-     "conocimiento",
-     "epistemolog",
-     "conocer",
-     "gnoseolog"
-    ],
-    [
-     "Problema político",
-     "politic",
-     "estado"
-    ]
-   ]
+     "nombre": "Problema del conocimiento, Problema de la realidad (ontológico) y Problema ético-político",
+     "cats": [
+        [
+           "Problema del conocimiento",
+           "conocimiento",
+           "epistemolog",
+           "conocer",
+           "gnoseolog"
+        ],
+        [
+           "Problema de la realidad (ontológico)",
+           "realidad",
+           "ontolog",
+           "ser",
+           "metafisic"
+        ],
+        [
+           "Problema ético-político",
+           "etic",
+           "moral",
+           "politic",
+           "estado"
+        ]
+     ]
   },
   "principal": {
    "grupos": [
@@ -3312,16 +3385,23 @@ const COMMENTS = {
   "ref": "República, libro VI",
   "texto": "—Es que no me parece correcto, Sócrates, que haya que atenerse a las opiniones de otros y no a las de uno, tras haberse ocupado tanto tiempo de esas cosas. —Pero ¿es que acaso te parece correcto decir acerca de ellas, como si se supiese, algo que no se sabe? —Como si se supiera, de ningún modo, pero sí como quien está dispuesto a exponer, como su pensamiento, aquello que piensa. —Pues bien —dije—. ¿No percibes que las opiniones sin ciencia son todas lamentables? En el mejor de los casos, ciegas. ¿O te parece que los ciegos que hacen correctamente su camino se diferencian en algo de los que tienen opiniones verdaderas sin inteligencia? —En nada. —¿Quieres acaso contemplar cosas lamentables, ciegas y tortuosas, en lugar de oírlas de otros claras y bellas? —¡Por Zeus! —exclamó Glaucón—. No te retires, Sócrates, como si ya estuvieras al final. Pues nosotros estaremos satisfechos si, del modo en que discurriste acerca de la justicia, la moderación y lo demás, así discurres acerca del bien.",
   "problema": {
-   "nombre": "Problema del conocimiento",
-   "cats": [
-    [
-     "Problema del conocimiento",
-     "conocimiento",
-     "epistemolog",
-     "conocer",
-     "gnoseolog"
-    ]
-   ]
+     "nombre": "Problema del conocimiento y Problema de la realidad (ontológico)",
+     "cats": [
+        [
+           "Problema del conocimiento",
+           "conocimiento",
+           "epistemolog",
+           "conocer",
+           "gnoseolog"
+        ],
+        [
+           "Problema de la realidad (ontológico)",
+           "realidad",
+           "ontolog",
+           "ser",
+           "metafisic"
+        ]
+     ]
   },
   "principal": {
    "grupos": [
@@ -3800,16 +3880,23 @@ const COMMENTS = {
   "ref": "República, libro VI",
   "texto": "—¿Estás dispuesto a declarar que la línea ha quedado dividida, en cuanto a su verdad y no verdad, de modo tal que lo opinable es a lo cognoscible como la copia es a aquello de lo que es copiado? —Estoy muy dispuesto. —Ahora examina si no hay que dividir también la sección de lo inteligible. —¿De qué modo? —De éste. Por un lado, en la primera parte de ella, el alma, sirviéndose de las cosas antes imitadas como si fueran imágenes, se ve forzada a indagar a partir de supuestos, marchando no hasta un principio sino hacia una conclusión. Por otro lado, en la segunda parte, avanza hasta un principio no supuesto, partiendo de un supuesto y sin recurrir a imágenes —a diferencia del otro caso—, efectuando el camino con Ideas mismas y por medio de Ideas. —No he aprehendido suficientemente esto que dices.",
   "problema": {
-   "nombre": "Problema del conocimiento",
-   "cats": [
-    [
-     "Problema del conocimiento",
-     "conocimiento",
-     "epistemolog",
-     "conocer",
-     "gnoseolog"
-    ]
-   ]
+     "nombre": "Problema del conocimiento y Problema de la realidad (ontológico)",
+     "cats": [
+        [
+           "Problema del conocimiento",
+           "conocimiento",
+           "epistemolog",
+           "conocer",
+           "gnoseolog"
+        ],
+        [
+           "Problema de la realidad (ontológico)",
+           "realidad",
+           "ontolog",
+           "ser",
+           "metafisic"
+        ]
+     ]
   },
   "principal": {
    "grupos": [
@@ -3853,16 +3940,23 @@ const COMMENTS = {
   "ref": "República, libro VI",
   "texto": "—Pues veamos nuevamente; será más fácil que entiendas si te digo esto antes. Creo que sabes que los que se ocupan de geometría y de cálculo suponen lo impar y lo par, las figuras y tres clases de ángulos y cosas afines, según lo que investigan en cada caso. Como si las conocieran, las adoptan como supuestos, y de ahí en adelante no estiman que deban dar cuenta de ellas ni a sí mismos ni a otros, como si fueran evidentes a cualquiera; antes bien, partiendo de ellas atraviesan el resto de modo consecuente, para concluir en aquello que proponían al examen. —Sí, esto lo sé. —Sabes, por consiguiente, que se sirven de figuras visibles y hacen discursos acerca de ellas, aunque no pensando en éstas sino en aquellas cosas a las cuales éstas se parecen, discurriendo en vista al Cuadrado en sí y a la Diagonal en sí, y no en vista de la que dibujan, y así con lo demás. De las cosas mismas que configuran y dibujan hay sombras e imágenes en el agua, y de estas cosas que dibujan se sirven como imágenes, buscando divisar aquellas cosas en sí que no podrían divisar de otro modo que con el pensamiento. —Dices verdad.",
   "problema": {
-   "nombre": "Problema del conocimiento",
-   "cats": [
-    [
-     "Problema del conocimiento",
-     "conocimiento",
-     "epistemolog",
-     "conocer",
-     "gnoseolog"
-    ]
-   ]
+     "nombre": "Problema del conocimiento y Problema de la realidad (ontológico)",
+     "cats": [
+        [
+           "Problema del conocimiento",
+           "conocimiento",
+           "epistemolog",
+           "conocer",
+           "gnoseolog"
+        ],
+        [
+           "Problema de la realidad (ontológico)",
+           "realidad",
+           "ontolog",
+           "ser",
+           "metafisic"
+        ]
+     ]
   },
   "principal": {
    "grupos": [
@@ -3906,16 +4000,23 @@ const COMMENTS = {
   "ref": "República, libro VI",
   "texto": "—A esto me refería como la especie inteligible. Pero en esta su primera sección, el alma se ve forzada a servirse de supuestos en su búsqueda, sin avanzar hacia un principio, por no poder remontarse más allá de los supuestos. Y para eso usa como imágenes a los objetos que abajo eran imitados, y que habían sido conjeturados y estimados como claros respecto de los que eran sus imitaciones. —Comprendo que te refieres a la geometría y a las artes afines. —Comprende entonces la otra sección de lo inteligible, cuando afirmo que en ella la razón misma aprehende, por medio de la facultad dialéctica, y hace de los supuestos no principios sino realmente supuestos, que son como peldaños y trampolines hasta el principio del todo, que es no supuesto, y, tras aferrarse a él, ateniéndose a las cosas que de él dependen, desciende hasta una conclusión, sin servirse para nada de lo sensible, sino de Ideas, a través de Ideas y en dirección a Ideas, hasta concluir en Ideas.",
   "problema": {
-   "nombre": "Problema del conocimiento",
-   "cats": [
-    [
-     "Problema del conocimiento",
-     "conocimiento",
-     "epistemolog",
-     "conocer",
-     "gnoseolog"
-    ]
-   ]
+     "nombre": "Problema del conocimiento y Problema de la realidad (ontológico)",
+     "cats": [
+        [
+           "Problema del conocimiento",
+           "conocimiento",
+           "epistemolog",
+           "conocer",
+           "gnoseolog"
+        ],
+        [
+           "Problema de la realidad (ontológico)",
+           "realidad",
+           "ontolog",
+           "ser",
+           "metafisic"
+        ]
+     ]
   },
   "principal": {
    "grupos": [
@@ -3959,16 +4060,23 @@ const COMMENTS = {
   "ref": "República, libro VI",
   "texto": "—Comprendo, aunque no suficientemente, ya que creo que tienes en mente una tarea enorme: quieres distinguir lo que de lo real e inteligible es estudiado por la ciencia dialéctica, estableciendo que es más claro que lo estudiado por las llamadas ‘artes’, para las cuales los supuestos son principios. Y los que los estudian se ven forzados a estudiarlos por medio del pensamiento discursivo, aunque no por los sentidos. Pero a raíz de no hacer el examen avanzando hacia un principio sino a partir de supuestos, te parece que no poseen inteligencia acerca de ellos, aunque sean inteligibles junto a un principio. Y creo que llamas ‘pensamiento discursivo’ al estado mental de los geómetras y similares, pero no ‘inteligencia’; como si el ‘pensamiento discursivo’ fuera algo intermedio entre la opinión y la inteligencia. —Entendiste perfectamente. Y ahora aplica a las cuatro secciones estas cuatro afecciones que se generan en el alma; inteligencia, a la suprema; pensamiento discursivo, a la segunda; a la tercera asigna la creencia y a la cuarta la conjetura; y ordénalas proporcionadamente, considerando que cuanto más participen de la verdad tanto más participan de la claridad. —Entiendo, y estoy de acuerdo en ordenarlas como dices.",
   "problema": {
-   "nombre": "Problema del conocimiento",
-   "cats": [
-    [
-     "Problema del conocimiento",
-     "conocimiento",
-     "epistemolog",
-     "conocer",
-     "gnoseolog"
-    ]
-   ]
+     "nombre": "Problema del conocimiento y Problema de la realidad (ontológico)",
+     "cats": [
+        [
+           "Problema del conocimiento",
+           "conocimiento",
+           "epistemolog",
+           "conocer",
+           "gnoseolog"
+        ],
+        [
+           "Problema de la realidad (ontológico)",
+           "realidad",
+           "ontolog",
+           "ser",
+           "metafisic"
+        ]
+     ]
   },
   "principal": {
    "grupos": [
@@ -4022,16 +4130,23 @@ const COMMENTS = {
   "ref": "Discurso del método, parte II",
   "texto": "Había estudiado un poco, siendo más joven, la lógica de entre las partes de la filosofía; de las matemáticas, el análisis de los geómetras y el álgebra. Tres artes o ciencias que debían contribuir en algo a mi propósito. Pero habiéndolas examinado, me percaté de que en relación con la lógica, sus silogismos y la mayor parte de sus reglas sirven más para explicar a otro cuestiones ya conocidas o, también, como sucede con el arte de Lulio, para hablar sin juicio de aquellas que se ignoran que para llegar a conocerlas. Y si bien la lógica contiene muchos preceptos verdaderos y muy adecuados, hay, sin embargo, mezclados con éstos otros muchos que o bien son perjudiciales o bien superfluos, de modo que es tan difícil separarlos como sacar una Diana o una Minerva de un bloque de mármol aún no trabajado.",
   "problema": {
-   "nombre": "Problema del conocimiento",
-   "cats": [
-    [
-     "Problema del conocimiento",
-     "conocimiento",
-     "epistemolog",
-     "conocer",
-     "gnoseolog"
-    ]
-   ]
+     "nombre": "Problema del conocimiento y Problema de la realidad (ontológico)",
+     "cats": [
+        [
+           "Problema del conocimiento",
+           "conocimiento",
+           "epistemolog",
+           "conocer",
+           "gnoseolog"
+        ],
+        [
+           "Problema de la realidad (ontológico)",
+           "realidad",
+           "ontolog",
+           "ser",
+           "metafisic"
+        ]
+     ]
   },
   "principal": {
    "grupos": [
@@ -4085,16 +4200,23 @@ const COMMENTS = {
   "ref": "Discurso del método, parte II",
   "texto": "Igualmente, en relación con el análisis de los antiguos o el álgebra de los modernos, además de que no se refieren sino a muy abstractas materias que parecen carecer de todo uso, el primero está tan circunscrito a la consideración de las figuras que no permite ejercer el entendimiento sin fatigar excesivamente la imaginación. La segunda está tan sometida a ciertas reglas y cifras que se ha convertido en un arte confuso y oscuro capaz de distorsionar el ingenio en vez de ser una ciencia que favorezca su desarrollo. Todo esto fue la causa por la que pensaba que era preciso indagar otro método que, asimilando las ventajas de estos tres, estuviera exento de sus defectos.",
   "problema": {
-   "nombre": "Problema del conocimiento",
-   "cats": [
-    [
-     "Problema del conocimiento",
-     "conocimiento",
-     "epistemolog",
-     "conocer",
-     "gnoseolog"
-    ]
-   ]
+     "nombre": "Problema del conocimiento y Problema de la realidad (ontológico)",
+     "cats": [
+        [
+           "Problema del conocimiento",
+           "conocimiento",
+           "epistemolog",
+           "conocer",
+           "gnoseolog"
+        ],
+        [
+           "Problema de la realidad (ontológico)",
+           "realidad",
+           "ontolog",
+           "ser",
+           "metafisic"
+        ]
+     ]
   },
   "principal": {
    "grupos": [
@@ -4149,16 +4271,23 @@ const COMMENTS = {
   "ref": "Discurso del método, parte II",
   "texto": "Y como la multiplicidad de leyes frecuentemente sirve para los vicios de tal forma que un Estado está mejor regido cuando no existen más que unas pocas leyes que son minuciosamente observadas, de la misma forma, en lugar del gran número de preceptos del cual está compuesta la lógica, estimé que tendría suficiente con los cuatro siguientes con tal de que tomase la firme y constante resolución de no incumplir ni una sola vez su observancia.\n\nEl primero consistía en no admitir cosa alguna como verdadera si no se la había conocido evidentemente como tal. Es decir, con todo cuidado debía evitar la precipitación y la prevención, admitiendo exclusivamente en mis juicios aquello que se presentara tan clara y distintamente a mi espíritu que no tuviera motivo alguno para ponerlo en duda.",
   "problema": {
-   "nombre": "Problema del conocimiento",
-   "cats": [
-    [
-     "Problema del conocimiento",
-     "conocimiento",
-     "epistemolog",
-     "conocer",
-     "gnoseolog"
-    ]
-   ]
+     "nombre": "Problema del conocimiento y Problema de la realidad (ontológico)",
+     "cats": [
+        [
+           "Problema del conocimiento",
+           "conocimiento",
+           "epistemolog",
+           "conocer",
+           "gnoseolog"
+        ],
+        [
+           "Problema de la realidad (ontológico)",
+           "realidad",
+           "ontolog",
+           "ser",
+           "metafisic"
+        ]
+     ]
   },
   "principal": {
    "grupos": [
@@ -4207,16 +4336,23 @@ const COMMENTS = {
   "ref": "Discurso del método, parte II",
   "texto": "El segundo exigía que dividiese cada una de las dificultades a examinar en tantas parcelas como fuera posible y necesario para resolverlas más fácilmente.\n\nEl tercero requería conducir por orden mis reflexiones comenzando por los objetos más simples y más fácilmente cognoscibles, para ascender poco a poco, gradualmente, hasta el conocimiento de los más complejos, suponiendo inclusive un orden entre aquellos que no se preceden naturalmente los unos a los otros.\n\nSegún el último de estos preceptos debería realizar recuentos tan completos y revisiones tan amplias que pudiese estar seguro de no omitir nada.",
   "problema": {
-   "nombre": "Problema del conocimiento",
-   "cats": [
-    [
-     "Problema del conocimiento",
-     "conocimiento",
-     "epistemolog",
-     "conocer",
-     "gnoseolog"
-    ]
-   ]
+     "nombre": "Problema del conocimiento y Problema de la realidad (ontológico)",
+     "cats": [
+        [
+           "Problema del conocimiento",
+           "conocimiento",
+           "epistemolog",
+           "conocer",
+           "gnoseolog"
+        ],
+        [
+           "Problema de la realidad (ontológico)",
+           "realidad",
+           "ontolog",
+           "ser",
+           "metafisic"
+        ]
+     ]
   },
   "principal": {
    "grupos": [
@@ -4273,16 +4409,23 @@ const COMMENTS = {
   "ref": "Discurso del método, parte II",
   "texto": "Las largas cadenas de razones simples y fáciles, por medio de las cuales generalmente los geómetras llegan a alcanzar las demostraciones más difíciles, me habían proporcionado la ocasión de imaginar que todas las cosas que pueden ser objeto del conocimiento de los hombres se entrelazan de igual forma y que, absteniéndose de admitir como verdadera alguna que no lo sea y guardando siempre el orden necesario para deducir unas de otras, no puede haber algunas tan alejadas de nuestro conocimiento que no podamos, finalmente, conocer ni tan ocultas que no podamos llegar a descubrir. No supuso para mí una gran dificultad el decidir por cuáles era necesario iniciar el estudio: previamente sabía que debía ser por las más simples y las más fácilmente cognoscibles.",
   "problema": {
-   "nombre": "Problema del conocimiento",
-   "cats": [
-    [
-     "Problema del conocimiento",
-     "conocimiento",
-     "epistemolog",
-     "conocer",
-     "gnoseolog"
-    ]
-   ]
+     "nombre": "Problema del conocimiento y Problema de la realidad (ontológico)",
+     "cats": [
+        [
+           "Problema del conocimiento",
+           "conocimiento",
+           "epistemolog",
+           "conocer",
+           "gnoseolog"
+        ],
+        [
+           "Problema de la realidad (ontológico)",
+           "realidad",
+           "ontolog",
+           "ser",
+           "metafisic"
+        ]
+     ]
   },
   "principal": {
    "grupos": [
@@ -4337,16 +4480,23 @@ const COMMENTS = {
   "ref": "Meditaciones metafísicas, Meditación primera",
   "texto": "He advertido hace ya algún tiempo que, desde mi más temprana edad, había admitido como verdaderas muchas opiniones falsas, y que lo edificado después sobre cimientos tan poco sólidos tenía que ser por fuerza muy dudoso e incierto; de suerte que me era preciso emprender seriamente, una vez en la vida, la tarea de deshacerme de todas las opiniones a las que hasta entonces había dado crédito, y empezar todo de nuevo desde los fundamentos, si quería establecer algo firme y constante en las ciencias. Mas pareciéndome ardua dicha empresa, he aguardado hasta alcanzar una edad lo bastante madura como para no poder esperar que haya otra, tras ella, más apta para la ejecución de mi propósito; y por ello lo he diferido tanto, que a partir de ahora me sentiría culpable si gastase en deliberaciones el tiempo que me queda para obrar.",
   "problema": {
-   "nombre": "Problema del conocimiento",
-   "cats": [
-    [
-     "Problema del conocimiento",
-     "conocimiento",
-     "epistemolog",
-     "conocer",
-     "gnoseolog"
-    ]
-   ]
+     "nombre": "Problema del conocimiento y Problema de la realidad (ontológico)",
+     "cats": [
+        [
+           "Problema del conocimiento",
+           "conocimiento",
+           "epistemolog",
+           "conocer",
+           "gnoseolog"
+        ],
+        [
+           "Problema de la realidad (ontológico)",
+           "realidad",
+           "ontolog",
+           "ser",
+           "metafisic"
+        ]
+     ]
   },
   "principal": {
    "grupos": [
@@ -4395,16 +4545,23 @@ const COMMENTS = {
   "ref": "Meditaciones metafísicas, Meditación primera",
   "texto": "Así pues, ahora que mi espíritu está libre de todo cuidado, habiéndome procurado reposo seguro en una apacible soledad, me aplicaré seriamente y con libertad a destruir en general todas mis antiguas opiniones.\n\nAhora bien, para cumplir tal designio, no me será necesario probar que son todas falsas, lo que acaso no conseguiría nunca; sino que, por cuanto la razón me persuade desde el principio para que no dé más crédito a las cosas no enteramente ciertas e indudables que a las manifiestamente falsas me bastará para rechazarlas todas con encontrar en cada una el más pequeño motivo de duda. Y para eso tampoco hará falta que examine todas y cada una en particular, pues sería un trabajo infinito; sino que, por cuanto la ruina de los cimientos lleva necesariamente consigo la de todo el edificio, me dirigiré en principio contra los fundamentos mismos en que se apoyaban todas mis opiniones antiguas.",
   "problema": {
-   "nombre": "Problema del conocimiento",
-   "cats": [
-    [
-     "Problema del conocimiento",
-     "conocimiento",
-     "epistemolog",
-     "conocer",
-     "gnoseolog"
-    ]
-   ]
+     "nombre": "Problema del conocimiento y Problema de la realidad (ontológico)",
+     "cats": [
+        [
+           "Problema del conocimiento",
+           "conocimiento",
+           "epistemolog",
+           "conocer",
+           "gnoseolog"
+        ],
+        [
+           "Problema de la realidad (ontológico)",
+           "realidad",
+           "ontolog",
+           "ser",
+           "metafisic"
+        ]
+     ]
   },
   "principal": {
    "grupos": [
@@ -4455,16 +4612,23 @@ const COMMENTS = {
   "ref": "Meditaciones metafísicas, Meditación primera",
   "texto": "Todo lo que he admitido hasta el presente como más seguro y verdadero, lo he aprendido de los sentidos o por los sentidos; ahora bien, he experimentado a veces que tales sentidos me engañaban, y es prudente no fiarse nunca por entero de quienes nos han engañado una vez.\n\nPero, aun dado que los sentidos nos engañan a veces, tocante a cosas mal perceptibles o muy remotas, acaso hallemos otras muchas de las que no podamos razonablemente dudar, aunque las conozcamos por su medio; como, por ejemplo, que estoy aquí, sentado junto al fuego, con una bata puesta y este papel en mis manos, o cosas por el estilo. Y ¿cómo negar que estas manos y este cuerpo sean míos, si no es poniéndome a la altura de esos insensatos, cuyo cerebro está tan turbio y ofuscado por los negros vapores de la bilis, que aseguran constantemente ser reyes siendo muy pobres, ir vestidos de oro y púrpura estando desnudos, o que se imaginan ser cacharros o tener el cuerpo de vidrio? Mas los tales son locos, y yo no lo sería menos si me rigiera por su ejemplo.",
   "problema": {
-   "nombre": "Problema del conocimiento",
-   "cats": [
-    [
-     "Problema del conocimiento",
-     "conocimiento",
-     "epistemolog",
-     "conocer",
-     "gnoseolog"
-    ]
-   ]
+     "nombre": "Problema del conocimiento y Problema de la realidad (ontológico)",
+     "cats": [
+        [
+           "Problema del conocimiento",
+           "conocimiento",
+           "epistemolog",
+           "conocer",
+           "gnoseolog"
+        ],
+        [
+           "Problema de la realidad (ontológico)",
+           "realidad",
+           "ontolog",
+           "ser",
+           "metafisic"
+        ]
+     ]
   },
   "principal": {
    "grupos": [
@@ -4506,16 +4670,23 @@ const COMMENTS = {
   "ref": "Meditaciones metafísicas, Meditación primera",
   "texto": "Con todo, debo considerar aquí que soy hombre y, por consiguiente, que tengo costumbre de dormir y de representarme en sueños las mismas cosas, y a veces cosas menos verosímiles, que esos insensatos cuando están despiertos. ¡Cuántas veces no me habrá ocurrido soñar, por la noche, que estaba aquí mismo, vestido, junto al fuego, estando en realidad desnudo y en la cama! En este momento, estoy seguro de que yo miro este papel con los ojos de la vigilia, de que esta cabeza que muevo no está soñolienta, de que alargo esta mano y la siento de propósito y con plena conciencia: lo que acaece en sueños no me resulta tan claro y distinto como todo esto. Pero, pensándolo mejor, recuerdo haber sido engañado, mientras dormía, por ilusiones semejantes. Y fijándome en este pensamiento, veo de un modo tan manifiesto que no hay indicios concluyentes ni señales que basten a distinguir con claridad el sueño de la vigilia, que acabo atónito, y mi estupor es tal que casi puede persuadirme de que estoy durmiendo.",
   "problema": {
-   "nombre": "Problema del conocimiento",
-   "cats": [
-    [
-     "Problema del conocimiento",
-     "conocimiento",
-     "epistemolog",
-     "conocer",
-     "gnoseolog"
-    ]
-   ]
+     "nombre": "Problema del conocimiento y Problema de la realidad (ontológico)",
+     "cats": [
+        [
+           "Problema del conocimiento",
+           "conocimiento",
+           "epistemolog",
+           "conocer",
+           "gnoseolog"
+        ],
+        [
+           "Problema de la realidad (ontológico)",
+           "realidad",
+           "ontolog",
+           "ser",
+           "metafisic"
+        ]
+     ]
   },
   "principal": {
    "grupos": [
@@ -4561,16 +4732,23 @@ const COMMENTS = {
   "ref": "Meditaciones metafísicas, Meditación primera",
   "texto": "Así, pues, supongamos ahora que estamos dormidos, y que todas estas particularidades, a saber: que abrimos los ojos, movemos la cabeza, alargamos las manos, no son sino mentirosas ilusiones; y pensemos que, acaso, ni nuestras manos ni todo nuestro cuerpo son tal y como los vemos. Con todo, hay que contestar al menos que las cosas que nos representamos en sueños son como cuadros y pinturas que deben formarse a semejanza de algo real y verdadero; de manera que por lo menos esas cosas generales —a saber: ojos, cabeza, manos, cuerpo entero— no son imaginarias, sino que en verdad existen. Pues los pintores, incluso cuando usan del mayor artificio para representar sirenas y sátiros mediante figuras caprichosas y fuera de lo común, no pueden, sin embargo, atribuirles formas y naturalezas del todo nuevas, y lo que hacen es sólo mezclar y componer partes de diversos animales; y, si llega el caso de que su imaginación sea lo bastante extravagante como para inventar algo tan nuevo que nunca haya sido visto, representándonos así su obra una cosa puramente fingida y absolutamente falsa, con todo, al menos los colores que usan deben ser verdaderos.",
   "problema": {
-   "nombre": "Problema del conocimiento",
-   "cats": [
-    [
-     "Problema del conocimiento",
-     "conocimiento",
-     "epistemolog",
-     "conocer",
-     "gnoseolog"
-    ]
-   ]
+     "nombre": "Problema del conocimiento y Problema de la realidad (ontológico)",
+     "cats": [
+        [
+           "Problema del conocimiento",
+           "conocimiento",
+           "epistemolog",
+           "conocer",
+           "gnoseolog"
+        ],
+        [
+           "Problema de la realidad (ontológico)",
+           "realidad",
+           "ontolog",
+           "ser",
+           "metafisic"
+        ]
+     ]
   },
   "principal": {
    "grupos": [
@@ -4684,16 +4862,23 @@ const COMMENTS = {
   "ref": "Meditaciones metafísicas, Meditación primera",
   "texto": "Y, sin embargo, hace tiempo que tengo en mi espíritu cierta opinión, según la cual hay un Dios que todo lo puede, por quien he sido creado tal como soy. Pues bien: ¿quién me asegura que el tal Dios no haya procedido de manera que no exista figura, ni magnitud, ni lugar, pero a la vez de modo que yo, no obstante, sí tenga la impresión de que todo eso existe tal y como lo veo? Y más aún: así como yo pienso, a veces, que los demás se engañan, hasta en las cosas que creen saber con más certeza, podría ocurrir que Dios haya querido que me engañe cuantas veces sumo dos más tres, o cuando enumero los lados de un cuadrado, o cuando juzgo de cosas aún más fáciles que ésas, si es que son siquiera imaginables.",
   "problema": {
-   "nombre": "Problema del conocimiento",
-   "cats": [
-    [
-     "Problema del conocimiento",
-     "conocimiento",
-     "epistemolog",
-     "conocer",
-     "gnoseolog"
-    ]
-   ]
+     "nombre": "Problema del conocimiento y Problema de la realidad (ontológico)",
+     "cats": [
+        [
+           "Problema del conocimiento",
+           "conocimiento",
+           "epistemolog",
+           "conocer",
+           "gnoseolog"
+        ],
+        [
+           "Problema de la realidad (ontológico)",
+           "realidad",
+           "ontolog",
+           "ser",
+           "metafisic"
+        ]
+     ]
   },
   "principal": {
    "grupos": [
@@ -4742,16 +4927,23 @@ const COMMENTS = {
   "ref": "Meditaciones metafísicas, Meditación primera",
   "texto": "Así pues, supondré que hay, no un verdadero Dios —que es fuente suprema de verdad—, sino cierto genio maligno, no menos artero y engañador que poderoso, el cual ha usado de toda su industria para engañarme. Pensaré que el cielo, el aire, la tierra, los colores, las figuras, los sonidos y las demás cosas exteriores, no son sino ilusiones y ensueños, de los que él se sirve para atrapar mi credulidad. Me consideraré a mí mismo como sin manos, sin ojos, sin carne, ni sangre, sin sentido alguno, y creyendo falsamente que tengo todo eso. Permaneceré obstinadamente fijo en ese pensamiento, y, si, por dicho medio, no me es posible llegar al conocimiento de alguna verdad, al menos está en mi mano suspender el juicio. Por ello, tendré sumo cuidado en no dar crédito a ninguna falsedad, y dispondré tan bien mi espíritu contra las malas artes de ese gran engañador que, por muy poderoso y astuto que sea, nunca podrá imponer nada.",
   "problema": {
-   "nombre": "Problema del conocimiento",
-   "cats": [
-    [
-     "Problema del conocimiento",
-     "conocimiento",
-     "epistemolog",
-     "conocer",
-     "gnoseolog"
-    ]
-   ]
+     "nombre": "Problema del conocimiento y Problema de la realidad (ontológico)",
+     "cats": [
+        [
+           "Problema del conocimiento",
+           "conocimiento",
+           "epistemolog",
+           "conocer",
+           "gnoseolog"
+        ],
+        [
+           "Problema de la realidad (ontológico)",
+           "realidad",
+           "ontolog",
+           "ser",
+           "metafisic"
+        ]
+     ]
   },
   "principal": {
    "grupos": [
@@ -4799,16 +4991,23 @@ const COMMENTS = {
   "ref": "Meditaciones metafísicas, Meditación segunda",
   "texto": "Mi meditación de ayer ha llenado mi espíritu de tantas dudas, que ya no está en mi mano olvidarlas. Y, sin embargo, no veo en qué manera podré resolverlas; y, como si de repente hubiera caído en aguas muy profundas, tan turbado me hallo que ni puedo apoyar mis pies en el fondo ni nadar para sostenerme en la superficie. Haré un esfuerzo, pese a todo, y tomaré de nuevo la misma vía que ayer, alejándome de todo aquello en que pueda imaginar la más mínima duda, del mismo modo que si supiera que es completamente falso; y seguiré siempre por ese camino, hasta haber encontrado algo cierto, o al menos, si otra cosa no puedo, hasta saber de cierto que nada cierto hay en el mundo.\n\nArquímedes, para trasladar la tierra de lugar, sólo pedía un punto de apoyo firme e inmóvil; así yo también tendré derecho a concebir grandes esperanzas, si por ventura hallo tan sólo una cosa que sea cierta e indubitable.",
   "problema": {
-   "nombre": "Problema del conocimiento",
-   "cats": [
-    [
-     "Problema del conocimiento",
-     "conocimiento",
-     "epistemolog",
-     "conocer",
-     "gnoseolog"
-    ]
-   ]
+     "nombre": "Problema del conocimiento y Problema de la realidad (ontológico)",
+     "cats": [
+        [
+           "Problema del conocimiento",
+           "conocimiento",
+           "epistemolog",
+           "conocer",
+           "gnoseolog"
+        ],
+        [
+           "Problema de la realidad (ontológico)",
+           "realidad",
+           "ontolog",
+           "ser",
+           "metafisic"
+        ]
+     ]
   },
   "principal": {
    "grupos": [
@@ -4856,23 +5055,30 @@ const COMMENTS = {
   "ref": "Meditaciones metafísicas, Meditación segunda",
   "texto": "Así pues, supongo que todo lo que veo es falso; estoy persuadido de que nada de cuanto mi mendaz memoria me representa ha existido jamás; pienso que carezco de sentidos; creo que cuerpo, figura, extensión, movimiento, lugar, no son sino quimeras de mi espíritu. ¿Qué podré, entonces, tener por verdadero? Acaso esto solo: que nada cierto hay en el mundo.\n\nPero ¿qué sé yo si no habrá otra cosa, distinta de las que acabo de reputar inciertas, y que sea absolutamente indudable? ¿No habrá un Dios, o algún otro poder, que me ponga en el espíritu estos pensamientos? Ello no es necesario: tal vez soy capaz de producirlos por mí mismo. Y yo mismo, al menos, ¿no soy algo? Ya he negado que yo tenga sentidos ni cuerpo. Con todo, titubeo, pues ¿qué se sigue de eso? ¿Soy tan dependiente del cuerpo y de los sentidos que, sin ellos, no puedo ser?",
   "problema": {
-   "nombre": "Problema del conocimiento y Problema antropológico",
-   "cats": [
-    [
-     "Problema del conocimiento",
-     "conocimiento",
-     "epistemolog",
-     "conocer",
-     "gnoseolog"
-    ],
-    [
-     "Problema antropológico",
-     "antropolog",
-     "ser humano",
-     "alma",
-     "hombre"
-    ]
-   ]
+     "nombre": "Problema del conocimiento, Problema antropológico y Problema de la realidad (ontológico)",
+     "cats": [
+        [
+           "Problema del conocimiento",
+           "conocimiento",
+           "epistemolog",
+           "conocer",
+           "gnoseolog"
+        ],
+        [
+           "Problema antropológico",
+           "antropolog",
+           "ser humano",
+           "alma",
+           "hombre"
+        ],
+        [
+           "Problema de la realidad (ontológico)",
+           "realidad",
+           "ontolog",
+           "ser",
+           "metafisic"
+        ]
+     ]
   },
   "principal": {
    "grupos": [
@@ -4919,16 +5125,23 @@ const COMMENTS = {
   "ref": "Meditaciones metafísicas, Meditación segunda",
   "texto": "Ya estoy persuadido de que nada hay en el mundo; ni cielo, ni tierra, ni espíritus, ni cuerpos, ¿y no estoy asimismo persuadido de que yo tampoco existo? Pues no: si yo estoy persuadido de algo, o meramente si pienso algo, es porque yo soy. Cierto que hay no sé qué engañador todopoderoso y astutísimo, que emplea toda su industria en burlarme. Pero entonces no cabe duda de que, si me engaña, es que yo soy; y, engáñeme cuanto quiera, nunca podrá hacer que yo no sea nada, mientras yo esté pensando que soy algo. De manera que, tras pensarlo bien y examinarlo todo cuidadosamente, resulta que es preciso concluir y dar como cosa cierta que esta proposición: yo soy, yo existo, es necesariamente verdadera, cuantas veces la pronuncio o la concibo en mi espíritu.",
   "problema": {
-   "nombre": "Problema del conocimiento",
-   "cats": [
-    [
-     "Problema del conocimiento",
-     "conocimiento",
-     "epistemolog",
-     "conocer",
-     "gnoseolog"
-    ]
-   ]
+     "nombre": "Problema del conocimiento y Problema de la realidad (ontológico)",
+     "cats": [
+        [
+           "Problema del conocimiento",
+           "conocimiento",
+           "epistemolog",
+           "conocer",
+           "gnoseolog"
+        ],
+        [
+           "Problema de la realidad (ontológico)",
+           "realidad",
+           "ontolog",
+           "ser",
+           "metafisic"
+        ]
+     ]
   },
   "principal": {
    "grupos": [
@@ -4976,23 +5189,30 @@ const COMMENTS = {
   "ref": "Meditaciones metafísicas, Meditación segunda",
   "texto": "Ahora bien, ya sé con certeza que soy, pero aún no sé con claridad qué soy; de suerte que, en adelante, preciso del mayor cuidado para no confundir imprudentemente otra cosa conmigo, y así no enturbiar ese conocimiento, que sostengo ser más cierto y evidente que todos los que he tenido antes.\n\nPor ello, examinaré de nuevo lo que yo creía ser, antes de incidir en estos pensamientos, y quitaré de mis antiguas opiniones todo lo que puede combatirse mediante las razones que acabo de alegar, de suerte que no quede más que lo enteramente indudable. Así pues, ¿qué es lo que antes yo creía ser? Un hombre, sin duda. Pero ¿qué es un hombre? ¿Diré, acaso, que un animal racional? No, por cierto: pues habría luego que averiguar qué es animal y qué es racional, y así una única cuestión nos llevaría insensiblemente a infinidad de otras cuestiones más difíciles y embarazosas, y no quisiera malgastar en tales sutilezas el poco tiempo y ocio que me restan.\n\nEntonces, me detendré aquí a considerar más bien los pensamientos que antes nacían espontáneos en mi espíritu, inspirados por mi sola naturaleza, cuando me aplicaba a considerar mi ser. Me fijaba, primero, en que yo tenía un rostro, manos, brazos, y toda esa máquina de huesos y carne, tal y como aparece en un cadáver, a la que designaba con el nombre de cuerpo.\n\nTras eso, reparaba en que me nutría, y andaba, y sentía, y pensaba, y refería todas esas acciones al alma; pero no me paraba a pensar en qué era ese alma, o bien, si lo hacía, imaginaba que era algo extremadamente raro y sutil, como un viento, una llama o un delicado éter, difundido por mis otras partes más groseras.",
   "problema": {
-   "nombre": "Problema del conocimiento y Problema antropológico",
-   "cats": [
-    [
-     "Problema del conocimiento",
-     "conocimiento",
-     "epistemolog",
-     "conocer",
-     "gnoseolog"
-    ],
-    [
-     "Problema antropológico",
-     "antropolog",
-     "ser humano",
-     "alma",
-     "hombre"
-    ]
-   ]
+     "nombre": "Problema del conocimiento, Problema antropológico y Problema de la realidad (ontológico)",
+     "cats": [
+        [
+           "Problema del conocimiento",
+           "conocimiento",
+           "epistemolog",
+           "conocer",
+           "gnoseolog"
+        ],
+        [
+           "Problema antropológico",
+           "antropolog",
+           "ser humano",
+           "alma",
+           "hombre"
+        ],
+        [
+           "Problema de la realidad (ontológico)",
+           "realidad",
+           "ontolog",
+           "ser",
+           "metafisic"
+        ]
+     ]
   },
   "principal": {
    "grupos": [
@@ -5036,23 +5256,30 @@ const COMMENTS = {
   "ref": "Meditaciones metafísicas, Meditación segunda",
   "texto": "En lo tocante al cuerpo, no dudaba en absoluto de su naturaleza, pues pensaba conocerla muy distintamente, y, de querer explicarla según las nociones que entonces tenía, la hubiera descrito así: entiendo por cuerpo todo aquello que puede estar delimitado por una figura, estar situado en un lugar y llenar un espacio, de suerte que todo otro cuerpo quede excluido; todo aquello que puede ser sentido por el tacto, la vista, el oído, el gusto o el olfato; que puede moverse de distintos modos, no por sí mismo, sino por alguna otra cosa que lo toca y cuya impresión recibe; pues no creía yo que fuera atribuible a la naturaleza corpórea la potencia de moverse, sentir y pensar: al contrario, me asombraba al ver que tales facultades se hallaban en algunos cuerpos.",
   "problema": {
-   "nombre": "Problema de la realidad (ontológico) y Problema antropológico",
-   "cats": [
-    [
-     "Problema de la realidad (ontológico)",
-     "realidad",
-     "ontolog",
-     "ser",
-     "metafisic"
-    ],
-    [
-     "Problema antropológico",
-     "antropolog",
-     "ser humano",
-     "alma",
-     "hombre"
-    ]
-   ]
+     "nombre": "Problema del conocimiento, Problema de la realidad (ontológico) y Problema antropológico",
+     "cats": [
+        [
+           "Problema del conocimiento",
+           "conocimiento",
+           "epistemolog",
+           "conocer",
+           "gnoseolog"
+        ],
+        [
+           "Problema de la realidad (ontológico)",
+           "realidad",
+           "ontolog",
+           "ser",
+           "metafisic"
+        ],
+        [
+           "Problema antropológico",
+           "antropolog",
+           "ser humano",
+           "alma",
+           "hombre"
+        ]
+     ]
   },
   "principal": {
    "grupos": [
@@ -5099,23 +5326,30 @@ const COMMENTS = {
   "ref": "Meditaciones metafísicas, Meditación segunda",
   "texto": "Pues bien, ¿qué soy yo, ahora que supongo haber alguien extremadamente poderoso y, si es lícito decirlo así, maligno y astuto, que emplea todas sus fuerzas e industria en engañarme? ¿Acaso puedo estar seguro de poseer el más mínimo de esos atributos que acabo de referir a la naturaleza corpórea? Me paro a pensar en ello con atención, paso revista una y otra vez, en mi espíritu, a esas cosas, y no hallo ninguna de la que pueda decir que está en mí. No es necesario que me entretenga en recontarlas. Pasemos, pues, a los atributos del alma, y veamos si hay alguno que esté en mí.",
   "problema": {
-   "nombre": "Problema del conocimiento y Problema antropológico",
-   "cats": [
-    [
-     "Problema del conocimiento",
-     "conocimiento",
-     "epistemolog",
-     "conocer",
-     "gnoseolog"
-    ],
-    [
-     "Problema antropológico",
-     "antropolog",
-     "ser humano",
-     "alma",
-     "hombre"
-    ]
-   ]
+     "nombre": "Problema del conocimiento, Problema antropológico y Problema de la realidad (ontológico)",
+     "cats": [
+        [
+           "Problema del conocimiento",
+           "conocimiento",
+           "epistemolog",
+           "conocer",
+           "gnoseolog"
+        ],
+        [
+           "Problema antropológico",
+           "antropolog",
+           "ser humano",
+           "alma",
+           "hombre"
+        ],
+        [
+           "Problema de la realidad (ontológico)",
+           "realidad",
+           "ontolog",
+           "ser",
+           "metafisic"
+        ]
+     ]
   },
   "principal": {
    "grupos": [
@@ -5159,23 +5393,30 @@ const COMMENTS = {
   "ref": "Meditaciones metafísicas, Meditación segunda",
   "texto": "Los primeros son nutrirme y andar; pero, si es cierto que no tengo cuerpo, es cierto entonces también que no puedo andar ni nutrirme. Un tercero es sentir, pero no puede uno sentir sin cuerpo, aparte de que yo he creído sentir en sueños muchas cosas y, al despertar, me he dado cuenta de que no las había sentido realmente. Un cuarto es pensar: y aquí sí hallo que el pensamiento es un atributo que me pertenece, siendo el único que no puede separarse de mí. Yo soy, yo existo; eso es cierto, pero ¿cuánto tiempo? Todo el tiempo que estoy pensando: pues quizá ocurriese que, si yo cesara de pensar, cesaría al mismo tiempo de existir.",
   "problema": {
-   "nombre": "Problema antropológico y Problema de la realidad (ontológico)",
-   "cats": [
-    [
-     "Problema antropológico",
-     "antropolog",
-     "ser humano",
-     "alma",
-     "hombre"
-    ],
-    [
-     "Problema de la realidad (ontológico)",
-     "realidad",
-     "ontolog",
-     "ser",
-     "metafisic"
-    ]
-   ]
+     "nombre": "Problema del conocimiento, Problema antropológico y Problema de la realidad (ontológico)",
+     "cats": [
+        [
+           "Problema del conocimiento",
+           "conocimiento",
+           "epistemolog",
+           "conocer",
+           "gnoseolog"
+        ],
+        [
+           "Problema antropológico",
+           "antropolog",
+           "ser humano",
+           "alma",
+           "hombre"
+        ],
+        [
+           "Problema de la realidad (ontológico)",
+           "realidad",
+           "ontolog",
+           "ser",
+           "metafisic"
+        ]
+     ]
   },
   "principal": {
    "grupos": [
@@ -6818,15 +7059,18 @@ function shuffle(arr){const a=arr.slice();for(let i=a.length-1;i>0;i--){const j=
 function startQuiz(id,host){
   const embedded=!!host;
   let pool;
+  const secKey=id.startsWith("sec:")?id.slice(4):null;
+  const aid=secKey?SEC_CHECK[secKey].author:id;
   const isMix=id.startsWith("mix");
   if(isMix){const line=id.slice(4);const list=shuffle((line==="a"||line==="b")?byLine(line):AUTHORS);
     const per=list.map((a,k)=>Math.floor(10/list.length)+(k<10%list.length?1:0));
     pool=shuffle(list.flatMap((a,k)=>shuffle(QUESTIONS[a.id].map(q=>({q,id:a.id}))).slice(0,per[k])))}
+  else if(secKey){const S=SEC_CHECK[secKey];pool=shuffle(QUESTIONS[S.author].filter(q=>q[4]===S.tag).map(q=>({q,id:S.author}))).slice(0,10)}
   else {if(!QUESTIONS[id]){location.hash="#test";return}pool=shuffle(QUESTIONS[id].map(q=>({q,id}))).slice(0,10)}
   // barajar opciones
   const items = pool.map(({q,id})=>{const order=shuffle([0,1,2,3]);return {id,text:q[0],opts:order.map(i=>q[1][i]),ans:order.indexOf(q[2]),exp:q[3],tema:q[4]||""}});
   const st={i:0,answers:[]};
-  const title = isMix?"Test mezclado · "+(id==="mix-a"?"Línea 1":id==="mix-b"?"Línea 2":"Todos"):"Test · "+getA(id).name;
+  const title = isMix?"Test mezclado · "+(id==="mix-a"?"Línea 1":id==="mix-b"?"Línea 2":"Todos"):secKey?"Test · "+getA(aid).name+" · "+SEC_CHECK[secKey].tag:"Test · "+getA(aid).name;
   const v=host||document.getElementById("view");
   const top=(sub,back)=>embedded?'':topbar(title,sub,back);
   const toTop=()=>{if(embedded)v.scrollIntoView({block:"start"});else window.scrollTo(0,0)};
@@ -6849,18 +7093,20 @@ function startQuiz(id,host){
   const finish=()=>{
     const ok=st.answers.filter((x,k)=>x===items[k].ans).length;
     const score=ok/items.length*10;stat("test-terminado");actividad();
-    const best=store.get("best",{});if(best[id]===undefined||score>best[id]){best[id]=score;store.set("best",best)}
-    const hist=store.get("hist",[]);const d=new Date();hist.push({id,score,date:d.toLocaleDateString("es-ES",{day:"numeric",month:"short"})+" · "+d.toLocaleTimeString("es-ES",{hour:"2-digit",minute:"2-digit"})});store.set("hist",hist.slice(-30));
+    if(secKey){const d=store.get("secTest",{});d[secKey]=Math.max(score,d[secKey]||0);store.set("secTest",d)}
+    const best=store.get("best",{});if(!secKey&&(best[id]===undefined||score>best[id])){best[id]=score;store.set("best",best)}
+    const hist=store.get("hist",[]);const d=new Date();if(!secKey)hist.push({id,score,date:d.toLocaleDateString("es-ES",{day:"numeric",month:"short"})+" · "+d.toLocaleTimeString("es-ES",{hour:"2-digit",minute:"2-digit"})});store.set("hist",hist.slice(-30));
     const C=2*Math.PI*62;
     const msg = score>=9?"Excelente. Lo tienes dominado.":score>=7?"Muy bien. Repasa los fallos y listo.":score>=5?"Aprobado. Vuelve a la teoría para reforzar.":"Toca repasar la teoría y volver a intentarlo.";
     v.innerHTML=top("Resultado",["test","Tests"])+
     '<section class="card" style="text-align:center;display:flex;flex-direction:column;gap:14px;align-items:center">'+
      '<div class="ring"><svg width="150" height="150" viewBox="0 0 150 150"><circle cx="75" cy="75" r="62" fill="none" stroke="var(--line)" stroke-width="12"/><circle cx="75" cy="75" r="62" fill="none" stroke="'+(score>=5?"var(--petrol)":"var(--orange)")+'" stroke-width="12" stroke-linecap="round" stroke-dasharray="'+(C*score/10)+' '+C+'"/></svg><div class="v">'+score.toFixed(1).replace(".",",")+'<small>'+ok+' de '+items.length+' aciertos</small></div></div>'+
      '<p style="font-weight:700">'+msg+'</p>'+
-     '<div class="btnrow" style="justify-content:center"><button class="btn primary" id="again">Repetir test</button>'+(embedded?'<button class="btn ghost" data-go="teoria">Repasar la teoría</button>':!isMix?'<a class="btn ghost" href="#autor-'+id+'">Ver teoría de '+getA(id).name+'</a>':'<a class="btn ghost" href="#test">Elegir otro</a>')+'</div>'+
+     '<div class="btnrow" style="justify-content:center"><button class="btn primary" id="again">Repetir test</button>'+(embedded?'<button class="btn ghost" data-go="teoria">Repasar la teoría</button>':!isMix?'<a class="btn ghost" href="#autor-'+aid+'">Ver teoría de '+getA(aid).name+'</a>':'<a class="btn ghost" href="#test">Elegir otro</a>')+'</div>'+
     '</section>'+
     '<section class="card"><h2 style="margin-bottom:12px">Revisión</h2><div class="review">'+items.map((it,k)=>{const good=st.answers[k]===it.ans;return '<div class="rv"><div class="rq">'+(k+1)+'. '+it.text+'</div>'+(good?'<div class="ra ok">Tu respuesta: '+it.opts[it.ans]+'</div>':'<div class="ra bad">Tu respuesta: '+it.opts[st.answers[k]]+'</div><div class="ra ok">Correcta: '+it.opts[it.ans]+'</div>')+'<div class="rx">'+it.exp+'</div></div>'}).join("")+'</div></section>';
     document.getElementById("again").onclick=()=>startQuiz(id,host);
+    if(secKey){const back=v.querySelector("a[href^='#autor-']");if(back)back.onclick=e=>{e.preventDefault();location.hash="#autor-"+aid;route()}}
     if(embedded&&host._go)v.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>host._go(b.dataset.go));
     toTop();
   };
@@ -7291,11 +7537,16 @@ function claseCardHTML(){
     '<div class="clase-txt"><b>¿Quieres que tu profe siga tu progreso?</b><span class="small muted">Es opcional. Solo verá tus porcentajes y el alias que elijas, nunca tus respuestas.</span></div></div>'+
     '<form class="clase-form" id="claseForm">'+
       '<div class="field"><label for="clCod">Código de clase</label><input class="cm-in" id="clCod" autocomplete="off" value="'+escH(store.get("codigo",""))+'" placeholder="El que te ha dado tu profe" required></div>'+
+      '<div class="field"><label for="clMail">Tu correo</label><input class="cm-in" id="clMail" type="email" autocomplete="email" value="'+escH(store.get("correo",""))+'" placeholder="tu@correo.com" required><span class="tiny muted">Sirve para recuperar tu progreso en otro dispositivo. Se guarda cifrado y tu profe no lo ve.</span></div>'+
       '<div class="field" id="clGruBox"><label for="clGru">Grupo</label><select class="cm-in" id="clGru" required>'+GRUPOS_DEF.map(x=>'<option>'+escH(x)+'</option>').join("")+'</select></div>'+
       '<div class="field"><label for="clAli">Alias</label><input class="cm-in" id="clAli" maxlength="24" placeholder="Tu número de lista o un apodo" required><span class="tiny muted">No pongas tu nombre completo: con que tu profe te reconozca basta.</span></div>'+
       '<p class="small clase-err" id="clErr" hidden></p>'+
       '<div class="btnrow"><button type="submit" class="btn primary">Unirme</button><button type="button" class="link-btn" data-clase="ocultar">Ahora no</button></div>'+
     '</form></section>';
+}
+async function correoId(mail){
+  const buf=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(mail));
+  return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,"0")).join("");
 }
 const ICONS_CLASE='<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0"/><circle cx="17" cy="9" r="2.5"/><path d="M15.5 14.2A4.5 4.5 0 0 1 21 18.5"/></svg>';
 document.addEventListener("click",async e=>{
@@ -7310,12 +7561,14 @@ document.addEventListener("click",async e=>{
 document.addEventListener("submit",async e=>{
   if(e.target.id!=="claseForm")return;e.preventDefault();
   const cod=document.getElementById("clCod").value.trim(),gru=document.getElementById("clGru").value.trim(),ali=document.getElementById("clAli").value.trim();
+  const mail=document.getElementById("clMail").value.trim().toLowerCase();
   const err=document.getElementById("clErr");err.hidden=true;
-  if(!cod||!gru||!ali){err.textContent=gru?"Rellena los tres campos.":"Elige tu grupo.";err.hidden=false;return}
-  const id=(crypto.randomUUID?crypto.randomUUID():String(Date.now())+Math.random().toString(36).slice(2));
+  if(!cod||!gru||!ali||!mail){err.textContent=gru?"Rellena todos los campos.":"Elige tu grupo.";err.hidden=false;return}
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail)){err.textContent="Escribe un correo válido.";err.hidden=false;return}
+  const id=await correoId(mail);
   try{
     await claseApi({action:"sync",codigo:cod,id,alias:ali,grupo:gru,progreso:claseSnapshot()});
-    store.set("codigo",cod);store.set("clase",{id,alias:ali,grupo:gru,last:Date.now()});claseLastSent=JSON.stringify(claseSnapshot());
+    store.set("codigo",cod);store.set("correo",mail);store.set("clase",{id,alias:ali,grupo:gru,last:Date.now()});claseLastSent=JSON.stringify(claseSnapshot());
     stat("clase-unirse");route();
   }catch(x){err.textContent=/grupo/i.test(x.message)?"Ese grupo no existe. Elígelo de la lista.":/c[oó]digo/i.test(x.message)?"Ese código no es correcto. Pídeselo a tu profe.":"No se ha podido conectar. Inténtalo de nuevo en un rato.";err.hidden=false}
 });
