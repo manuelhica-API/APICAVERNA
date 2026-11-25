@@ -157,9 +157,12 @@ ${bloques}
       const error = await r.json();
       detalle = error?.error?.message || error?.error?.type || "";
     } catch {}
+    // Se registra en los logs de Cloudflare y se devuelve con 500 para que el mensaje llegue a la web
+    // (Cloudflare sustituye el cuerpo de los 502 por su página de error).
+    console.log("corregir-disertacion: error de la API", r.status, detalle);
     return json(
       { error: `La API de Claude respondió con error ${r.status}${detalle ? ": " + detalle : ""}` },
-      502
+      500
     );
   }
 
@@ -170,7 +173,8 @@ ${bloques}
   try {
     evaluacion = extraerJson(texto);
   } catch {
-    return json({ error: "No se pudo interpretar la corrección. Inténtalo de nuevo." }, 502);
+    console.log("corregir-disertacion: respuesta no interpretable", texto.slice(0, 300));
+    return json({ error: "No se pudo interpretar la corrección. Inténtalo de nuevo." }, 500);
   }
 
   return json({ partes, total, ...evaluacion });
