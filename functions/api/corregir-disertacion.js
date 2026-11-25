@@ -32,11 +32,17 @@ REGLAS:
 - No inventes contenido del alumno ni cites autores que no aparezcan en su texto para acusarle de no citarlos.
 - Sé concreto: señala frases o ideas literales del alumno en cada comentario.
 - Tono: directo, respetuoso y útil, como un profesor que quiere que el alumno mejore. Escribe en español.
-- No asignes una nota numérica.
+- Incluye una nota orientativa en forma de rango de 0 a 10 (por ejemplo "4-5" o "7-8"), según los criterios. Es orientativa, no una calificación oficial.
+- Sé muy breve. Cada comentario de categoría: 2 frases, máximo 35 palabras, dejando claro qué está bien y qué falla.
+- La valoración global: 1 o 2 frases.
+- puntos_fuertes: máximo 2 elementos, de una frase corta cada uno.
+- mejoras_prioritarias: máximo 2 elementos, de una frase corta cada uno.
+- Devuelve el JSON completo y cerrado; no añadas texto fuera de él.
 
 FORMATO DE RESPUESTA: devuelve SOLO un objeto JSON válido, sin texto antes ni después, con esta forma:
 {
-  "valoracion_global": "2-3 frases",
+  "nota_orientativa": "rango, por ejemplo 4-5",
+  "valoracion_global": "1-2 frases",
   "categorias": [
     {"nombre": "Contenido", "nivel": "conseguido|parcial|no_conseguido", "comentario": "..."},
     {"nombre": "Estructura", "nivel": "...", "comentario": "..."},
@@ -45,7 +51,7 @@ FORMATO DE RESPUESTA: devuelve SOLO un objeto JSON válido, sin texto antes ni d
     {"nombre": "Crítica", "nivel": "...", "comentario": "..."}
   ],
   "puntos_fuertes": ["..."],
-  "mejoras_prioritarias": ["máximo 3 acciones concretas"]
+  "mejoras_prioritarias": ["máximo 2 acciones concretas"]
 }`;
 
 function contarPalabras(texto) {
@@ -130,7 +136,7 @@ ${bloques}
 
   const cuerpoPeticion = JSON.stringify({
     model: MODELO,
-    max_tokens: 3000,
+    max_tokens: 8000,
     system: SYSTEM_PROMPT,
     messages: [{ role: "user", content: mensajeUsuario }],
   });
@@ -183,7 +189,14 @@ ${bloques}
 // Entrada de Cloudflare Pages: /api/corregir-disertacion
 export async function onRequest({ request, env }) {
   try {
-    return await corregirDisertacion(request, env);
+    const cuerpo = await request.clone().text();
+    let respuesta = await corregirDisertacion(new Request(request.url, { method: request.method, headers: request.headers, body: cuerpo }), env);
+    // Si el modelo devuelve un texto que no se puede leer, se reintenta una vez.
+    if (respuesta.status === 500 && (await respuesta.clone().text()).includes("No se pudo interpretar")) {
+      console.log("corregir-disertacion: reintento tras respuesta no interpretable");
+      respuesta = await corregirDisertacion(new Request(request.url, { method: request.method, headers: request.headers, body: cuerpo }), env);
+    }
+    return respuesta;
   } catch (error) {
     console.log("corregir-disertacion: excepción", error?.message || error);
     return json({ error: "Error interno al corregir: " + (error?.message || "desconocido") }, 500);
