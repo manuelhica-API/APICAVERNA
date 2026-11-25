@@ -5968,6 +5968,7 @@ function pintarCorreccionEscribir(d){
   const cats=(d.categorias||[]).map(c=>'<div style="margin-top:12px"><b>'+esc(c.nombre)+'</b> <span class="chip">'+esc(NIVEL[c.nivel]||c.nivel||"")+'</span><p class="small" style="margin:6px 0 0">'+esc(c.comentario||"")+'</p></div>').join("");
   const lista=a=>a&&a.length?'<ul class="small">'+a.map(x=>'<li>'+esc(x)+'</li>').join("")+'</ul>':'';
   return '<h2 style="margin-bottom:8px;font-size:19px">Corrección</h2>'+
+   (d.nota_orientativa?'<p><b>Nota orientativa: '+esc(d.nota_orientativa)+'</b></p>':'')+
    '<p>'+esc(d.valoracion_global||"")+'</p>'+
    '<ul class="small">'+partes+'</ul>'+cats+
    '<h3 style="font-size:16px;margin:16px 0 4px">Puntos fuertes</h3>'+lista(d.puntos_fuertes)+
