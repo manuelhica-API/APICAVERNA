@@ -1929,9 +1929,7 @@ function paintSecCheck(box,secId){
     if(b) b.onclick=()=>startQuiz("sec:"+secId);
     return;
   }
-  const done=!!store.get("secDone",{})[secId];
-  box.innerHTML='<label class="check"><input type="checkbox" '+(done?"checked":"")+'><span>Apartado completado</span></label>';
-  box.querySelector("input").onchange=e=>{const d=store.get("secDone",{});d[secId]=e.target.checked;store.set("secDone",d)};
+  box.innerHTML='<div style="background:#2e7d4f;color:#fff;border-radius:12px;padding:12px 16px;font-weight:700">✔ Apartado completado: has visto el vídeo y superado el test de 10 preguntas</div>';
 }
 function refreshSecChecks(){
   document.querySelectorAll("section.th.open").forEach(s=>{if(s._paintCheck)s._paintCheck()});
