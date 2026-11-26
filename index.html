@@ -1789,7 +1789,9 @@ function stats(){
   const best = store.get("best",{}); const hist = store.get("hist",[]);
   const vals = AUTHORS.map(a=>best[a.id]).filter(v=>v!==undefined);
   const avg = vals.length? vals.reduce((a,b)=>a+b,0)/vals.length : null;
-  const drafts = Object.keys(store.get("drafts",{})).length + (store.get("essay",{text:""}).text.trim()?1:0);
+  const essayGuardado = store.get("essay",{}) || {};
+  const hayEnsayo = Object.values(essayGuardado.partes||{}).some(t=>String(t||"").trim()!=="") || String(essayGuardado.text||"").trim()!=="";
+  const drafts = Object.keys(store.get("drafts",{})).length + (hayEnsayo?1:0);
   return {best,hist,avg,done:hist.length,authorsDone:vals.length,drafts};
 }
 function viewInicio(){
