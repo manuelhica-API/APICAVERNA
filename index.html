@@ -7581,6 +7581,7 @@ function claseCardHTML(){
     '<button type="button" class="link-btn" data-clase="salir">Dejar la clase</button></div></section>';
   if(store.get("claseHide",false)) return '';
   setTimeout(claseCargarGrupos,0);
+  setTimeout(initClaseGoogle,0);
   return '<section class="card clase-card" id="claseCard"><div class="clase-row"><span class="clase-ic" aria-hidden="true">'+ICONS_CLASE+'</span>'+
     '<div class="clase-txt"><b>¿Quieres que tu profe siga tu progreso?</b><span class="small muted">Es opcional. Solo verá tus porcentajes y el alias que elijas, nunca tus respuestas.</span></div></div>'+
     '<form class="clase-form" id="claseForm">'+
