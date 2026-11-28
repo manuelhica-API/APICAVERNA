@@ -7619,7 +7619,8 @@ function initClaseGoogle(intento=0){
     try{const p=JSON.parse(atob(resp.credential.split(".")[1].replace(/-/g,"+").replace(/_/g,"/")));const cu=document.getElementById("clCuenta");if(cu){cu.textContent="Sesión iniciada como "+p.email;cu.hidden=false}}catch(e){}
     box.innerHTML="";
   }});
-  google.accounts.id.renderButton(box,{theme:"outline",size:"large",text:"signin_with",locale:"es"});
+  box.style.cssText="margin-top:10px;display:flex;justify-content:flex-start;border-radius:999px;overflow:hidden";
+  google.accounts.id.renderButton(box,{theme:"filled_black",shape:"pill",size:"large",text:"signin_with",locale:"es",width:280});
 }
 async function correoId(mail){
   const buf=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(mail));
