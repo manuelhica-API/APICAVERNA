@@ -7576,9 +7576,9 @@ function hace(ts){if(!ts)return "nunca";const m=Math.round((Date.now()-ts)/6e4);
 function escH(s){return String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 function claseCardHTML(){
   const c=store.get("clase",null);
-  if(c) return '<section class="card clase-card" id="claseCard"><div class="clase-row"><span class="clase-ic" aria-hidden="true">'+ICONS_CLASE+'</span>'+
+  if(c&&!store.get("claseCambiar",false)) return '<section class="card clase-card" id="claseCard"><div class="clase-row"><span class="clase-ic" aria-hidden="true">'+ICONS_CLASE+'</span>'+
     '<div class="clase-txt"><b>Tu profe ve tu progreso</b><span class="small muted">Como «'+escH(c.alias)+'» · '+escH(c.grupo)+' · actualizado '+hace(c.last)+'</span></div>'+
-    '<button type="button" class="link-btn" data-clase="salir">Dejar la clase</button></div></section>';
+    '<button type="button" class="link-btn" data-clase="cambiar">Cambiar alias o grupo</button> · <button type="button" class="link-btn" data-clase="salir">Dejar la clase</button></div></section>';
   if(store.get("claseHide",false)) return '';
   setTimeout(claseCargarGrupos,0);
   setTimeout(initClaseGoogle,0);
@@ -7587,10 +7587,10 @@ function claseCardHTML(){
     '<form class="clase-form" id="claseForm">'+
       '<div class="field"><label for="clCod">Código de clase</label><input class="cm-in" id="clCod" autocomplete="off" value="'+escH(store.get("codigo",""))+'" placeholder="El que te ha dado tu profe" required></div>'+
       '<div class="field"><label>Tu cuenta del centro</label><span class="tiny muted">Entra con tu correo @g.educaand.es. Sirve para recuperar tu progreso en otro dispositivo; tu profe no ve tu correo.</span><div id="clGoogle" style="margin-top:8px"></div><p class="tiny" id="clCuenta" hidden></p></div>'+
-      '<div class="field" id="clGruBox"><label for="clGru">Grupo</label><select class="cm-in" id="clGru" required>'+GRUPOS_DEF.map(x=>'<option>'+escH(x)+'</option>').join("")+'</select></div>'+
-      '<div class="field"><label for="clAli">Alias</label><input class="cm-in" id="clAli" maxlength="24" placeholder="Tu número de lista o un apodo" required><span class="tiny muted">No pongas tu nombre completo: con que tu profe te reconozca basta.</span></div>'+
+      '<div class="field" id="clGruBox"><label for="clGru">Grupo</label><select class="cm-in" id="clGru" required>'+GRUPOS_DEF.map(x=>'<option'+(c&&x===c.grupo?' selected':'')+'>'+escH(x)+'</option>').join("")+'</select></div>'+
+      '<div class="field"><label for="clAli">Alias</label><input class="cm-in" id="clAli" maxlength="24" value="'+escH(c?c.alias:"")+'" placeholder="Tu número de lista o un apodo" required><span class="tiny muted">No pongas tu nombre completo: con que tu profe te reconozca basta.</span></div>'+
       '<p class="small clase-err" id="clErr" hidden></p>'+
-      '<div class="btnrow"><button type="submit" class="btn primary">Unirme</button><button type="button" class="link-btn" data-clase="ocultar">Ahora no</button></div>'+
+      '<div class="btnrow"><button type="submit" class="btn primary">'+(c?"Guardar cambios":"Unirme")+'</button><button type="button" class="link-btn" data-clase="'+(c?"cancelarCambio":"ocultar")+'">'+(c?"Cancelar":"Ahora no")+'</button></div>'+
     '</form></section>';
 }
 const COPIA_EXCLUIR=["clase","codigo","correo","claseHide","demoClase","appInstalada","installHide","tab","distab","retorno"];
@@ -7634,6 +7634,8 @@ document.addEventListener("click",async e=>{
   if(a==="cancelar"){document.getElementById("claseForm").hidden=true;document.getElementById("claseBtns").hidden=false}
   if(a==="ocultar"){store.set("claseHide",true);route()}
   if(a==="mostrar"){store.set("claseHide",false);route();const c=document.getElementById("claseCard");if(c)c.scrollIntoView({block:"center",behavior:"smooth"})}
+  if(a==="cambiar"){store.set("claseCambiar",true);route()}
+  if(a==="cancelarCambio"){store.set("claseCambiar",false);route()}
   if(a==="salir"){const c=store.get("clase",null);if(c){try{await claseApi({action:"salir",codigo:store.get("codigo",""),sesion:c.sesion})}catch(err){}}store.set("clase",null);store.set("claseHide",false);route()}
 });
 document.addEventListener("submit",async e=>{
@@ -7650,8 +7652,9 @@ document.addEventListener("submit",async e=>{
       if(r.sesion)auth={sesion:r.sesion};
       if(r.copia&&Object.keys(r.copia).length){restaurarCopia(r.copia);restaurada=true}
     }
-    const r=await claseApi({action:"sync",codigo:cod,...auth,alias:ali,grupo:gru,progreso:claseSnapshot(),copia:copiaLocal()});
-    store.set("codigo",cod);store.set("clase",{id:r.id,sesion:r.sesion,alias:ali,grupo:gru,last:Date.now()});claseLastSent=JSON.stringify([claseSnapshot(),copiaLocal()]);
+    const cambiar=store.get("claseCambiar",false)===true;
+    const r=await claseApi({action:"sync",codigo:cod,...auth,alias:ali,grupo:gru,cambiar,progreso:claseSnapshot(),copia:copiaLocal()});
+    store.set("codigo",cod);store.set("clase",{id:r.id,sesion:r.sesion,alias:r.alias||ali,grupo:r.grupo||gru,last:Date.now()});store.set("claseCambiar",false);claseLastSent=JSON.stringify([claseSnapshot(),copiaLocal()]);
     stat("clase-unirse");
     if(restaurada)location.reload();else route();
   }catch(x){err.textContent=/c[oó]digo/i.test(x.message)?"Ese código no es correcto. Pídeselo a tu profe.":/Inicia sesión/i.test(x.message)?"Tu cuenta debe ser del centro (@g.educaand.es). Inténtalo con la cuenta correcta.":"No se ha podido conectar. Inténtalo de nuevo en un rato.";err.hidden=false}
