@@ -110,16 +110,20 @@ export async function clase(req, env, store) {
     if (!codigoOk()) return json(403, { error: "Código de clase incorrecto" });
     const yo = await identificar(b, env);
     if (!yo) return json(401, { error: NO_SESION });
-    const alias = limpia(b.alias, 24), grupo = limpia(b.grupo, 12), progreso = progresoLimpio(b.progreso);
-    if (!alias || !grupo || !progreso) return json(400, { error: "Faltan datos" });
-    if (grupos.length && !grupos.includes(grupo)) return json(400, { error: "Ese grupo no existe" });
     const previo = await store.get(yo.id);
+    // Alias y grupo quedan fijos una vez elegidos; solo cambian si el alumno lo pide (b.cambiar).
+    const fijos = previo && previo.alias && previo.grupo && b.cambiar !== true;
+    const alias = fijos ? previo.alias : limpia(b.alias, 24);
+    const grupo = fijos ? previo.grupo : limpia(b.grupo, 12);
+    const progreso = progresoLimpio(b.progreso);
+    if (!alias || !grupo || !progreso) return json(400, { error: "Faltan datos" });
+    if (!fijos && grupos.length && !grupos.includes(grupo)) return json(400, { error: "Ese grupo no existe" });
     // Si el dispositivo no tiene copia (está vacío), se conserva la que ya había en el servidor.
     const copia = copiaLimpia(b.copia) || (previo && previo.copia) || null;
     const rec = { id: yo.id, alias, grupo, progreso, updated: Date.now() };
     if (copia) rec.copia = copia;
     await store.set(yo.id, rec);
-    return json(200, { ok: true, id: yo.id, sesion: yo.sesion });
+    return json(200, { ok: true, id: yo.id, sesion: yo.sesion, alias, grupo });
   }
 
   if (b.action === "restaurar") {
@@ -127,7 +131,7 @@ export async function clase(req, env, store) {
     const yo = await identificar(b, env);
     if (!yo) return json(401, { error: NO_SESION });
     const rec = await store.get(yo.id);
-    return json(200, { ok: true, id: yo.id, sesion: yo.sesion, copia: rec && rec.copia ? rec.copia : null });
+    return json(200, { ok: true, id: yo.id, sesion: yo.sesion, alias: rec ? rec.alias : null, grupo: rec ? rec.grupo : null, copia: rec && rec.copia ? rec.copia : null });
   }
 
   if (b.action === "salir") {
